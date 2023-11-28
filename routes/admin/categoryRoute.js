@@ -50,7 +50,7 @@ router.post('/update-category/:id',  upload.single('image'), async (req, res) =>
         );
 
         if (!updatedCategory) {
-            return res.status(404).json({ message: 'Category not found' });
+            return res.status(404);
         }
         // req.flash("accepted", "Successfully create new category")
     } catch (error) {
@@ -67,7 +67,7 @@ router.delete('/delete-category/:id', async (req, res) => {
         const deletedCategory = await Category.findByIdAndDelete(categoryId);
         
         if (!deletedCategory) {
-            return res.status(404).json({ message: 'Category not found' });
+            return res.status(404);
         }
         // Delete the corresponding image file from the server
         if (deletedCategory.image) {
