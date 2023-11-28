@@ -21,6 +21,11 @@ app.use(express.urlencoded({ extended: true }));
         .then(() => console.log("Connected to MongoDB Atlas!"))
         .catch((error) => console.log(error.message));
 
+// Routes
+const CategoryRouter = require('./routes/admin/categoryRoute');
+
+app.use("/category/", CategoryRouter);
+
 app.listen(3000, ()=>{
     console.log(`Server is running on port localhost:3000`);
 });
