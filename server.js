@@ -16,8 +16,10 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // Mongoose
-
-
+    // Books Database
+        mongoose.connect('mongodb+srv://thegalaxy1590:thegalaxy1590@librarybooks.pouktuc.mongodb.net/?retryWrites=true&w=majority')
+        .then(() => console.log("Connected to MongoDB Atlas!"))
+        .catch((error) => console.log(error.message));
 
 app.listen(3000, ()=>{
     console.log(`Server is running on port localhost:3000`);
