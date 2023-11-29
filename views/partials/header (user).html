@@ -12,7 +12,6 @@
   </head>
   <body>
     <header class="header">
-    
       <div class="logo">
         <a href = "#"><img src="../../public/images/logo.png" alt=""> </a>          
       </div>
@@ -57,5 +56,22 @@
           </div>
         </div>
   </header>
-  </body>
+  <main class="main">
+    <form id="wishlistForm">
+      <label for="author">Author:</label>
+      <input type="text" id="author" name="author" required>
+  
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required>
+  
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required>
+  
+      <label for="image">Image (URL):</label>
+      <input type="url" id="image" name="image">
+  
+      <button type="button" onclick="submitWishlist()">Submit Wishlist</button>
+    </form>
+  </main>
+</body>
 </html>
