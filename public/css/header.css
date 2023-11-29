@@ -162,6 +162,7 @@ body {
 	margin-top: 15px;
     margin-left: 0px;
     margin:0 auto;
+    border-radius: 6%;
   }
   
   .search input[type="text"] {
@@ -247,3 +248,56 @@ body {
 .main { 
  flex: 1;
 }
+
+.menu-button {
+    display: none;
+}
+
+/* Media query for devices between 480px and 767px */
+@media only screen and (min-width: 200px) and (max-width: 767px) {
+    .menu-button {
+        display: block;
+        margin: 0 auto;
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+        color: #2B2A4C;
+        background-color: #9AD0C2;
+        border :000000 2px;
+      }
+
+      .logo {
+        display: none;
+      }
+    
+      .NavList {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #002B5B;
+        z-index: 999;
+        margin-top: 20px;
+      }
+    
+      .NavList-item {
+        margin-bottom: 10px;
+      }
+    
+      .NavList-item a {
+        text-decoration: none;
+        color: #fff;
+        padding: 10px;
+        display: block;
+      }
+    
+      .search {
+        margin-top: 10px;
+      }
+    
+      .user {
+        margin-top: 10px;
+      }
+    }

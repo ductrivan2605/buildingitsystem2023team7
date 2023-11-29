@@ -20,3 +20,8 @@ window.onclick = function(event) {
     }
   }
 }
+
+function toggleMenu() {
+    var navList = document.getElementById("navList");
+    navList.style.display = (navList.style.display === "none" || navList.style.display === "") ? "flex" : "none";
+  }
