@@ -23,8 +23,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 const CategoryRouter = require('./routes/admin/categoryRoute');
+const AuthorRouter = require('./routes/admin/authorRoute');
 
-app.use("/category/", CategoryRouter);
+app.use("/admin/category/", CategoryRouter);
+app.use("/admin/author/", AuthorRouter);
 
 app.listen(3000, ()=>{
     console.log(`Server is running on port localhost:3000`);

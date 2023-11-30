@@ -8,9 +8,7 @@ const upload = require("../../controllers/uploadImage.js");
 // Get all categories
 router.get('/', async (req,res) => {
     try{
-
         const category = await Category.find({})
-
     }catch(error){
         res.send(error);
     }
