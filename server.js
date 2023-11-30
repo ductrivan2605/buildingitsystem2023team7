@@ -23,11 +23,6 @@ app.use(express.urlencoded({ extended: true }));
         .catch((error) => console.log(error.message));
 
 // Routes
-const CategoryRouter = require('./routes/admin/categoryRoute');
-const authRoutes = require('./routes/authRoutes');
-
-app.use("/category/", CategoryRouter);
-app.use("/auth", authRoutes)
 app.listen(3000, ()=>{
     console.log(`Server is running on port localhost:3000`);
 });
