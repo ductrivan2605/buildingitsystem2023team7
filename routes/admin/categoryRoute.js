@@ -24,12 +24,12 @@ router.post("/add-new-category", upload.single("image"), async (req, res) => {
       ? subCategory.split(",").map((item) => item.trim())
       : [];
 
-    await Category.create({
+    const categorys = await Category.create({
       category: category,
       subCategory: subCategoryArray,
       image: image,
     });
-
+    console.log(categorys)
     // req.flash("accepted", "Successfully create new category")
   } catch (error) {
     console.log(error);
@@ -104,7 +104,7 @@ router.delete("/delete-category/:id", async (req, res) => {
 router.delete("/delete-all-categories", async (req, res) => {
   try {
     const deletedCategories = await Category.find({});
-
+    
     deletedCategories.forEach((category) => {
       if (category.image) {
         const imagePath = path.join(
