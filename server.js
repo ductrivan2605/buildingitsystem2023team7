@@ -1,10 +1,11 @@
 const express = require("express");
 const app = express();
-const expressLayouts = require("express-ejs-layouts");
 const path = require("path");
 const mongoose = require("mongoose");
+const bodyParser = require('body-parser');
 
 
+const port = 3000;
 
 // Static Files
 app.set("views", __dirname + "/views");
@@ -21,7 +22,25 @@ app.use(express.urlencoded({ extended: true }));
         .then(() => console.log("Connected to MongoDB Atlas!"))
         .catch((error) => console.log(error.message));
 
+// Routes
+const CategoryRouter = require('./routes/admin/categoryRoute');
+const AuthorRouter = require('./routes/admin/authorRoute');
+const BooksRouter = require('./routes/admin/bookRoute');
+const authRouter = require('./routes/authRoutes');
+const wishlistRouter = require("./routes/wishlistRouter"); 
+
+app.use("/admin/category/", CategoryRouter);
+app.use("/admin/author/", AuthorRouter);
+app.use("/admin/books-management/", BooksRouter);
+app.use("/auth", authRouter);
+app.use(wishlistRouter);
+
+// Serve wishlist.html for the /wishlist route
+app.get('/wishlist', (req, res) => {
+    res.render('wishlist');
+  });
+
+
 app.listen(3000, ()=>{
     console.log(`Server is running on port localhost:3000`);
 });
-  

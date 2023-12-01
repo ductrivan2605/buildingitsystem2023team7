@@ -246,12 +246,14 @@ body {
     display: block;
   }
 .main { 
- flex: 1;
+ margin-top: 300px;
 }
 
 .menu-button {
     display: none;
 }
+
+
 
 /* Media query for devices between 480px and 767px */
 @media only screen and (min-width: 200px) and (max-width: 767px) {
