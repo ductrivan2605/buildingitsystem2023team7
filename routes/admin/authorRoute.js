@@ -9,7 +9,6 @@ const upload = require("../../middleware/uploadImage.js");
 router.get("/", async (req, res) => {
   try {
     const authors = await Authors.find({});
-    res.json(authors);
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
@@ -23,6 +22,7 @@ router.post("/add-new-author", upload.single("image"), async (req, res) => {
     const image = req.file ? req.file.filename : null;
 
     const author = await Authors.create({ name, email, background, image });
+    console.log(author);
   } catch (error) {
     console.log(error);
     res.status(500).send(error);

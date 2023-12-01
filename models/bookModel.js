@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { memoryStorage } = require('multer');
 
 const BookSchema = new mongoose.Schema({
    title:{
@@ -11,12 +10,11 @@ const BookSchema = new mongoose.Schema({
        type: mongoose.Schema.Types.ObjectId,
        ref: 'Authors',
        required: true
-      },
+      }
    ],
    category:[
       {
-       type: mongoose.Schema.Types.ObjectId,
-       ref: 'Categories',
+       type: String,
        required: true,
       },
    ],
@@ -43,6 +41,6 @@ const BookSchema = new mongoose.Schema({
 });
 
 
-const Books = mongoose.model('Book Detial', BookSchema);
+const Books = mongoose.model('Book details', BookSchema);
 
 module.exports = Books;
