@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
-const expressLayouts = require("express-ejs-layouts");
 const path = require("path");
 const mongoose = require("mongoose");
+const bodyParser = require('body-parser');
+
 
 // Static Files
 app.set("views", __dirname + "/views");
@@ -24,13 +25,16 @@ const CategoryRouter = require('./routes/admin/categoryRoute');
 const AuthorRouter = require('./routes/admin/authorRoute');
 const BooksRouter = require('./routes/admin/bookRoute');
 const authRouter = require('./routes/authRoutes');
+const wishlistRouter = require("./routes/wishlistRouter"); 
+
 
 app.use("/admin/category/", CategoryRouter);
 app.use("/admin/author/", AuthorRouter);
 app.use("/admin/books-management/", BooksRouter);
 app.use("/auth", authRouter);
+app.use(wishlistRouter);
+
 
 app.listen(3000, ()=>{
     console.log(`Server is running on port localhost:3000`);
 });
-  
