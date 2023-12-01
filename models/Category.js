@@ -12,11 +12,10 @@ const CategorySchema = new mongoose.Schema({
     ],
     image:{
         type: String,
-        required: true  
       } 
 });
 
 
-const Category = mongoose.model('Book Category', CategorySchema);
+const Category = mongoose.model('Categories', CategorySchema);
 
 module.exports = Category;
