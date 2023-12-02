@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="adminPopup.css">
+    <title>admin popup</title>
+</head>
+<body>
+    <div class="popup-container">
+        <div class="popup">
+            <div class="image-container">
+                <label for="imageUpload" class="image-label">Select an image:</label>
+                <input type="file" id="imageUpload" accept="image/*" onchange="previewImage(event)" />
+                <img id="imagePreview" src="#" alt="Preview" style="display: none; max-width: 70%; max-height: 70%; margin: auto;"/>
+              </div>
+          <div class="right-container">
+            <label for="title">Book Title:</label>
+            <input type="text" id="title" />
+      
+            <label for="category">Category:</label>
+            <select id="category">
+              <option value="romance">#</option>
+              <option value="economy">#</option>
+              <option value="economy">#</option>
+              <option value="economy">#</option>
+            </select>
+      
+            <label for="author">Author:</label>
+            <input type="text" id="author" />
+      
+            <label for="publisher">Publisher:</label>
+            <input type="text" id="publisher" />
+      
+            <label for="description">Description:</label>
+            <textarea id="description" rows="4"></textarea>
+      
+            <div class="button-container">
+              <button onclick="resetForm()">Reset</button>
+              <button onclick="submitForm()">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="adminPopup.js"></script>
+</body>
+</html>

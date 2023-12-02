@@ -27,8 +27,8 @@
  }
 
  .description {
-  margin: 40px;
-  width: 90%;
+   margin: 40px;
+   width: 90%;
  }
 
  nav ul {
@@ -67,21 +67,21 @@
  }
 
  @media screen and (max-width: 600px) {
-  .container1 {
-    flex-direction: column;
-  }
+   .container1 {
+     flex-direction: column;
+   }
  }
 
  @media screen and (max-width: 600px) {
-  .title {
-    text-align: center;
-    }
+   .title {
+     text-align: center;
+   }
  }
 
  @media screen and (max-width: 600px) {
-  .description {
-    margin: 40px;
-    transform: translate(-17px);
-  }
+   .description {
+     margin: 40px;
+     transform: translate(-17px);
+   }
  }
  
