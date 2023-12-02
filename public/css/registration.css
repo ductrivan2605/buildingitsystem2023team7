@@ -1,0 +1,7 @@
+/*mobile*/
+@media only screen and (max-width: 960px) {
+    #con {
+        margin-top: 25%;
+        margin-bottom: 0%;
+    }
+}
