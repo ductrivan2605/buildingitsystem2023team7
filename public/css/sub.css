@@ -1,0 +1,133 @@
+*{margin:0; padding:0;}
+ul{list-style:none;}
+a{text-decoration:none; color:#333;}
+.wrap{padding:130px; letter-spacing:-0.5px;}
+.tab_menu{position:relative;}
+.tab_menu .list{
+    overflow:hidden;
+    
+}
+
+.subCategory {
+    /* background-color: aqua; */
+
+}
+.subCategory h1 {
+    /* text-align: center; */
+    border-bottom: 1px solid black;
+}
+.tab_menu .list li{float:left; margin-right:14px;}
+.list {
+    border-bottom: 1px solid black;
+    background-color: rgb(194, 111, 9);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    list-style: none;
+    padding: 10px;
+
+}
+
+.list li {
+    width: calc(20% - 12px); /* 5개의 버튼을 한 줄에 배치하기 위해 */
+    margin-bottom: 10px; /* 아래쪽 간격 */
+}
+
+/* 5번째 버튼마다 오른쪽 마진 제거 */
+.list li:nth-child(5n) {
+    margin-right: 0;
+}
+
+/* 마지막 버튼의 아래 여백 제거 */
+.list li:nth-last-child(-n+5) {
+    margin-bottom: 0;
+}
+
+.tab_menu .list .btn{font-size:20px; padding:50px;}
+.tab_menu .list .cont{display:none; position:absolute; top:100px; left:0; text-align:center; width:100%; height:100%; line-height:100%; margin-top:20px;}
+.tab_menu .list li.is_on .btn{font-weight:bold; color:green;}
+.tab_menu .list li.is_on .cont{display:block;}
+.bookContainer {
+    display: flex;
+    flex-wrap: wrap; 
+    border-radius: 20px;
+    /* padding: 10px; */
+    background-color: rgb(111, 111, 182);
+
+    
+}
+.category {
+    background-color: rgb(76, 95, 95);
+    /* margin-top:25px; */
+    
+}
+.Books {
+    margin: 10px; 
+    background-color: rgb(22, 19, 19);
+    width: 10%;
+    margin: 50px;
+    padding: 10px;
+    background-color: white;
+    
+
+}
+
+.Books img {
+    /* background-color: cadetblue; */
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+    margin-top:15px;
+    
+}
+
+.Books p {
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 767px) {
+    .category {
+        /* 이미지 크기 조정 */
+        width: 100%;
+        /* display: block; */
+        /* margin:auto; */
+    }
+    .wrap {
+        padding:0%;
+    }
+    .Books {
+        width: calc(50% - 50px); 
+        margin: 10px; 
+        background-color: rgb(22, 19, 19);
+        margin: 0 auto;
+        /* width: 10%; */
+        /* margin: 50px; */
+        padding: 10px;
+        background-color: white;
+    
+    }
+    
+    .Books img {
+
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        margin-top:15px;
+        
+    }
+    .list {
+        border-bottom: 1px solid black;
+        background-color: rgb(192, 113, 16);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+
+}
