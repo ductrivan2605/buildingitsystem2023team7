@@ -4,8 +4,7 @@ const router = express.Router();
 const WishlistItem = require('../models/Wishlist'); 
 
 router.get('/wishlist', (req, res) => {
-  // Assuming 'wishlist.html' is in the 'views' directory
-  res.sendFile(path.join(__dirname, '..', 'views', 'wishlist.html'));
+  res.sendFile(path.join(__dirname, '..', 'views', 'partials','wishlist.html'));
 });
 
 // Handle POST requests to submit a wishlist item
