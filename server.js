@@ -36,7 +36,10 @@ app.use("/wishlist", wishlistRouter);
 app.get('/', (req, res) => {
     res.render('wishlist');
 });
-
+  app.get('/public/css/header.css', (req, res) => {
+    res.header('Content-Type', 'text/css');
+    res.sendFile(__dirname + '/public/css/header.css');
+  });
 
 app.listen(3000, () => {
     console.log(`Server is running on port localhost:3000`);
