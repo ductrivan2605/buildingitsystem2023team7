@@ -1,9 +1,8 @@
 const express = require("express");
 const app = express();
-const expressLayouts = require("express-ejs-layouts");
 const path = require("path");
 const mongoose = require("mongoose");
-
+const bodyParser = require('body-parser');
 
 
 // Static Files
@@ -27,10 +26,17 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 const CategoryRouter = require('./routes/admin/categoryRoute');
+const AuthorRouter = require('./routes/admin/authorRoute');
+const BooksRouter = require('./routes/admin/bookRoute');
+const authRouter = require('./routes/authRoutes');
+const wishlistRouter = require("./routes/wishlistRouter"); 
 
-<<<<<<< Updated upstream
-app.use("/category/", CategoryRouter);
-=======
+
+app.use("/admin/category/", CategoryRouter);
+app.use("/admin/author/", AuthorRouter);
+app.use("/admin/books-management/", BooksRouter);
+app.use("/auth", authRouter);
+app.use(wishlistRouter);
 // Render
 app.get('/', (req,res) => {
     res.render("signin")
@@ -39,8 +45,9 @@ app.get('/register', (req,res) => {
     res.render("signup")
 });
 >>>>>>> Stashed changes
+=======
+>>>>>>> main
 
 app.listen(3000, ()=>{
     console.log(`Server is running on port localhost:3000`);
 });
-  
