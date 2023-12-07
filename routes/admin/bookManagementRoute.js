@@ -201,4 +201,18 @@ router.post("/delete-all-books", async (req, res) => {
 });
 
 
+// Search for book
+router.post("/search", async(req,res) => {
+  let searchTerm = req.body.search;
+  let books = await Books.find({$text: {$search: searchTerm, $diacriticSensitive: true}});
+  const authors = await Author.find({});
+  const categories = await Category.find({});
+  res.render("admin/searchBookManagement", {
+    layout: "./layouts/admin/bookManagementLayout",
+    books:books,
+    authors: authors,
+    categories: categories
+  });
+})
+
 module.exports = router;
