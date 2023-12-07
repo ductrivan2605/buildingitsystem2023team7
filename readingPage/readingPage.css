@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+.book-move {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+}
+
+.book-container {
+    flex: 1;
+    min-width: 0;
+}
+
+
+#page-display {
+    border: 1px solid #ccc;
+    padding: 20px;
+    min-height: 600px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+
+
+#page-navigation {
+    display: flex;
+}
+
+
+.rightside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.select, .option {
+    width: 100px;
+    height: 30px;
+    margin: 0 5px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 15px 200px;
+    margin: 0 5px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+}
+
+@media screen and (max-width: 767px) {
+    .book-move {
+      flex-direction: column;
+      width: 80%; /* 더 작은 화면에서도 잘 보이도록 width 조정 */
+      margin: 0 auto; /* 중앙 정렬 */
+    }
+  
+    #page-display {
+      width: 100%; /* 페이지 표시 영역 너비 조정 */
+      margin: 20px 0; /* 위아래 여백 조정 */
+    }
+  
+    .btn {
+      padding: 10px 25%; /* 버튼 크기 조정 */
+    }
+    .rightside {
+        order: 3;
+        margin-top: 20px;
+        display: block;
+      }
+
+      .book-container {
+        width: 91%;
+      }
+  }
+  

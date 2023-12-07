@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="readingPage.css">
+  <title>readingPage</title>
+</head>
+
+<body>
+
+  <div class="book-move">
+    <div class="book-container">
+      <div id="page-display">
+        <p id="page-content"></p>
+      </div>
+      <div id="page-navigation">
+        <button class="btn" id="prev-page"> ◁ </button>
+        <button class="btn" id="next-page"> ▷ </button>
+      </div>
+    </div>
+
+    <div class="rightside">
+      <select class="select" id="page-selection">
+      </select>
+
+      <select class="option" id="options">
+        <option value="" disabled selected>Options</option>
+        <option value="increaseFontSize">Increase Font Size</option>
+        <option value="decreaseFontSize">Decrease Font Size</option>
+      </select>
+    </div>
+  </div>
+
+
+
+
+  <script src="readingPage.js"></script>
+
+</body>
+
+</html>
