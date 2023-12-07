@@ -6,7 +6,7 @@ const options = document.getElementById('options');
 let currentPage = 1;
 const totalPages = 10;
 const bookContents = [
-    "Hello",
+    "Hello ",
     "my",
     "name",
     "is",
@@ -98,3 +98,17 @@ function decreaseFontSize() {
         pageContent.style.fontSize = `${currentFontSizeValue - 4}px`;
     }
 }
+
+document.addEventListener('keydown', function(event) {
+    if (event.code === 'ArrowLeft') {
+        if (currentPage > 1) {
+            currentPage--;
+            displayPage(currentPage);
+        }
+    } else if (event.code === 'ArrowRight') {
+        if (currentPage < totalPages) {
+            currentPage++;
+            displayPage(currentPage);
+        }
+    }
+});
