@@ -8,7 +8,12 @@ const upload = require("../../middleware/uploadImage.js");
 // Get all categories
 router.get("/", async (req, res) => {
   try {
-    const category = await Category.find({});
+    const categories = await Category.find({});
+    res.render("admin/categoryManagement", {
+      layout: "./layouts/admin/itemsManagementLayout",
+      title: "Category Management",
+      categories: categories,
+    });
   } catch (error) {
     res.send(error);
   }
@@ -24,76 +29,84 @@ router.post("/add-new-category", upload.single("image"), async (req, res) => {
       ? subCategory.split(",").map((item) => item.trim())
       : [];
 
-    const categorys = await Category.create({
+    await Category.create({
       category: category,
       subCategory: subCategoryArray,
       image: image,
     });
-    console.log(categorys)
     // req.flash("accepted", "Successfully create new category")
+    res.redirect('/admin/categories');
   } catch (error) {
     console.log(error);
     res.send(error);
   }
 });
 
-router.post(
-  "/update-category/:id",
-  upload.single("image"),
-  async (req, res) => {
-    try {
-      const categoryId = req.params.id;
-      const { category, subCategory } = req.body;
-      const image = req.file ? req.file.filename : null;
-      // Split subCategory into an array
-      const subCategoryArray = subCategory
-        ? subCategory.split(",").map((item) => item.trim())
-        : [];
-
-      const updatedCategory = await Category.findByIdAndUpdate(
-        categoryId,
-        { category, subCategory: subCategoryArray, image },
-        { new: true } // Return the updated document
-      );
-
-      if (!updatedCategory) {
-        return res.status(404);
-      }
-      // req.flash("accepted", "Successfully create new category")
-    } catch (error) {
-      console.log(error);
-      res.status(500).send(error);
-    }
-  }
-);
-
-// Delete a single category
-router.delete("/delete-category/:id", async (req, res) => {
+router.post("/update-category/:id", upload.single("editImage"), async (req, res) => {
   try {
     const categoryId = req.params.id;
 
-    const deletedCategory = await Category.findByIdAndDelete(categoryId);
+    // Extract fields from the request body
+    const { category, subCategory } = req.body;
+    const newImage = req.file ? req.file.filename : null;
+
+    // Find the current category to get the old image filename
+    const currentCategory = await Category.findById(categoryId);
+
+    // Construct a dynamic update object with only provided fields
+    const updateFields = {};
+    if (category) updateFields.category = category;
+    if (subCategory) updateFields.subCategory = subCategory.split(",").map((item) => item.trim());
+    if (newImage) {
+      // Delete the old image file
+      if (currentCategory.image) {
+        const oldImagePath = path.resolve(__dirname, "../../public/images", currentCategory.image);
+        if (fs.existsSync(oldImagePath)) {
+          fs.unlinkSync(oldImagePath);
+        }
+      }
+      // Set the new image filename
+      updateFields.image = newImage;
+    }
+
+    // Update the category
+    const updatedCategory = await Category.findByIdAndUpdate(
+      categoryId,
+      updateFields,
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedCategory) {
+      return res.status(404);
+    }
+
+    // req.flash("accepted", "Successfully update category");
+    res.redirect('/admin/categories');
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+});
+
+
+
+// Delete a single category
+router.post("/delete/:id", async (req, res) => {
+  try {
+    const deletedCategory = await Category.findByIdAndDelete(req.params.id);
 
     if (!deletedCategory) {
       return res.status(404);
     }
-    // Delete the corresponding image file from the server
-    if (deletedCategory.image) {
-      const imagePath = path.join(
-        __dirname,
-        "../../public/images",
-        deletedCategory.image
-      );
 
-      fs.unlink(imagePath, (err) => {
-        if (err) {
-          console.error("Error deleting image file:", err);
-        } else {
-          console.log("Image file deleted successfully");
-        }
-      });
+    if (deletedCategory.image) {
+      const imagePath = path.join(__dirname, "../../public/images", deletedCategory.image);
+      await fs.promises.unlink(imagePath);
     }
+
     // req.flash("accepted", "Successfully create new category")
+    res.redirect('/admin/categories');
+
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
@@ -101,23 +114,19 @@ router.delete("/delete-category/:id", async (req, res) => {
 });
 
 // Delete all categories
-router.delete("/delete-all-categories", async (req, res) => {
+router.post("/delete-all-categories", async (req, res) => {
   try {
-    const deletedCategories = await Category.find({});
-    
-    deletedCategories.forEach((category) => {
-      if (category.image) {
-        const imagePath = path.join(
-          __dirname,
-          "../../public/images",
-          category.image
-        );
-        fs.unlinkSync(imagePath);
+    const categories = await Category.find({});
+
+    for(const category of categories){
+      if(category.image){
+        const imagePath = path.join(__dirname, "../../public/images", category.image);
+        await fs.promises.unlink(imagePath);
       }
-    });
+    }
 
     await Category.deleteMany({});
-    // req.flash("accepted", "Successfully create new category")
+    res.redirect('/admin/categories');
   } catch (error) {
     console.log(error);
     res.status(500).send(error);

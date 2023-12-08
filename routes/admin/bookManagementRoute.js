@@ -215,11 +215,20 @@ router.post("/delete-all-books", async (req, res) => {
 // Search for book
 router.post("/search", async(req,res) => {
   let searchTerm = req.body.search;
-  let books = await Books.find({$text: {$search: searchTerm, $diacriticSensitive: true}});
+  // Use a regular expression for case-insensitive search
+  const regex = new RegExp(searchTerm, 'i');
+  
+  let books = await Books.find({
+    $or: [
+      {title: regex},
+      {authors: regex},
+    ]
+  });
   const authors = await Author.find({});
   const categories = await Category.find({});
   res.render("admin/searchBookManagement", {
     layout: "./layouts/admin/itemsManagementLayout",
+    title: "Book Management",
     books:books,
     authors: authors,
     categories: categories
