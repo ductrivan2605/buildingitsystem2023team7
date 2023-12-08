@@ -1,3 +1,19 @@
+function toggleSearch() {
+    var searchOverlay = document.getElementById("search-overlay");
+    if (searchOverlay.style.display === "flex") {
+        searchOverlay.style.display = "none";
+    } else {
+        searchOverlay.style.display = "flex";
+    }
+}
+
+function closeSearch() {
+    document.getElementById("search-overlay").style.display = "none";
+}
+
+
+
+
 const header = document.querySelector('header')
         
 

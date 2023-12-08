@@ -1,4 +1,3 @@
-<h1>Hello World</h1>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="lisgt">
 
@@ -15,6 +14,19 @@
 </head>
 
 <body>
+
+  <div id="search-overlay" onclick="closeSearch()">
+    <div class="search-content" onclick="event.stopPropagation()">
+        <div><button id="close-search" onclick="closeSearch()">X</button></div>
+        <div><input type="text" id="search-input" placeholder="Search..."></div>
+        <!-- Add your recommended keywords here -->
+        <div class="recommended-keywords">
+            <span>Keyword 1</span>
+            <span>Keyword 2</span>
+            <!-- Add more keywords as needed -->
+        </div>
+    </div>
+</div>
 
     <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
         <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
@@ -69,7 +81,7 @@
             </ul>
     
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-              <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+              <input type="search" class="form-control" placeholder="Search..." aria-label="Search" onclick="toggleSearch()">
             </form>
     
             <div class="dropdown text-end">
@@ -98,7 +110,7 @@
               class="img-fluid" alt="Sample image">
           </div>
           <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-            <form action="/signin" method="POST">
+            <form>
               <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                 <p class="lead fw-normal mb-0 me-3">Login</p> <br><br><br>
 
@@ -134,7 +146,7 @@
               <div class="text-center text-lg-start mt-4 pt-2">
                 <button type="button" class="btn btn-primary btn-lg"
                   style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-                <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/register"
+                <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
                     class="link-danger">Register</a></p>
               </div>
     
