@@ -32,7 +32,7 @@ const BooksRouter = require("./routes/admin/bookManagementRoute");
 const authRouter = require("./routes/authRoutes");
 const wishlistRouter = require("./routes/wishlistRouter");
 
-app.use("/admin/category", CategoryRouter);
+app.use("/admin/categories", CategoryRouter);
 app.use("/admin/authors", AuthorRouter);
 
 app.use("/admin/books-management", BooksRouter);
