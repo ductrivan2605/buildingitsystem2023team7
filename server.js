@@ -4,13 +4,15 @@ const path = require("path");
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 
-// Specify view engine
-app.set('view engine', 'ejs');
-
 // Static Files
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/images, express.static(path.join(__dirname, "/images")))
 app.set("view engine", "ejs");
+app.get('/public/css/header.css', (req, res) => {
+    res.header('Content-Type', 'text/css');
+    res.sendFile(__dirname + '/public/css/header.css');
+});
 
 // SetUp parse
 app.use(express.urlencoded({ extended: true }));
@@ -36,10 +38,7 @@ app.use("/wishlist", wishlistRouter);
 app.get('/', (req, res) => {
     res.render('wishlist');
 });
-  app.get('/public/css/header.css', (req, res) => {
-    res.header('Content-Type', 'text/css');
-    res.sendFile(__dirname + '/public/css/header.css');
-  });
+  
 
 app.listen(3000, () => {
     console.log(`Server is running on port localhost:3000`);
