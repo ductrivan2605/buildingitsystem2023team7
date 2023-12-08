@@ -17,9 +17,10 @@ router.post('/register', async (req, res) => {
     const user = new User({
       username: req.body.username,
       password: hashedPassword,
-      role: 'normal' // 'admin' for admin users
+      role: 'standard' // 'admin' for admin users
     });
     await user.save();
+    console.log(user);
     res.redirect('/auth/signin');
   } catch (error) {
     res.status(500).send('Error registering user');

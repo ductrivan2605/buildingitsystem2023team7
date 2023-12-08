@@ -5,13 +5,12 @@ const BookSchema = new mongoose.Schema({
     type:String,
     required: true
    }, 
-   author:[
+   authors: [
       {
-       type: mongoose.Schema.Types.ObjectId,
-       ref: 'Authors',
-       required: true
+        type: String,
+        required: true
       }
-   ],
+    ],
    category:[
       {
        type: String,
@@ -28,17 +27,20 @@ const BookSchema = new mongoose.Schema({
     type: String,
    },
    
-    review:{
-        type: String,
+   review:{
+      type: String,
    },
-   
-   image: {
+   contentImage: [{
     type: String,
     required: true
-   },
-
-
+   }],
+   imageCover:{
+      type: String,
+      required: true
+   }
 });
+
+BookSchema.index({title: 'text', authors: 'text'});
 
 
 const Books = mongoose.model('Book details', BookSchema);
