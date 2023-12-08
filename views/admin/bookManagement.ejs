@@ -314,13 +314,13 @@
                             <form action="/admin/books-management/update-book/<%= book._id %>" method="post" class="d-flex w-100" enctype="multipart/form-data">
                                 <div class="image-container ">
                                     <div class="imageCoverContainer d-flex flex-column">
-                                        <label for="editBookImageCover">Add image Cover</label>
+                                        <label for="editBookImageCover">Edit image Cover</label>
                                         <input type="file" id="editBookImageCover" name="imageCover" onchange="previewImage('editBookImageCover', 'edit-image-cover-preview')">
                                         <div id="edit-image-cover-preview" class="py-1"></div>
                                     </div>
                                 </div>
                                 <div class="right-container">
-                                    <label for="newTitle">Book Title:</label>
+                                    <label for="newTitle">Book Title</label>
                                     <input type="text" id="newTitle" name="title" value="<%= book.title %>" />
         
         

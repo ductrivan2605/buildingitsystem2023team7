@@ -29,8 +29,8 @@ const BooksRouter = require("./routes/admin/bookManagementRoute");
 const authRouter = require("./routes/authRoutes");
 const wishlistRouter = require("./routes/wishlistRouter");
 
-app.use("/admin/category/", CategoryRouter);
-app.use("/admin/author/", AuthorRouter);
+app.use("/admin/category", CategoryRouter);
+app.use("/admin/authors", AuthorRouter);
 app.use("/admin/books-management", BooksRouter);
 app.use("/auth", authRouter);
 app.use(wishlistRouter);
