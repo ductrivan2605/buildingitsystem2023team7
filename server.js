@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 // Static Files
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
-app.use("/images, express.static(path.join(__dirname, "/images")))
+app.use("/images", express.static(path.join(__dirname, "images"))); // Fixed the syntax error here 
 app.set("view engine", "ejs");
 app.get('/public/css/header.css', (req, res) => {
     res.header('Content-Type', 'text/css');

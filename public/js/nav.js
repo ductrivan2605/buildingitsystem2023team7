@@ -58,3 +58,57 @@ function toggleMenu() {
       console.error('Error:', error);
     });
   }
+
+ 
+  document.addEventListener('DOMContentLoaded', function () {
+    const header = document.querySelector('.header');
+    const line = document.createElement('div');
+    line.classList.add('hover-line');
+
+    header.appendChild(line);
+
+    header.addEventListener('mousemove', function (event) {
+        const mouseX = event.clientX - header.getBoundingClientRect().left;
+        line.style.width = mouseX + 'px';
+        line.style.left = mouseX + 'px';
+    });
+
+    header.addEventListener('mouseleave', function () {
+        line.style.width = '0';
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const header = document.querySelector('.header');
+  const line = document.createElement('div');
+  line.classList.add('hover-line');
+
+  header.appendChild(line);
+
+  const navBar = document.querySelector('.navBar');
+  const dropDown = document.querySelector('.dropDown');
+
+  header.addEventListener('mousemove', function (event) {
+      const mouseX = event.clientX - header.getBoundingClientRect().left;
+      line.style.width = mouseX + 'px';
+      line.style.left = mouseX + 'px';
+  });
+
+  header.addEventListener('mouseleave', function () {
+      line.style.width = '0';
+  });
+
+  // Handle dropdown arrow positioning
+  dropDown.addEventListener('mouseenter', function () {
+      const navBarRect = navBar.getBoundingClientRect();
+      const dropDownRect = dropDown.getBoundingClientRect();
+
+      const arrowPosition = dropDownRect.left + dropDownRect.width / 2 - navBarRect.left;
+      line.style.left = arrowPosition + 'px';
+  });
+
+  dropDown.addEventListener('mouseleave', function () {
+      line.style.width = '0';
+  });
+});
