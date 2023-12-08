@@ -15,7 +15,7 @@ window.onclick = function(event) {
       var openDropdown = dropdowns[i];
       if (openDropdown.classList.contains('show')) {
         openDropdown.classList.remove('show');
-        dropdownVisible = false; // Update the dropdown state when closed
+        dropdownVisible = false;  
       }
     }
   }
@@ -26,68 +26,16 @@ function toggleMenu() {
     navList.style.display = (navList.style.display === "none" || navList.style.display === "") ? "flex" : "none";
   }
 
-  function submitWishlist() {
-    const author = document.getElementById("author").value;
-    const title = document.getElementById("title").value;
-    const date = document.getElementById("date").value;
-    const image = document.getElementById("image").value;
-  
-    const wishlistData = {
-      author,
-      title,
-      date,
-      image,
-    };
-  
-    // Send wishlist data to the server (Node.js) using an AJAX request or fetch API
-    // Example using fetch:
-    fetch('/submit-wishlist', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(wishlistData),
-    })
-    .then(response => response.json())
-    .then(data => {
-      // Handle response from the server (e.g., show a success message)
-      console.log(data);
-    })
-    .catch(error => {
-      // Handle errors
-      console.error('Error:', error);
-    });
-  }
-
- 
-  document.addEventListener('DOMContentLoaded', function () {
-    const header = document.querySelector('.header');
-    const line = document.createElement('div');
-    line.classList.add('hover-line');
-
-    header.appendChild(line);
-
-    header.addEventListener('mousemove', function (event) {
-        const mouseX = event.clientX - header.getBoundingClientRect().left;
-        line.style.width = mouseX + 'px';
-        line.style.left = mouseX + 'px';
-    });
-
-    header.addEventListener('mouseleave', function () {
-        line.style.width = '0';
-    });
-});
 
 
-document.addEventListener('DOMContentLoaded', function () {
+
+ /* for the bar */ 
+ document.addEventListener('DOMContentLoaded', function () {
   const header = document.querySelector('.header');
   const line = document.createElement('div');
   line.classList.add('hover-line');
 
   header.appendChild(line);
-
-  const navBar = document.querySelector('.navBar');
-  const dropDown = document.querySelector('.dropDown');
 
   header.addEventListener('mousemove', function (event) {
       const mouseX = event.clientX - header.getBoundingClientRect().left;
@@ -98,17 +46,24 @@ document.addEventListener('DOMContentLoaded', function () {
   header.addEventListener('mouseleave', function () {
       line.style.width = '0';
   });
-
-  // Handle dropdown arrow positioning
-  dropDown.addEventListener('mouseenter', function () {
-      const navBarRect = navBar.getBoundingClientRect();
-      const dropDownRect = dropDown.getBoundingClientRect();
-
-      const arrowPosition = dropDownRect.left + dropDownRect.width / 2 - navBarRect.left;
-      line.style.left = arrowPosition + 'px';
-  });
-
-  dropDown.addEventListener('mouseleave', function () {
-      line.style.width = '0';
-  });
 });
+
+
+/* for the user */ 
+document.addEventListener('click', function (event) {
+  const userSection = document.getElementById('userSection');
+  const userDropdown = document.getElementById('userDropdown');
+
+  // Check if the click is inside the user section or its dropdown
+  const isClickInsideUser = userSection.contains(event.target) || userDropdown.contains(event.target);
+
+  // If not, close the user dropdown
+  if (!isClickInsideUser) {
+      userDropdown.style.display = 'none';
+  }
+});
+
+function toggleUserMenu() {
+  const userDropdown = document.getElementById('userDropdown');
+  userDropdown.style.display = (userDropdown.style.display === 'block') ? 'none' : 'block';
+}
