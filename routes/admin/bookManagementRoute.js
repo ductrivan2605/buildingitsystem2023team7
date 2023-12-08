@@ -12,9 +12,9 @@ router.get("/", async (req, res) => {
     const books = await Books.find({});
     const authors = await Author.find({});
     const categories = await Category.find({});
-    console.log("Populated Books:", books);
     res.render("admin/bookManagement", {
-      layout: "./layouts/admin/bookManagementLayout",
+      layout: "./layouts/admin/itemsManagementLayout",
+      title: "Book Management",
       books:books,
       authors: authors,
       categories: categories
@@ -81,12 +81,26 @@ router.post("/update-book/:id", upload.fields([
   try {
     const bookId = req.params.id;
 
+    // Retrieve the current book to access the old image filename
+    const books = await Books.findById(bookId);
+
     // Construct a dynamic update object
     const updateFields = {};
     if (req.body.title) updateFields.title = req.body.title;
     if (req.body.published) updateFields.published = req.body.published;
     if (req.body.description) updateFields.description = req.body.description;
+
+    // Delete the old image if a new image is uploaded
     if (req.files['imageCover']) {
+      // Check if the current book has an old image
+      if (books.imageCover) {
+        // Delete the old image
+        const oldImageFilePath = path.resolve(__dirname, "../../public/images", books.imageCover);
+        if (fs.existsSync(oldImageFilePath)) {
+          fs.unlinkSync(oldImageFilePath);
+        }
+      }
+      // Save the new image
       updateFields.imageCover = req.files['imageCover'][0].filename;
     }
 
@@ -116,13 +130,13 @@ router.post("/update-book/:id", upload.fields([
       return res.status(404).send("Book not found");
     }
 
-    console.log(updatedBook);
     res.redirect('/admin/books-management');
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
   }
 });
+
 
 
 
@@ -159,7 +173,6 @@ router.post("/delete/:id", async (req, res) => {
     await Books.findByIdAndDelete(req.params.id);
     res.redirect("/admin/books-management");
   } catch (error) {
-    console.error(error);
     res.status(500).send(error.message);
   }
 });
@@ -191,9 +204,7 @@ router.post("/delete-all-books", async (req, res) => {
         console.error("Error deleting image cover file:", error);
       }
     }
-
     res.status(202).redirect('/admin/books-management');
-    console.log("Deleted Books:", deletedBooks);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -208,7 +219,7 @@ router.post("/search", async(req,res) => {
   const authors = await Author.find({});
   const categories = await Category.find({});
   res.render("admin/searchBookManagement", {
-    layout: "./layouts/admin/bookManagementLayout",
+    layout: "./layouts/admin/itemsManagementLayout",
     books:books,
     authors: authors,
     categories: categories
