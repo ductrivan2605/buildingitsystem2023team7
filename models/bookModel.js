@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { default: slugify } = require('slugify');
 
 const BookSchema = new mongoose.Schema({
    title:{
@@ -32,15 +33,25 @@ const BookSchema = new mongoose.Schema({
    },
    contentImage: [{
     type: String,
-    required: true
    }],
    imageCover:{
       type: String,
       required: true
+   },
+   slug:{
+      type: String,
+      required: true,
+      unique: true
    }
+
 });
-
-
+    
+BookSchema.pre('validate', function (next){
+   if(this.title){
+      this.slug = slugify(this.title, {lower: true, strict: true});
+   }
+   next();
+})
 
 const Books = mongoose.model('Book details', BookSchema);
 
