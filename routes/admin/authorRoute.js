@@ -39,103 +39,86 @@ router.post("/add-new-author", upload.single("image"), async (req, res) => {
 // Update an author
 router.post("/update-author/:id", upload.single("editImage"), async (req, res) => {
   try {
-    // Get the image to be updated
-    const authors = await Authors.findById(req.params.id);
-    if (!authors) {
-      req.flash("rejected", "Image not found!");
-      res.redirect("/admin/welcome_page");
-      return;
+    const existingAuthor = await Authors.findById(req.params.id);
+
+    if (!existingAuthor) {
+      req.flash("rejected", "Author not found!");
+      return res.redirect("/admin/authors");
     }
 
-    // Update the image with the new image file, if one was uploaded
+    // Update the image field if a new image is provided
     if (req.file) {
-      // Unlink the old image file, if it exists
-      const oldImageFilePath = path.resolve(
-        __dirname,
-        "../../public/images",
-        authors.image
-      );
-      if (fs.existsSync(oldImageFilePath)) {
-        fs.unlink(oldImageFilePath, (err) => {
-          if (err) {
-            console.log("Error deleting old image file:", err);
-          }
-        });
+      // Check if there is an existing image
+      if (existingAuthor.image) {
+        const oldImageFilePath = path.resolve(
+          __dirname,
+          "../../public/images",
+          existingAuthor.image
+        );
+        // Delete the old image file
+        if (fs.existsSync(oldImageFilePath)) {
+          fs.unlinkSync(oldImageFilePath);
+        }
       }
-
-      // Update the picture with the new image file
-      authors.image = req.file.filename;
+      // Update with the new image file
+      existingAuthor.image = req.file.filename;
     }
 
-    // Update the image's other fields
-    authors.name = req.body.name;
-    authors.email = req.body.email;
-    authors.background = req.body.background;
+    // Update fields if provided in the request
+    existingAuthor.name = req.body.name || existingAuthor.name;
+    existingAuthor.email = req.body.email || existingAuthor.email;
+    existingAuthor.background = req.body.background || existingAuthor.background;
 
-    // Save the updated image
-    await authors.save();
-
-    if (!authors) {
-      return res.status(404).send("Author not found");
-    }
+    await existingAuthor.save();
 
     res.redirect('/admin/authors');
   } catch (error) {
     console.error("Error updating author:", error);
 
-    // Customize the response based on the type of error
     if (error.name === "CastError") {
-      // Handle invalid authorId
       return res.status(400).send("Invalid authorId");
     }
 
-    // Handle other errors
     res.status(500).send("Internal Server Error");
   }
 });
 
 
+
 // Delete a single author
 router.post("/delete/:id", async (req, res) => {
   try {
-    const authors = await Authors.findById(req.params.id);
-    if (!authors) {
+    const author = await Authors.findByIdAndDelete(req.params.id);
+
+    if (!author) {
       req.flash("rejected", "Author not found!");
-      res.redirect("/admin/authors");
-      return;
+      return res.redirect("/admin/authors");
     }
 
     // Delete the corresponding image file from the server
-    if (authors.image) {
-      const imagePath = path.join(
-        __dirname,
-        "../../public/images",
-        authors.image
-      );
-      fs.promises.unlink(imagePath);
+    if (author.image) {
+      const imagePath = path.join(__dirname, "../../public/images", author.image);
+      await fs.promises.unlink(imagePath);
     }
-    await Authors.findByIdAndDelete(req.params.id);
+
     res.redirect('/admin/authors');
   } catch (error) {
-    res.status(500).send(error);
+    res.status(500).send(error.message);
   }
 });
+
 
 // Delete all authors
 router.post("/delete-all-authors", async (req, res) => {
   try {
     const deletedAuthors = await Authors.find({});
-
-    deletedAuthors.forEach((author) => {
+    
+    for (const author of deletedAuthors) {
       if (author.image) {
-        const imagePath = path.join(
-          __dirname,
-          "../../public/images",
-          author.image
-        );
-        fs.unlinkSync(imagePath);
+        const imagePath = path.join(__dirname, "../../public/images", author.image);
+        await fs.promises.unlink(imagePath);
       }
-    });
+    }
 
     await Authors.deleteMany({});
     res.redirect('/admin/authors');
@@ -144,5 +127,25 @@ router.post("/delete-all-authors", async (req, res) => {
     res.status(500).send(error);
   }
 });
+
+
+// Search for book
+router.post("/search", async(req,res) => {
+  let searchTerm = req.body.search;
+  const regex = new RegExp(searchTerm, 'i');
+  
+  let authors = await Authors.find({
+    $or: [
+      {name: regex},
+      {background: regex},
+    ]
+  });
+  res.render("admin/searchItemsManagement", {
+    layout: "./layouts/admin/itemsManagementLayout",
+    authors: authors,
+    title: "Author Management",
+  });
+})
+
 
 module.exports = router;

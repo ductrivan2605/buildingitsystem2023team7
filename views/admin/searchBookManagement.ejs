@@ -142,8 +142,10 @@
         <h1>Book Management</h1>
     </div>
     <div class="search-form">
-        <input type="search" placeholder="Search for customers..." />
-        <input type="button" value="Search" />
+        <form action="/admin/books-management/search" method="post" class="d-flex">
+            <input type="text" name="search" placeholder="Search for book name" />
+            <button type="submit">Search</button>
+        </form>
         <div class="btns">
             <input type="button" value="Add book" onclick="openPopup('addBookPopup')" />
             <div class="popup-container" id="addBookPopup">
