@@ -16,6 +16,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 
 // Mongoose
+app.get("/", (req, res) => {
+  res.render("register")
+})
 
 // Books Database
 mongoose
@@ -30,12 +33,16 @@ const CategoryRouter = require("./routes/admin/categoryRoute");
 const AuthorRouter = require("./routes/admin/authorRoute");
 const BooksRouter = require("./routes/admin/bookManagementRoute");
 const authRouter = require("./routes/authRoutes");
+const userManagementRouter = require("./routes/admin/userManagementRoute");
+const userRouter = require("./routes/userRoutes");
 const wishlistRouter = require("./routes/wishlistRouter");
 
 app.use("/admin/categories", CategoryRouter);
 app.use("/admin/authors", AuthorRouter);
 
 app.use("/admin/books-management", BooksRouter);
+app.use("/admin/users-management", userManagementRouter);
+app.use("/user", userRouter);
 app.use("/auth", authRouter);
 app.use("/wishlist", wishlistRouter);
 
