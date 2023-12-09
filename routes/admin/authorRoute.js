@@ -42,7 +42,7 @@ router.post("/update-author/:id", upload.single("editImage"), async (req, res) =
     const existingAuthor = await Authors.findById(req.params.id);
 
     if (!existingAuthor) {
-      req.flash("rejected", "Author not found!");
+      // req.flash("rejected", "Author not found!");
       return res.redirect("/admin/authors");
     }
 
@@ -91,7 +91,7 @@ router.post("/delete/:id", async (req, res) => {
     const author = await Authors.findByIdAndDelete(req.params.id);
 
     if (!author) {
-      req.flash("rejected", "Author not found!");
+      // req.flash("rejected", "Author not found!");
       return res.redirect("/admin/authors");
     }
 
@@ -121,6 +121,7 @@ router.post("/delete-all-authors", async (req, res) => {
     }
 
     await Authors.deleteMany({});
+    console.log(deletedAuthors);
     res.redirect('/admin/authors');
   } catch (error) {
     console.log(error);

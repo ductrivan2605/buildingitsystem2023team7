@@ -26,15 +26,16 @@ mongoose
   .catch((error) => console.log(error.message));
 
 // Routes
+const mainPage = require("./routes/user/mainPage");
 const CategoryRouter = require("./routes/admin/categoryRoute");
 const AuthorRouter = require("./routes/admin/authorRoute");
 const BooksRouter = require("./routes/admin/bookManagementRoute");
 const authRouter = require("./routes/authRoutes");
 const wishlistRouter = require("./routes/wishlistRouter");
 
+app.use("/", mainPage);
 app.use("/admin/categories", CategoryRouter);
 app.use("/admin/authors", AuthorRouter);
-
 app.use("/admin/books-management", BooksRouter);
 app.use("/auth", authRouter);
 app.use("/wishlist", wishlistRouter);
@@ -44,3 +45,5 @@ app.listen(3000, () => {
   console.log(`Server is running on port localhost:3000`);
 
 });
+
+

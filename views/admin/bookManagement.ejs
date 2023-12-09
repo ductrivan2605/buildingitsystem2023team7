@@ -157,18 +157,18 @@
                         <div class="image-container ">
                             <div class="imageCoverContainer d-flex flex-column">
                                 <label for="addBookImageCover">Add image Cover</label>
-                                <input type="file" id="addBookImageCover" name="imageCover" onchange="previewImage('addBookImageCover', 'add-image-cover-preview')">
+                                <input type="file" id="addBookImageCover" name="imageCover" onchange="previewImage('addBookImageCover', 'add-image-cover-preview')" required>
                                 <div id="add-image-cover-preview" class="py-1"></div>
                             </div>
                             <div class="contentImageContainer d-flex flex-column">
                                 <label for="addContentImage" class="image-label">Add Content Image</label>
-                                <input type="file" id="addContentImage" name="contentImage" onchange="previewImage('addContentImage', 'add-image-content-preview')" multiple>
+                                <input type="file" id="addContentImage" name="contentImage" onchange="previewImage('addContentImage', 'add-image-content-preview')" multiple >
                                 <div id="add-image-content-preview" class="py-1"></div>
                             </div>
                         </div>
                         <div class="right-container">
                             <label for="title">Book Title:</label>
-                            <input type="text" id="title" name="title" />
+                            <input type="text" id="title" name="title" required />
 
 
                         <!-- Authors -->
@@ -193,7 +193,7 @@
                             <div class="valueField">
                                 <label for="authors"></label>
                                 <!-- Change input to textarea -->
-                                <textarea name="authors" placeholder="Display selected author(s)" id="authors" rows="3"></textarea>
+                                <textarea name="authors" placeholder="Display selected author(s)" id="authors" rows="3" required></textarea>
                             </div>
                         </div>
 
@@ -229,7 +229,7 @@
                                 </div>
                                 <div class="valueField">
                                     <label for="category"></label>
-                                    <textarea name="categories" placeholder="Display selected category(s)" id="category" rows="3"></textarea>
+                                    <textarea name="categories" placeholder="Display selected category(s)" id="category" rows="3" required></textarea>
                                 </div>
                             </div>
 
