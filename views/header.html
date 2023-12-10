@@ -1,68 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="../public/css/header.css">
-  <link rel="icon" type="image/x-icon" href="../public/images/logo.png">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="../public/js/nav.js" defer></script>
-  <title>Wishlist</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../public/css/header.css" />
+    <link rel="icon" type="image/x-icon" href="../public/images/logo.png" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="../public/js/nav.js" defer></script>
+    <title>Wishlist</title>
+  </head>
+  <body>
     <header class="header">
-        <div class="logo">
-            <a href="#"><img src="../public/images/logo.png" alt=""></a>
-        </div>
-        <button class="menu-button" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
-        <nav class="navBar">
-            <ul class="NavList" id="navList">
-                <li class="NavList-item"><a href="#">Home</a></li>
-                <li class="NavList-item"><a href="#">Trending</a></li>
-                <li class="NavList-item"><a href="#">New Arrival</a></li>
-               
-               <li class="NavList-item">
-                    <a href="#">Categories <i class="fa-solid fa-caret-down"></i></a>
-                    <div class="dropDown">
-                        <ul class="dropDownList">
-                            <li class="dropDownItem"><a href="#">Lv1 <i class="fa-solid fa-arrow-right"></i></a>
-                                <ul class="dropDownList-lv2">
-                                    <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
-                                    <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropDownItem"><a href="#">Lv1 <i class="fa-solid fa-arrow-right"></i></a>
-                                <ul class="dropDownList-lv2">
-                                    <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
-                                    <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </li>  
-            </ul>
-            
-        </nav>
+      <div class="logo">
+        <a href="#"><img src="../public/images/logo.png" alt="" /></a>
+      </div>
+      <button class="menu-button" onclick="toggleMenu()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <nav class="navBar">
+        <ul class="NavList" id="navList">
+          <li class="NavList-item"><a href="#">Home</a></li>
+          <li class="NavList-item"><a href="#">Trending</a></li>
+          <li class="NavList-item"><a href="#">New Arrival</a></li>
 
-        <form class="search">
-            <input type="text" placeholder="What are you finding?">
-            <button type="submit">Search</button>
-        </form>
-        <div class="user" id="userSection">
-            <div class="user-info" onclick="toggleUserMenu()">
-                <img id="userAvatar" src="" alt="User Avatar">
-                <span id="userName">User Name</span>
-                <i class="fa-solid fa-caret-down"></i>
+          <li class="NavList-item">
+            <a href="#">Categories <i class="fa-solid fa-caret-down"></i></a>
+            <div class="dropDown">
+              <ul class="dropDownList">
+                <li class="dropDownItem">
+                  <a href="#">Lv1 <i class="fa-solid fa-arrow-right"></i></a>
+                  <ul class="dropDownList-lv2">
+                    <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
+                    <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
+                  </ul>
+                </li>
+                <li class="dropDownItem">
+                  <a href="#">Lv1 <i class="fa-solid fa-arrow-right"></i></a>
+                  <ul class="dropDownList-lv2">
+                    <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
+                    <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
+                  </ul>
+                </li>
+              </ul>
             </div>
-            <div class="user-dropdown" id="userDropdown">
-                <!-- Dropdown menu content -->
-                <a href="#">Profile</a>
-                <a href="#">Settings</a>
-                <a href="#">Logout</a>
-            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <form class="search">
+        <input
+          type="text"
+          class="search-box"
+          placeholder="What are you finding?"
+        />
+        <button type="submit" class="search-but">
+          <img
+            src="https://cdn2.iconfinder.com/data/icons/minimal-set-five/32/minimal-48-1024.png"
+            alt=""
+            class="img1"
+          />
+        </button>
+      </form>
+      <div class="user" id="userSection">
+        <div class="user-info" onclick="toggleUserMenu()">
+          <img
+            id="userAvatar"
+            src="https://bsnl.ch/wp-content/uploads/2019/03/avatar-default-circle.png"
+            alt="User Avatar"
+          />
+          <span id="userName">User Name</span>
+          <i class="fa-solid fa-caret-down"></i>
         </div>
+        <div class="user-dropdown" id="userDropdown">
+          <!-- Dropdown menu content -->
+          <a href="#">Profile</a>
+          <a href="#">Settings</a>
+          <a href="#">Logout</a>
+        </div>
+      </div>
     </header>
- 
   </body>
-  </html>
+</html>
