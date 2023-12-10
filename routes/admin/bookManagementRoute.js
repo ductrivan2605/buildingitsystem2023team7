@@ -31,45 +31,51 @@ router.post("/add-new-book", upload.fields([
   { name: 'imageCover', maxCount: 1 }
 ]), async (req, res) => {
   try {
-     const {
-        title,
-        authors,
-        categories,
-        published,
-        description,
-     } = req.body;
+    const {
+      title,
+      authors,
+      categories,
+      published,
+      description,
+    } = req.body;
 
-     // Get the filenames for both contentImage and imageCover
-     const contentImage = req.files['contentImage'].map((file) => file.filename);
-     const imageCover = req.files['imageCover'][0].filename;
+    // Get the filenames for both contentImage and imageCover
+    const contentImageFiles = req.files['contentImage'];
+    const contentImage = contentImageFiles ? contentImageFiles.map((file) => file.filename) : null;
+    
+    const imageCover = req.files['imageCover'][0].filename;
 
-     // Convert authors and categories to arrays
-     const authorIds = authors
-        ? authors.split(",").map((item) => item.trim())
-        : [];
-     const categoryIds = categories
-        ? categories.split(",").map((item) => item.trim())
-        : [];
+    // Convert authors and categories to arrays
+    const authorIds = authors
+      ? authors.split(",").map((item) => item.trim())
+      : [];
+    const categoryIds = categories
+      ? categories.split(",").map((item) => item.trim())
+      : [];
 
-     const book = await Books.create({
-        title: title,
-        authors: authorIds,
-        category: categoryIds,
-        published: published,
-        description: description,
-        contentImage: contentImage,
-        imageCover: imageCover,
-     });
+    const book = await Books.create({
+      title: title,
+      authors: authorIds,
+      category: categoryIds,
+      published: published,
+      description: description,
+      contentImage: contentImage,
+      imageCover: imageCover,
+    });
 
-     console.log("Added new book:", book);
-     res.status(201).redirect("/admin/books-management");
+    
+    // Send a success response
+    res.status(201).redirect("/admin/books-management");
   } catch (error) {
-     if (error.message === "Invalid file type") {
-        return res.status(400);
-     }
-     res.status(500);
+    // Send an appropriate error response
+    if (error.message === "Invalid file type") {
+      return res.status(400).send("Invalid file type");
+    }
+    console.error(error);
+    res.status(500).send("Internal Server Error");
   }
 });
+
 
 
 
@@ -187,12 +193,16 @@ router.post("/delete-all-books", async (req, res) => {
       await Books.findByIdAndDelete(deletedBook._id);
 
       // Delete the corresponding image files
-      for (const imageFileName of deletedBook.contentImage) {
-        const imagePath = path.join(__dirname, "../../public/images", imageFileName);
-        try {
-          await fs.promises.unlink(imagePath);
-        } catch (error) {
-          console.error("Error deleting image file:", error);
+      if (deletedBook.imageCover) {
+        const imageCoverPath = path.join(__dirname, "../../public/images", deletedBook.imageCover);
+        
+        // Check if the file exists before trying to delete
+        if (fs.existsSync(imageCoverPath)) {
+          try {
+            await fs.promises.unlink(imageCoverPath);
+          } catch (error) {
+            console.error("Error deleting image cover file:", error);
+          }
         }
       }
 

@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../../public/css/header.css" />
-  <link rel="icon" type="image/x-icon" href="../../public/images/logo.png">
+  <link rel="stylesheet" type="text/css" href="/css/header.css">
+  <link rel="icon" type="image/x-icon" href="../public/images/logo.png">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="../../public/js/nav.js" defer></script>
+  <script src="../public/js/nav.js" defer></script>
   <title>Wishlist</title>
 </head>
 <body>
     <header class="header">
         <div class="logo">
-          <a href="#"><img src="../../public/images/logo.png" alt=""></a>
+          <a href="#"><img src="images/logo.png" alt=""></a>
         </div>
         <button class="menu-button" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
         <nav class="navBar">
@@ -59,20 +59,20 @@
       
       <main class="main">
         <form id="wishlistForm">
-          <label for="authorWishlist">Author:</label>
-          <input type="text" id="authorWishlist" name="authorWishlist" required>
+            <label for="authorWishlist">Author:</label>
+            <input type="text" id="authorWishlist" name="authorWishlist" required>
     
-          <label for="titleWishlist">Title:</label>
-          <input type="text" id="titleWishlist" name="itleWishlist" required>
+            <label for="titleWishlist">Title:</label>
+            <input type="text" id="titleWishlist" name="titleWishlist" required>
     
-          <label for="dateWishlist">Date:</label>
-          <input type="date" id="dateWishlist" name="dateWishlist" required>
+            <label for="dateWishlist">Date:</label>
+            <input type="date" id="dateWishlist" name="dateWishlist" required>
     
-          <label for="imageWishlist">Image (URL):</label>
-          <input type="url" id="imageWishlist" name="imageWishlist">
+            <label for="imageWishlist">Image (URL):</label>
+            <input type="url" id="imageWishlist" name="imageWishlist">
     
-          <button type="button" onclick="submitWishlist()">Submit Wishlist</button>
+            <button type="button" onclick="submitWishlist()">Submit Wishlist</button>
         </form>
-      </main>
+    </main>
   </body>
   </html>
