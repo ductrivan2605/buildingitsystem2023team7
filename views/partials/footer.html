@@ -10,6 +10,27 @@
       type="text/css"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
     />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Function to toggle visibility of ul on mobile
+        function toggleUlOnMobile() {
+          if ($(window).width() <= 767) {
+            $(this).find("ul").slideToggle();
+          }
+        }
+
+        // Attach click event to footer-col elements
+        $(".footer-col").on("click", toggleUlOnMobile);
+
+        // Resize event to hide ul on larger screens
+        $(window).resize(function () {
+          if ($(window).width() > 767) {
+            $(".footer-col ul").removeAttr("style");
+          }
+        });
+      });
+    </script>
   </head>
   <body>
     <footer class="footer">
@@ -25,7 +46,7 @@
             </ul>
           </div>
           <div class="footer-col">
-            <h4>discover</h4>
+            <h4>Discover</h4>
             <ul>
               <li><a href="#">categories</a></li>
               <li><a href="#">authors</a></li>
@@ -34,7 +55,7 @@
             </ul>
           </div>
           <div class="footer-col">
-            <h4>help</h4>
+            <h4>Help</h4>
             <ul>
               <li><a href="#">FAQ</a></li>
               <li><a href="#">borrowing</a></li>
@@ -43,7 +64,7 @@
             </ul>
           </div>
           <div class="footer-col">
-            <h4>follow us</h4>
+            <h4>Follow Us</h4>
             <div class="social-links">
               <a href="#"><i class="fab fa-facebook-f"></i></a>
               <a href="#"><i class="fab fa-twitter"></i></a>

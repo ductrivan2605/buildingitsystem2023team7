@@ -20,8 +20,9 @@ ul {
   list-style: none;
 }
 .footer {
-  background-color: #24262b;
-  padding: 70px 0;
+  background-color: #0f2c59;
+  padding-bottom: 15px;
+  padding-top: 15px;
 }
 .footer-col {
   width: 25%;
@@ -79,6 +80,13 @@ ul {
   background-color: #ffffff;
 }
 
+/* Add this media query to hide ul elements on mobile */
+@media (max-width: 767px) {
+  .footer-col ul {
+    display: none;
+  }
+}
+
 /*responsive*/
 @media (max-width: 767px) {
   .footer-col {
@@ -86,6 +94,32 @@ ul {
     margin-bottom: 30px;
   }
 }
+@media (max-width: 574px) {
+  .footer-col {
+    width: 100%;
+  }
+}
+
+/* Add this CSS for mobile view */
+@media (max-width: 767px) {
+  .footer-col h4 {
+    cursor: pointer;
+  }
+
+  /* Add a hover effect for better visual feedback */
+  .footer-col h4:hover {
+    color: #e91e63; /* Change the color on hover if needed */
+  }
+}
+
+/*responsive*/
+@media (max-width: 767px) {
+  .footer-col {
+    width: 50%;
+    margin-bottom: 30px;
+  }
+}
+
 @media (max-width: 574px) {
   .footer-col {
     width: 100%;
