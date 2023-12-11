@@ -1,14 +1,24 @@
-// models/Wishlist.js
+// models/WishlistItem.js
 const mongoose = require('mongoose');
 
-const wishlistSchema = new mongoose.Schema({
-  authorWishlist: String,
-  titleWishlist: String,
-  dateWishlist: Date,
-  imageWishlist: String,
-  approved: { type: Boolean, default: false }, // New field for approval status
+const wishlistItemSchema = new mongoose.Schema({
+  authorWishlist: {
+    type: String,
+    required: true,
+  },
+  titleWishlist: {
+    type: String,
+    required: true,
+  },
+  dateWishlist: {
+    type: Date,
+    required: true,
+  },
+  imageWishlist: {
+    type: String, // Assuming the image is stored as a URL
+  },
 });
 
-const WishlistItem = mongoose.model('WishlistItem', wishlistSchema);
+const WishlistItem = mongoose.model('WishlistItem', wishlistItemSchema);
 
 module.exports = WishlistItem;
