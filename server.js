@@ -34,6 +34,7 @@ const authRouter = require("./routes/authRoutes");
 const userManagementRouter = require("./routes/admin/userManagementRoute");
 const userRouter = require("./routes/user/userRoutes");
 const wishlistRouter = require("./routes/wishlistRouter");
+const wishlistAdminRouter = require('./routes/admin/wishlistAdminRouter');
 
 app.use("/", mainPage);
 app.use("/book", bookDetail);
@@ -44,10 +45,12 @@ app.use("/admin/users-management", userManagementRouter);
 app.use("/user", userRouter);
 app.use("/auth", authRouter);
 app.use("/wishlist", wishlistRouter);
+app.use('/admin/wishlist', wishlistAdminRouter);
 
-app.get('/user', (req, res) => {
-  res.render('wishlist.ejs');  
+app.get('/', (req, res) => {
+  res.render('user/wishlist');
 });
+
 
 app.listen(3000, () => {
   console.log(`Server is running on port localhost:3000`);

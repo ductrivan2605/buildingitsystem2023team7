@@ -1,4 +1,6 @@
 // models/WishlistItem.js
+// models/WishlistItem.js
+
 const mongoose = require('mongoose');
 
 const wishlistItemSchema = new mongoose.Schema({
@@ -15,7 +17,12 @@ const wishlistItemSchema = new mongoose.Schema({
     required: true,
   },
   imageWishlist: {
-    type: String, // Assuming the image is stored as a URL
+    type: String,
+  },
+  // Change field name to approveWishlist
+  approveWishlist: {
+    type: Boolean,
+    default: false, // Set default value to false
   },
 });
 
