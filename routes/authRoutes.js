@@ -3,16 +3,37 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 const User = require('../models/user');
 
-router.get('/', (req, res) => {
-  res.render('signin');
+router.get("/", async (req, res) => {
+  try {
+    res.render("signin", {
+      layout: "./layouts/admin/itemsManagementLayout",
+      title: "User Authenticate",
+    });
+  } catch (error) {
+    res.send(error);
+  }
 });
 
-router.get('/register', (req, res) => {
-  res.render('register');
+router.get("/register", async (req, res) => {
+  try {
+    res.render("register", {
+      layout: "./layouts/admin/itemsManagementLayout",
+      title: "User Authenticate",
+    });
+  } catch (error) {
+    res.send(error);
+  }
 });
 
-router.get('/configure', (req, res) => {
-  res.render('configure')
+router.get("/configure", async (req, res) => {
+  try {
+    res.render("configure", {
+      layout: "./layouts/admin/itemsManagementLayout",
+      title: "User Authenticate",
+    });
+  } catch (error) {
+    res.send(error);
+  }
 });
 router.post('/register', async (req, res) => {
   try {

@@ -1,0 +1,141 @@
+<main class="d-flex flex-nowrap">
+    <!-- Left Section - User Management -->
+    <div class="mainContent">
+        <div class="CategoryName">
+            <h1>User Management</h1>
+        </div>
+        <!-- Search Form for Users -->
+        <div class="search-form">
+            <form action="/admin/search" method="post" class="d-flex">
+                <input type="text" name="search" placeholder="Search for user by name or username" />
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <!-- Add User Popup -->
+        <div class="btns">
+            <input type="button" value="Add User" onclick="openPopup('addUserPopup')" />
+            <div class="popup-container" id="addUserPopup">
+                <div class="popup">
+                    <div>
+                        <h1>Add New User</h1>
+                    </div>
+                    <!-- Add User Form -->
+                        <form action="/admin/add-user" method="post" class="d-flex w-100">
+                        <div class="profileImage d-flex flex-column">
+                            <label for="addProfileImage">Add profile image</label>
+                            <input type="file" id="addProfileImage" name="imageCover" onchange="previewImage('addProfileImage', 'add-image-cover-preview')">
+                            <div id="add-image-cover-preview" class="py-1"></div>
+                        </div>
+
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" required>
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" name="address" required>
+
+                        <label for="subaddress">Subaddress:</label>
+                        <input type="text" id="subaddress" name="subaddress">
+
+                        <label for="country">Country:</label>
+                        <input type="text" id="country" name="country">
+
+                        <label for="role">Role:</label>
+                        <select id="role" name="role">
+                            <option value="standard">Standard</option>
+                            <option value="admin">Admin</option>
+                        </select>
+
+                        <div class="button-container">
+                            <button type="submit">Add User</button>
+                            <button type="button" onclick="closePopup('addUserPopup')">Cancel</button>
+                        </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Section - User Table -->
+    <div class="customerTables">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach((user) => { %>
+                    <tr>
+                        <td><%= user.name %></td>
+                        <td><%= user.username %></td>
+                        <td><%= user.email %></td>
+                        <td><%= user.address %></td>
+                        <td><%= user.country %></td>
+                        <td><%= user.role %></td>
+                        <td>
+                            <button class="edit-btn" onclick="openPopup('editUserPopup<%= user._id %>')">Edit</button>
+                            <div class="popup-container" id="editUserPopup<%= user._id %>">
+                                <div class="popup">
+                                    <!-- Edit User Popup -->
+                                    <div class="popup-container" id="editUserPopup">
+                                        <div class="popup">
+                                            <form action="/admin/update-user/<%= user._id %>" method="post" class="d-flex w-100">
+                                                <!-- Include fields for editing user details -->
+                                                <label for="editName">Name:</label>
+                                                <input type="text" id="editName" name="name" value="<%= user.name %>" required>
+
+                                                <label for="editUsername">Username:</label>
+                                                <input type="text" id="editUsername" name="username" value="<%= user.username %>" required>
+
+                                                <label for="editEmail">Email:</label>
+                                                <input type="email" id="editEmail" name="email" value="<%= user.email %>" required>
+
+                                                <label for="editAddress">Address:</label>
+                                                <input type="text" id="editAddress" name="address" value="<%= user.address %>" required>
+
+                                                <label for="editSubaddress">Subaddress:</label>
+                                                <input type="text" id="editSubaddress" name="subaddress" value="<%= user.subaddress %>">
+
+                                                <label for="editCountry">Country:</label>
+                                                <input type="text" id="editCountry" name="country" value="<%= user.country %>">
+
+                                                <label for="editRole">Role:</label>
+                                                <select id="editRole" name="role">
+                                                    <option value="standard" <% if (user.role === 'standard') { %> selected <% } %>>Standard</option>
+                                                    <option value="admin" <% if (user.role === 'admin') { %> selected <% } %>>Admin</option>
+                                                </select>
+
+                                                <div class="button-container">
+                                                    <button type="submit">Update User</button>
+                                                    <button type="button" onclick="closePopup('editUserPopup')">Cancel</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form action="/admin/users-management/delete-user/<%= user._id %>" method="post" onsubmit="return confirm('Are you sure?')">
+                                <button type="submit" class="delete-btn">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</main>

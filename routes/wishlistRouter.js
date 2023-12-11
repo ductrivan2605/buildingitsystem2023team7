@@ -3,6 +3,8 @@ const express = require('express');
 const WishlistItem = require('../models/Wishlist');
 const wishlistRouter = express.Router();
 
+//render all wishlist
+
 // Route to handle form submission
 wishlistRouter.post('/submitWishlist', async (req, res) => {
   try {

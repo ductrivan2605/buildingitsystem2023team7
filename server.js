@@ -32,7 +32,7 @@ const AuthorRouter = require("./routes/admin/authorRoute");
 const BooksRouter = require("./routes/admin/bookManagementRoute");
 const authRouter = require("./routes/authRoutes");
 const userManagementRouter = require("./routes/admin/userManagementRoute");
-const userRouter = require("./routes/userRoutes");
+const userRouter = require("./routes/user/userRoutes");
 const wishlistRouter = require("./routes/wishlistRouter");
 
 app.use("/", mainPage);
