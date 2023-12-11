@@ -6,13 +6,25 @@ const Categories= require("../../models/Category.js")
 router.get("/:category", async (req, res) => {
     try {
         const page = req.query.page || 1;
-        const itemsPerPage = 10; // Set the number of items to display per page
+        const itemsPerPage = 1; // Set the number of items to display per page
+        let searchTerm = req.params.category; // Use req.params.category to get the selected category from the URL
+        const regex = new RegExp(searchTerm, 'i');
 
-        const category = await Categories.find({ category: req.params.category });
-        const totalBooks = await Books.countDocuments({});
+        // Find the category based on the regex (you can customize this part based on your data model)
+        let category = await Categories.find({
+            $or: [
+                { category: regex },
+                { subCategory: regex },
+            ]
+        });
+
+        // Find the total number of books in the selected category
+        const totalBooks = await Books.countDocuments({ category: searchTerm });
+
         const totalPages = Math.ceil(totalBooks / itemsPerPage);
 
-        const books = await Books.find({})
+        // Retrieve books in the selected category, paginated
+        const books = await Books.find({ category: searchTerm })
             .skip((page - 1) * itemsPerPage)
             .limit(itemsPerPage);
 
@@ -29,6 +41,7 @@ router.get("/:category", async (req, res) => {
         console.log(error);
     }
 });
+
 
 
 module.exports = router;

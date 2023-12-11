@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { slugify } = require('slugify');
+const { default: slugify } = require('slugify');
 
 const BookSchema = new mongoose.Schema({
    title:{
