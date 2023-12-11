@@ -151,7 +151,7 @@
             <div class="popup-container" id="addBookPopup">
                 <div class="popup">
                     <div>
-                        <h1>Add New Book</h1>
+                        <h1 class="add-new-book">Add New Book</h1>
                     </div>
                     <form action="/admin/books-management/add-new-book" method="post"  class="d-flex w-100" enctype="multipart/form-data">
                         <div class="image-container ">
@@ -167,14 +167,14 @@
                             </div>
                         </div>
                         <div class="right-container">
-                            <label for="title">Book Title:</label>
+                            <label for="title" id="popup-details">Book Title:</label>
                             <input type="text" id="title" name="title" required />
 
 
                         <!-- Authors -->
                         <div class="addAuthors position-relative">
                             <div class="searchField">
-                                <label class="position-relative w-100" for="searchAuthor">Authors</label>
+                                <label class="position-relative w-100" for="searchAuthor" id="popup-details">Authors:</label>
                                 <input type="text" id="searchAuthor" placeholder="Search for existing author" oninput="searchItems('searchAuthor', 'authorsList','dropDownSelectAuthorContainer')" onclick="toggleDropDown('dropDownSelectAuthorContainer')"/>
                                 <div class="dropDownSelectAuthorContainer position-absolute bg-light w-100" style="display: none; z-index: 500;" id="dropDownSelectAuthorContainer">
                                     <div class="authorList w-100" id="authorsList">
@@ -200,7 +200,7 @@
                             <!-- Categories -->
                             <div class="addCategory position-relative">
                                 <div class="searchField">
-                                    <label class="position-relative w-100" for="searchCategory">Category</label>
+                                    <label class="position-relative w-100" for="searchCategory" id="popup-details">Category:</label>
                                     <input type="text" id="searchCategory" placeholder="Search for existing category" oninput="searchItems('searchCategory', 'categoryList', 'dropDownSelectCategoryContainer')" onclick="toggleDropDown('dropDownSelectCategoryContainer')"/>
                                     <div class="dropDownSelectCategoryContainer position-absolute bg-light w-100" style="display: none; z-index: 500;" id="dropDownSelectCategoryContainer">
                                         <div class="categoryList w-100" id="categoryList">
@@ -234,21 +234,21 @@
                             </div>
 
 
-                            <label for="publisher">Publisher:</label>
+                            <label for="publisher" id="popup-details">Publisher:</label>
                             <input type="text" id="publisher" name="publisher" />
 
                             
-                            <label for="published">Published:</label>
+                            <label for="published" id="popup-details">Published:</label>
                             <input type="date" id="published" name="published" />
 
-                            <label for="description">Book description</label>
+                            <label for="description" id="popup-details">Book description</label>
                             <textarea id="description" name="description" rows="4"></textarea>
                             
 
                             <div class="button-container">
-                            <button type="reset">Reset</button>
-                            <button type="submit">Submit</button>
-                            <button type="button" onclick="closePopup('addBookPopup')">Cancel</button>
+                            <button type="reset" id="reset">Reset</button>
+                            <button type="submit" id="submit">Submit</button>
+                            <button type="button" id="cancel" onclick="closePopup('addBookPopup')">Cancel</button>
                             </div>
                         </div>
                     </form>
