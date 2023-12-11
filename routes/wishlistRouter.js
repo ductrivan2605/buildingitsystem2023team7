@@ -1,29 +1,20 @@
 // routes/wishlist.js
 const express = require('express');
-const WishlistItem = require('../models/Wishlist');
-const wishlistRouter = express.Router();
+const router = express.Router();
+const WishlistItem = require('../models/Wishlist')
 
 //render all wishlist
 
 // Route to handle form submission
 wishlistRouter.post('/submitWishlist', async (req, res) => {
   try {
-    // Create a new WishlistItem instance with data from the form
-    const newWishlistItem = new WishlistItem({
-      authorWishlist: req.body.authorWishlist,
-      titleWishlist: req.body.titleWishlist,
-      dateWishlist: req.body.dateWishlist,
-      imageWishlist: req.body.imageWishlist,
+    res.render("user/wishlist", {
+      layout: "./layouts/user/wishlistUserLayout",
+  
     });
-
-    // Save the new WishlistItem to MongoDB
-    await newWishlistItem.save();
-
-    console.log('New wishlist item submitted:', newWishlistItem);
-    res.redirect('/wishlistadmin.html'); 
   } catch (error) {
-    console.error('Error submitting wishlist item:', error);
-    res.status(500).send('Internal Server Error');
+    console.error(error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
@@ -78,4 +69,4 @@ wishlistRouter.post('/deleteWishlist/:id', async (req, res) => {
   }
 });
 
-module.exports = wishlistRouter;
+module.exports = router;

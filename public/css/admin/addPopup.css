@@ -28,6 +28,17 @@
     z-index: 100;
   }
   
+  #select-image {
+    font: italic bold 1em Georgia, serif;
+    margin-bottom: 10px;
+  }
+
+  #add-image-cover-preview img , #add-image-content-preview img {
+    width: 70% !important;
+    height: 70% !important;
+    object-fit: cover;
+  }
+  
   .image-container {
     /* flex: 1; */
     display: flex;
