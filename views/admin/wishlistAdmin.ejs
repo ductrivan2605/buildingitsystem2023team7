@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="/css/header.css">
-  <link rel="icon" type="image/x-icon" href="../public/images/logo.png">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="../public/js/nav.js" defer></script>
-  <title>Wishlist</title>
-</head>
-<body>
+
     <header class="header">
         <div class="logo">
           <a href="#"><img src="images/logo.png" alt=""></a>
@@ -59,22 +47,48 @@
       
       <main class="main">
      <!-- Iterate over the wishlist items and display them in the table -->
-     <% wishlistItems.forEach((wishlistItem) => { %>
+     <table class="table mt-4">
+      <thead>
         <tr>
-          <td><%= wishlistItem.authorWishlist %></td>
-          <td><%= wishlistItem.titleWishlist %></td>
-          <td><%= wishlistItem.dateWishlist %></td>
-          <td><img src="<%= wishlistItem.imageWishlist %>" alt="Wishlist Item Image"></td>
-          <td>
-            <!-- Add buttons for search and delete actions -->
-            <a href="/wishlistAdmin/<%= wishlistItem._id %>">Search</a>
-            <form action="/wishlistAdmin/<%= wishlistItem._id %>?_method=DELETE" method="POST">
-              <button type="submit">Delete</button>
-            </form>
-          </td>
+          <th scope="col">Author</th>
+          <th scope="col">Title</th>
+          <th scope="col">Date</th>
+          <th scope="col">Image</th>
+          <th scope="col">Approval Status</th>
+          <th scope="col">Actions</th>
         </tr>
-      <% }); %>
+      </thead>
+      <tbody>
+        <% wishlistItems.forEach(item => { %>
+          <tr>
+            <td><%= item.authorWishlist %></td>
+            <td><%= item.titleWishlist %></td>
+            <td><%= item.dateWishlist.toISOString().split('T')[0] %></td>
+            <td><img src="<%= item.imageWishlist %>" alt="Book Image" style="max-width: 50px;"></td>
+            <td>
+              <% if (item.approveWishlist) { %>
+                <span class="badge badge-success">Approved</span>
+              <% } else { %>
+                <span class="badge badge-warning">Pending Approval</span>
+              <% } %>
+            </td>
+            <td>
+              <button class="btn btn-warning">Edit</button>
+              <form action="/admin/wishlist/approve/<%= item._id %>" method="post" style="display: inline;">
+                <button class="btn btn-info">Approve</button>
+              </form>
+              <form action="/admin/wishlist/delete/<%= item._id %>" method="post">
+                <button class="btn btn-danger" onclick="deleteItem('<%= item._id %>')">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
     </main>
     
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </body>
   </html>
