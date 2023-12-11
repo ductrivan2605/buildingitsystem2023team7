@@ -156,12 +156,12 @@
                     <form action="/admin/books-management/add-new-book" method="post"  class="d-flex w-100" enctype="multipart/form-data">
                         <div class="image-container ">
                             <div class="imageCoverContainer d-flex flex-column">
-                                <label for="addBookImageCover">Add image Cover</label>
+                                <label for="addBookImageCover" id="select-image">Add image Cover</label>
                                 <input type="file" id="addBookImageCover" name="imageCover" onchange="previewImage('addBookImageCover', 'add-image-cover-preview')" required>
                                 <div id="add-image-cover-preview" class="py-1"></div>
                             </div>
                             <div class="contentImageContainer d-flex flex-column">
-                                <label for="addContentImage" class="image-label">Add Content Image</label>
+                                <label for="addContentImage" class="image-label" id="select-image">Add Content Image</label>
                                 <input type="file" id="addContentImage" name="contentImage" onchange="previewImage('addContentImage', 'add-image-content-preview')" multiple >
                                 <div id="add-image-content-preview" class="py-1"></div>
                             </div>
