@@ -30,9 +30,18 @@ const WishlistItem = require('../models/Wishlist')
   }); */
   
 // Render all wishlist items
-router.get('/', (req, res) => {
-  res.render('user/wishlist');
-});
+router.get("/", async (req, res) => {
+  try {
+    res.render("user/wishlist", {
+      layout: "./layouts/user/wishlistUserLayout",
+  
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+}); 
+
 
   router.post('/', async (req, res) => {
     try {

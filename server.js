@@ -39,6 +39,9 @@ app.use("/admin/books-management", BooksRouter);
 app.use("/auth", authRouter);
 app.use("/wishlist", wishlistRouter);
 
+app.get('/user', (req, res) => {
+  res.render('wishlist.ejs');  
+});
 
 app.listen(3000, () => {
   console.log(`Server is running on port localhost:3000`);
