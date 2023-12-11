@@ -31,6 +31,7 @@ const AuthorRouter = require("./routes/admin/authorRoute");
 const BooksRouter = require("./routes/admin/bookManagementRoute");
 const authRouter = require("./routes/authRoutes");
 const wishlistRouter = require("./routes/wishlistRouter");
+const wishlistAdminRouter = require('./routes/admin/wishlistAdminRouter');
 
 app.use("/admin/category", CategoryRouter);
 app.use("/admin/authors", AuthorRouter);
@@ -38,10 +39,12 @@ app.use("/admin/authors", AuthorRouter);
 app.use("/admin/books-management", BooksRouter);
 app.use("/auth", authRouter);
 app.use("/wishlist", wishlistRouter);
+app.use('/admin/wishlist', wishlistAdminRouter);
 
-app.get('/user', (req, res) => {
-  res.render('wishlist.ejs');  
+app.get('/', (req, res) => {
+  res.render('user/wishlist');
 });
+
 
 app.listen(3000, () => {
   console.log(`Server is running on port localhost:3000`);

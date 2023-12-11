@@ -43,30 +43,32 @@ router.get("/", async (req, res) => {
 }); 
 
 
-  router.post('/', async (req, res) => {
-    try {
-      const { authorWishlist, titleWishlist, dateWishlist, imageWishlist } = req.body;
-  
-      // Log received data
-      console.log('Received data:', { authorWishlist, titleWishlist, dateWishlist, imageWishlist });
+router.post('/', async (req, res) => {
+  try {
+    const { authorWishlist, titleWishlist, dateWishlist, imageWishlist, approveWishlist } = req.body;
 
-      const newWishlistItem = new WishlistItem({
-        authorWishlist: authorWishlist,
-        titleWishlist: titleWishlist,
-        dateWishlist: dateWishlist,
-        imageWishlist: imageWishlist,
-      });
-  
-      // Save the wishlist item to the database
-      await newWishlistItem.save();
-  
-      // Respond immediately without interacting with the database
-      res.status(201).json({ message: 'Wishlist item submitted successfully' });
-    } catch (error) {
-      console.error('Error in route handling:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
+    // Log received data
+    console.log('Received data:', { authorWishlist, titleWishlist, dateWishlist, imageWishlist, approveWishlist });
+
+    const newWishlistItem = new WishlistItem({
+      authorWishlist: authorWishlist,
+      titleWishlist: titleWishlist,
+      dateWishlist: dateWishlist,
+      imageWishlist: imageWishlist,
+      // Update the field name to approveWishlist
+      approveWishlist: approveWishlist,
+    });
+
+    // Save the wishlist item to the database
+    await newWishlistItem.save();
+
+    // Respond immediately without interacting with the database
+    res.status(201).json({ message: 'Wishlist item submitted successfully' });
+  } catch (error) {
+    console.error('Error in route handling:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
   
