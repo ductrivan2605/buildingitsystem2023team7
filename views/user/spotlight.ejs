@@ -7,7 +7,7 @@
         <ul class="splide__list">
           <% books.forEach(book => {%>
           <li class="splide__slide">
-            <a href="">
+            <a href="/book/<%= book.slug %>">
               <img src="/images/<%= book.imageCover %>" alt="bookImage" />
               <p><%= book.title %></p>
             </a>
@@ -25,7 +25,7 @@
         <ul class="splide__list">
           <% books.forEach(book => {%>
           <li class="splide__slide">
-            <a href="">
+            <a href="/book/<%= book.slug %>">
               <img src="/images/<%= book.imageCover %>" alt="bookImage" />
               <p><%= book.title %></p>
             </a>
@@ -43,7 +43,7 @@
         <ul class="splide__list">
           <% books.forEach(book => {%>
           <li class="splide__slide">
-            <a href="">
+            <a href="/book/<%= book.slug %>">
               <img src="/images/<%= book.imageCover %>" alt="bookImage" />
               <p><%= book.title %></p>
             </a>
