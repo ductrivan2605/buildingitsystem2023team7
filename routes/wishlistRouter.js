@@ -6,7 +6,7 @@ const WishlistItem = require('../models/Wishlist')
 //render all wishlist
 
 // Route to handle form submission
-wishlistRouter.post('/submitWishlist', async (req, res) => {
+router.post('/submitWishlist', async (req, res) => {
   try {
     res.render("user/wishlist", {
       layout: "./layouts/user/wishlistUserLayout",
