@@ -5,6 +5,7 @@ const router = express.Router();
 const Books = require("../../models/bookModel.js");
 const Author = require("../../models/author.js");
 const Category = require("../../models/Category.js");
+const Reviews = require("../../models/review.js");
 const upload = require("../../middleware/uploadImage.js");
 
 router.get("/", async (req, res) => {
@@ -36,6 +37,7 @@ router.post("/add-new-book", upload.fields([
       authors,
       categories,
       published,
+      publisher,
       description,
     } = req.body;
 
@@ -58,6 +60,7 @@ router.post("/add-new-book", upload.fields([
       authors: authorIds,
       category: categoryIds,
       published: published,
+      publisher: publisher,
       description: description,
       contentImage: contentImage,
       imageCover: imageCover,
@@ -94,6 +97,7 @@ router.post("/update-book/:id", upload.fields([
     const updateFields = {};
     if (req.body.title) updateFields.title = req.body.title;
     if (req.body.published) updateFields.published = req.body.published;
+    if (req.body.publisher) updateFields.publisher = req.body.publisher;
     if (req.body.description) updateFields.description = req.body.description;
 
     // Delete the old image if a new image is uploaded
@@ -156,16 +160,18 @@ router.post("/delete/:id", async (req, res) => {
       res.redirect("/admin/books-management");
       return;
     }
-
     // Delete content images
-    for (const imageFileName of book.contentImage) {
-      const imagePath = path.join(__dirname, "../../public/images", imageFileName);
-      try {
-        await fs.promises.unlink(imagePath);
-      } catch (error) {
-        console.error("Error deleting image file:", error);
+    if(book.contentImage){
+        for (const imageFileName of book.contentImage) {
+        const imagePath = path.join(__dirname, "../../public/images", imageFileName);
+        try {
+          await fs.promises.unlink(imagePath);
+        } catch (error) {
+          console.error("Error deleting image file:", error);
+        }
       }
     }
+
 
     // Delete the image cover file
     const imageCoverPath = path.join(__dirname, "../../public/images", book.imageCover);

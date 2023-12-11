@@ -21,6 +21,10 @@ const BookSchema = new mongoose.Schema({
    published: {
     type: String,
    },
+   publisher: {
+    type: String,
+    required: true
+   },
    rating:{
     type:Number,
    },
@@ -28,9 +32,10 @@ const BookSchema = new mongoose.Schema({
     type: String,
    },
    
-   review:{
-      type: String,
-   },
+   reviews:[{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Reviews"
+   }],
    contentImage: [{
     type: String,
    }],

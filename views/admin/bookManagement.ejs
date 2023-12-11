@@ -234,12 +234,14 @@
                             </div>
 
 
+                            <label for="publisher">Publisher:</label>
+                            <input type="text" id="publisher" name="publisher" />
 
-
+                            
                             <label for="published">Published:</label>
-                            <input type="text" id="published" name="published" />
+                            <input type="date" id="published" name="published" />
 
-                            <label for="description">Description:</label>
+                            <label for="description">Book description</label>
                             <textarea id="description" name="description" rows="4"></textarea>
                             
 
@@ -277,6 +279,7 @@
             <th scope="col">Title</th>
             <th scope="col">Author</th>
             <th scope="col">Category</th>
+            <th scope="col">Publisher</th>
             <th scope="col">Published</th>
             <th scope="col">Rating</th>
             <th scope="col">Description</th>
@@ -295,6 +298,7 @@
                     <%= book.authors %>
                 </td>
                 <td><%= book.category %></td>
+                <td><%= book.publisher %></td>
                 <td><%= book.published %></td>
                 <td><%= book.rating %></td>
                 <td><%= book.description %></td>
@@ -386,7 +390,8 @@
                                         </div>
                                     </div>
         
-        
+                                    <label for="editPublisher">Publisher:</label>
+                                    <input type="text" id="editPublisher" name="publisher" />
         
         
                                     <label for="published">Published:</label>
