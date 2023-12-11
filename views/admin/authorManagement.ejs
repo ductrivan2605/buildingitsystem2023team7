@@ -150,32 +150,32 @@
             <div class="popup-container" id="addPopup">
                 <div class="popup">
                     <div>
-                        <h1>Add New Book</h1>
+                        <h1 class="add-new-book">Add New Book</h1>
                     </div>
                     <form action="/admin/authors/add-new-author" method="post"  class="d-flex w-100" enctype="multipart/form-data">
                         <div class="image-container ">
                             <div class="imageCoverContainer d-flex flex-column">
-                                <label for="image">Add image Cover</label>
+                                <label for="image" id="select-image">Add image Cover</label>
                                 <input type="file" id="image" name="image" onchange="previewImage('image', 'add-image-preview')">
                                 <div id="add-image-preview" class="py-1"></div>
                             </div>
                         </div>
                         <div class="right-container">
-                            <label for="name">Author name</label>
+                            <label for="name" id="popup-details">Author name:</label>
                             <input type="text" id="name" name="name" required/>
 
 
-                            <label for="email">Email</label>
+                            <label for="email" id="popup-details">Email:</label>
                             <input type="email" id="email" name="email" />
 
-                            <label for="background">Background</label>
+                            <label for="background" id="popup-details">Background:</label>
                             <textarea id="background" name="background" rows="4"></textarea>
                             
 
                             <div class="button-container">
-                            <button type="reset">Reset</button>
-                            <button type="submit">Submit</button>
-                            <button type="button" onclick="closePopup('addPopup')">Cancel</button>
+                            <button type="reset" id="reset">Reset</button>
+                            <button type="submit" id="submit">Submit</button>
+                            <button type="button" id="cancel" onclick="closePopup('addPopup')">Cancel</button>
                             </div>
                         </div>
                     </form>

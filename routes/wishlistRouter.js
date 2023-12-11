@@ -3,34 +3,10 @@ const express = require('express');
 const router = express.Router();
 const WishlistItem = require('../models/Wishlist')
 
+//render all wishlist
 
-
-/* router.post('/', async (req, res) => {
-    try {
-      const { author, title, date, image } = req.body;
-      console.log('Received data:', { author, title, date, image });
-  
-      // Create a new wishlist item
-      const newWishlistItem = new WishlistItem({
-        author,
-        title,
-        date,
-        image,
-      });
-  
-      // Save the wishlist item to the database
-      await newWishlistItem.save();
-  
-      console.log('Wishlist item saved successfully');
-      res.status(201).json({ message: 'Wishlist item submitted successfully' });
-    } catch (error) {
-      console.error('Error submitting wishlist item:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  }); */
-  
-// Render all wishlist items
-router.get("/", async (req, res) => {
+// Route to handle form submission
+wishlistRouter.post('/submitWishlist', async (req, res) => {
   try {
     res.render("user/wishlist", {
       layout: "./layouts/user/wishlistUserLayout",

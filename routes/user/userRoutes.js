@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
+const User = require('../../models/user');
 
 // GET /user/:id/profile route to display user profile and configuration form
 router.get('/:id/profile', async (req, res) => {
