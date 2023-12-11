@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/css/header.css">
+  <link rel="icon" type="image/x-icon" href="../public/images/logo.png">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="../public/js/nav.js" defer></script>
+  <title>Wishlist</title>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">
+          <a href="#"><img src="images/logo.png" alt=""></a>
+        </div>
+        <button class="menu-button" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+        <nav class="navBar">
+          <ul class="NavList" id="navList">
+            <li class="NavList-item"><a href="# ">Something1</a></li>
+            <li class="NavList-item"><a href="#">Something2</a></li>
+            <li class="NavList-item">
+              <a href="#">List Drop down <i class="fa-solid fa-caret-down"></i></a>
+              <div class="dropDown">
+                <ul class="dropDownList">
+                  <li class="dropDownItem"><a href="#">Lv1 <i class="fa-solid fa-arrow-right"></i></a>
+                    <ul class="dropDownList-lv2">
+                      <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
+                      <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
+                    </ul>
+                  </li>
+                  <li class="dropDownItem"><a href="#">Lv1 <i class="fa-solid fa-arrow-right"></i></a>
+                    <ul class="dropDownList-lv2">
+                      <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
+                      <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </nav>
+    
+        <form class="search">
+          <input type="text" placeholder="What are you finding?">
+          <button type="submit">Search</button>
+        </form>
+    
+        <div class="user" onclick="toggleDropdown()">
+          <a><i class="fa-solid fa-user"></i></a>
+          <div class="dropdown-content" id="myDropdown">
+            <a href="#">Profile</a>
+            <a href="#">Settings</a>
+            <a href="#"><i class="fa-solid fa-right-from-bracket"></i></a>
+          </div>
+        </div>
+      </header>
+      
+      <main class="main">
+        <h1 class="wishlist-h1">Wishlist</h1>
+        <nav class="wishlist-quote">Unlock the world of imagination – submit your desired reads to our wishlist, and let the magic of storytelling unfold. Your bookish dreams are just a click away from becoming reality. Happy reading</nav>
+        <form action="/wishlist" method="post" id="wishlistForm">
+            <div class="form-group">
+              <label for="authorWishlist">Author:</label>
+              <input type="text" class="form-control" id="authorWishlist" name="authorWishlist" required>
+            </div>
+        
+            <div class="form-group">
+              <label for="titleWishlist">Title:</label>
+              <input type="text" class="form-control" id="titleWishlist" name="titleWishlist" required>
+            </div>
+        
+            <div class="form-group">
+              <label for="dateWishlist">Date:</label>
+              <input type="date" class="form-control" id="dateWishlist" name="dateWishlist" required>
+            </div>
+        
+            <div class="form-group">
+              <label for="imageWishlist">Image (URL):</label>
+              <input type="url" class="form-control" id="imageWishlist" name="imageWishlist">
+            </div>
+        
+            <button id="wishlist-btn" type="submit" class="btn btn-success">Submit Wishlist</button>
+          </form>
+    </main>
+    
+  </body>
+  </html>

@@ -1,7 +1,8 @@
 // routes/wishlist.js
 const express = require('express');
 const router = express.Router();
-const WishlistItem = require('../models/Wishlist');
+const WishlistItem = require('../models/Wishlist')
+
 
 
 /* router.post('/', async (req, res) => {
@@ -28,8 +29,10 @@ const WishlistItem = require('../models/Wishlist');
     }
   }); */
   
-// Search wishlist item by ID
-
+// Render all wishlist items
+router.get('/', (req, res) => {
+  res.render('user/wishlist');
+});
 
   router.post('/', async (req, res) => {
     try {
