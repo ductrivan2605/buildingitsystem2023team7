@@ -26,7 +26,8 @@ mongoose
 
 // Routes
 const mainPage = require("./routes/user/mainPage");
-const bookDetail = require("./routes/user/bookDetail");
+const bookDetailRouter = require("./routes/user/bookDetail");
+const categoryRouter= require("./routes/user/categoryPage");
 const CategoryRouter = require("./routes/admin/categoryRoute");
 const AuthorRouter = require("./routes/admin/authorRoute");
 const BooksRouter = require("./routes/admin/bookManagementRoute");
@@ -36,7 +37,8 @@ const userRouter = require("./routes/userRoutes");
 const wishlistRouter = require("./routes/wishlistRouter");
 
 app.use("/", mainPage);
-app.use("/book", bookDetail);
+app.use("/book", bookDetailRouter);
+app.use("/category", categoryRouter);
 app.use("/admin/categories", CategoryRouter);
 app.use("/admin/authors", AuthorRouter);
 app.use("/admin/books-management", BooksRouter);

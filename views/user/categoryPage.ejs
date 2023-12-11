@@ -1,0 +1,36 @@
+<div class="wrap">
+  <div class="subCategory">
+    <h1>
+      <%= category.length > 0 ? category[0].category : 'Category Not Found' %>
+    </h1>
+  </div>
+  <nav class="navbar">
+    <ul class="navbar__menu">
+      <% if (category.length > 0 && category[0].subCategory) { %> <%
+      category[0].subCategory.forEach(sub => { %>
+      <li><a href="#"><%= sub %></a></li>
+      <% }) %> <% } %>
+    </ul>
+  </nav>
+  <div class="mainContent">
+    <div class="book-container">
+      <% if(books.length > 0){ %>
+        <% books.forEach(boos => { %>
+      <div class="book">
+        <a href=""><img src="/images/<%= book.imageCover %>" alt="Fiction book 1" /></a>
+        <h2><%= book.title %></h2>
+
+        <p><%= book.authors.join(',') %></p>
+        </div>
+      <% }) %>
+      <% }else{ %>
+        <p>No books available</p>    
+    <% } %>
+    </div>
+    <div class="pagination">
+        <% for (let i = 1; i <= totalPages; i++) { %>
+            <a href="?page=<%= i %>" class="page-btn <%= currentPage == i ? 'active' : '' %>"><%= i %></a>
+        <% } %>
+    </div>
+  </div>
+</div>

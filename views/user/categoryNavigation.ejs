@@ -2,8 +2,10 @@
     <% categories.forEach(category => { %>
     <div class="nav-items">
         <div class="nav-item">
-            <img src="/images/<%= category.image %>" alt="Novel_icon" style="width: 50px;">
-            <p><%= category.category %></p>
+            <a href="/category/<%= category.category %>">
+                <img src="/images/<%= category.image %>" alt="Novel_icon" style="width: 50px;">
+                <p><%= category.category %></p>
+            </a>
         </div>
     </div>
     <% }) %>
