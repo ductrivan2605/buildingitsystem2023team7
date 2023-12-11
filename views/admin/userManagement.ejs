@@ -6,7 +6,7 @@
         <div class="search-form">
             <form action="/admin/users-management/search" method="post" class="d-flex">
                 <input type="text" name="search" placeholder="Search for user by name or username" />
-                <button type="submit">Search</button>
+                <button type="submit" class="w-25 m-0 px-2">Search</button>
             </form>
             <div class="btns">
                 <input type="button" value="Add User" onclick="openPopup('addPopup')" />
@@ -16,43 +16,47 @@
                             <h1>Add New User</h1>
                         </div>
                         <form action="/admin/users-management/add-user" method="post" class="d-flex w-100">
-                            <div class="profileImage d-flex flex-column">
+                            <div class="image-container ">
                                 <label for="image">Add profile image</label>
                                 <input type="file" id="image" name="imageCover" onchange="previewImage('image', 'add-image-preview')">
                                 <div id="add-image-preview" class="py-1"></div>
                             </div>
-                            <label for="name">Name:</label>
-                            <input type="text" id="name" name="name" required>
+                            <div class="right-container w-100">
 
-                            <label for="username">Username:</label>
-                            <input type="text" id="username" name="username" required>
+                                <label for="name">Name:</label>
+                                <input type="text" id="name" name="name" required>
 
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" required>
+                                <label for="username">Username:</label>
+                                <input type="text" id="username" name="username" required>
 
-                            <label for="password">Password:</label>
-                            <input type="password" id="password" name="password" required>
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email" required>
 
-                            <label for="address">Address:</label>
-                            <input type="text" id="address" name="address" required>
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" name="password" required>
 
-                            <label for="subaddress">Subaddress:</label>
-                            <input type="text" id="subaddress" name="subaddress">
+                                <label for="address">Address:</label>
+                                <input type="text" id="address" name="address" required>
 
-                            <label for="country">Country:</label>
-                            <input type="text" id="country" name="country">
+                                <label for="subaddress">Subaddress:</label>
+                                <input type="text" id="subaddress" name="subaddress">
 
-                            <label for="role">Role:</label>
-                            <select id="role" name="role">
-                                <option value="standard">Standard</option>
-                                <option value="admin">Admin</option>
-                            </select>
+                                <label for="country">Country:</label>
+                                <input type="text" id="country" name="country">
 
-                            <div class="button-container">
-                                <button type="reset">Reset</button>
-                                <button type="submit">Submit</button>
-                                <button type="button" onclick="closePopup('addPopup')">Cancel</button>
-                            </div>
+                                <label for="role">Role:</label>
+                                <select id="role" name="role">
+                                    <option value="standard">Standard</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+
+                                <div class="button-container">
+                                    <button type="reset">Reset</button>
+                                    <button type="submit">Submit</button>
+                                    <button type="button" onclick="closePopup('addPopup')">Cancel</button>
+                                </div>
+                        </div>
+                            
                         </form>
                     </div>
                 </div>
@@ -110,7 +114,9 @@
                                             <input type="file" id="editImage" name="editImage" onchange="previewImage('editImage', 'edit-image-preview')">
                                             <div id="edit-image-preview" class="py-1"></div>
                                         </div>
-                                        <label for="editName">Name:</label>
+                                        <div class="right-container w-100">
+
+                                                <label for="editName">Name:</label>
                                                 <input type="text" id="editName" name="name" value="<%= user.name %>" required>
 
                                                 <label for="editUsername">Username:</label>
@@ -138,6 +144,7 @@
                                             <button type="reset">Reset</button>
                                             <button type="submit">Submit</button>
                                             <button type="button" onclick="closePopup('editPopup<%= counter %>')">Cancel</button>
+                                        </div>
                                         </div>
                                     </form>
                                 </div>

@@ -6,7 +6,7 @@ const Categories= require("../../models/Category.js")
 router.get("/:category", async (req, res) => {
     try {
         const page = req.query.page || 1;
-        const itemsPerPage = 1; // Set the number of items to display per page
+        const itemsPerPage = 10; // Set the number of items to display per page
         let searchTerm = req.params.category; // Use req.params.category to get the selected category from the URL
         const regex = new RegExp(searchTerm, 'i');
 
