@@ -1,113 +1,121 @@
 body {
-    background-color: #EEEEEE;
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-  
-.hamburger {
-    display: none;
+  background-color: #EEEEEE;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
-  .sidebar {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 200px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #00ADB5;
-    padding-top: 20px;
-    padding-left: 10px;
-  }
+.hamburger {
+  display: none;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #00ADB5;
+  padding-top: 20px;
+  padding-left: 10px;
+}
 
 .content {
-    margin: 3% 4% 1% 15%;
+  margin: 3% 4% 1% 15%;
 }
 
+.settings {
+  list-style-type: none;
+  margin-top: 30px;
+}
+
+.sidebar li {
+  padding: 8px;
+}
+
+.settings a {
+  color: #222831;
+  text-decoration: none;
+}
+
+.settings a:hover {
+
+  transition: 1s;
+  color: #EEEEEE;
+
+}
+
+
+:target {
+  display: block;
+}
+
+.profile_img {
+  width: 8%;
+  height: 8%;
+  margin-bottom: 2%;
+  border-radius: 50%;
+}
+
+.custom-select {
+  width: 100%;
+  padding: 0.7%;
+  border: 1px solid #ced4da;
+  border-radius: 0.4rem;
+}
+
+.submitButton {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 1% 4% 1% 1%;
+  text-align: right;
+}
+
+@media (max-width: 1370px) {
+  .content {
+    margin: 3% 4% 1% 25%;
+  }
+}
+
+@media (max-width: 850px) {
+  .sidebar {
+    flex-direction: row;
+    height: 0%;
+    width: 0%;
+    background-color: #EEEEEE;
+  }
+
+  .content {
+    margin: 20% 3% 10% 3%;
+  }
+
   .settings {
-    list-style-type: none; 
-    margin-top: 30px;
+    display: none;
   }
 
-  .sidebar li {
-    padding: 8px;
-  }
-  
-  .settings a {
-    color: #222831;
-    text-decoration: none;
-  }
-
-  .settings a:hover {
-
-    transition: 1s;
-    color: #EEEEEE;
-
-  }
-
-  
-  :target {
+  .hamburger {
     display: block;
   }
 
-  .profile_img {
-    width: 8%;
-    height: 8%;
-    margin-bottom: 2%;
-    border-radius: 50%;
-  }
-  
-  .custom-select {
-    width: 100%;
-    padding: 0.7%;
+  .hamburger button {
     border: 1px solid #ced4da;
-    border-radius: 0.4rem; 
+    border-radius: 0.4rem;
+    background-color: #00ADB5;
+  }
+
+  .profile_img {
+    width: 20%;
+    height: 20%;
   }
 
   .submitButton {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    padding: 1% 4% 1% 1%;
-    text-align: right;
+    position: static;
   }
-
-  @media (max-width: 1370px) {
-    .content{
-        margin: 3% 4% 1% 25%;
-    }
-  }
-
-  @media (max-width: 850px) {
-    .sidebar{
-        flex-direction: row;
-        height: 0%;
-        width: 0%;
-        background-color: #EEEEEE;
-    }
-    .content{
-        margin: 20% 3% 10% 3%;
-    }
-    .settings {
-        display: none;
-    }
-    .hamburger {
-        display:block;
-    }
-    .hamburger button {
-        border: 1px solid #ced4da;
-        border-radius: 0.4rem; 
-        background-color: #00ADB5;
-    }
-    .profile_img {
-        width: 20%;
-        height: 20%;
-  }
-
-  .submitButton {
-    position:static;
 }
-  }
 
+.hamburger:hover + .settings {
+  display: block;
+}
