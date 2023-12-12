@@ -4,6 +4,8 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const WishlistItem = require('../../models/Wishlist');
 
+let responseSent = false;
+
 // Get all wishlist items
 router.get('/', async (req, res) => {
   try {
@@ -19,23 +21,40 @@ router.get('/', async (req, res) => {
   }
 });
 
+
 // Get a single wishlist item by ID
 router.get('/:id', async (req, res) => {
   try {
     const wishlistItem = await WishlistItem.findById(req.params.id);
+
     if (!wishlistItem) {
-      return res.status(404).json({ error: 'Wishlist Item not found' });
+      return res.status(404).render('error404', { error: 'Wishlist Item not found' });
     }
-    res.json(wishlistItem);
+
+  
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).render('error500', { error: 'Internal Server Error' });
+  }
+});
+
+
+// reset page 
+router.post('/reset', async (req, res) => {
+  try {
+    // Your logic for resetting the wishlist goes here
+
+    // Redirect back to the wishlist admin page after reset
+    res.redirect('/admin/wishlist');
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-
 //aprove wishlist bby id
-router.post('/approve/:id', async (req, res) => {
+/* router.post('/approve/:id', async (req, res) => {
   try {
     const wishlistItemId = req.params.id;
 
@@ -59,7 +78,34 @@ router.post('/approve/:id', async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
+}); */
+router.post('/approve/:id', async (req, res) => {
+  try {
+    const wishlistItemId = req.params.id;
+
+    if (!mongoose.Types.ObjectId.isValid(wishlistItemId)) {
+      return res.status(400).json({ error: 'Invalid Wishlist Item ID' });
+    }
+
+    const updatedWishlistItem = await WishlistItem.findByIdAndUpdate(
+      wishlistItemId,
+      { $set: { approveWishlist: true } },
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedWishlistItem) {
+      return res.status(404).json({ error: 'Wishlist Item not found' });
+    }
+
+    // Send the response with the updated item
+    res.redirect('/admin/wishlist');
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
+
 
 
 router.post('/delete/:id', async (req, res) => {
@@ -76,7 +122,8 @@ router.post('/delete/:id', async (req, res) => {
       return res.status(404).json({ error: 'Wishlist Item not found' });
     }
 
-    res.status(200).json({ message: 'Wishlist Item deleted successfully' });
+    // res.status(200).json({ message: 'Wishlist Item deleted successfully' });
+    res.redirect('/admin/wishlist')
   } catch (error) {
     console.error('Error in delete route:', error);
     res.status(500).json({ error: 'Internal Server Error', details: error.message });

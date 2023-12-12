@@ -1,51 +1,10 @@
 
-    <header class="header">
-        <div class="logo">
-          <a href="#"><img src="images/logo.png" alt=""></a>
-        </div>
-        <button class="menu-button" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
-        <nav class="navBar">
-          <ul class="NavList" id="navList">
-            <li class="NavList-item"><a href="# ">Something1</a></li>
-            <li class="NavList-item"><a href="#">Something2</a></li>
-            <li class="NavList-item">
-              <a href="#">List Drop down <i class="fa-solid fa-caret-down"></i></a>
-              <div class="dropDown">
-                <ul class="dropDownList">
-                  <li class="dropDownItem"><a href="#">Lv1 <i class="fa-solid fa-arrow-right"></i></a>
-                    <ul class="dropDownList-lv2">
-                      <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
-                      <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
-                    </ul>
-                  </li>
-                  <li class="dropDownItem"><a href="#">Lv1 <i class="fa-solid fa-arrow-right"></i></a>
-                    <ul class="dropDownList-lv2">
-                      <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
-                      <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </nav>
     
-        <form class="search">
-          <input type="text" placeholder="What are you finding?">
-          <button type="submit">Search</button>
-        </form>
-    
-        <div class="user" onclick="toggleDropdown()">
-          <a><i class="fa-solid fa-user"></i></a>
-          <div class="dropdown-content" id="myDropdown">
-            <a href="#">Profile</a>
-            <a href="#">Settings</a>
-            <a href="#"><i class="fa-solid fa-right-from-bracket"></i></a>
-          </div>
-        </div>
-      </header>
       
       <main class="main">
+        <form action="/admin/wishlist/reset" method="post" id="wishlistResetForm" style="display: inline;">
+          <button class="btn btn-primary">Reset Wishlist</button>
+        </form>
      <!-- Iterate over the wishlist items and display them in the table -->
      <table class="table mt-4">
       <thead>
@@ -73,7 +32,6 @@
               <% } %>
             </td>
             <td>
-              <button class="btn btn-warning">Edit</button>
               <form action="/admin/wishlist/approve/<%= item._id %>" method="post" style="display: inline;">
                 <button class="btn btn-info">Approve</button>
               </form>
@@ -90,5 +48,23 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script>
+    function submitFormAndShowMessage() {
+      // Submit the form using fetch API
+      fetch('/admin/wishlist/reset', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+          // Display a pop-up message
+          alert('Wishlist reset successfully!');
+  
+          // Redirect back to the wishlist admin page after reset
+          window.location.href = '/admin/wishlistAdmin';
+        })
+        .catch(error => {
+          console.error('Error resetting wishlist:', error);
+          alert('Error resetting wishlist. Please try again.');
+        });
+    }
+  </script>
   </body>
   </html>

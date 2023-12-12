@@ -51,15 +51,14 @@ function toggleMenu() {
 
 /* for the user */ 
 document.addEventListener('click', function (event) {
-  const userSection = document.getElementById('userSection');
   const userDropdown = document.getElementById('userDropdown');
 
-  // Check if the click is inside the user section or its dropdown
-  const isClickInsideUser = userSection.contains(event.target) || userDropdown.contains(event.target);
+  // Check if the click is inside the user dropdown
+  const isClickInsideDropdown = userDropdown.contains(event.target);
 
   // If not, close the user dropdown
-  if (!isClickInsideUser) {
-      userDropdown.style.display = 'none';
+  if (!isClickInsideDropdown) {
+    userDropdown.style.display = 'none';
   }
 });
 
@@ -67,3 +66,4 @@ function toggleUserMenu() {
   const userDropdown = document.getElementById('userDropdown');
   userDropdown.style.display = (userDropdown.style.display === 'block') ? 'none' : 'block';
 }
+

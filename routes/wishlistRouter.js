@@ -63,7 +63,8 @@ router.post('/', async (req, res) => {
     await newWishlistItem.save();
 
     // Respond immediately without interacting with the database
-    res.status(201).json({ message: 'Wishlist item submitted successfully' });
+    // res.status(201).json({ message: 'Wishlist item submitted successfully' });
+    res.redirect('/wishlist');
   } catch (error) {
     console.error('Error in route handling:', error);
     res.status(500).json({ error: 'Internal Server Error' });
