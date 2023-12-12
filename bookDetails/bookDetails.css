@@ -26,6 +26,33 @@
    margin-left: 20px;
  }
 
+ .authorpage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 14px;
+    color:#42a2c2;
+    transition: color 0.3s;
+    cursor: pointer;
+    margin-bottom: 10px;
+
+ }
+
+ .authorName {
+  margin-left: 10px;
+ }
+
+ .authorName:hover {
+  color: #c75143;
+ }
+
+ .authorpage img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 5px;
+  }
+
  .description {
    margin: 40px;
    width: 90%;
@@ -66,22 +93,100 @@
    color: black;
  }
 
- @media screen and (max-width: 600px) {
+/* 유저 프로필 및 리뷰 스타일 */
+.user-review {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 10px;
+
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.user-profile img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.user-details {
+  flex-grow: 1;
+}
+
+.user-details h3 {
+  margin-bottom: 5px;
+}
+
+.user-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.stars {
+  color: #f9c203;
+  font-size: 20px;
+}
+
+.rating-label {
+  font-weight: bold;
+  font-size: large;
+
+}
+
+.review-date {
+  font-style: italic;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.verified-purchase {
+  color: #090;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.review-description {
+  margin-bottom: 10px;
+}
+
+.action-buttons button {
+  padding: 8px 12px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.helpful-btn {
+  background-color: #42a2c2;
+  color: white;
+}
+
+.report-btn {
+  background-color: #c75143;
+  color: white;
+}
+
+
+
+
+ @media screen and (max-width: 768px) {
    .container1 {
      flex-direction: column;
    }
- }
-
- @media screen and (max-width: 600px) {
    .title {
-     text-align: center;
-   }
+    text-align: center;
+  }
+  .description {
+    margin: 40px;
+    transform: translate(-17px);
+  }
+  .authorpage {
+    justify-content: center;
+  }
  }
-
- @media screen and (max-width: 600px) {
-   .description {
-     margin: 40px;
-     transform: translate(-17px);
-   }
- }
- 
