@@ -40,62 +40,45 @@
 }
 
 .navForBook {
-    height: 135px;
+    min-height: 200px;
     border-bottom: 1px solid black;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: space-around;
-    margin-top:20px;
-    /* background-color: aqua; */
 
 
 }
 
+
 .nav-items {
     display: flex;
-    /* background-color: aqua; */
 
     
     
 }
 
 .nav-item {
-    margin-left: 10px;
-    margin:100px;
-    font-size: 20px;
-    text-align: center;
-    /* background-color: aqua; */
+    width: 100px; 
+    height: 100px; 
+    border: 1px solid black; 
+    margin:0px;
+    align-items: center;
 
 }
 
-.nav-item:after {
-    display:block;
-    content: '';
-    border-bottom: solid 3px rgb(168, 107, 109);  
-    transform: scaleX(0);  
-    transition: transform 250ms ease-in-out;
-  }
-.nav-item:hover:after { transform: scaleX(1); }
+.nav-item img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+.nav-item p {
+    word-wrap: break-word;
+    text-align: center;
+}
+
 
 
 
 @media screen and (max-width: 767px) {
-    .nav-items {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
 
-    .nav-item {
-        width: calc(33.33% - 20px); /* 각 아이템의 너비 계산 */
-        margin: 10px; /* 간격 조정 */
-    }
-    
-    .nav-item img {
-        width:30%;
-    }
-
-    .navForBook {
-        height:230px;
-        margin-top:20px;
-    }
 }

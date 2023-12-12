@@ -1,16 +1,17 @@
 .splide {
-    /* background-color: aqua; */
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
 }
 
 .splide__track {
-    /* background-color: blueviolet; */
+
     border-radius: 20px;
 }
 
 
 
 .splide__slide img {
-    background-color: cadetblue;
     width: 50%;
     height: 80%;
     object-fit: cover;
@@ -22,6 +23,7 @@
     margin: 50px;
     padding: 10px;
     background-color: rgb(234, 219, 200);
+    
 
     
 
@@ -33,7 +35,9 @@
     overflow: hidden;
     text-overflow: ellipsis; 
 }
-
+.splide:not(.splide-active) .splide__arrow {
+    display: none;
+}
 
 /* 모바일 화면에서 Splide 이미지의 위치를 조정하는 예시 */
 /* 모바일 화면에서 이미지의 위치를 조정하는 예시 */
