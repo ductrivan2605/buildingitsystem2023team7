@@ -49,9 +49,9 @@ app.use("/auth", authRouter);
 app.use("/wishlist", wishlistRouter);
 app.use('/admin/wishlist', wishlistAdminRouter);
 
-app.get('/', (req, res) => {
-  res.render('user/wishlist');
-});
+// app.get('/', (req, res) => {
+//   res.render('user/wishlist');
+// });
 
 
 app.listen(3000, () => {
