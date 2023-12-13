@@ -93,38 +93,91 @@
    color: black;
  }
 
-/* 유저 프로필 및 리뷰 스타일 */
-.user-review {
+.user-review, .user-comment {
   border: 1px solid #ccc;
   padding: 15px;
   margin-bottom: 10px;
 
 }
 
-.user-profile {
+.user-profile, .user-comment-box {
   display: flex;
   align-items: center;
 }
 
-.user-profile img {
+.user-profile img, .user-comment-box img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   margin-right: 15px;
 }
 
-.user-details {
+.user-details, .user-comment-box-header {
   flex-grow: 1;
 }
 
-.user-details h3 {
+.user-details h3, #comment-name {
   margin-bottom: 5px;
+}
+
+#comment-name {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  text-indent: 5px;
+  height: 20px;
+}
+
+#comment-contents {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  text-indent: 5px;
+  height: 100px;
+  width: 100%;
+  margin-top: 10px;
+  font-size: 15px;
+  font-family: Arial, sans-serif;
 }
 
 .user-rating {
   display: flex;
   align-items: center;
   margin-bottom: 5px;
+}
+
+.user-comment-box-header h3 {
+  margin-bottom: 5px;
+}
+
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 1rem;
+  line-height: 2rem;
+  justify-content: space-around;
+  padding: 0 0.2em;
+  text-align: center;
+  width: 6em;
+}
+ 
+.star-rating input {
+  display: none;
+}
+ 
+.star-rating label {
+  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #f9c203;
+  cursor: pointer;
+  margin: 2px;
+}
+ 
+.star-rating :checked ~ label {
+  -webkit-text-fill-color: #f9c203;
+}
+ 
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  -webkit-text-fill-color: #f9c203;
 }
 
 .stars {
@@ -138,11 +191,6 @@
 
 }
 
-.review-date {
-  font-style: italic;
-  color: #666;
-  margin-bottom: 5px;
-}
 
 .verified-purchase {
   color: #090;

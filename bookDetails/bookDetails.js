@@ -19,3 +19,15 @@ function showContent(index) {
 }
 
 
+document.addEventListener('DOMContentLoaded', function() {
+  const resetButton = document.getElementById('resetButton');
+
+  resetButton.addEventListener('click', function() {
+      document.getElementById('comment-contents').value = '';
+
+      const ratingInputs = document.querySelectorAll('input[type="radio"][name="rating"]');
+      ratingInputs.forEach(input => {
+          input.checked = false;
+      });
+  });
+});
