@@ -81,10 +81,11 @@ router.post('/configure', async (req, res) => {
     }
 
     user.name = name;
+    //addusername or nickname
     user.email = email;
-    user.address = address;
-    user.subaddress = subaddress;
-    user.country = country;
+    user.address = address; //we don't need
+    user.subaddress = subaddress; //we don't need
+    user.country = country; //we don't need
 
     await user.save();
     res.redirect('/dashboard'); // Redirect to profile viewing page
