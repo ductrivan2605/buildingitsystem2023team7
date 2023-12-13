@@ -18,7 +18,7 @@
                         <form action="/admin/users-management/add-user" method="post" class="d-flex w-100">
                             <div class="image-container ">
                                 <label for="image">Add profile image</label>
-                                <input type="file" id="image" name="imageCover" onchange="previewImage('image', 'add-image-preview')">
+                                <input type="file" id="image" name="profileImage" onchange="previewImage('image', 'add-image-preview')">
                                 <div id="add-image-preview" class="py-1"></div>
                             </div>
                             <div class="right-container w-100">
@@ -80,12 +80,14 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
+                    <th scope="col">#</th>    
                     <th scope="col">Name</th>
                     <th scope="col">Username</th>
                     <th scope="col">Email</th>
                     <th scope="col">Address</th>
                     <th scope="col">Country</th>
                     <th scope="col">Role</th>
+                    <th scope="col">Profile Picture</th>
                     <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -101,6 +103,11 @@
                         <td><%= user.country %></td>
                         <td><%= user.role %></td>
                         <td>
+                            <div class="profileImage">
+                                <img src="/images/<%= user.image %>" style="width: 100px; height: 100px; object-fit: cover;"/>
+                            </div>
+                        </td>
+                        <td>
                             <button class="edit-btn" onclick="openPopup('editPopup<%= counter %>')">Edit</button>
                             <div class="popup-container" id="editPopup<%= counter %>">
                                 <div class="popup">
@@ -109,9 +116,9 @@
                                     </div>
                                     <form action="/admin/users-management/update-user/<%= user._id %>" method="post" class="d-flex w-100">
                                         <!-- Edit user form -->
-                                        <div class="profileImage d-flex flex-column">
-                                            <label for="editImage">Add profile image</label>
-                                            <input type="file" id="editImage" name="editImage" onchange="previewImage('editImage', 'edit-image-preview')">
+                                        <div class="image d-flex flex-column">
+                                            <label for="image">Add profile image</label>
+                                            <input type="file" id="editImage" name="editProfileImage" onchange="previewImage('editImage', 'edit-image-preview')">
                                             <div id="edit-image-preview" class="py-1"></div>
                                         </div>
                                         <div class="right-container w-100">
