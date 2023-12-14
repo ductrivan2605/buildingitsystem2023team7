@@ -8,13 +8,9 @@
     background-color: #393E46;
   }
   body { 
-    margin:120px;
-    background-color: #222831;
+    /* margin:120px; */
+    /* background-color: #222831; */
     
-  }
-  a {
-    text-decoration: none;
-    color: var(--text-color);
   }
 
 .navbar__menu {
@@ -34,7 +30,7 @@
   }
   .subCategory h1 {
     /* text-align: center; */
-    color: rgb(255, 255, 255);
+    color: #222831;
     padding: 10px;
     margin:0px;
 
@@ -76,17 +72,17 @@
     
 
 }
-/* 기본 링크 스타일 */
+
 .navbar__menu li a {
   text-decoration: none;
   color: white;
   transition: color 0.3s ease; /* 색깔 변화를 부드럽게 적용하기 위한 트랜지션 */
 }
 
-/* 호버 효과 */
+
 .navbar__menu li a:hover {
-  color: #00ADB5; /* 호버 시 색상을 변경해보자 */
-  font-weight: bold; /* 폰트를 두껍게 */
+  color: #00ADB5;
+  font-weight: bold; 
 }
 
 .pagination {
@@ -130,15 +126,11 @@
         width: calc(40% - 40px); /* 모바일에서 한 줄에 두 개의 요소가 배치되도록 설정 */
         margin: 30px 20px; /* 여백 수정 */
     }
-    body { 
-      margin:0px;
-      background-color: #222831;
-      
-    }
+
     .subCategory h1 {
       /* text-align: center; */
       border-bottom: 1px solid black;
-      color: rgb(255, 255, 255);
+      color: #222831;
       padding: 10px;
       font-size: 60px;
       margin:0px;

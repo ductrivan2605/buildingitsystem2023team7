@@ -1,17 +1,23 @@
-const bookmarkIcon = document.querySelector('.bookmarkIcon');
+// Select all bookmark buttons
+const bookmarkButtons = document.querySelectorAll('.bookmark-btn');
 
-let isBookmarked = false; // 북마크 상태를 나타내는 변수
+// Add an event to each bookmark button
+bookmarkButtons.forEach((button, index) => {
+  let isBookmarked = false; // Variable to track bookmark status for each button
 
-bookmarkIcon.addEventListener('click', function() {
-  isBookmarked = !isBookmarked; // 북마크 상태를 토글
+  button.addEventListener('click', () => {
+    isBookmarked = !isBookmarked; // Toggle bookmark status
 
-  if (isBookmarked) {
-    // 북마크되었을 때의 동작
-    bookmarkIcon.style.color = 'gold'; // 아이콘 색상을 변경하여 북마크 상태 표시
-    // 여기서 서버로 북마크 정보를 보내는 등의 작업을 수행해야 합니다.
-  } else {
-    // 북마크 해제되었을 때의 동작
-    bookmarkIcon.style.color = ''; // 아이콘 색상을 초기화하여 북마크 해제 상태 표시
-    // 서버에 북마크 해제 정보를 보내는 등의 작업도 필요합니다.
-  }
+    if (isBookmarked) {
+      // Actions when bookmarked
+      button.querySelector('.btnIcon').style.color = 'gold'; // Change icon color to indicate bookmarked
+      // Here, perform actions like sending bookmark information to the server
+      console.log('Bookmarked added - Book index:', index);
+    } else {
+      // Actions when unbookmarked
+      button.querySelector('.btnIcon').style.color = ''; // Reset icon color to indicate unbookmarked
+      // Additional actions like sending unbookmark information to the server may be added here
+      console.log('Bookmark removed - Book index:', index);
+    }
+  });
 });
