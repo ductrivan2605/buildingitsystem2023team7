@@ -1,91 +1,80 @@
-
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--background-color);
-    padding: 8px 12px;
-    background-color: #393E46;
-  }
-  body { 
-    margin:120px;
-    background-color: #222831;
-    
-  }
-  a {
-    text-decoration: none;
-    color: var(--text-color);
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--background-color);
+  padding: 8px 12px;
+  background-color: #393e46;
+}
+body {
+  margin: 120px;
+  background-color: #222831;
+}
+a {
+  text-decoration: none;
+  color: var(--text-color);
+}
 
 .navbar__menu {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding-left: 0;
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-    
-  }
-  
-.navbar__menu li {
-    padding: 8px 30px;
-    
-  }
-  .subCategory h1 {
-    /* text-align: center; */
-    color: rgb(255, 255, 255);
-    padding: 10px;
-    margin:0px;
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding-left: 0;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+}
 
-    font-size: 60px;
+.subCategory h1 {
+  /* text-align: center; */
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  margin: 0px;
+  font-size: 60px;
 }
 
 .book-container {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: #EEEEEE;
-
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #eeeeee;
 }
-  
+
 .book {
-    width: 10%;
-    margin: 50px;
-    padding: 20px;
-    background-color: rgb(255, 255, 255);
+  width: 10%;
+  margin: 50px;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
 
-    text-align: center;
+  text-align: center;
 }
-  
+
 .book a img {
-    width: 100%;
-    height: 70%;
-    margin-bottom: 10px;
-    object-fit: cover;
+  width: 100%;
+  height: 70%;
+  margin-bottom: 10px;
+  object-fit: cover;
 }
 
-
-.book > h2{
-    font-size: 17px;
-
+.book > h2 {
+  font-size: 17px;
 }
-  
+
 .book > p {
-    font-size: 14px;
-    color: #555;
-    
-
+  font-size: 14px;
+  color: #555;
 }
 /* 기본 링크 스타일 */
 .navbar__menu li a {
+  position: relative;
   text-decoration: none;
   color: white;
-  transition: color 0.3s ease; /* 색깔 변화를 부드럽게 적용하기 위한 트랜지션 */
+  transition: color 0.3s ease;
+  min-height: 30px; /* Set a minimum height */
 }
 
 /* 호버 효과 */
 .navbar__menu li a:hover {
-  color: #00ADB5; /* 호버 시 색상을 변경해보자 */
+  color: #00adb5; /* 호버 시 색상을 변경해보자 */
   font-weight: bold; /* 폰트를 두껍게 */
 }
 
@@ -101,49 +90,45 @@
   border: 1px solid #ccc;
   background-color: #f4f4f4;
   cursor: pointer;
-
 }
 
 .page-btn:hover {
   background-color: #ddd;
 }
 
-
 @media screen and (max-width: 700px) {
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-        margin: 0;
-      }
-
-      .navbar__menu {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-      }
-      
-      .navbar__menu li {
-        width: 100%;
-        text-align: center;
-      }
-      .book {
-        width: calc(40% - 40px); /* 모바일에서 한 줄에 두 개의 요소가 배치되도록 설정 */
-        margin: 30px 20px; /* 여백 수정 */
-    }
-    body { 
-      margin:0px;
-      background-color: #222831;
-      
-    }
-    .subCategory h1 {
-      /* text-align: center; */
-      border-bottom: 1px solid black;
-      color: rgb(255, 255, 255);
-      padding: 10px;
-      font-size: 60px;
-      margin:0px;
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0;
   }
-  
-    
-      
+
+  .navbar__menu {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .navbar__menu li {
+    width: 100%;
+    text-align: center;
+  }
+  .book {
+    width: calc(
+      40% - 40px
+    ); /* 모바일에서 한 줄에 두 개의 요소가 배치되도록 설정 */
+    margin: 30px 20px; /* 여백 수정 */
+  }
+  body {
+    margin: 0px;
+    background-color: #222831;
+  }
+  .subCategory h1 {
+    /* text-align: center; */
+    border-bottom: 1px solid black;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    font-size: 60px;
+    margin: 0px;
+  }
 }

@@ -1,32 +1,54 @@
 const express = require("express");
 const router = express.Router();
 const Books = require("../../models/bookModel.js");
-const Categories= require("../../models/Category.js")
+const Categories = require("../../models/Category.js");
+const slugify = require("slugify");
 
-router.get("/:category", async (req, res) => {
+// For the main category page
+router.get("/:slug", async (req, res) => {
     try {
         const page = req.query.page || 1;
-        const itemsPerPage = 10; // Set the number of items to display per page
-        let searchTerm = req.params.category; // Use req.params.category to get the selected category from the URL
-        const regex = new RegExp(searchTerm, 'i');
+        const itemsPerPage = 10;
+        const searchTermSlug = req.params.slug;
 
-        // Find the category based on the regex (you can customize this part based on your data model)
-        let category = await Categories.find({
+        const category = await Categories.findOne({
+            slug: searchTermSlug,
+        });
+
+        if (!category) {
+            // Handle case where category with given slug is not found
+            return res.status(404).send("Category not found");
+        }
+
+        const totalBooks = await Books.countDocuments({
             $or: [
-                { category: regex },
-                { subCategory: regex },
+                { category: searchTermSlug.category },
+                { category: { $in: category.subCategory } },
             ]
         });
 
-        // Find the total number of books in the selected category
-        const totalBooks = await Books.countDocuments({ category: searchTerm });
-
         const totalPages = Math.ceil(totalBooks / itemsPerPage);
 
-        // Retrieve books in the selected category, paginated
-        const books = await Books.find({ category: searchTerm })
-            .skip((page - 1) * itemsPerPage)
-            .limit(itemsPerPage);
+        let books;
+
+        // Check if subcategories are selected
+        if (req.query.subcategories) {
+            const selectedSubcategories = req.query.subcategories.split(',');
+            books = await Books.find({
+                category: { $in: selectedSubcategories },
+            })
+                .skip((page - 1) * itemsPerPage)
+                .limit(itemsPerPage);
+        } else {
+            books = await Books.find({
+                $or: [
+                    { category: searchTermSlug.category },
+                    { category: { $in: category.subCategory } },
+                ]
+            })
+                .skip((page - 1) * itemsPerPage)
+                .limit(itemsPerPage);
+        }
 
         res.render('user/categoryPage', {
             layout: './layouts/user/bookDetailPage',
@@ -35,13 +57,57 @@ router.get("/:category", async (req, res) => {
             itemsPerPage: itemsPerPage,
             currentPage: page,
             totalPages: totalPages,
+            title: "Booktopia",
+            selectedSubcategories: req.query.subcategories ? req.query.subcategories.split(',') : [],
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+// For subcategory page
+router.get("/:category/:subCategory", async (req, res) => {
+    try {
+        const page = req.query.page || 1;
+        const itemsPerPage = 10;
+        const categorySlug = req.params.category;
+        const subCategorySlug = req.params.subCategory;
+
+        const category = await Categories.findOne({
+            slug: categorySlug,
+        });
+
+        if (!category) {
+            // Handle case where category with given slug is not found
+            return res.status(404).send("Category not found");
+        }
+
+        const totalBooks = await Books.countDocuments({
+            category: subCategorySlug,
+        });
+
+        const totalPages = Math.ceil(totalBooks / itemsPerPage);
+
+        const books = await Books.find({
+            category: subCategorySlug,
+        })
+            .skip((page - 1) * itemsPerPage)
+            .limit(itemsPerPage);
+
+        res.render('user/subCategoryPage', {
+            layout: './layouts/user/bookDetailPage',
+            category: { subCategory: subCategorySlug },
+            books: books,
+            itemsPerPage: itemsPerPage,
+            currentPage: page,
+            totalPages: totalPages,
             title: "Booktopia"
         });
     } catch (error) {
         console.log(error);
+        res.status(500).send("Internal Server Error");
     }
 });
-
-
 
 module.exports = router;
