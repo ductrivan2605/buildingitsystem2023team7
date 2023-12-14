@@ -16,7 +16,7 @@
     /* background-color: rgb(248, 240, 229); */
 }
 .category {
-    background-color: rgb(218, 192, 163);
+    background-color: #222831;
     /* background-color: darkgoldenrod; */
     border-radius: 20px;
     font-size: 20px;
@@ -25,9 +25,17 @@
 
 }
 
+.category p {
+    text-decoration: none; 
+    color: black;
+    font-weight: bold;
+}
+
+
 .category h2 {
     font-size: 40px;
     /* margin-top:20px; */
+    color: #EEEEEE;
 
 }
 
@@ -37,7 +45,12 @@
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis; 
+    color: black;
 }
+
+
+
+
 
 .navForBook {
     min-height: 200px;

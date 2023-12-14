@@ -33,14 +33,12 @@ router.get("/", async (req, res) => {
 //   }
 // });
 // POST /admin/add-user - Add a new user
-router.post('/add-user', upload.fields([{
-  // name:"profileImage", maxCount: 1
+router.post('/add-user', upload.single([{
+  name:"image", maxCount: 1
 }]), async (req, res) => {
   try {
     // if (req.user.role !== 'admin') {
     //   return res.status(403).send('Access denied');
-    
-
     const {
       name,
       username,
@@ -52,8 +50,8 @@ router.post('/add-user', upload.fields([{
       role
     } = req.body;
     //get the filenames for profileImage
-    // const profileImageFiles = req.files["profileImage"]
-    // const profileImage = profileImageFiles ? profileImageFiles.map((file) => file.filename) : null;
+    const image = req.file ? req.file.filename : null;
+
     // Check if the username or email already exists
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
@@ -65,7 +63,7 @@ router.post('/add-user', upload.fields([{
 
     // Create the new user
     const user = await User.create({
-      // profileImage: profileImage,
+      image: image,
       name: name,
       username: username,
       email: email,
@@ -84,9 +82,9 @@ router.post('/add-user', upload.fields([{
     console.log(error.message)
   }
 });
-// POST /auth/user/update/:id - Update user by ID
+// POST /admin/user/update/:id - Update user by ID
 router.post('/update/:id',
-//  upload.single('profileImage'), 
+ upload.single('editImage'), 
  async (req, res) => {
   try {
     const userId = req.params.id;
@@ -105,7 +103,7 @@ router.post('/update/:id',
     // Check if the user exists
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).send('User not found');
+      return res.redirect("/admin/users-management");
     }
 
     // Construct a dynamic update object
@@ -119,17 +117,17 @@ router.post('/update/:id',
     if (role) updateFields.role = role;
 
     // Update profile image if a new image is uploaded
-    // if (req.file) {
-    //   // Delete the old profile image if it exists
-    //   if (user.profileImage) {
-    //     const oldImageFilePath = path.resolve(__dirname, "../../public/images", user.profileImage);
-    //     if (fs.existsSync(oldImageFilePath)) {
-    //       fs.unlinkSync(oldImageFilePath);
-    //     }
-    //   }
-    //   // Save the new profile image
-    //   updateFields.profileImage = req.file.filename;
-    // }
+    if (req.file) {
+      // Delete the old profile image if it exists
+      if (user.image) {
+        const oldImageFilePath = path.resolve(__dirname, "../../public/images", user.image);
+        if (fs.existsSync(oldImageFilePath)) {
+          fs.unlinkSync(oldImageFilePath);
+        }
+      }
+      // Save the new profile image
+      user.image = req.file.filename;
+    }
 
     // Check if a new password is provided and hash it
     if (password) {
@@ -166,10 +164,10 @@ router.post('/delete/:id', async (req, res) => {
     }
 
     // Delete user profile image if exists
-    if (user.profileImage) {
-      const imagePath = path.join(__dirname, '../../public/images', user.profileImage);
+    if (user.image) {
+      const imagePath = path.join(__dirname, '../../public/images', user.image);
       try {
-        await fs.promises.unlink(imagePath);
+        await fs.unlink(imagePath);
       } catch (error) {
         console.error('Error deleting profile image:', error);
       }
@@ -192,8 +190,8 @@ router.post('/delete-all-users', async (req, res) => {
       await User.findByIdAndDelete(deletedUser._id);
 
       // Delete profile image if exists
-      if (deletedUser.profileImage) {
-        const imagePath = path.join(__dirname, '../../public/profile-images', deletedUser.profileImage);
+      if (deletedUser.image) {
+        const imagePath = path.join(__dirname, '../../public/profile-images', deletedUser.image);
         try {
           await fs.unlink(imagePath);
         } catch (error) {

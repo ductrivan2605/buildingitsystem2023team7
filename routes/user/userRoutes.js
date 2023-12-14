@@ -9,7 +9,7 @@ router.get('/:id/profile', async (req, res) => {
     if (!user) {
       return res.status(404).send('User not found');
     }
-    res.render('userProfile', { user });
+    res.render('setting', { user });
   } catch (error) {
     res.status(500).send('Error fetching user');
   }

@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 const User = require('../models/user');
 
-router.get("/", async (req, res) => {
+router.get("/signin", async (req, res) => {
   try {
     res.render("signin", {
       layout: "./layouts/admin/itemsManagementLayout",
@@ -33,6 +33,7 @@ router.get("/configure", async (req, res) => {
     });
   } catch (error) {
     res.send(error);
+    res.render("404")
   }
 });
 router.post('/register', async (req, res) => {
@@ -48,6 +49,7 @@ router.post('/register', async (req, res) => {
     res.redirect('/auth/signin');
   } catch (error) {
     res.status(500).send('Error registering user');
+    res.render("404")
   }
 });
 
@@ -62,11 +64,13 @@ router.post('/signin', async (req, res) => {
   try {
     if (await bcrypt.compare(password, user.password)) {
       res.send(`Welcome, ${user.username}!`);
+      res.redirect("/")
     } else {
       res.status(401).send('Invalid password');
     }
   } catch (error) {
     res.status(500).send('Error signing in');
+    res.render("404")
   }
 });
 // POST /auth/configure route to handle user information update
@@ -81,15 +85,17 @@ router.post('/configure', async (req, res) => {
     }
 
     user.name = name;
+    //addusername or nickname
     user.email = email;
-    user.address = address;
-    user.subaddress = subaddress;
-    user.country = country;
+    user.address = address; //we don't need
+    user.subaddress = subaddress; //we don't need
+    user.country = country; //we don't need
 
     await user.save();
-    res.redirect('/dashboard'); // Redirect to profile viewing page
+    res.redirect('/configure'); // Redirect to profile viewing page
   } catch (error) {
     res.status(500).send('Error updating user information');
+    res.render("404")
   }
 });
 
