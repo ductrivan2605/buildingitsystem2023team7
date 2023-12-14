@@ -167,14 +167,14 @@
                             </div>
                         </div>
                         <div class="right-container">
-                            <label for="title" id="popup-details">Book Title:</label>
+                            <label for="title">Book Title:</label>
                             <input type="text" id="title" name="title" required />
 
 
                         <!-- Authors -->
                         <div class="addAuthors position-relative">
                             <div class="searchField">
-                                <label class="position-relative w-100" for="searchAuthor" id="popup-details">Authors:</label>
+                                <label class="position-relative w-100" for="searchAuthor">Authors:</label>
                                 <input type="text" id="searchAuthor" placeholder="Search for existing author" oninput="searchItems('searchAuthor', 'authorsList','dropDownSelectAuthorContainer')" onclick="toggleDropDown('dropDownSelectAuthorContainer')"/>
                                 <div class="dropDownSelectAuthorContainer position-absolute bg-light w-100" style="display: none; z-index: 500;" id="dropDownSelectAuthorContainer">
                                     <div class="authorList w-100" id="authorsList">
@@ -200,7 +200,7 @@
                             <!-- Categories -->
                             <div class="addCategory position-relative">
                                 <div class="searchField">
-                                    <label class="position-relative w-100" for="searchCategory" id="popup-details">Category:</label>
+                                    <label class="position-relative w-100" for="searchCategory">Category:</label>
                                     <input type="text" id="searchCategory" placeholder="Search for existing category" oninput="searchItems('searchCategory', 'categoryList', 'dropDownSelectCategoryContainer')" onclick="toggleDropDown('dropDownSelectCategoryContainer')"/>
                                     <div class="dropDownSelectCategoryContainer position-absolute bg-light w-100" style="display: none; z-index: 500;" id="dropDownSelectCategoryContainer">
                                         <div class="categoryList w-100" id="categoryList">
@@ -208,7 +208,11 @@
                                                 <!-- Display Category -->
                                                 <div class="inputField w-100 d-flex" style="cursor: pointer;">
                                                     <input type="checkbox" id="<%= category.category %>" value="<%= category.category %>" onchange="updateSelectedItems(this, selectedCategories, 'category', 'dropDownSelectCategoryContainer')" hidden/>
-                                                    <label for="<%= category.category %>" class="w-100 p-2" style="cursor: pointer;"><%= category.category %></label>
+                                                    <label for="<%= category.category %>" class="w-100 p-2" style="cursor: pointer;">
+                                                        <strong>
+                                                            <%= category.category %>
+                                                        </strong>
+                                                    </label>
                                                 </div>
                                     
                                                 <!-- Display Subcategories -->
@@ -234,14 +238,14 @@
                             </div>
 
 
-                            <label for="publisher" id="popup-details">Publisher:</label>
+                            <label for="publisher">Publisher:</label>
                             <input type="text" id="publisher" name="publisher" />
 
                             
-                            <label for="published" id="popup-details">Published:</label>
+                            <label for="published">Published:</label>
                             <input type="date" id="published" name="published" />
 
-                            <label for="description" id="popup-details">Book description</label>
+                            <label for="description">Book description</label>
                             <textarea id="description" name="description" rows="4"></textarea>
                             
 
@@ -365,7 +369,11 @@
                                                         <!-- Display Category -->
                                                         <div class="inputField w-100 d-flex" style="cursor: pointer;">
                                                             <input type="checkbox" id="edit<%= category.category %>" value="<%= category.category %>" onchange="updateSelectedItems(this, selectedCategories, 'editCategory<%= counter %>', 'dropDownEditSelectCategoryContainer')" hidden/>
-                                                            <label for="edit<%= category.category %>" class="w-100 p-2" style="cursor: pointer;"><%= category.category %></label>
+                                                            <label for="edit<%= category.category %>" class="w-100 p-2" style="cursor: pointer;">
+                                                                <strong>
+                                                                    <%= category.category %>
+                                                                </strong>
+                                                            </label>
                                                         </div>
                                             
                                                         <!-- Display Subcategories -->
