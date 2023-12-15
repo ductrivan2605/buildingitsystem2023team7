@@ -2,6 +2,9 @@ const pageContent = document.getElementById('page-content');
 const prevPageBtn = document.getElementById('prev-page');
 const nextPageBtn = document.getElementById('next-page');
 const options = document.getElementById('options');
+const currentPageNumber = document.getElementById('current-page-number');
+const totalPagesNumber = document.getElementById('total-pages-number');
+
 
 let currentPage = 1;
 const totalPages = 10;
@@ -21,10 +24,12 @@ const bookContents = [
 
 function displayPage(pageNum) {
     pageContent.textContent = bookContents[pageNum - 1];
+    currentPageNumber.textContent = pageNum;
 }
 
 
 displayPage(currentPage);
+totalPagesNumber.textContent = totalPages;
 
 
 prevPageBtn.addEventListener('click', () => {
@@ -112,3 +117,5 @@ document.addEventListener('keydown', function(event) {
         }
     }
 });
+
+
