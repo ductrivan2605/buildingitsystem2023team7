@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Categories = require("../../models/Category.js");
 const Books = require("../../models/bookModel.js");
-const Reviews = require("../../models/review.js");
 
 
 router.get("/", async(req,res) =>{

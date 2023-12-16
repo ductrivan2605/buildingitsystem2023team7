@@ -93,8 +93,14 @@ router.post(
       // req.flash("accepted", "Successfully update category");
       res.redirect("/admin/categories");
     } catch (error) {
-      console.log(error);
-      res.status(500).send(error);
+      if (error.code === 11000) {
+        // Handle duplicate key error
+        console.error('Duplicate key violation:', error.keyValue);
+        // Implement your error handling or validation logic
+      } else {
+        // Handle other MongoDB errors
+        console.error('MongoDB error:', error);
+      }
     }
   }
 );

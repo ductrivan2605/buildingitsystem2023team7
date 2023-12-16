@@ -1,4 +1,3 @@
-
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -30,7 +29,7 @@
   }
   .subCategory h1 {
     /* text-align: center; */
-    color: #222831;
+    color: rgb(255, 255, 255);
     padding: 10px;
     margin:0px;
 
@@ -38,26 +37,25 @@
 }
 
 .book-container {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: #EEEEEE;
-
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #eeeeee;
 }
-  
+
 .book {
-    width: 10%;
-    margin: 50px;
-    padding: 20px;
-    background-color: rgb(255, 255, 255);
+  width: 10%;
+  margin: 50px;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
 
-    text-align: center;
+  text-align: center;
 }
-  
+
 .book a img {
-    width: 100%;
-    height: 70%;
-    margin-bottom: 10px;
-    object-fit: cover;
+  width: 100%;
+  height: 70%;
+  margin-bottom: 10px;
+  object-fit: cover;
 }
 
 
@@ -69,7 +67,7 @@
     color: black;
 
 }
-  
+
 .book > p {
     font-size: 14px;
     color: #555;
@@ -82,15 +80,17 @@
 }
 
 .navbar__menu li a {
+  position: relative;
   text-decoration: none;
   color: white;
-  transition: color 0.3s ease; /* 색깔 변화를 부드럽게 적용하기 위한 트랜지션 */
+  transition: color 0.3s ease;
+  min-height: 30px; /* Set a minimum height */
 }
 
 
 .navbar__menu li a:hover {
-  color: #00ADB5;
-  font-weight: bold; 
+  color: #00ADB5; /* 호버 시 색상을 변경해보자 */
+  font-weight: bold; /* 폰트를 두껍게 */
 }
 
 .pagination {
@@ -105,20 +105,18 @@
   border: 1px solid #ccc;
   background-color: #f4f4f4;
   cursor: pointer;
-
 }
 
 .page-btn:hover {
   background-color: #ddd;
 }
 
-
 @media screen and (max-width: 700px) {
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-        margin: 0;
-      }
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0;
+  }
 
       .navbar__menu {
         flex-direction: column;
@@ -134,16 +132,17 @@
         width: calc(53% - 53px); 
         margin: 30px 20px; 
     }
-
+    body { 
+      margin:0px;
+      background-color: #222831;
+      
+    }
     .subCategory h1 {
       /* text-align: center; */
       border-bottom: 1px solid black;
-      color: #222831;
+      color: rgb(255, 255, 255);
       padding: 10px;
       font-size: 60px;
       margin:0px;
   }
-  
-    
-      
 }

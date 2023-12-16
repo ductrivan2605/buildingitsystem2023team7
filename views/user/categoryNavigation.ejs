@@ -2,7 +2,7 @@
     <% categories.forEach(category => { %>
     <div class="nav-items">
         <div class="nav-item">
-            <a href="/category/<%= category.category %>">
+            <a href="/category/<%= category.slug %>">
                 <img src="/images/<%= category.image %>" alt="Novel_icon">
                 <p><%= category.category %></p>
             </a>
