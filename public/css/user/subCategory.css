@@ -63,12 +63,20 @@
 
 .book > h2{
     font-size: 17px;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    color: black;
 
 }
   
 .book > p {
     font-size: 14px;
     color: #555;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    color: black;
     
 
 }
@@ -123,8 +131,8 @@
         text-align: center;
       }
       .book {
-        width: calc(40% - 40px); /* 모바일에서 한 줄에 두 개의 요소가 배치되도록 설정 */
-        margin: 30px 20px; /* 여백 수정 */
+        width: calc(53% - 53px); 
+        margin: 30px 20px; 
     }
 
     .subCategory h1 {
