@@ -1,5 +1,5 @@
 const contents = document.querySelectorAll('.content');
-const links = document.querySelectorAll('nav a');
+const links = document.querySelectorAll('.container1 nav a');
 
 links.forEach((link, index) => {
   link.addEventListener('click', (e) => {
@@ -10,11 +10,23 @@ links.forEach((link, index) => {
 
 function showContent(index) {
   contents.forEach((content, i) => {
-    if (i === index) {
+    if (content && i === index) {
       content.classList.add('active');
-    } else {
+    } else if (content) {
       content.classList.remove('active');
     }
   });
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+  const resetButton = document.getElementById('resetButton');
+
+  resetButton.addEventListener('click', function() {
+    document.getElementById('comment-contents').value = '';
+
+    const ratingInputs = document.querySelectorAll('input[type="radio"][name="rating"]');
+    ratingInputs.forEach(input => {
+      input.checked = false;
+    });
+  });
+});

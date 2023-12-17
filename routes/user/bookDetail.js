@@ -1,14 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const Books = require("../../models/bookModel.js");
+const Authors = require("../../models/author.js");
 const Reviews = require("../../models/review.js");
 
 
 router.get("/:slug", async (req, res) => {
-    try{
-        const books = await Books.findOne({slug: req.params.slug}).populate('reviews').exec();
-        res.render('user/bookDetail', {layout: './layouts/user/bookDetailPage', title:"Booktopia", books: books})
-    }catch(error){
+    try {
+        const books = await Books.findOne({ slug: req.params.slug }).populate('reviews').exec();
+        res.render('user/bookDetail', { layout: './layouts/user/bookDetailPage', title: "Booktopia", books: books, authors: authors });
+    } catch (error) {
         console.log(error);
     }
 })

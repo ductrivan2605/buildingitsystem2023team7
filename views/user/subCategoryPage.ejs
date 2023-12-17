@@ -10,7 +10,7 @@
       <% if (books.length > 0) { %>
         <% books.forEach(book => { %>
         <div class="book">
-          <a href=""><img src="/images/<%= book.imageCover %>" alt="Fiction book 1" /></a>
+          <a href="/book/<%= book.slug %>"><img src="/images/<%= book.imageCover %>" alt="Fiction book 1" /></a>
           <h2><%= book.title %></h2>
           <p><%= book.authors.join(',') %></p>
         </div>
