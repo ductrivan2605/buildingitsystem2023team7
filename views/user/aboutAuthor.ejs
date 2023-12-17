@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/user/aboutAuthor.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="middle">
+            <h1 class="authorName"><%= authors.name %></h1>
+        </div>
+        <div class="authorDetail">
+            <div class="authorImage">
+                <img src="/images/<%= authors.image %>" alt="DonnaEverhart">
+            </div>
+            <div class="authorDescription">
+                <h2>About the author</h2>
+                <p><%= authors.background %></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

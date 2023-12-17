@@ -1,73 +1,149 @@
-<h1>Book Details</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<% if (books) { %>
- 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/user/bookDetail.css">
+    <title>Book Details</title>
+</head>
+
+<body>
+    <h1>Book Details</h1>
     <div class="container">
         <div class="container1">
             <div class="title">
-                <img src="picture/THESAINTSOFSWALLOWHILL.jpg" style="max-width: 100%; height: auto;"
-                alt="The Saint of Swallowhill">
-                <div class="details">
-                    <% if (books.title) { %>
-                        <h2> <%= books.title %></h2>
-                    <% } %>
-                    <p>
-                        <%- books.authors.map(author => `<a href="">${author}</a>`).join(', ') %>
-                    </p>
-                    
-                    <p>Publisher: <%= books.publisher %></p>
-                    <p>Publication Date:  <%= books.published %></p>
-                    <p>Rating:
-                        <% for (let i = 1; i <= 5; i++) { %>
-                          <% if (i <= books.rating) { %>
-                            <span class="star">&#9733;</span>
-                          <% } else { %>
-                            <span class="star">&#9734;</span>
-                          <% } %>
-                        <% } %>
-                      </p>
-                </div>
+                <img src="/images/<%= books.imageCover %>" style="max-width: 100%; height: auto;"
+                    alt="Image Cover">
+                    <div class="details">
+                        <h2><%= books.title %></h2>
+                        <p>Publisher: <%= books.publisher %></p>
+                        <p>Publication Date: <%= books.published %></p>
+                        <p>Rating: &#9733;&#9733;&#9733;&#9733;&#9734;</p>
+                        <p>
+                            Author(s):
+                            <% books.authorsSlug.forEach((authorSlug, index) => { %>
+                                <a href="/author/<%= authorSlug %>"><%= books.authors[index] %></a><%= index !== books.authors.length - 1 ? ',' : '' %>
+                            <% }) %>
+                        </p>
+                        
+                        
+                        
+                    </div>
             </div>
             <div class="description">
                 <nav>
                     <ul>
                         <li><a class="active" href="#book-intro">Book Introduction</a></li>
-                        <li><a href="#author-intro">Author Introduction</a></li>
-                        <li><a href="#review">Review</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
                     </ul>
                 </nav>
-                
+
                 <div class="description1">
                     <div id="book-intro" class="content active">
                         <h2>Book Introduction</h2>
-                        <p><%= books.description %></p>
+                        <p><%= books.description%></p>
                     </div>
-                    
-                    <div id="author-intro" class="content">
-                        <h2>Author Introduction</h2>
-                        <p>Donna Everhart is the USA Today bestselling author of vivid, authentic Southern fiction,
-                            including the Southeastern Library Association Award-winning The Road to Bittersweet, the
-                            Indie Next Pick, Amazon Spotlight/Debut Pick, The Education of Dixie Dupree, The Forgiving
-                            Kind, and The Moonshiner’s Daughter. Her fifth novel, The Saints of Swallow Hill is out now.
-                            <pre></pre>
-                            Born and raised in Raleigh, North Carolina, she now lives with her husband just an hour away in
-                            the Sandhills area of the state. Please visit her online at DonnaEverhart.com.</p>
+
+                    <div id="review" class="content">
+                        <h3>Write a Comments</h3>
+                        <div class="user-comment">
+                            <div class="user-comment-box">
+                                <img src="/bookDetails/picture/Person.jpg" alt="User Profile Image">
+                                    <div class="user-comment-box-header">
+                                        <h3>User Name</h3>
+                                        <div class="star-rating space-x-4 mx-auto">
+                                            <input type="radio" id="5-stars" name="rating" value="5" v-model="ratings"/>
+                                            <label for="5-stars" class="star pr-4">★</label>
+                                            <input type="radio" id="4-stars" name="rating" value="4" v-model="ratings"/>
+                                            <label for="4-stars" class="star">★</label>
+                                            <input type="radio" id="3-stars" name="rating" value="3" v-model="ratings"/>
+                                            <label for="3-stars" class="star">★</label>
+                                            <input type="radio" id="2-stars" name="rating" value="2" v-model="ratings"/>
+                                            <label for="2-stars" class="star">★</label>
+                                            <input type="radio" id="1-star" name="rating" value="1" v-model="ratings" />
+                                            <label for="1-star" class="star">★</label>
+                                        </div>
+                                    </div>
+                            </div>
+                            <hr>
+                            <div class="review-description">
+                                <textarea id="comment-contents" name="content" rows="5" cols="100" required></textarea>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="helpful-btn">Submit</button>
+                                <button class="report-btn" id="resetButton">Reset</button>
+                            </div>
                         </div>
-                        
-                        <div id="review" class="content">
-                            <h2>Review</h2>
-                            
-                            <% books.reviews.forEach(review => { %>
-                                <p>
-                                    <%= review.review %>
-                                </p>    
-                                <p>
-                                    <%= review.getFormattedDateTime() %>
-                                </p>    
-                            <% }) %>
+                    
+                        <h2>Reviews</h2>
+                    <div class="user-review">
+                        <div class="user-profile">
+                            <img src="/bookDetails/picture/Person.jpg" alt="User Profile Image">
+                            <div class="user-details">
+                                <h3>User Name</h3>
+                                <div class="user-rating">
+                                    <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                                    <p class="verified-purchase">Verified Purchase</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="review-description">
+                            <p>This book was a great read. I loved the characters and the setting.</p>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="helpful-btn">Helpful</button>
+                            <button class="report-btn">Report</button>
+                        </div>
+                    </div>
+
+                    <div class="user-review">
+                        <div class="user-profile">
+                            <img src="/bookDetails/picture/Person.jpg" alt="User Profile Image">
+                            <div class="user-details">
+                                <h3>User Name</h3>
+                                <div class="user-rating">
+                                    <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                                    <p class="verified-purchase">Verified Purchase</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="review-description">
+                            <p>This book was a great read. I loved the characters and the setting.</p>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="helpful-btn">Helpful</button>
+                            <button class="report-btn">Report</button>
+                        </div>
+                    </div>
+
+                    <div class="user-review">
+                        <div class="user-profile">
+                            <img src="/bookDetails/picture/Person.jpg" alt="User Profile Image">
+                            <div class="user-details">
+                                <h3>User Name</h3>
+                                <div class="user-rating">
+                                    <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                                    <p class="verified-purchase">Verified Purchase</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="review-description">
+                            <p>This book was a great read. I loved the characters and the setting.</p>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="helpful-btn">Helpful</button>
+                            <button class="report-btn">Report</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <% } %>
+    </div>
+    </div>
+</body>
+
+</html>

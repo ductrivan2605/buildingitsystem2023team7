@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { default: slugify } = require('slugify');
 
 const authorSchema = new mongoose.Schema({
     name: {
@@ -13,7 +14,19 @@ const authorSchema = new mongoose.Schema({
     },
     image: {
         type: String,
+    },
+    slug: {
+        type: String,
+        required: true,
+        unique: true,
     }
+});
+
+authorSchema.pre('validate', function (next) {
+    if(this.name){
+        this.slug = slugify(this.name, {lower:true, strict:true});
+    }
+    next();
 });
 
 
