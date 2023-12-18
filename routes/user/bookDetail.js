@@ -1,36 +1,39 @@
 const express = require("express");
 const router = express.Router();
-const Books = require("../../models/bookModel.js");
-const Authors = require("../../models/author.js");
-const Reviews = require("../../models/review.js");
+const Book = require("../../models/bookModel.js");
 
-
+// Display book details and reviews
 router.get("/:slug", async (req, res) => {
     try {
-        const books = await Books.findOne({ slug: req.params.slug }).populate('reviews').exec();
-        res.render('user/bookDetail', { layout: './layouts/user/bookDetailPage', title: "Booktopia", books: books, authors: authors });
+        const books = await Book.findOne({ slug: req.params.slug });
+        console.log(books);
+        res.render('user/bookDetail', { layout: './layouts/user/bookDetailPage', title: "Booktopia", books });
     } catch (error) {
-        console.log(error);
+        console.error(error);
+        res.status(500).send("Internal Server Error");
     }
-})
+});
 
-router.post("/:slug/comments", async (req, res) => {
-    try{
-        
-        const {userName , review} = req.body;
-        
-        const slug = req.params.slug;
-        await Reviews.create({
-            userName,
+// Submit a new review
+router.post("/:slug/review", async (req, res) => {
+    try {
+        const { userName, review, rating } = req.body;
+
+        // Create the review
+        const newReview = {
+            userName: userName || "Anonymous",
             review,
-        })
+            rating: parseInt(rating), // Convert the rating to a number
+        };
 
-        res.redirect(`/book/${slug}`);
-    }catch(error){
-        console.log(error);
+        // Update the book's reviews array
+        await Book.updateOne({ slug: req.params.slug }, { $push: { reviews: newReview } });
+
+        res.redirect(`/book/${req.params.slug}`);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
     }
-        
-})
-
+});
 
 module.exports = router;

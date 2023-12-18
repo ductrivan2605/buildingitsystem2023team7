@@ -1,6 +1,25 @@
 const mongoose = require('mongoose');
 const { default: slugify } = require('slugify');
 
+const ReviewSchema = new mongoose.Schema({
+    review: {
+        type: String,
+    },
+    userName: {
+        type: String,
+    },
+    rating: {
+        type: Number,
+        required: true,
+        min: 1,
+        max: 5,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+});
+
 const BookSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -31,10 +50,7 @@ const BookSchema = new mongoose.Schema({
     description: {
         type: String,
     },
-    reviews: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Reviews"
-    }],
+    reviews: [ReviewSchema],
     contentImage: [{
         type: String,
     }],
@@ -52,6 +68,20 @@ const BookSchema = new mongoose.Schema({
         required: true,
     }],
 });
+
+
+// Calculating the average stars
+BookSchema.virtual('averageRating').get(function () {
+    if (this.reviews.length === 0) {
+        return 0; // Default to 0 if there are no reviews
+    }
+
+    const totalRating = this.reviews.reduce((sum, review) => sum + review.rating, 0);
+    return totalRating / this.reviews.length;
+});
+
+BookSchema.set('toObject', { virtuals: true });
+BookSchema.set('toJSON', { virtuals: true });
 
 BookSchema.pre('validate', function (next) {
     if (this.title) {

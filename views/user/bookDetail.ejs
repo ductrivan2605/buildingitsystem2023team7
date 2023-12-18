@@ -1,149 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/user/bookDetail.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/user/bookDetail.css" />
     <title>Book Details</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1>Book Details</h1>
     <div class="container">
-        <div class="container1">
-            <div class="title">
-                <img src="/images/<%= books.imageCover %>" style="max-width: 100%; height: auto;"
-                    alt="Image Cover">
-                    <div class="details">
-                        <h2><%= books.title %></h2>
-                        <p>Publisher: <%= books.publisher %></p>
-                        <p>Publication Date: <%= books.published %></p>
-                        <p>Rating: &#9733;&#9733;&#9733;&#9733;&#9734;</p>
-                        <p>
-                            Author(s):
-                            <% books.authorsSlug.forEach((authorSlug, index) => { %>
-                                <a href="/author/<%= authorSlug %>"><%= books.authors[index] %></a><%= index !== books.authors.length - 1 ? ',' : '' %>
-                            <% }) %>
-                        </p>
-                        
-                        
-                        
-                    </div>
+      <div class="container1">
+        <div class="title">
+          <img
+            src="/images/<%= books.imageCover %>"
+            style="max-width: 100%; height: auto"
+            alt="Image Cover"
+          />
+          <div class="details">
+            <h2><%= books.title %></h2>
+            <p>Publisher: <%= books.publisher %></p>
+            <p>Publication Date: <%= books.published %></p>
+
+            <% function displayStars(rating) { %>
+              <% const roundedRating = Math.round(rating); %>
+              <% for (let i = 1; i <= 5; i++) { %>
+                  <% if (i <= roundedRating) { %>
+                      <span class="stars">&#9733;</span>
+                  <% } else { %>
+                      <span class="stars">&#9734;</span>
+                  <% } %>
+              <% } %>
+            <% } %>
+            <p>Rating: <%= displayStars(books.averageRating) %> 
+              <% if(books.reviews.length < 2){ %>
+              <%= books.reviews.length %> review 
+              <% }else{ %>
+                <%= books.reviews.length %> reviews 
+                <% } %>
+            </p>
+            <p>
+              Author(s): <% books.authorsSlug.forEach((authorSlug, index) => {
+              %>
+              <a href="/author/<%= authorSlug %>"><%= books.authors[index] %></a
+              ><%= index !== books.authors.length - 1 ? ',' : '' %> <% }) %>
+            </p>
+          </div>
+        </div>
+        <div class="description">
+          <nav>
+            <ul>
+              <li>
+                <a class="active" href="#book-intro">Book Introduction</a>
+              </li>
+              <li><a href="#reviews">Reviews</a></li>
+            </ul>
+          </nav>
+
+          <div class="description1">
+            <div id="book-intro" class="content active">
+              <h2>Book Introduction</h2>
+              <p><%= books.description%></p>
             </div>
-            <div class="description">
-                <nav>
-                    <ul>
-                        <li><a class="active" href="#book-intro">Book Introduction</a></li>
-                        <li><a href="#reviews">Reviews</a></li>
-                    </ul>
-                </nav>
-
-                <div class="description1">
-                    <div id="book-intro" class="content active">
-                        <h2>Book Introduction</h2>
-                        <p><%= books.description%></p>
+            
+            <form action="/book/<%= books.slug %>/review" method="post">
+            <div id="review" class="content">
+              <h3>Write a Comments</h3>
+              <div class="user-comment">
+                <div class="user-comment-box">
+                  <img
+                  src=""
+                  alt="User Profile Image"
+                  />
+                  <div class="user-comment-box-header">
+                    <h3>User Name</h3>
+                    <div class="star-rating space-x-4 mx-auto">
+                      <input
+                        type="radio"
+                        id="5-stars"
+                        name="rating"
+                        value="5"
+                        v-model="ratings"
+                      />
+                      <label for="5-stars" class="star pr-4">★</label>
+                      <input
+                        type="radio"
+                        id="4-stars"
+                        name="rating"
+                        value="4"
+                        v-model="ratings"
+                      />
+                      <label for="4-stars" class="star">★</label>
+                      <input
+                        type="radio"
+                        id="3-stars"
+                        name="rating"
+                        value="3"
+                        v-model="ratings"
+                      />
+                      <label for="3-stars" class="star">★</label>
+                      <input
+                        type="radio"
+                        id="2-stars"
+                        name="rating"
+                        value="2"
+                        v-model="ratings"
+                      />
+                      <label for="2-stars" class="star">★</label>
+                      <input
+                        type="radio"
+                        id="1-star"
+                        name="rating"
+                        value="1"
+                        v-model="ratings"
+                      />
+                      <label for="1-star" class="star">★</label>
                     </div>
+                  </div>
+                </div>
+                <hr />
+                  <div class="review-description">
+                      <textarea
+                          id="comment-contents"
+                          placeholder="Leave your review here"
+                          name="review"
+                          rows="5"
+                          cols="100"
+                      ></textarea>
+                  </div>
+                  <div class="action-buttons">
+                      <button type="submit" class="helpful-btn">Submit</button>
+                      <button type="reset" class="report-btn" id="resetButton">Reset</button>
+                  </div>
+              </form>
+              </div>
 
-                    <div id="review" class="content">
-                        <h3>Write a Comments</h3>
-                        <div class="user-comment">
-                            <div class="user-comment-box">
-                                <img src="/bookDetails/picture/Person.jpg" alt="User Profile Image">
-                                    <div class="user-comment-box-header">
-                                        <h3>User Name</h3>
-                                        <div class="star-rating space-x-4 mx-auto">
-                                            <input type="radio" id="5-stars" name="rating" value="5" v-model="ratings"/>
-                                            <label for="5-stars" class="star pr-4">★</label>
-                                            <input type="radio" id="4-stars" name="rating" value="4" v-model="ratings"/>
-                                            <label for="4-stars" class="star">★</label>
-                                            <input type="radio" id="3-stars" name="rating" value="3" v-model="ratings"/>
-                                            <label for="3-stars" class="star">★</label>
-                                            <input type="radio" id="2-stars" name="rating" value="2" v-model="ratings"/>
-                                            <label for="2-stars" class="star">★</label>
-                                            <input type="radio" id="1-star" name="rating" value="1" v-model="ratings" />
-                                            <label for="1-star" class="star">★</label>
-                                        </div>
-                                    </div>
+              <h2>Reviews</h2>
+              <% books.reviews.slice().reverse().forEach((review) => { %>
+                <div class="user-review">
+                    <div class="user-profile">
+                        <img src="" alt="User Profile Image" />
+                        <div class="user-details">
+                            <h3><%= review.userName %></h3>
+                            <div class="user-rating">
+                                <!-- Dynamically generate star ratings based on the review's rating -->
+                                <% for (let i = 1; i <= 5; i++) { %>
+                                    <% if (i <= review.rating) { %>
+                                        <span class="stars">&#9733;</span>
+                                    <% } else { %>
+                                        <span class="stars">&#9734;</span>
+                                    <% } %>
+                                <% } %>
+                                <p class="verified-purchase">Verified Purchase</p>
                             </div>
-                            <hr>
-                            <div class="review-description">
-                                <textarea id="comment-contents" name="content" rows="5" cols="100" required></textarea>
-                            </div>
-                            <div class="action-buttons">
-                                <button class="helpful-btn">Submit</button>
-                                <button class="report-btn" id="resetButton">Reset</button>
-                            </div>
-                        </div>
-                    
-                        <h2>Reviews</h2>
-                    <div class="user-review">
-                        <div class="user-profile">
-                            <img src="/bookDetails/picture/Person.jpg" alt="User Profile Image">
-                            <div class="user-details">
-                                <h3>User Name</h3>
-                                <div class="user-rating">
-                                    <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-                                    <p class="verified-purchase">Verified Purchase</p>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="review-description">
-                            <p>This book was a great read. I loved the characters and the setting.</p>
-                        </div>
-                        <div class="action-buttons">
-                            <button class="helpful-btn">Helpful</button>
-                            <button class="report-btn">Report</button>
                         </div>
                     </div>
-
-                    <div class="user-review">
-                        <div class="user-profile">
-                            <img src="/bookDetails/picture/Person.jpg" alt="User Profile Image">
-                            <div class="user-details">
-                                <h3>User Name</h3>
-                                <div class="user-rating">
-                                    <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-                                    <p class="verified-purchase">Verified Purchase</p>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="review-description">
-                            <p>This book was a great read. I loved the characters and the setting.</p>
-                        </div>
-                        <div class="action-buttons">
-                            <button class="helpful-btn">Helpful</button>
-                            <button class="report-btn">Report</button>
-                        </div>
+                    <hr />
+                    <div class="review-description">
+                        <p><%= review.review %></p>
                     </div>
-
-                    <div class="user-review">
-                        <div class="user-profile">
-                            <img src="/bookDetails/picture/Person.jpg" alt="User Profile Image">
-                            <div class="user-details">
-                                <h3>User Name</h3>
-                                <div class="user-rating">
-                                    <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-                                    <p class="verified-purchase">Verified Purchase</p>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="review-description">
-                            <p>This book was a great read. I loved the characters and the setting.</p>
-                        </div>
-                        <div class="action-buttons">
-                            <button class="helpful-btn">Helpful</button>
-                            <button class="report-btn">Report</button>
-                        </div>
+                    <div class="action-buttons">
+                        <button class="helpful-btn">Helpful</button>
+                        <button class="report-btn">Report</button>
                     </div>
                 </div>
+            <% }) %>
+            
+              
             </div>
-        </div>
+      </div>
     </div>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>
