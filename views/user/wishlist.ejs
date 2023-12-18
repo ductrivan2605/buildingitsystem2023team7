@@ -66,12 +66,26 @@
             </div>
         
             <div class="form-group">
-              <label for="imageWishlist">Image (URL):</label>
-              <input type="url" class="form-control" id="imageWishlist" name="imageWishlist">
+              <div class="image-container ">
+                <div class="imageCoverContainer d-flex flex-column">
+                    <label for="image">Add image Cover</label>
+                    <input type="file" id="imageWishlist" name="imageWishlist" onchange="previewImage('imageWishlist', 'add-image-preview')">
+                    <div id="add-image-preview" class="py-1"></div>
+                </div>
+            </div>
             </div>
         
-            <button id="wishlist-btn" type="submit" class="btn btn-success">Submit Wishlist</button>
+            <button id="wishlist-btn" type="button" class="btn btn-success" onclick="submitWishlist()">Submit Wishlist</button>
+
           </form>
+          <script>
+            function submitWishlist() {
+              // Your existing code for form submission goes here
+          
+              // Display a pop-up alert after successful form submission
+              window.alert('Wishlist submitted successfully!');
+            }
+          </script>
     </main>
     
 

@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const WishlistItem = require('../models/Wishlist')
+const upload = require("../middleware/uploadImage.js");
 
 
 
@@ -43,9 +44,10 @@ router.get("/", async (req, res) => {
 }); 
 
 
-router.post('/', async (req, res) => {
+router.post('/', upload.single("imageWishlist") , async (req, res) => {
   try {
-    const { authorWishlist, titleWishlist, dateWishlist, imageWishlist, approveWishlist } = req.body;
+    const { authorWishlist, titleWishlist, dateWishlist, approveWishlist } = req.body;
+    const imageWishlist = req.file ? req.file.filename : null;
 
     // Log received data
     console.log('Received data:', { authorWishlist, titleWishlist, dateWishlist, imageWishlist, approveWishlist });
