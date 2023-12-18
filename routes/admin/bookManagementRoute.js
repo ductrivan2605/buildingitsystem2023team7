@@ -5,7 +5,6 @@ const router = express.Router();
 const Books = require("../../models/bookModel.js");
 const Author = require("../../models/author.js");
 const Category = require("../../models/Category.js");
-const Reviews = require("../../models/review.js");
 const upload = require("../../middleware/uploadImage.js");
 
 router.get("/", async (req, res) => {
@@ -201,14 +200,12 @@ router.post("/delete-all-books", async (req, res) => {
       // Delete the corresponding image files
       if (deletedBook.imageCover) {
         const imageCoverPath = path.join(__dirname, "../../public/images", deletedBook.imageCover);
-        
+
         // Check if the file exists before trying to delete
-        if (fs.existsSync(imageCoverPath)) {
-          try {
-            await fs.promises.unlink(imageCoverPath);
-          } catch (error) {
-            console.error("Error deleting image cover file:", error);
-          }
+        try {
+          await fs.promises.unlink(imageCoverPath);
+        } catch (error) {
+          console.error("Error deleting image cover file:", error);
         }
       }
 
@@ -226,6 +223,7 @@ router.post("/delete-all-books", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
 
 
 // Search for book
