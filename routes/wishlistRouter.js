@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const WishlistItem = require('../models/Wishlist')
-const upload = require("../middleware/uploadImage.js");
+const upload = require("../middleware/uploadImage");
 
 
 
@@ -44,7 +44,7 @@ router.get("/", async (req, res) => {
 }); 
 
 
-router.post('/', upload.single("imageWishlist") , async (req, res) => {
+router.post('/', upload.single('imageWishlist'), async (req, res) => {
   try {
     const { authorWishlist, titleWishlist, dateWishlist, approveWishlist } = req.body;
     const imageWishlist = req.file ? req.file.filename : null;
@@ -53,19 +53,17 @@ router.post('/', upload.single("imageWishlist") , async (req, res) => {
     console.log('Received data:', { authorWishlist, titleWishlist, dateWishlist, imageWishlist, approveWishlist });
 
     const newWishlistItem = new WishlistItem({
-      authorWishlist: authorWishlist,
-      titleWishlist: titleWishlist,
-      dateWishlist: dateWishlist,
-      imageWishlist: imageWishlist,
-      // Update the field name to approveWishlist
-      approveWishlist: approveWishlist,
+      authorWishlist,
+      titleWishlist,
+      dateWishlist,
+      imageWishlist,
+      approveWishlist,
     });
 
     // Save the wishlist item to the database
     await newWishlistItem.save();
 
     // Respond immediately without interacting with the database
-    // res.status(201).json({ message: 'Wishlist item submitted successfully' });
     res.redirect('/wishlist');
   } catch (error) {
     console.error('Error in route handling:', error);

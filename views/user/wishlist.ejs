@@ -75,16 +75,35 @@
             </div>
             </div>
         
-            <button id="wishlist-btn" type="button" class="btn btn-success" onclick="submitWishlist()">Submit Wishlist</button>
+            <button id="wishlist-btn" type="button" class="btn btn-success" style="margin-top: 300px;" onclick="submitWishlist()">Submit Wishlist</button>
 
           </form>
           <script>
             function submitWishlist() {
-              // Your existing code for form submission goes here
-          
-              // Display a pop-up alert after successful form submission
-              window.alert('Wishlist submitted successfully!');
-            }
+    const form = document.getElementById('wishlistForm');
+    const formData = new FormData(form);
+
+    fetch('/wishlist', {
+      method: 'POST',
+      body: formData,
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Handle the response data as needed
+        console.log(data);
+
+        // Display a pop-up alert after successful form submission
+        window.alert('Wishlist submitted successfully!');
+
+        // Optionally, redirect to another page
+        // window.location.href = '/wishlist';
+      })
+      .catch(error => {
+        console.error(error);
+        // Handle errors if necessary
+        window.alert('Wishlist submission failed!');
+      });
+  }
           </script>
     </main>
     
