@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const WishlistItem = require('../models/Wishlist')
+const upload = require("../middleware/uploadImage");
 
 //render all wishlist
 
@@ -19,30 +20,34 @@ router.post('/submitWishlist', async (req, res) => {
 }); 
 
 
-  router.post('/', async (req, res) => {
-    try {
-      const { authorWishlist, titleWishlist, dateWishlist, imageWishlist } = req.body;
-  
-      // Log received data
-      console.log('Received data:', { authorWishlist, titleWishlist, dateWishlist, imageWishlist });
 
-      const newWishlistItem = new WishlistItem({
-        authorWishlist: authorWishlist,
-        titleWishlist: titleWishlist,
-        dateWishlist: dateWishlist,
-        imageWishlist: imageWishlist,
-      });
-  
-      // Save the wishlist item to the database
-      await newWishlistItem.save();
-  
-      // Respond immediately without interacting with the database
-      res.status(201).json({ message: 'Wishlist item submitted successfully' });
-    } catch (error) {
-      console.error('Error in route handling:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
+router.post('/', upload.single('imageWishlist'), async (req, res) => {
+  try {
+    const { authorWishlist, titleWishlist, dateWishlist, approveWishlist } = req.body;
+    const imageWishlist = req.file ? req.file.filename : null;
+
+    // Log received data
+    console.log('Received data:', { authorWishlist, titleWishlist, dateWishlist, imageWishlist, approveWishlist });
+
+    const newWishlistItem = new WishlistItem({
+      authorWishlist,
+      titleWishlist,
+      dateWishlist,
+      imageWishlist,
+      approveWishlist,
+    });
+
+    // Save the wishlist item to the database
+    await newWishlistItem.save();
+
+    // Respond immediately without interacting with the database
+    res.redirect('/wishlist');
+  } catch (error) {
+    console.error('Error in route handling:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 
   

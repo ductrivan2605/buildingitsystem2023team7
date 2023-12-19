@@ -35,14 +35,15 @@
           <button type="submit">Search</button>
         </form>
     
-        <div class="user" onclick="toggleDropdown()">
+        <div class="user" onclick="toggleUserMenu()">
           <a><i class="fa-solid fa-user"></i></a>
-          <div class="dropdown-content" id="myDropdown">
+          <div class="user-dropdown" id="userDropdown">
             <a href="#">Profile</a>
             <a href="#">Settings</a>
             <a href="#"><i class="fa-solid fa-right-from-bracket"></i></a>
           </div>
         </div>
+        
       </header>
       
       <main class="main">
@@ -65,12 +66,45 @@
             </div>
         
             <div class="form-group">
-              <label for="imageWishlist">Image (URL):</label>
-              <input type="url" class="form-control" id="imageWishlist" name="imageWishlist">
+              <div class="image-container ">
+                <div class="imageCoverContainer d-flex flex-column">
+                    <label for="image">Add image Cover</label>
+                    <input type="file" id="imageWishlist" name="imageWishlist" onchange="previewImage('imageWishlist', 'add-image-preview')">
+                    <div id="add-image-preview" class="py-1"></div>
+                </div>
+            </div>
             </div>
         
-            <button id="wishlist-btn" type="submit" class="btn btn-success">Submit Wishlist</button>
+            <button id="wishlist-btn" type="button" class="btn btn-success" style="margin-top: 300px;" onclick="submitWishlist()">Submit Wishlist</button>
+
           </form>
+          <script>
+            function submitWishlist() {
+    const form = document.getElementById('wishlistForm');
+    const formData = new FormData(form);
+
+    fetch('/wishlist', {
+      method: 'POST',
+      body: formData,
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Handle the response data as needed
+        console.log(data);
+
+        // Display a pop-up alert after successful form submission
+        window.alert('Wishlist submitted successfully!');
+
+        // Optionally, redirect to another page
+        // window.location.href = '/wishlist';
+      })
+      .catch(error => {
+        console.error(error);
+        // Handle errors if necessary
+        window.alert('Wishlist submission failed!');
+      });
+  }
+          </script>
     </main>
     
 

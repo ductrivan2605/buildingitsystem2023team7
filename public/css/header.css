@@ -214,7 +214,6 @@ body {
 .user {
   position: relative;
   cursor: pointer;
-  margin-right: 50px;
 }
 
 .user-dropdown {
@@ -246,20 +245,26 @@ body {
   cursor: pointer;
 }
 
-.user-info img {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 8px;
-}
-
-.user-info span {
-  font-weight: bold;
-}
 
 .menu-button {
   display: none;
 }
+
+/* <-----> ADMIN WISHLIST <------> */
+
+ /* Add text color to Bootstrap badges */
+.badge-success {
+  background-color: #28a745; 
+  color: #fff; 
+}
+
+.badge-warning {
+  background-color: #ffc107; 
+  color: #212529; 
+}
+
+
+
 /* this section is for the main code */
 .main { 
 
