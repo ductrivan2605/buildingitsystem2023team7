@@ -5,6 +5,19 @@ const WishlistItem = require('../models/Wishlist')
 const upload = require("../middleware/uploadImage");
 
 //render all wishlist
+router.get('/', async (req, res) => {
+  try {
+    const wishlistItems = await WishlistItem.find({});
+    res.render('user/wishlist', {
+      layout: './layouts/user/wishlistUserLayout',
+      title: 'Wishlist',
+      wishlistItems: wishlistItems,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 // Route to handle form submission
 router.post('/submitWishlist', async (req, res) => {

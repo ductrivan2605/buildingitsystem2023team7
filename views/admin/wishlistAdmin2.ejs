@@ -1,0 +1,99 @@
+
+<main class="main">
+    <form action="/admin/wishlist/reset2" method="post" id="wishlistResetForm" style="display: inline;">
+      <button class="btn btn-primary">Reset Wishlist</button>
+    </form>
+  
+    <!-- Delete All button -->
+    <input type="button" value="Delete All" onclick="openPopup('deleteAllPopup')" />
+    <div class="popup-container" id="deleteAllPopup">
+      <div class="popup">
+        <div>
+          <h1>Do you want to delete all wishlist items?</h1>
+        </div>
+        <div class="fluid-container">
+          <form action="/admin/wishlist/delete-all2" method="post">
+            <button type="submit" class="btn btn-success">Confirm</button>
+            <button type="button" class="btn btn-danger" onclick="closePopup('deleteAllPopup')">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Wishlist Items table -->
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th scope="col">Author</th>
+          <th scope="col">Title</th>
+          <th scope="col">Date</th>
+          <th scope="col">Image</th>
+          <th scope="col">Approval Status</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% wishlistItems.forEach(item => { %>
+          <tr>
+            <td><%= item.authorWishlist %></td>
+            <td><%= item.titleWishlist %></td>
+            <td><%= item.dateWishlist.toISOString().split('T')[0] %></td>
+            <td>
+              <div class="imgBooks">
+                <img src="/images/<%= item.imageWishlist %>" alt="Wishlist Image" style="max-width: 50px; height: auto;">
+              </div>
+            </td>
+            <td>
+              <% if (item.approveWishlist) { %>
+                <span class="badge badge-success" style="color: white; background-color: green;">Approved</span>
+              <% } else { %>
+                <span class="badge badge-warning" style="color: black; background-color: yellow;">Pending Approval</span>
+              <% } %>
+            </td>
+            <td>
+              <div class="popup-container" id="deletePopup<%= item._id %>">
+                <div class="popup">
+                  <div>
+                    <h1>Do you want to delete this <%= item.titleWishlist %> item?</h1>
+                  </div>
+                  <div class="fluid-container">
+                    <form action="/admin/wishlist/delete2/<%= item._id %>" method="post">
+                      <button type="submit" class="btn btn-success">Confirm</button>
+                      <button type="button" class="btn btn-danger" onclick="closePopup('deletePopup<%= item._id %>')">Cancel</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-danger" onclick="openPopup('deletePopup<%= item._id %>')">Delete</button>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </main>
+  
+      
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script>
+    function submitFormAndShowMessage() {
+      // Submit the form using fetch API
+      fetch('/admin/wishlist/reset', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+          // Display a pop-up message
+          alert('Wishlist reset successfully!');
+  
+          // Redirect back to the wishlist admin page after reset
+          window.location.href = '/admin/wishlistAdmin';
+        })
+        .catch(error => {
+          console.error('Error resetting wishlist:', error);
+          alert('Error resetting wishlist. Please try again.');
+        });
+    }
+  </script>
+  </body>
+  </html>

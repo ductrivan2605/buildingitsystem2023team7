@@ -12,11 +12,25 @@ let responseSent = false;
 // Get all wishlist items
 router.get('/', async (req, res) => {
   try {
-    const wishlistItems = await WishlistItem.find({});
+    const wishlistItems = await WishlistItem.find({ approveWishlist: false });
     res.render('admin/wishlistAdmin', {
       layout: './layouts/admin/itemsManagementLayout',
       title: 'Wishlist Management',
       wishlistItems: wishlistItems,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+router.get('/approved', async (req, res) => {
+  try {
+    const approvedWishlistItems = await WishlistItem.find({ approveWishlist: true });
+    res.render('admin/wishlistAdmin2', {
+      layout: './layouts/admin/itemsManagementLayout',
+      title: 'Approved Wishlist Items',
+      wishlistItems: approvedWishlistItems,
     });
   } catch (error) {
     console.error(error);
@@ -49,7 +63,19 @@ router.post('/reset', async (req, res) => {
     // Your logic for resetting the wishlist goes here
 
     // Redirect back to the wishlist admin page after reset
-    res.redirect('/admin/wishlist');
+    res.redirect('/admin/wishlist/');
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+router.post('/reset2', async (req, res) => {
+  try {
+    // Your logic for resetting the wishlist goes here
+
+    // Redirect back to the wishlist admin page after reset
+    res.redirect('/admin/wishlist/approved');
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -109,7 +135,7 @@ router.post('/approve/:id', async (req, res) => {
   }
 });
 
-router.post('/delete/:id', async (req, res) => {
+router.post('/delete1/:id', async (req, res) => {
   try {
     const wishlistItemId = req.params.id;
 
@@ -142,7 +168,41 @@ router.post('/delete/:id', async (req, res) => {
   }
 });
 
+router.post('/delete2/:id', async (req, res) => {
+  try {
+    const wishlistItemId = req.params.id;
+
+    if (!mongoose.Types.ObjectId.isValid(wishlistItemId)) {
+      return res.status(400).json({ error: 'Invalid Wishlist Item ID' });
+    }
+
+    const deletedWishlistItem = await WishlistItem.findByIdAndDelete(wishlistItemId);
+
+    if (!deletedWishlistItem) {
+      return res.status(404).json({ error: 'Wishlist Item not found' });
+    }
+
+    // Delete the associated image file asynchronously
+    if (deletedWishlistItem.imageWishlist) {
+      const imagePath = path.join(__dirname, '../../public/images', deletedWishlistItem.imageWishlist);
+      
+      fs.unlink(imagePath, (err) => {
+        if (err) {
+          console.error('Error deleting image file:', err);
+        }
+      });
+    }
+
+    // res.status(200).json({ message: 'Wishlist Item deleted successfully' });
+    res.redirect('/admin/wishlist/approved');
+  } catch (error) {
+    console.error('Error in delete route:', error);
+    res.status(500).json({ error: 'Internal Server Error', details: error.message });
+  }
+});
+
 // wishlistAdminRouter.js
+/* 
 router.post('/delete-all', async (req, res) => {
   try {
     // Fetch all wishlist items to get image filenames
@@ -168,8 +228,62 @@ router.post('/delete-all', async (req, res) => {
     console.error('Error in delete-all route:', error);
     res.status(500).json({ error: 'Internal Server Error', details: error.message });
   }
+}); */
+router.post('/delete-all1', async (req, res) => {
+  try {
+    // Fetch all wishlist items to get image filenames
+    const wishlistItems = await WishlistItem.find({ approveWishlist: false });
+
+    // Loop through wishlist items and delete associated images
+    for (const item of wishlistItems) {
+      if (item.imageWishlist) {
+        // Assuming images are stored in the public/images directory
+        const imagePath = path.join(__dirname, '../../public/images', item.imageWishlist);
+
+        // Delete the image file synchronously
+        fs.unlinkSync(imagePath);
+      }
+    }
+
+    // Delete all wishlist items from the database
+    await WishlistItem.deleteMany({});
+
+    // Redirect to the wishlist page
+    res.redirect('/admin/wishlist');
+  } catch (error) {
+    console.error('Error in delete-all route:', error);
+    res.status(500).json({ error: 'Internal Server Error', details: error.message });
+  }
 });
 
-module.exports = router;
+router.post('/delete-all2', async (req, res) => {
+  try {
+    // Fetch all wishlist items to get image filenames
+    const wishlistItems = await WishlistItem.find({ approveWishlist: true });
+
+    // Loop through wishlist items and delete associated images
+    for (const item of wishlistItems) {
+      if (item.imageWishlist) {
+        // Assuming images are stored in the public/images directory
+        const imagePath = path.join(__dirname, '../../public/images', item.imageWishlist);
+
+        // Delete the image file synchronously
+        fs.unlinkSync(imagePath);
+      }
+    }
+
+    // Delete all wishlist items from the database
+    await WishlistItem.deleteMany({});
+
+    // Redirect to the wishlist page
+    res.redirect('/admin/wishlist/approved');
+  } catch (error) {
+    console.error('Error in delete-all route:', error);
+    res.status(500).json({ error: 'Internal Server Error', details: error.message });
+  }
+});
+
 
 module.exports = router;
+
+
