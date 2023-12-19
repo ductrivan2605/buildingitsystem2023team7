@@ -1,0 +1,18 @@
+<div class="navForBook">
+    <% categories.forEach(category => { %>
+    <div class="nav-items">
+        <div class="nav-item">
+            <a href="/category/<%= category.slug %>">
+                <img src="/images/<%= category.image %>" alt="Novel_icon">
+                <p><%= category.category %></p>
+            </a>
+        </div>
+    </div>
+    <% }) %>
+    <div class="nav-items">
+        <div class="nav-item">
+            <img src="/images/" alt="Novel_icon">
+            <p>View more</p>
+        </div>
+    </div>
+</div>

@@ -3,17 +3,18 @@
   line-height: 1.5;
   font-family: "Poppins", sans-serif;
 }
-*{
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main{
+  margin-left: 250px;
 }
 .container11 {
   max-width: 1170px;
   margin: auto;
-
-
-
 }
 .row11 {
   display: flex;
@@ -25,9 +26,9 @@ box-sizing: border-box;
 .footer11 {
   background-color: #24262b;
   padding: 70px 0;
-  position : fixed;
-  bottom : 0;
-  width:85%;
+  position: fixed;
+  bottom: 0;
+  width: 85%;
 }
 .footer-col11 {
   width: 25%;
@@ -84,33 +85,32 @@ box-sizing: border-box;
   color: #24262b;
   background-color: #ffffff;
 }
-.mainContent{
-    width:100%;
+.mainContent {
+  width: 100%;
 }
 .CatergoryName h1 {
-    border-bottom: 1px solid black;
-    padding:30px;
+  border-bottom: 1px solid black;
+  padding: 30px;
 }
 
 .search-form {
-    display: flex;
-    height: 40px;
-    justify-content: space-around;
-  }
-
-.search-form input[type='search'] {
-    width: 50%;
-    border: 0;
-    border-radius: 5px;
-    font-size: 1rem;
-    background-color: #fff;
-
+  display: flex;
+  height: 40px;
+  justify-content: space-around;
 }
-.search-form input[type='button'] {
-    width: 4em;
-    border: 0;
-    border-radius: 5px;
-    font-size: 1rem;
+
+.search-form input[type="search"] {
+  width: 50%;
+  border: 0;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #fff;
+}
+.search-form input[type="button"] {
+  width: 4em;
+  border: 0;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
 /* .search-form input[type='text'] {
@@ -132,69 +132,65 @@ box-sizing: border-box;
   cursor: pointer; 
 } */
 
-
-.btns input[type='button']:nth-of-type(1) {
+.btns input[type="button"]:nth-of-type(1) {
   background-color: rgb(84, 177, 84);
 }
 
-.btns input[type='button']:nth-of-type(2) {
-  background-color: rgb(211, 91, 91); 
+.btns input[type="button"]:nth-of-type(2) {
+  background-color: rgb(211, 91, 91);
 }
 
-
-.btns input[type='button'] {
-    width: 6em;
-    height: 100%;
+.btns input[type="button"] {
+  width: 6em;
+  height: 100%;
 }
 
-.edit-btn, .delete-btn {
-    padding: 8px 16px; 
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-    margin: 50px 0px;
-  }
-  
+.edit-btn,
+.delete-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  margin: 50px 0px;
+}
 
-  .edit-btn {
-    background-color: #3498db;
-    color: white;
-  }
-  
-  .delete-btn {
-    background-color: #e74c3c;
-    color: white;
-  }
- 
-.imgBooks img{
-    width: 10%;
-    height:auto;
-}  
+.edit-btn {
+  background-color: #3498db;
+  color: white;
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.imgBooks img {
+  width: 10%;
+  height: auto;
+}
 
 .searchField :is(.authorList, .categoryList) {
   max-height: 200px;
   overflow-y: scroll;
 }
 
-
-.searchField .inputField a{
+.searchField .inputField a {
   text-decoration: none;
   color: black;
 }
-.searchField .inputField a:hover{
+.searchField .inputField a:hover {
   color: blue;
 }
 
-.searchField .inputField label:hover{
+.searchField .inputField label:hover {
   background: #bbbbbb;
 }
 .table th,
 .table td {
-  max-width: 200px; 
+  max-width: 200px;
 
-  word-wrap: break-word; 
+  word-wrap: break-word;
 }
-
 
 @media (max-width: 767px) {
   .footer-col11 {

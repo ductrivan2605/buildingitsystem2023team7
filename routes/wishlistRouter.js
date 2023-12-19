@@ -4,34 +4,10 @@ const router = express.Router();
 const WishlistItem = require('../models/Wishlist')
 const upload = require("../middleware/uploadImage");
 
+//render all wishlist
 
-
-/* router.post('/', async (req, res) => {
-    try {
-      const { author, title, date, image } = req.body;
-      console.log('Received data:', { author, title, date, image });
-  
-      // Create a new wishlist item
-      const newWishlistItem = new WishlistItem({
-        author,
-        title,
-        date,
-        image,
-      });
-  
-      // Save the wishlist item to the database
-      await newWishlistItem.save();
-  
-      console.log('Wishlist item saved successfully');
-      res.status(201).json({ message: 'Wishlist item submitted successfully' });
-    } catch (error) {
-      console.error('Error submitting wishlist item:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  }); */
-  
-// Render all wishlist items
-router.get("/", async (req, res) => {
+// Route to handle form submission
+router.post('/submitWishlist', async (req, res) => {
   try {
     res.render("user/wishlist", {
       layout: "./layouts/user/wishlistUserLayout",
@@ -42,6 +18,7 @@ router.get("/", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 }); 
+
 
 
 router.post('/', upload.single('imageWishlist'), async (req, res) => {
@@ -70,6 +47,7 @@ router.post('/', upload.single('imageWishlist'), async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 
   

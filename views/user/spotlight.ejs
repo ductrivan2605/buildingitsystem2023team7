@@ -1,0 +1,75 @@
+<% if(books.length > 0){ %>
+<div class="bookContainers">
+  <div class="category">
+    <h2>MostRead</h2>
+    <section class="splide" id="splide1" aria-label="Splide Basic HTML Example">
+      <div class="splide__track">
+        <ul class="splide__list">
+          <% books.forEach(book => {%>
+          <li class="splide__slide">
+            <a href="/book/<%= book.slug %>">
+              <img src="/images/<%= book.imageCover %>" alt="bookImage" />
+              <p><%= book.title %></p>
+            </a>
+            <button class="bookmark-btn">
+              <div class="btnIcon">
+                <ion-icon class="bookmarkIcon" name="star"></ion-icon>
+                
+              </div>
+            </button>
+          </li>
+          <% })%>
+        </ul>
+      </div>
+    </section>
+  </div> 
+  <div class="category">
+    <h2>MostRead2</h2>
+    <!-- <div class="bookContainer">     -->
+    <section class="splide" id="splide2" aria-label="Splide Basic HTML Example">
+      <div class="splide__track">
+        <ul class="splide__list">
+          <% books.forEach(book => {%>
+          <li class="splide__slide">
+            <a href="/book/<%= book.slug %>">
+              <img src="/images/<%= book.imageCover %>" alt="bookImage" />
+              <p><%= book.title %></p>
+            </a>
+            <button class="bookmark-btn">
+              <div class="btnIcon">
+                <ion-icon class="bookmarkIcon" name="star"></ion-icon>
+                
+              </div>
+            </button>
+          </li>
+          <% })%>
+        </ul>
+      </div>
+    </section>
+  </div>
+  <div class="category">
+    <h2>MostRead3</h2>
+    <!-- <div class="bookContainer">     -->
+    <section class="splide" id="splide3" aria-label="Splide Basic HTML Example">
+      <div class="splide__track">
+        <ul class="splide__list">
+          <% books.forEach(book => {%>
+          <li class="splide__slide">
+            <a href="/book/<%= book.slug %>">
+              <img src="/images/<%= book.imageCover %>" alt="bookImage" />
+              <p><%= book.title %></p>
+            </a>
+            <button class="bookmark-btn">
+              <div class="btnIcon">
+                <ion-icon class="bookmarkIcon" name="star"></ion-icon>
+                
+              </div>
+            </button>
+          </li>
+          <% })%>
+        </ul>
+      </div>
+    </section>
+  </div>
+</div>
+<% } %>
