@@ -8,13 +8,19 @@
   </head>
 
   <body>
-    <h1>Book Details</h1>
-    <div class="container">
+    <ul class="book_detail_breadcrumbs">
+      <li><a href="/">Home</a></li>
+      <li><a href="/category/">Category</a></li>
+      <li><a href="/category/subcategory/">Subcategory</a></li>
+      <li><a href="/category/subcategory/page/">Page</a></li>
+    </ul>
+    <h1 class="book_details_title">Book Details</h1>
+    <div class="container111">
       <div class="container1">
         <div class="title">
           <img
             src="/images/<%= books.imageCover %>"
-            style="max-width: 100%; height: auto"
+            style="max-width: 80%; height: auto; margin-bottom: 20px;"
             alt="Image Cover"
           />
           <div class="details">
@@ -151,7 +157,6 @@
                                         <span class="stars">&#9734;</span>
                                     <% } %>
                                 <% } %>
-                                <p class="verified-purchase">Verified Purchase</p>
                             </div>
                         </div>
                     </div>
