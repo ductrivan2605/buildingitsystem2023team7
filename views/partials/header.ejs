@@ -55,9 +55,11 @@
         </ul>
       </nav>
 
-      <form class="search">
+      <form action="/user/search/result" method="post" class="search" >
         <input
           type="text"
+          name="search"
+          id="searchInput"
           class="search-box"
           placeholder="What are you finding?"
         />
@@ -70,6 +72,10 @@
           /> -->
         </button>
       </form>
+
+
+
+
       <div class="user" id="userSection">
         <div class="user-info" onclick="toggleUserMenu()">
           <img
