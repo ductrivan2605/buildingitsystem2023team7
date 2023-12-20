@@ -37,6 +37,7 @@ const userManagementRouter = require("./routes/admin/userManagementRoute");
 const userRouter = require("./routes/user/userRoutes");
 const wishlistRouter = require("./routes/wishlistRouter");
 const wishlistAdminRouter = require('./routes/admin/wishlistAdminRouter');
+const searchPageRouter = require('./routes/user/searchPageRoute');
 
 app.use("/", mainPage);
 app.use("/book", bookDetailRouter);
@@ -50,6 +51,7 @@ app.use("/user", userRouter);
 app.use("/auth", authRouter);
 app.use("/wishlist", wishlistRouter);
 app.use('/admin/wishlist', wishlistAdminRouter);
+app.use('/user/search', searchPageRouter);
 
 // app.get('/', (req, res) => {
 //   res.render('user/wishlist');
