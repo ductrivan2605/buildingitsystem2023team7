@@ -1,18 +1,19 @@
 .splide {
-    /* background-color: aqua; */
+        display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
 }
 
 .splide__track {
-    /* background-color: blueviolet; */
+    background-color: #393E46;
     border-radius: 20px;
 }
 
 
 
 .splide__slide img {
-    background-color: cadetblue;
-    width: 50%;
-    height: 80%;
+    width: 40%;
+    height: 70%;
     object-fit: cover;
     margin-top:15px;
 }
@@ -21,10 +22,22 @@
     width: 10%;
     margin: 50px;
     padding: 10px;
-    background-color: rgb(234, 219, 200);
+    background-color: #EEEEEE;
+    border-radius: 30px;
 
-    
 
+
+
+
+}
+.splide__slide a {
+    text-decoration: none;
+}
+
+.splide__list {
+    width:94%;
+    text-align: center;
+    /* justify-content: center; */
 }
 
 .splide__slide p {
@@ -34,6 +47,17 @@
     text-overflow: ellipsis; 
 }
 
+button.bookmark-btn {
+    /* display: flex; */
+    font-size: 28px;
+    float: right;
+  }
+.bookmark-btn {
+    border: none; 
+    background: none; 
+    padding: 0; 
+}
+  
 
 /* 모바일 화면에서 Splide 이미지의 위치를 조정하는 예시 */
 /* 모바일 화면에서 이미지의 위치를 조정하는 예시 */
@@ -50,4 +74,10 @@
         justify-content: center; 
         align-items: center;
     }
+    .splide__list {
+        width:65%;
+        text-align: center;
+        /* justify-content: center; */
+    }
+    
 }

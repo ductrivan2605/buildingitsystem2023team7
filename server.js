@@ -15,10 +15,6 @@ app.use(express.static(path.join(__dirname, "public")));
 // SetUp parse
 app.use(express.urlencoded({ extended: true }));
 
-// Mongoose
-app.get("/", (req, res) => {
-  res.render("register")
-})
 
 // Books Database
 mongoose
@@ -30,15 +26,23 @@ mongoose
 
 // Routes
 const mainPage = require("./routes/user/mainPage");
+const bookDetailRouter = require("./routes/user/bookDetail");
+const authorRouter = require("./routes/user/aboutAuthor");
+const categoryRouter= require("./routes/user/categoryPage");
 const CategoryRouter = require("./routes/admin/categoryRoute");
 const AuthorRouter = require("./routes/admin/authorRoute");
 const BooksRouter = require("./routes/admin/bookManagementRoute");
 const authRouter = require("./routes/authRoutes");
 const userManagementRouter = require("./routes/admin/userManagementRoute");
-const userRouter = require("./routes/userRoutes");
+const userRouter = require("./routes/user/userRoutes");
 const wishlistRouter = require("./routes/wishlistRouter");
+const wishlistAdminRouter = require('./routes/admin/wishlistAdminRouter');
+const searchPageRouter = require('./routes/user/searchPageRoute');
 
 app.use("/", mainPage);
+app.use("/book", bookDetailRouter);
+app.use("/author", authorRouter);
+app.use("/category", categoryRouter);
 app.use("/admin/categories", CategoryRouter);
 app.use("/admin/authors", AuthorRouter);
 app.use("/admin/books-management", BooksRouter);
@@ -46,6 +50,12 @@ app.use("/admin/users-management", userManagementRouter);
 app.use("/user", userRouter);
 app.use("/auth", authRouter);
 app.use("/wishlist", wishlistRouter);
+app.use('/admin/wishlist', wishlistAdminRouter);
+app.use('/user/search', searchPageRouter);
+
+// app.get('/', (req, res) => {
+//   res.render('user/wishlist');
+// });
 
 
 app.listen(3000, () => {

@@ -6,17 +6,16 @@ const fs = require('fs').promises;
 const upload = require("../../middleware/uploadImage.js");
 
 // GET /admin - View all users 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    // if (req.user.role !== 'admin') {
-    //   return res.status(403).send('Access denied');
-    // }
     const users = await User.find({});
-    res.render('admin/userManagement', { 
-      // layout: "./layouts/admin/itemManagementLayout",
-      users: users });
+    res.render("admin/userManagement", {
+      layout: "./layouts/admin/itemsManagementLayout",
+      title: "User Management",
+      users: users,
+    });
   } catch (error) {
-    res.status(500).send('Error fetching users');
+    res.send(error);
   }
 });
 
@@ -34,14 +33,12 @@ router.get('/', async (req, res) => {
 //   }
 // });
 // POST /admin/add-user - Add a new user
-router.post('/admin/add-user', upload.fields([{
-  name:"profileImage", maxCount: 1
+router.post('/add-user', upload.single([{
+  name:"image", maxCount: 1
 }]), async (req, res) => {
   try {
-    if (req.user.role !== 'admin') {
-      return res.status(403).send('Access denied');
-    }
-
+    // if (req.user.role !== 'admin') {
+    //   return res.status(403).send('Access denied');
     const {
       name,
       username,
@@ -53,7 +50,7 @@ router.post('/admin/add-user', upload.fields([{
       role
     } = req.body;
     //get the filenames for profileImage
-    const profileImage = req.files["profileImage"].map((file) => file.filename);
+    const image = req.file ? req.file.filename : null;
 
     // Check if the username or email already exists
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
@@ -66,7 +63,7 @@ router.post('/admin/add-user', upload.fields([{
 
     // Create the new user
     const user = await User.create({
-      profileImage: profileImage,
+      image: image,
       name: name,
       username: username,
       email: email,
@@ -82,10 +79,13 @@ router.post('/admin/add-user', upload.fields([{
     res.redirect('/admin/users-management');
   } catch (error) {
     res.status(500).send("Can't add user");
+    console.log(error.message)
   }
 });
-// POST /auth/user/update/:id - Update user by ID
-router.post('/update/:id', upload.single('profileImage'), async (req, res) => {
+// POST /admin/user/update/:id - Update user by ID
+router.post('/update/:id',
+ upload.single('editImage'), 
+ async (req, res) => {
   try {
     const userId = req.params.id;
 
@@ -103,7 +103,7 @@ router.post('/update/:id', upload.single('profileImage'), async (req, res) => {
     // Check if the user exists
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).send('User not found');
+      return res.redirect("/admin/users-management");
     }
 
     // Construct a dynamic update object
@@ -119,14 +119,14 @@ router.post('/update/:id', upload.single('profileImage'), async (req, res) => {
     // Update profile image if a new image is uploaded
     if (req.file) {
       // Delete the old profile image if it exists
-      if (user.profileImage) {
-        const oldImageFilePath = path.resolve(__dirname, "../../public/images", user.profileImage);
+      if (user.image) {
+        const oldImageFilePath = path.resolve(__dirname, "../../public/images", user.image);
         if (fs.existsSync(oldImageFilePath)) {
           fs.unlinkSync(oldImageFilePath);
         }
       }
       // Save the new profile image
-      updateFields.profileImage = req.file.filename;
+      user.image = req.file.filename;
     }
 
     // Check if a new password is provided and hash it
@@ -144,7 +144,7 @@ router.post('/update/:id', upload.single('profileImage'), async (req, res) => {
     if (!updatedUser) {
       return res.status(404).send('User not found');
     }
-
+    console.log(updatedUser);
     res.redirect('/');
   } catch (error) {
     console.error(error);
@@ -164,8 +164,8 @@ router.post('/delete/:id', async (req, res) => {
     }
 
     // Delete user profile image if exists
-    if (user.profileImage) {
-      const imagePath = path.join(__dirname, '../../public/profile-images', user.profileImage);
+    if (user.image) {
+      const imagePath = path.join(__dirname, '../../public/images', user.image);
       try {
         await fs.unlink(imagePath);
       } catch (error) {
@@ -175,7 +175,7 @@ router.post('/delete/:id', async (req, res) => {
 
     // Delete the user document
     await User.findByIdAndDelete(req.params.id);
-    res.redirect('/admin/user-management');
+    res.redirect('/admin/users-management');
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -190,8 +190,8 @@ router.post('/delete-all-users', async (req, res) => {
       await User.findByIdAndDelete(deletedUser._id);
 
       // Delete profile image if exists
-      if (deletedUser.profileImage) {
-        const imagePath = path.join(__dirname, '../../public/profile-images', deletedUser.profileImage);
+      if (deletedUser.image) {
+        const imagePath = path.join(__dirname, '../../public/profile-images', deletedUser.image);
         try {
           await fs.unlink(imagePath);
         } catch (error) {
@@ -199,13 +199,12 @@ router.post('/delete-all-users', async (req, res) => {
         }
       }
     }
-    res.status(202).redirect('/admin/user-management');
+    res.status(202).redirect('/admin/users-management');
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
   }
 });
-// User searching
 // Search for users
 router.post("/search", async(req, res) => {
   try {
@@ -220,8 +219,8 @@ router.post("/search", async(req, res) => {
       ],
     });
 
-    res.render("admin/userManagement", {
-      // layout: "./layouts/admin/itemManagementLayout",
+    res.render("admin/userManagement",  {
+      layout: "./layouts/admin/itemManagementLayout",
       users: users,
     });
   } catch (error) {

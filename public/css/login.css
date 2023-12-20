@@ -1,3 +1,30 @@
+* {
+    color: #222831;
+}
+
+#submitBtn {
+    background-color: #00ADB5;
+    border:#222831
+}
+
+#submitBtn:hover {
+    background-color: #029ba3;
+}
+
+
+body {
+    background-color: #EEEEEE;
+}
+
+.body {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 70%;
+}
+
 #search-overlay {
     display: none;
     display: flex;
@@ -66,7 +93,7 @@ height: 100%;
 /*mobile*/
 @media only screen and (max-width: 960px) {
     #con {
-        margin-top: 7%;
+        margin-top: 0%;
         margin-bottom: 8%;
     }
 }
@@ -74,7 +101,7 @@ height: 100%;
 /*laptop*/
 @media only screen and (min-width:961px) {
     #con {
-        margin-top: 7%;
+        margin-top: 0%;
         margin-bottom: 8%;
     }
 }

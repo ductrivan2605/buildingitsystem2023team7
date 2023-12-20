@@ -36,6 +36,7 @@ router.post("/add-new-book", upload.fields([
       authors,
       categories,
       published,
+      publisher,
       description,
     } = req.body;
 
@@ -58,6 +59,7 @@ router.post("/add-new-book", upload.fields([
       authors: authorIds,
       category: categoryIds,
       published: published,
+      publisher: publisher,
       description: description,
       contentImage: contentImage,
       imageCover: imageCover,
@@ -94,6 +96,7 @@ router.post("/update-book/:id", upload.fields([
     const updateFields = {};
     if (req.body.title) updateFields.title = req.body.title;
     if (req.body.published) updateFields.published = req.body.published;
+    if (req.body.publisher) updateFields.publisher = req.body.publisher;
     if (req.body.description) updateFields.description = req.body.description;
 
     // Delete the old image if a new image is uploaded
@@ -156,16 +159,18 @@ router.post("/delete/:id", async (req, res) => {
       res.redirect("/admin/books-management");
       return;
     }
-
     // Delete content images
-    for (const imageFileName of book.contentImage) {
-      const imagePath = path.join(__dirname, "../../public/images", imageFileName);
-      try {
-        await fs.promises.unlink(imagePath);
-      } catch (error) {
-        console.error("Error deleting image file:", error);
+    if(book.contentImage){
+        for (const imageFileName of book.contentImage) {
+        const imagePath = path.join(__dirname, "../../public/images", imageFileName);
+        try {
+          await fs.promises.unlink(imagePath);
+        } catch (error) {
+          console.error("Error deleting image file:", error);
+        }
       }
     }
+
 
     // Delete the image cover file
     const imageCoverPath = path.join(__dirname, "../../public/images", book.imageCover);
@@ -195,14 +200,12 @@ router.post("/delete-all-books", async (req, res) => {
       // Delete the corresponding image files
       if (deletedBook.imageCover) {
         const imageCoverPath = path.join(__dirname, "../../public/images", deletedBook.imageCover);
-        
+
         // Check if the file exists before trying to delete
-        if (fs.existsSync(imageCoverPath)) {
-          try {
-            await fs.promises.unlink(imageCoverPath);
-          } catch (error) {
-            console.error("Error deleting image cover file:", error);
-          }
+        try {
+          await fs.promises.unlink(imageCoverPath);
+        } catch (error) {
+          console.error("Error deleting image cover file:", error);
         }
       }
 
@@ -220,6 +223,7 @@ router.post("/delete-all-books", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
 
 
 // Search for book

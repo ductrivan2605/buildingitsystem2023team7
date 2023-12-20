@@ -214,7 +214,6 @@ body {
 .user {
   position: relative;
   cursor: pointer;
-  margin-right: 50px;
 }
 
 .user-dropdown {
@@ -246,20 +245,26 @@ body {
   cursor: pointer;
 }
 
-.user-info img {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 8px;
-}
-
-.user-info span {
-  font-weight: bold;
-}
 
 .menu-button {
   display: none;
 }
+
+/* <-----> ADMIN WISHLIST <------> */
+
+ /* Add text color to Bootstrap badges */
+.badge-success {
+  background-color: #28a745; 
+  color: #fff; 
+}
+
+.badge-warning {
+  background-color: #ffc107; 
+  color: #212529; 
+}
+
+
+
 /* this section is for the main code */
 .main { 
 
@@ -291,7 +296,7 @@ body {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 30px;
+ 
 }
 
 .wishlist-h1 {
@@ -350,7 +355,6 @@ body {
   .menu-button {
     display: none;
   }
-}
 /* Media query for devices between 480px and 767px */
 @media only screen and (min-width: 400px) and (max-width: 767px) {
   .menu-button {
