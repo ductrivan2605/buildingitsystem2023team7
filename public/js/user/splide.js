@@ -3,15 +3,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (images.length >= 4) {
         var splide1 = new Splide('#splide1', {
-            //... (splide1 설정)
+            gap: 50,
+
         }).mount();
 
         var splide2 = new Splide('#splide2', {
-            //... (splide2 설정)
+            gap: 50,
+
         }).mount();
 
         var splide3 = new Splide('#splide3', {
-            //... (splide3 설정)
+            gap: 50,
+
         }).mount();
 
         function setSplidePerPage() {
