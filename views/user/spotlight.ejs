@@ -8,8 +8,11 @@
           <% books.forEach(book => {%>
           <li class="splide__slide">
             <a href="/book/<%= book.slug %>">
-              <img src="/images/<%= book.imageCover %>" alt="bookImage" />
-              <p><%= book.title %></p>
+              <img class="bookImage" src="/images/<%= book.imageCover %>" alt="bookImage" />
+              <div class="bookInformation">
+                <div class="bookTitle"><h2><%= book.title %></h2></div>
+                <div class="bookAuthor"><p><%= book.authors.join(',') %></p></div>
+              </div>
             </a>
             <button class="bookmark-btn">
               <div class="btnIcon">
@@ -32,8 +35,10 @@
           <% books.forEach(book => {%>
           <li class="splide__slide">
             <a href="/book/<%= book.slug %>">
-              <img src="/images/<%= book.imageCover %>" alt="bookImage" />
-              <p><%= book.title %></p>
+              <img class="bookImage" src="/images/<%= book.imageCover %>" alt="bookImage" />
+              <div class=bookInformationMain>
+                <div class="bookTitle"><p><%= book.title %></p></div>
+              </div>
             </a>
             <button class="bookmark-btn">
               <div class="btnIcon">
