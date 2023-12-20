@@ -42,7 +42,7 @@ router.post("/result", async(req, res) => {
     res.render("user/searchPageResult", {
       layout: "./layouts/user/searchPageLayout",
       title: "Book Management",
-      searchTerm: searchTerm,  // searchTerm을 변수로 전달
+      searchTerm: searchTerm, 
       books: books,
       authors: authors,
       categories: categories
