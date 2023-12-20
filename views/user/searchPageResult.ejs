@@ -1,0 +1,133 @@
+<main>
+    <div class="searchPageHeader">
+      <div class="categorySearch">
+          <h1>Book Search Results</h1>
+      </div>
+    </div>
+    <div class="Searchcontainer">
+      <form action="/user/search/result" method="post" class="d-flex">
+        <input type="text" name="search" id="searchInput" placeholder="Enter search keyword.">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+    
+    
+    
+    <div class="resultContainer">
+      <div class="bookContainer">
+        <h2>Search result total <%= books.length %></h2>
+        <% counter = 1 %> <% books.forEach((book) =>{ %>
+        <div class="bookCard">
+          <a href="detail_page_url_here">
+            <img class="bookImage" src="/images/<%= book.imageCover %>" style="width: 220px; height: 220px; object-fit: cover" alt="Book Cover 1">
+            <div class="book-info">
+              <div class="book-title"><a href="detail_page_url_here"><%= book.title %></a></div>
+              <div class="book-author"><a href="detail_page_url_here"><%= book.authors %></a></div>
+            </div>
+          </a>
+          <button class="bookmark-btn">
+            <div class="btnIcon">
+              <ion-icon class="bookmarkIcon" name="star"></ion-icon>
+            </div>
+          </button>
+        </div>
+        <% counter++ %> <% }) %>
+      </div>
+    </div>
+    </main>
+
+
+<!-- <main>
+    <div class="searchPageHeader">
+      <div class="categorySearch">
+          <h1>Book Search</h1>
+      </div>
+    </div>
+    <div class="Searchcontainer">
+      <form action="/user/search/result/" method="post" class="d-flex">
+      <input type="text" id="searchInput" placeholder="Enter search keyword.">
+      <button type="submit" onclick="search()">Search</button>
+    </form>
+    </div>
+    
+    
+    
+      <div class="resultContainer">
+          <div class="bookContainer">
+              <h2>Search result for "~" : total n</h2>
+              <% counter = 1 %>
+              <% books.forEach((book) =>{ %>
+              <div class="bookCard" >
+                  <a href="detail_page_url_here">
+                      <img class="bookImage" src="/images/<%= book.imageCover %>" style="width: 100px; height: 100px; object-fit: cover" alt="Book Cover 1">
+                      <div class="book-info">
+                          <div class="book-title"><a href="detail_page_url_here"><%= book.title %></a></div>
+                          <div class="book-author"><a href="detail_page_url_here"><%= book.authors %></a></div>
+                      </div>
+                  </a>
+                  <button class="bookmark-btn">
+                      <div class="btnIcon">
+                          <ion-icon class="bookmarkIcon" name="star"></ion-icon>
+                      </div>
+                  </button>
+              </div>
+              <% counter++ %>
+              <% }) %>
+      </div>
+    </main> -->
+
+<!-- <main class="d-flex flex-nowrap">
+
+    <div class="mainContent">
+    <div class="CatergoryName">
+        <h1>Book Search Results</h1>
+    </div>
+    <div class="search-form">
+        <form action="/user/search/result/" method="post" class="d-flex">
+            <input type="text" name="search" placeholder="Search for book name" />
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <div class="customerTables">
+        <table class="table table-striped">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Category</th>
+            <th scope="col">Published</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Description</th>
+            <th scope="col">Review</th>
+            <th scope="col">Cover image</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% counter = 1 %>
+            <% books.forEach((book) =>{ %>
+            <tr>
+                <th scope="row"><%= counter %></th>
+                <td><%= book.title %></td>
+                <td>
+                    <%= book.authors %>
+                </td>
+                <td><%= book.category %></td>
+                <td><%= book.published %></td>
+                <td><%= book.rating %></td>
+                <td><%= book.description %></td>
+                <td><%= book.review %></td>
+                <td>
+                    <div class="imgBooks">
+                        <img src="/images/<%= book.imageCover %>" style="width: 100px; height: 100px; object-fit: cover;"/>
+                    </div>
+                </td>
+            </tr>
+            <% counter++ %>
+            <% }) %>
+        </tbody>
+        </table>
+    </div>
+    </div>
+</main> -->

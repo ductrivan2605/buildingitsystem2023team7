@@ -1,0 +1,55 @@
+.container-1 {
+    font-size: 16px;
+    font-size: 1.25vw;
+    width: 100%;
+    min-width: 320px;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0;
+    padding-top: 50px;
+}
+
+.middle {
+
+    background-color: white;
+    border: 5px inset;
+    width: 65%;
+    margin: auto;
+}
+
+.authorName {
+    color: #2d2d2d;
+    line-height: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 28px 0;
+    text-align: center;
+}
+
+.authorDetail {
+    display: flex;
+    padding: 46px 2% 80px 10%;
+    justify-content: center;
+}
+
+.authorImage img {
+    width: 300px;
+    margin-right: 100px;
+}
+
+.authorDescription {
+    max-width: 500px;
+}
+
+@media screen and (max-width: 768px) {
+    .authorDetail {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .authorImage img {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    
+}

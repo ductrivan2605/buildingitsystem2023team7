@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="styles.css" /> -->
+    <script src="
+    https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js
+    "></script>
+    <link
+      href="
+    https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css
+    "
+      rel="stylesheet"
+    />
+    <!-- Javascript -->
+    <script src="/js/user/splide.js" defer></script>
+    <!-- Css -->
+    <link rel="stylesheet" href="/css/user/categoryNavigation.css">
+    <link rel="stylesheet" href="/css/user/spotlight.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="/js/user/bookMark.js" defer></script>
+    <title><%= title %></title>
+  </head>
+  <body>
+      <%- include('../../partials/header.ejs') %>
+      <%- body %>
+      <%- include('../../user/spotlight.ejs') %>
+      <%- include('../../partials/footer.ejs') %>
+  </body>
+</html>

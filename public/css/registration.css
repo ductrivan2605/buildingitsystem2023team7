@@ -1,7 +1,29 @@
+body {
+    background-color: #EEEEEE;
+}
+
+.profile_img {
+    width: 30%;
+    height: 30%;
+    margin-bottom: 2%;
+    border-radius: 50%;
+}
+
 /*mobile*/
 @media only screen and (max-width: 960px) {
     #con {
-        margin-top: 25%;
+        width: 300%;
         margin-bottom: 0%;
+    }
+
+    /* .body {
+        position: fixed;
+    } */
+
+    .profile_img {
+        width: 70%;
+        height: 70%;
+        margin-bottom: 2%;
+        border-radius: 50%;
     }
 }

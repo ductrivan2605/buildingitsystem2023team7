@@ -1,0 +1,280 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+ 
+  .book_detail_breadcrumbs {
+    list-style: none;
+    padding: 0;
+    margin: 10px 10px;
+  }
+
+  .book_detail_breadcrumbs li {
+    display: inline;
+    margin-right: 5px;
+  }
+
+  .book_detail_breadcrumbs li::after {
+    content: "›";
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #999;
+  }
+
+  .book_detail_breadcrumbs li:last-child::after {
+    content: none;
+  }
+
+  .book_detail_breadcrumbs li a {
+    text-decoration: none;
+    color: #333;
+  }
+
+  .book_detail_breadcrumbs li a:hover {
+    text-decoration: underline;
+  }
+
+  .container111 {
+    margin-top: 50px;
+    margin-bottom: 80px;
+  }
+ 
+  .book_details_title {
+    padding-top: 20px;
+    padding-left: 30px;
+  }
+
+  .container1 {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    justify-content: center;
+    border-style: double;
+  }
+ 
+  .title {
+    margin: 50px;
+    width: 60%;
+    text-align: center;
+  }
+
+ 
+  .authorpage {
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     font-size: 14px;
+     color:#42a2c2;
+     transition: color 0.3s;
+     cursor: pointer;
+     margin-bottom: 10px;
+ 
+  }
+ 
+  .authorName {
+   margin-left: 10px;
+  }
+ 
+  .authorName:hover {
+   color: #c75143;
+  }
+ 
+  .authorpage img {
+     width: 50px;
+     height: 50px;
+     border-radius: 50%;
+     margin: 5px;
+   }
+ 
+  .description {
+    margin: 40px;
+    width: 80%;
+  }
+ 
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+ 
+  nav ul li {
+    float: left;
+  }
+ 
+  nav ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+ 
+  nav ul li a:hover:not(.active) {
+    background-color: #111;
+  }
+ 
+  .content {
+    display: none;
+    padding: 20px;
+  }
+ 
+  .active {
+    display: block;
+    background-color: white;
+    color: black;
+  }
+ 
+ .user-review, .user-comment {
+   border: 1px solid #ccc;
+   padding: 15px;
+   margin-bottom: 10px;
+ 
+ }
+ 
+ .user-profile, .user-comment-box {
+   display: flex;
+   align-items: center;
+ }
+ 
+ .user-profile img, .user-comment-box img {
+   width: 50px;
+   height: 50px;
+   border-radius: 50%;
+   margin-right: 15px;
+ }
+ 
+ .user-details, .user-comment-box-header {
+   flex-grow: 1;
+ }
+ 
+ .user-details h3, #comment-name {
+   margin-bottom: 5px;
+ }
+ 
+ #comment-name {
+   border-radius: 5px;
+   border: 1px solid #ccc;
+   text-indent: 5px;
+   height: 20px;
+ }
+ 
+ #comment-contents {
+   border-radius: 5px;
+   border: 1px solid #ccc;
+   text-indent: 5px;
+   height: 100px;
+   width: 100%;
+   margin-top: 10px;
+   font-size: 15px;
+   font-family: Arial, sans-serif;
+   resize: vertical;
+ }
+ 
+ .user-rating {
+   display: flex;
+   align-items: center;
+   margin-bottom: 5px;
+ }
+ 
+ .user-comment-box-header h3 {
+   margin-bottom: 5px;
+ }
+ 
+ .star-rating {
+   display: flex;
+   flex-direction: row-reverse;
+   font-size: 1rem;
+   line-height: 2rem;
+   justify-content: space-around;
+   padding: 0 0.2em;
+   text-align: center;
+   width: 6em;
+ }
+  
+ .star-rating input {
+   display: none;
+ }
+  
+ .star-rating label {
+   -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+   -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: #f9c203;
+   cursor: pointer;
+   margin: 2px;
+ }
+  
+ .star-rating :checked ~ label {
+   -webkit-text-fill-color: #f9c203;
+ }
+  
+ .star-rating label:hover,
+ .star-rating label:hover ~ label {
+   -webkit-text-fill-color: #f9c203;
+ }
+ 
+ .stars {
+   color: #f9c203;
+   font-size: 20px;
+ }
+ 
+ .rating-label {
+   font-weight: bold;
+   font-size: large;
+ 
+ }
+ 
+ 
+ .verified-purchase {
+   color: #090;
+   margin-left: 10px;
+   margin-bottom: 10px;
+ }
+ 
+ .review-description {
+   margin-bottom: 10px;
+ }
+ 
+ .action-buttons button {
+   padding: 8px 12px;
+   margin-right: 10px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+ }
+ 
+ .helpful-btn {
+   background-color: #42a2c2;
+   color: white;
+ }
+ 
+ .report-btn {
+   background-color: #c75143;
+   color: white;
+ }
+ 
+ 
+ 
+ 
+  @media screen and (max-width: 768px) {
+    .container1 {
+      flex-direction: column;
+      align-items: center;
+    }
+    .title {
+     text-align: center;
+   }
+   .description {
+     margin: 40px;
+   }
+   .authorpage {
+     justify-content: center;
+   }
+   .book_detail_breadcrumbs li a {
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+  }
