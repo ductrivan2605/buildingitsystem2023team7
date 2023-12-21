@@ -27,6 +27,7 @@ body {
   height: 100%;
   min-height: 120vh;
   max-height: none;
+  margin-top: 0;
 }
 
 /* code for tthe header */
@@ -267,12 +268,13 @@ body {
 
 /* this section is for the main code */
 .main { 
-
- z-index: 0;
- background: linear-gradient(-45deg, #ECF4D6,#9AD0C2,#265073);
-	background-size: 400% 400%;
-	animation: gradient 15s ease infinite;
-	height: 100vh;
+  z-index: 0;
+  background: linear-gradient(-45deg, #ECF4D6, #9AD0C2, #265073);
+  animation: gradient 15s ease infinite;
+  height: 120vh;
+  max-height: 200vh;
+  margin-top: 0px;
+  position: relative; 
 }
 @keyframes gradient {
 	0% {
@@ -300,21 +302,61 @@ body {
 }
 
 .wishlist-h1 {
-  margin-left: 90px;
-  margin-top: 40px;
+  margin-left: 30px;
   font-size: 40px;
+  margin-top: 0%;
 }
 
 .wishlist-quote {
   max-width: 1200px;
-  margin-left: 50px;
-  margin-top: 45px;
+  margin-left: 30px;
+  margin-top: 20px;
 }
 .form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  box-sizing: border-box;
+  max-height: 800px;
+}
+
+/* Style for the date input */
+.form-control[type="date"] {
+  padding: 8px;
+}
+
+/* Style for the file input and its label */
+.image-container {
   margin-top: 15px;
 }
-  
-.form-control{
+
+.imageCoverContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.imageCoverContainer label {
+  margin-bottom: 5px;
+  cursor: pointer;
+  color: #007580; /* Change color to your preference */
+}
+
+/* Style for the file input */
+
+
+/* Style for the image preview */
+#add-image-preview {
   margin-top: 5px;
 }
 
@@ -346,12 +388,8 @@ body {
   .menu-button {
     display: none;
   }
-  /* this section is for the main code */
-  .main {
-    margin-top: 300px;
-    z-index: 0;
-  }
 
+ 
   .menu-button {
     display: none;
   }

@@ -1,55 +1,10 @@
 
-    <header class="header">
-        <div class="logo">
-          <a href="#"><img src="images/logo.png" alt=""></a>
-        </div>
-        <button class="menu-button" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
-        <nav class="navBar">
-          <ul class="NavList" id="navList">
-            <li class="NavList-item"><a href="# ">Something1</a></li>
-            <li class="NavList-item"><a href="#">Something2</a></li>
-            <li class="NavList-item">
-              <a href="#">List Drop down <i class="fa-solid fa-caret-down"></i></a>
-              <div class="dropDown">
-                <ul class="dropDownList">
-                  <li class="dropDownItem"><a href="#">Lv1 <i class="fa-solid fa-arrow-right"></i></a>
-                    <ul class="dropDownList-lv2">
-                      <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
-                      <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
-                    </ul>
-                  </li>
-                  <li class="dropDownItem"><a href="#">Lv1 <i class="fa-solid fa-arrow-right"></i></a>
-                    <ul class="dropDownList-lv2">
-                      <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
-                      <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </nav>
-    
-        <form class="search">
-          <input type="text" placeholder="What are you finding?">
-          <button type="submit">Search</button>
-        </form>
-    
-        <div class="user" onclick="toggleUserMenu()">
-          <a><i class="fa-solid fa-user"></i></a>
-          <div class="user-dropdown" id="userDropdown">
-            <a href="#">Profile</a>
-            <a href="#">Settings</a>
-            <a href="#"><i class="fa-solid fa-right-from-bracket"></i></a>
-          </div>
-        </div>
-        
-      </header>
       
-      <main class="main">
-        <h1 class="wishlist-h1">Wishlist</h1>
-        <nav class="wishlist-quote">Unlock the world of imagination – submit your desired reads to our wishlist, and let the magic of storytelling unfold. Your bookish dreams are just a click away from becoming reality. Happy reading</nav>
+    <main class="main">
+        
         <form action="/wishlist" method="post" id="wishlistForm">
+          <h1 class="wishlist-h1">Wishlist</h1>
+        <nav class="wishlist-quote">Unlock the world of imagination – submit your desired reads to our wishlist, and let the magic of storytelling unfold. Your bookish dreams are just a click away from becoming reality. Happy reading</nav>
             <div class="form-group">
               <label for="authorWishlist">Author:</label>
               <input type="text" class="form-control" id="authorWishlist" name="authorWishlist" required>
@@ -69,54 +24,52 @@
               <div class="image-container ">
                 <div class="imageCoverContainer d-flex flex-column">
                     <label for="image">Add image Cover</label>
-                    <input type="file" id="imageWishlist" name="imageWishlist" onchange="previewImage('imageWishlist', 'add-image-preview')">
+                    <input class="form-control" type="file" id="imageWishlist" name="imageWishlist" onchange="previewImage('imageWishlist', 'add-image-preview')">
                     <div id="add-image-preview" class="py-1"></div>
                 </div>
             </div>
             </div>
         
             <button id="wishlist-btn" type="button" class="btn btn-success" onclick="submitWishlist()">Submit Wishlist</button>
-
           </form>
-          <script>
-            function submitWishlist() {
-              const form = document.getElementById('wishlistForm');
-              const formData = new FormData(form);
-          
-              fetch('/wishlist', {
-                method: 'POST',
-                body: formData,
-              })
-                .then(response => {
-                  if (response.redirected) {
-                    // Handle redirects
-                    window.location.href = response.url;
-                  } else {
-                    // Handle the response data as needed
-                    return response.json();
-                  }
-                })
-                .then(data => {
-                  if (data) {
-                    // Handle the response data as needed
-                    console.log(data);
-                  }
-          
-                  // Display a pop-up alert after successful form submission
-                  window.alert('Wishlist submitted successfully!');
-          
-                  // Optionally, redirect to another page
-                  // window.location.href = '/wishlist';
-                })
-                .catch(error => {
-                  console.error(error);
-                  // Handle errors if necessary
-                  window.alert('Wishlist submission failed!');
-                });
-            }
-          </script>
-          
     </main>
+    <script>
+      function submitWishlist() {
+        const form = document.getElementById('wishlistForm');
+        const formData = new FormData(form);
+    
+        fetch('/wishlist', {
+          method: 'POST',
+          body: formData,
+        })
+          .then(response => {
+            if (response.redirected) {
+              // Handle redirects
+              window.location.href = response.url;
+            } else {
+              // Handle the response data as needed
+              return response.json();
+            }
+          })
+          .then(data => {
+            if (data) {
+              // Handle the response data as needed
+              console.log(data);
+            }
+    
+            // Display a pop-up alert after successful form submission
+            window.alert('Wishlist submitted successfully!');
+    
+            // Optionally, redirect to another page
+            // window.location.href = '/wishlist';
+          })
+          .catch(error => {
+            console.error(error);
+            // Handle errors if necessary
+            window.alert('Wishlist submission failed!');
+          });
+      }
+    </script>
     
 
  

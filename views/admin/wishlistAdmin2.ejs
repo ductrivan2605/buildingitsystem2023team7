@@ -5,7 +5,7 @@
     </form>
   
     <!-- Delete All button -->
-    <input type="button" value="Delete All" onclick="openPopup('deleteAllPopup')" />
+    <input type="button" value="Delete All" onclick="openPopup('deleteAllPopup')" class="btn btn-danger" />
     <div class="popup-container" id="deleteAllPopup">
       <div class="popup">
         <div>
@@ -19,6 +19,9 @@
         </div>
       </div>
     </div>
+    <form action="/admin/wishlist" method="get" id="wishlistResetForm" style="display: inline;">
+      <button class="btn btn-warning">Wishlist Pending</button>
+    </form>
   
     <!-- Wishlist Items table -->
     <table class="table mt-4">
@@ -40,7 +43,7 @@
             <td><%= item.dateWishlist.toISOString().split('T')[0] %></td>
             <td>
               <div class="imgBooks">
-                <img src="/images/<%= item.imageWishlist %>" alt="Wishlist Image" style="max-width: 50px; height: auto;">
+                <img src="/images/<%= item.imageWishlist %>" alt="Wishlist Image" style="width: 100px; height: 100px; object-fit: cover;">
               </div>
             </td>
             <td>
