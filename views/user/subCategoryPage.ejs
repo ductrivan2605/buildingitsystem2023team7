@@ -17,12 +17,17 @@
                 <div class="bookAuthor"><p><%= book.authors.join(',') %></p></div>
               </div>  
             </a>
-            <button class="bookmark-btn">
-              <div class="btnIcon">
-                <ion-icon class="bookmarkIcon" name="star"></ion-icon>
-                
-              </div>
-            </button>
+            <form action="/bookmarks/add/<%= book.slug %>" method="post">
+              <button type="submit" class="bookmark-btn">
+                <div class="btnIcon">
+                  <% if(book.bookmarked){ %>
+                    <ion-icon class="bookmarkIcon" name="star" style="color:gold"></ion-icon>
+                    <% }else{ %>
+                      <ion-icon class="bookmarkIcon" name="star" style="color: black"></ion-icon>
+                    <% } %>
+                </div>
+              </button>
+            </form>
           </div>
         <% }) %>
       <% } else { %>

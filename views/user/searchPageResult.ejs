@@ -1,36 +1,53 @@
 <main>
-    <div class="searchPageHeader">
-      <div class="categorySearch">
-          
-      </div>
-    </div>
+  <div class="searchPageHeader">
+    <div class="categorySearch"></div>
+  </div>
 
-    
-    
-    
-    <div class="resultContainer">
-      <div class="bookContainer">
-        <h2>Search result total <%= books.length %></h2>
-        <% counter = 1 %> <% books.forEach((book) =>{ %>
-        <div class="bookCard">
-          <a href="detail_page_url_here">
-            <img class="bookImage" src="/images/<%= book.imageCover %>" style="width: 220px; height: 220px; object-fit: cover" alt="Book Cover 1">
-            <div class="book-info">
-              <div class="book-title"><a href="detail_page_url_here"><%= book.title %></a></div>
-              <div class="book-author"><a href="detail_page_url_here"><%= book.authors %></a></div>
+  <div class="resultContainer">
+    <div class="bookContainer">
+      <h2>Search result total <%= books.length %></h2>
+      <% counter = 1 %> <% books.forEach((book) =>{ %>
+      <div class="bookCard">
+        <a href="/book/<%= book.slug %>">
+          <img
+            class="bookImage"
+            src="/images/<%= book.imageCover %>"
+            style="width: 220px; height: 220px; object-fit: cover"
+            alt="Book Cover 1"
+          />
+          <div class="book-info">
+            <div class="book-title">
+              <a><%= book.title %></a>
             </div>
-          </a>
-          <button class="bookmark-btn">
+            <div class="book-author">
+              <a><%= book.authors %></a>
+            </div>
+          </div>
+        </a>
+        <form action="/bookmarks/add/<%= book.slug %>" method="post">
+          <button type="submit" class="bookmark-btn">
             <div class="btnIcon">
-              <ion-icon class="bookmarkIcon" name="star"></ion-icon>
+              <% if(book.bookmarked){ %>
+              <ion-icon
+                class="bookmarkIcon"
+                name="star"
+                style="color: gold"
+              ></ion-icon>
+              <% }else{ %>
+              <ion-icon
+                class="bookmarkIcon"
+                name="star"
+                style="color: black"
+              ></ion-icon>
+              <% } %>
             </div>
           </button>
-        </div>
-        <% counter++ %> <% }) %>
+        </form>
       </div>
+      <% counter++ %> <% }) %>
     </div>
-    </main>
-
+  </div>
+</main>
 
 <!-- <main>
     <div class="searchPageHeader">
