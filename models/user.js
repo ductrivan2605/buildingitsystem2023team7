@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = new mongoose.Schema({
   image: {
@@ -19,24 +20,18 @@ const userSchema = new mongoose.Schema({
   },
   email:{
     type: String,
-    require: true
-  },
-  address: {
-    type: String,
-    required:true
-  },
-  subaddress: {
-    type: String,
-  },
-  country:{
-    type: String,
   },
   role: {
     type: String,
     enum: ['standard', 'admin'],
     default: 'standard'
-  }
+  },
+  bookmarks: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Book details",
+  }],
 });
 
+userSchema.plugin(passportLocalMongoose);
 const User = mongoose.model('User', userSchema);
 module.exports = User;
