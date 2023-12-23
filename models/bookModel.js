@@ -67,6 +67,7 @@ const BookSchema = new mongoose.Schema({
   },
   bookmarked:{
     type: Boolean,
+    default: false,
   },
   authorsSlug: [
     {
