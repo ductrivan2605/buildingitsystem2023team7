@@ -84,6 +84,9 @@ button.bookmark-btn {
     margin:0px 10px;
 }
   
+.bookmark-btn .btnIcon.bookmarked ion-icon {
+    color: gold;
+}
 
 
 @media screen and (max-width: 767px) {

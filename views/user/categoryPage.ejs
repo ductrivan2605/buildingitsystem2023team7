@@ -3,6 +3,7 @@
     <h1>
       <%= category.category %>
     </h1>
+    
   </div>
   <nav class="navbar">
     <ul class="navbar__menu">
@@ -29,10 +30,12 @@
               </div>  
             </a>
             <button class="bookmark-btn">
-              <div class="btnIcon">
-                <ion-icon class="bookmarkIcon" name="star"></ion-icon>
-                
-              </div>
+              <form action="/bookmark/:slug" method="post">
+                <div class="btnIcon">
+                  <ion-icon class="bookmarkIcon" name="star"></ion-icon>
+                </div>
+                <input type="hidden" name="bookSlug" value="{{ book.slug }}">
+              </form>
             </button>
           </div>
         <% }) %>
