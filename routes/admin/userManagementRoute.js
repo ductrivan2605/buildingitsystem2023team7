@@ -5,13 +5,11 @@ const User = require("../../models/user.js");
 const fs = require('fs').promises;
 const upload = require("../../middleware/uploadImage.js");
 const {
-  checkAuthenticated,
-  checkNotAuthenticated,
-  checkAdmin,
+  checkAdmin
 } = require("../../middleware/checkAuthenticated.js");
 
 // GET /admin - View all users 
-router.get("/",checkAuthenticated, checkAdmin, async (req, res) => {
+router.get("/", checkAdmin, async (req, res) => {
   try {
     const users = await User.find({});
     res.render("admin/userManagement", {
@@ -38,7 +36,7 @@ router.get("/",checkAuthenticated, checkAdmin, async (req, res) => {
 //   }
 // });
 // POST /admin/add-user - Add a new user
-router.post('/add-user',checkAuthenticated, checkAdmin, upload.single([{
+router.post('/add-user', checkAdmin, upload.single([{
   name:"image", maxCount: 1
 }]), async (req, res) => {
   try {
@@ -89,7 +87,7 @@ router.post('/add-user',checkAuthenticated, checkAdmin, upload.single([{
 });
 // POST /admin/user/update/:id - Update user by ID
 router.post('/update/:id',
-checkAuthenticated, checkAdmin,
+ checkAdmin,
  upload.single('editImage'), 
  async (req, res) => {
   try {
@@ -159,7 +157,7 @@ checkAuthenticated, checkAdmin,
 });
 
 // Delete a user
-router.post('/delete/:id',checkAuthenticated, checkAdmin, async (req, res) => {
+router.post('/delete/:id', checkAdmin, async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
 
@@ -188,7 +186,7 @@ router.post('/delete/:id',checkAuthenticated, checkAdmin, async (req, res) => {
 });
 
 // Delete all users
-router.post('/delete-all-users',checkAuthenticated, checkAdmin, async (req, res) => {
+router.post('/delete-all-users', checkAdmin, async (req, res) => {
   try {
     const deletedUsers = await User.find({});
 
@@ -212,7 +210,7 @@ router.post('/delete-all-users',checkAuthenticated, checkAdmin, async (req, res)
   }
 });
 // Search for users
-router.post("/search",checkAuthenticated, checkAdmin, async(req, res) => {
+router.post("/search", checkAdmin, async(req, res) => {
   try {
     let searchTerm = req.body.search;
     const users = await User.find({

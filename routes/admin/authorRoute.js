@@ -5,13 +5,11 @@ const router = express.Router();
 const Authors = require("../../models/author.js");
 const upload = require("../../middleware/uploadImage.js");
 const {
-  checkAuthenticated,
-  checkNotAuthenticated,
-  checkAdmin,
+  checkAdmin
 } = require("../../middleware/checkAuthenticated.js");
 
 // Get all authors
-router.get("/", checkAuthenticated, checkAdmin, async (req, res) => {
+router.get("/", checkAdmin, async (req, res) => {
   try {
     const authors = await Authors.find({});
     res.render("admin/authorManagement", {
@@ -29,7 +27,7 @@ router.get("/", checkAuthenticated, checkAdmin, async (req, res) => {
 // Add a new author
 router.post(
   "/add-new-author",
-  checkAuthenticated,
+  
   checkAdmin,
   upload.single("image"),
   async (req, res) => {
@@ -50,7 +48,7 @@ router.post(
 // Update an author
 router.post(
   "/update-author/:id",
-  checkAuthenticated,
+  
   checkAdmin,
   upload.single("editImage"),
   async (req, res) => {
@@ -102,7 +100,7 @@ router.post(
 );
 
 // Delete a single author
-router.post("/delete/:id", checkAuthenticated, checkAdmin, async (req, res) => {
+router.post("/delete/:id",  checkAdmin, async (req, res) => {
   try {
     const author = await Authors.findByIdAndDelete(req.params.id);
 
@@ -130,7 +128,7 @@ router.post("/delete/:id", checkAuthenticated, checkAdmin, async (req, res) => {
 // Delete all authors
 router.post(
   "/delete-all-authors",
-  checkAuthenticated,
+  
   checkAdmin,
   async (req, res) => {
     try {
@@ -158,7 +156,7 @@ router.post(
 );
 
 // Search for book
-router.post("/search", checkAuthenticated, checkAdmin, async (req, res) => {
+router.post("/search",  checkAdmin, async (req, res) => {
   let searchTerm = req.body.search;
   const regex = new RegExp(searchTerm, "i");
 

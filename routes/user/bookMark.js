@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/user.js");
 const Books = require("../../models/bookModel.js");
-const { checkAuthenticated } = require("../../middleware/checkAuthenticated");
+const connectEnsureLogin = require('connect-ensure-login');
 
-router.get("/", checkAuthenticated, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const userId = req.user.id;
 
@@ -21,7 +21,7 @@ router.get("/", checkAuthenticated, async (req, res) => {
   }
 });
 
-router.post("/add/:slug", checkAuthenticated, async (req, res) => {
+router.post("/add/:slug",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), async (req, res) => {
   try {
     const { slug } = req.params;
 
@@ -41,13 +41,6 @@ router.post("/add/:slug", checkAuthenticated, async (req, res) => {
       { new: true }
     );
 
-    // Update the book's 'bookmarked' property to true
-    await Books.findByIdAndUpdate(
-      book._id,
-      { bookmarked: true },
-      { new: true }
-    );
-
     res.redirect('/bookmarks');
     console.log("Added bookmarks");
   } catch (error) {
@@ -56,7 +49,7 @@ router.post("/add/:slug", checkAuthenticated, async (req, res) => {
   }
 });
 
-router.post("/delete/:slug", checkAuthenticated, async (req, res) => {
+router.post("/delete/:slug",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), async (req, res) => {
   try {
     const { slug } = req.params;
 
@@ -73,13 +66,6 @@ router.post("/delete/:slug", checkAuthenticated, async (req, res) => {
     await User.findByIdAndUpdate(
       userId,
       { $pull: { bookmarks: book._id } },
-      { new: true }
-    );
-
-    // Update the book's 'bookmarked' property to false
-    await Books.findByIdAndUpdate(
-      book._id,
-      { bookmarked: false },
       { new: true }
     );
 

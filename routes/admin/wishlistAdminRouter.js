@@ -8,15 +8,13 @@ const fs = require('fs');
 const path = require('path');
 const User = require("../../models/user.js");
 const {
-  checkAuthenticated,
-  checkNotAuthenticated,
-  checkAdmin,
+  checkAdmin
 } = require("../../middleware/checkAuthenticated.js");
 
 let responseSent = false;
 
 // Get all wishlist items
-router.get('/', checkAuthenticated, checkAdmin, async (req, res) => {
+router.get('/', checkAdmin, async (req, res) => {
   try {
     const wishlistItems = await WishlistItem.find({ approveWishlist: false });
     const users = await User.find({});
@@ -33,7 +31,7 @@ router.get('/', checkAuthenticated, checkAdmin, async (req, res) => {
   }
 });
 
-router.get('/approved', checkAuthenticated, checkAdmin, async (req, res) => {
+router.get('/approved',  checkAdmin, async (req, res) => {
   try {
     const approvedWishlistItems = await WishlistItem.find({ approveWishlist: true });
     const users = await User.find({});

@@ -3,9 +3,9 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 const User = require('../models/user');
 const passport = require('passport');
-const {checkNotAuthenticated } = require("./../middleware/checkAuthenticated");
+const connectEnsureLogin = require('connect-ensure-login');
 
-router.get("/signin",checkNotAuthenticated, async (req, res) => {
+router.get("/signin",connectEnsureLogin.ensureLoggedOut(), async (req, res) => {
   try {
     res.render("signin", {
       layout: false,
@@ -79,7 +79,7 @@ router.post('/register', async (req, res) => {
 // });
 
 router.post('/signin', passport.authenticate('local', {
-  successRedirect: '/',
+  successReturnToOrRedirect:'/',
   failureRedirect: '/auth/signin',
   failureFlash: false, 
 }), (req, res) => {
