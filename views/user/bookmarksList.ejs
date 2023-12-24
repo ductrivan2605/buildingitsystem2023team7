@@ -13,37 +13,39 @@
 </head>
 
 <body>
-    <div class="resultContainer">
-        <div class="bookContainer">
-            <h2>My Bookmark List</h2>
-            <% if (user.bookmarks.length > 0) { %>
-                <% user.bookmarks.forEach((book) => { %>
-                    <ul class="bookmark-list">
-                        <li class="book">
-                            <div class="book-imagebox">
-                                <img class="book-image" src="/images/<%= book.imageCover %>">
-                            </div>
-                            <div class="book-info">
-                                <div class="book-title">
-                                    <h3><%= book.title %></h3>
+    <div id="wrapper">    
+        <div class="resultContainer">
+            <div class="bookContainer">
+                <h2>My Bookmark List</h2>
+                <% if (user.bookmarks.length > 0) { %>
+                    <% user.bookmarks.forEach((book) => { %>
+                        <ul class="bookmark-list">
+                            <li class="book">
+                                <div class="book-imagebox">
+                                    <img class="book-image" src="/images/<%= book.imageCover %>">
                                 </div>
-                                <div class="bookdetail">
-                                    <p><strong>Author:</strong><%= book.authors.join(', ') %></p>
-                                    <p><strong>Category:</strong><%= book.category.join(', ') %></p>
-                                    <p><strong>Publisher:</strong><%= book.publisher %></p>
+                                <div class="book-info">
+                                    <div class="book-title">
+                                        <h3><%= book.title %></h3>
+                                    </div>
+                                    <div class="bookdetail">
+                                        <p><strong>Author:</strong><%= book.authors.join(', ') %></p>
+                                        <p><strong>Category:</strong><%= book.category.join(', ') %></p>
+                                        <p><strong>Publisher:</strong><%= book.publisher %></p>
+                                    </div>
+                                    <div class="bookmarkBtn">
+                                        <form method="post" action="/bookmarks/delete/<%= book.slug %>">
+                                            <button class="deleteButton">Delete</button>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div class="bookmarkBtn">
-                                    <form method="post" action="/bookmarks/delete/<%= book.slug %>">
-                                        <button class="deleteButton">Delete</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                <% }); %>
-            <% } else { %>
-                <p>No bookmarks yet.</p>
-            <% } %>
+                            </li>
+                        </ul>
+                    <% }); %>
+                <% } else { %>
+                    <p>No bookmarks yet.</p>
+                <% } %>
+            </div>
         </div>
     </div>
 </body>

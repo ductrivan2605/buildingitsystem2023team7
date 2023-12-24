@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             } else {
                 splides.forEach(function(splide) {
-                    splide.options.perPage = 5;
+                    splide.options.perPage = 3;
                     splide.refresh();
                 });
             }

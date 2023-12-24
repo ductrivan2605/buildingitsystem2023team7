@@ -1,9 +1,20 @@
 body {
     background-color: #EEEEEE;
 }
+
+#wrapper{
+  height : auto;
+  min-height: 100%;
+}
+
+#wrapper,
+.resultContainer {
+  min-height: calc(100vh - 60px);
+
+}
 .bookmark-list {
     list-style: none;
-    padding: 0;
+    padding: 20px;
   }
 .bookContainer h2 {
     border-bottom: 1px solid rgb(187, 186, 186);

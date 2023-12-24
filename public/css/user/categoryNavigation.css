@@ -18,7 +18,7 @@
 }
 .category {
     background-color: #222831;
-    /* background-color: darkgoldenrod; */
+
     border-radius: 20px;
     font-size: 20px;
     text-align: center;
@@ -56,15 +56,23 @@
 
 .navForBook {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     background-color: #f0f0f0;
     padding: 10px;
+    flex-wrap: wrap;
+    gap: 80px; 
+    justify-content: flex-start;
+
 }
 
 
 .nav-items {
     text-align: center;
+    width: calc(16.666% - 20px); 
+    margin-bottom: 20px;
+    box-sizing: border-box;
+
 
 }
 
@@ -104,11 +112,48 @@
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) and (max-width: 1024px) {
     .categoryName p {
         margin: 0; 
-        font-size: 16px; 
+        font-size: 10px; 
         word-wrap: break-word;
+    }
+    .nav-items {
+        width: calc(33.33% - 20px); 
+    }
+    .navForBook {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f0f0f0;
+        padding: 10px;
+        flex-wrap: wrap;
+        gap: 30px; 
+        justify-content: flex-start;
+    
+    }
+
+}
+
+@media (min-width: 1024px) and (max-width: 1366px) {
+    .categoryName p {
+        margin: 0; 
+        font-size: 12px; 
+        word-wrap: break-word;
+    }
+    .nav-items {
+        width: calc(33.33% - 20px); 
+    }
+    .navForBook {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #f0f0f0;
+        padding: 10px;
+        flex-wrap: wrap;
+        gap: 30px; 
+        justify-content: flex-start;
+    
     }
 
 }
