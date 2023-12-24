@@ -372,7 +372,7 @@ label {
 }
 
 #wishlist-btn:hover {
-  background-color: #007580;
+  background-color: #EEEEEE;
 }
   .user-info img {
     width: 30px;
@@ -417,7 +417,7 @@ label {
     top: 60px;
     left: 0;
     width: 100%;
-    background-color: #002b5b;
+    background-color: #EEEEEE;
     z-index: 999;
     margin-top: 20px;
   }
