@@ -6,17 +6,26 @@ const WishlistItem = require('../../models/Wishlist');
 const upload = require("../../middleware/uploadImage.js");
 const fs = require('fs');
 const path = require('path');
+const User = require("../../models/user.js");
+const {
+  checkAuthenticated,
+  checkNotAuthenticated,
+  checkAdmin,
+} = require("../../middleware/checkAuthenticated.js");
 
 let responseSent = false;
 
 // Get all wishlist items
-router.get('/', async (req, res) => {
+router.get('/', checkAuthenticated, checkAdmin, async (req, res) => {
   try {
     const wishlistItems = await WishlistItem.find({ approveWishlist: false });
+    const users = await User.find({});
     res.render('admin/wishlistAdmin', {
       layout: './layouts/admin/itemsManagementLayout',
       title: 'Wishlist Management',
       wishlistItems: wishlistItems,
+      users: users,
+      user: res.locals.user, // Pass the user object to the template
     });
   } catch (error) {
     console.error(error);
@@ -24,19 +33,23 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/approved', async (req, res) => {
+router.get('/approved', checkAuthenticated, checkAdmin, async (req, res) => {
   try {
     const approvedWishlistItems = await WishlistItem.find({ approveWishlist: true });
+    const users = await User.find({});
     res.render('admin/wishlistAdmin2', {
       layout: './layouts/admin/itemsManagementLayout',
       title: 'Approved Wishlist Items',
       wishlistItems: approvedWishlistItems,
+      users: users,
+      user: res.locals.user, // Pass the user object to the template
     });
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
   }
 });
+
 
 
 // Get a single wishlist item by ID
