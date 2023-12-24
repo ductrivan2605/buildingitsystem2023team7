@@ -7,12 +7,10 @@ const Author = require("../../models/author.js");
 const Category = require("../../models/Category.js");
 const upload = require("../../middleware/uploadImage.js");
 const {
-  checkAuthenticated,
-  checkNotAuthenticated,
-  checkAdmin,
+  checkAdmin
 } = require("../../middleware/checkAuthenticated.js");
 
-router.get("/", checkAuthenticated, checkAdmin, async (req, res) => {
+router.get("/",  checkAdmin, async (req, res) => {
   try {
     const books = await Books.find({});
     const authors = await Author.find({});
@@ -32,7 +30,7 @@ router.get("/", checkAuthenticated, checkAdmin, async (req, res) => {
 
 router.post(
   "/add-new-book",
-  checkAuthenticated,
+  
   checkAdmin,
   upload.fields([
     { name: "contentImage", maxCount: 10 },
@@ -86,7 +84,7 @@ router.post(
 // Update a book
 router.post(
   "/update-book/:id",
-  checkAuthenticated,
+  
   checkAdmin,
   upload.fields([
     { name: "imageCover", maxCount: 1 },
@@ -157,7 +155,7 @@ router.post(
 );
 
 // Delete a book
-router.post("/delete/:id", checkAuthenticated, checkAdmin, async (req, res) => {
+router.post("/delete/:id",  checkAdmin, async (req, res) => {
   try {
     const book = await Books.findById(req.params.id);
 
@@ -205,7 +203,7 @@ router.post("/delete/:id", checkAuthenticated, checkAdmin, async (req, res) => {
 // Delete all books
 router.post(
   "/delete-all-books",
-  checkAuthenticated,
+  
   checkAdmin,
   async (req, res) => {
     try {
@@ -251,7 +249,7 @@ router.post(
 );
 
 // Search for book
-router.post("/search", checkAuthenticated, checkAdmin, async (req, res) => {
+router.post("/search",  checkAdmin, async (req, res) => {
   let searchTerm = req.body.search;
   // Use a regular expression for case-insensitive search
   const regex = new RegExp(searchTerm, "i");

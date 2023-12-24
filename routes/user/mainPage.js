@@ -7,11 +7,20 @@ const Books = require("../../models/bookModel.js");
 router.get("/", async (req, res) => {
   try {
     const categories = await Categories.find({}).limit(5);
+
+    // Check if the user is authenticated
+    const isAuthenticated = req.isAuthenticated();
+
+    // Fetch user's bookmarks if authenticated
+    const userBookmarks = isAuthenticated ? req.user.bookmarks.map(bookmark => bookmark.toString()) : [];
     const books = await Books.find({});
     res.render("user/categoryNavigation", {
       layout: "./layouts/user/mainPage",
       categories: categories,
-      books: books,
+      books: books.map(book => ({
+        ...book.toObject(),
+        bookmarked: userBookmarks.includes(book._id.toString()),
+      })),
       title: "Booktopia",
     });
   } catch (error) {

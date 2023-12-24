@@ -7,6 +7,7 @@ const session = require("express-session");
 const passport = require("passport");
 const initializePassport = require('./middleware/passport-config')
 const User = require('./models/user');
+const connectEnsureLogin = require('connect-ensure-login');
 
 
 // Page Template Engine
@@ -62,16 +63,16 @@ const searchPageRouter = require("./routes/user/searchPageRoute");
 app.use("/", mainPage);
 app.use("/book", bookDetailRouter);
 app.use("/author", authorRouter);
-app.use("/bookmarks", bookMarkRouter);
+app.use("/bookmarks",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), bookMarkRouter);
 app.use("/category", categoryRouter);
-app.use("/admin/categories", CategoryRouter);
-app.use("/admin/authors", AuthorRouter);
-app.use("/admin/books-management", BooksRouter);
-app.use("/admin/users-management", userManagementRouter);
+app.use("/admin/categories",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), CategoryRouter);
+app.use("/admin/authors",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), AuthorRouter);
+app.use("/admin/books-management",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), BooksRouter);
+app.use("/admin/users-management",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), userManagementRouter);
 app.use("/user", userRouter);
 app.use("/auth", authRouter);
 app.use("/wishlist", wishlistRouter);
-app.use("/admin/wishlist", wishlistAdminRouter);
+app.use("/admin/wishlist",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), wishlistAdminRouter);
 app.use("/user/search", searchPageRouter);
 
 // app.get('/', (req, res) => {

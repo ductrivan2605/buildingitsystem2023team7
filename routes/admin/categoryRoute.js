@@ -5,12 +5,10 @@ const router = express.Router();
 const Category = require("../../models/Category.js");
 const upload = require("../../middleware/uploadImage.js");
 const {
-  checkAuthenticated,
-  checkNotAuthenticated,
-  checkAdmin,
+  checkAdmin
 } = require("../../middleware/checkAuthenticated.js");
 // Get all categories
-router.get("/",checkAuthenticated, checkAdmin, async (req, res) => {
+router.get("/", checkAdmin, async (req, res) => {
   try {
     const categories = await Category.find({});
     res.render("admin/categoryManagement", {
@@ -24,7 +22,7 @@ router.get("/",checkAuthenticated, checkAdmin, async (req, res) => {
 });
 
 // Add a new category
-router.post("/add-new-category",checkAuthenticated, checkAdmin, upload.single("image"), async (req, res) => {
+router.post("/add-new-category", checkAdmin, upload.single("image"), async (req, res) => {
   try {
     const { category, subCategory } = req.body;
     const image = req.file ? req.file.filename : null;
@@ -48,7 +46,7 @@ router.post("/add-new-category",checkAuthenticated, checkAdmin, upload.single("i
 
 router.post(
   "/update-category/:id",
-  checkAuthenticated, checkAdmin,
+   checkAdmin,
   upload.single("editImage"),
   async (req, res) => {
     try {
@@ -111,7 +109,7 @@ router.post(
 );
 
 // Delete a single category
-router.post("/delete/:id",checkAuthenticated, checkAdmin, async (req, res) => {
+router.post("/delete/:id", checkAdmin, async (req, res) => {
   try {
     const deletedCategory = await Category.findByIdAndDelete(req.params.id);
 
@@ -137,7 +135,7 @@ router.post("/delete/:id",checkAuthenticated, checkAdmin, async (req, res) => {
 });
 
 // Delete all categories
-router.post("/delete-all-categories",checkAuthenticated, checkAdmin, async (req, res) => {
+router.post("/delete-all-categories", checkAdmin, async (req, res) => {
   try {
     const categories = await Category.find({});
 
