@@ -6,11 +6,9 @@ const Books = require("../../models/bookModel.js");
 const Author = require("../../models/author.js");
 const Category = require("../../models/Category.js");
 const upload = require("../../middleware/uploadImage.js");
-const {
-  checkAdmin
-} = require("../../middleware/checkAuthenticated.js");
+const { checkAdmin } = require("../../middleware/checkAuthenticated.js");
 
-router.get("/",  checkAdmin, async (req, res) => {
+router.get("/", checkAdmin, async (req, res) => {
   try {
     const books = await Books.find({});
     const authors = await Author.find({});
@@ -21,16 +19,15 @@ router.get("/",  checkAdmin, async (req, res) => {
       books: books,
       authors: authors,
       categories: categories,
+      messages: req.flash(),
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal Server Error");
+    res.status(404).render("/404");
   }
 });
 
 router.post(
   "/add-new-book",
-  
   checkAdmin,
   upload.fields([
     { name: "contentImage", maxCount: 10 },
@@ -68,15 +65,14 @@ router.post(
         imageCover: imageCover,
       });
 
-      // Send a success response
-      res.status(201).redirect("/admin/books-management");
-    } catch (error) {
-      // Send an appropriate error response
-      if (error.message === "Invalid file type") {
-        return res.status(400).send("Invalid file type");
+      if (!book) {
+        req.flash("fail", "Unable to create new book!");
+        res.redirect("/admin/books-management");
       }
-      console.error(error);
-      res.status(500).send("Internal Server Error");
+      req.flash("success", "New book created successfully!");
+      res.redirect("/admin/books-management");
+    } catch (error) {
+      res.status(404).render("/404");
     }
   }
 );
@@ -84,7 +80,7 @@ router.post(
 // Update a book
 router.post(
   "/update-book/:id",
-  
+
   checkAdmin,
   upload.fields([
     { name: "imageCover", maxCount: 1 },
@@ -96,7 +92,10 @@ router.post(
 
       // Retrieve the current book to access the old image filename
       const books = await Books.findById(bookId);
-
+      if (!books) {
+        req.flash("fail", "Unable to find book!");
+        res.redirect("/admin/books-management");
+      }
       // Construct a dynamic update object
       const updateFields = {};
       if (req.body.title) updateFields.title = req.body.title;
@@ -138,31 +137,26 @@ router.post(
         updateFields.category = selectedCategories;
       }
 
-      const updatedBook = await Books.findByIdAndUpdate(bookId, updateFields, {
+      await Books.findByIdAndUpdate(bookId, updateFields, {
         new: true,
       });
 
-      if (!updatedBook) {
-        return res.status(404).send("Book not found");
-      }
-
+      req.flash("success", "Updated book successfully!");
       res.redirect("/admin/books-management");
     } catch (error) {
-      console.error(error);
-      res.status(500).send("Internal Server Error");
+      res.status(404).render("/404");
     }
   }
 );
 
 // Delete a book
-router.post("/delete/:id",  checkAdmin, async (req, res) => {
+router.post("/delete/:id", checkAdmin, async (req, res) => {
   try {
     const book = await Books.findById(req.params.id);
 
     if (!book) {
-      req.flash("rejected", "Book not found!");
+      req.flash("fail", "Unable to delete book!");
       res.redirect("/admin/books-management");
-      return;
     }
     // Delete content images
     if (book.contentImage) {
@@ -194,16 +188,18 @@ router.post("/delete/:id",  checkAdmin, async (req, res) => {
 
     // Delete the book document
     await Books.findByIdAndDelete(req.params.id);
+    req.flash("success", "Book deleted successfully!");
     res.redirect("/admin/books-management");
+
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(404).render("/404");
   }
 });
 
 // Delete all books
 router.post(
   "/delete-all-books",
-  
+
   checkAdmin,
   async (req, res) => {
     try {
@@ -240,16 +236,20 @@ router.post(
           console.error("Error deleting image cover file:", error);
         }
       }
-      res.status(202).redirect("/admin/books-management");
+      if (!deletedBooks) {
+        req.flash("fail", "Unable to delete all book!");
+        res.redirect("/admin/books-management");
+      }
+      req.flash("success", "All book deleted successfully!");
+      res.redirect("/admin/books-management");
     } catch (error) {
-      console.error(error);
-      res.status(500).send("Internal Server Error");
+      res.status(404).render("/404");
     }
   }
 );
 
 // Search for book
-router.post("/search",  checkAdmin, async (req, res) => {
+router.post("/search", checkAdmin, async (req, res) => {
   let searchTerm = req.body.search;
   // Use a regular expression for case-insensitive search
   const regex = new RegExp(searchTerm, "i");

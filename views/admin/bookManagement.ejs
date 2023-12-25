@@ -1,8 +1,16 @@
 <main class="d-flex flex-nowrap">
-  <!-- <div class="b-example-divider b-example-vr"></div> -->
   <div class="mainContent">
     <div class="CatergoryName">
       <h1>Book Management</h1>
+      <% if (messages.fail) { %>
+        <div id="rejectedMessage" class="alert alert-danger" role="alert">
+          <%- messages.fail %>
+        </div>
+        <% } %> <% if (messages.success) { %>
+        <div id="acceptedMessage" class="alert alert-success" role="alert">
+          <%- messages.success %>
+        </div>
+    <% } %>
     </div>
     <div class="search-form">
       <form
