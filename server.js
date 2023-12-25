@@ -8,7 +8,7 @@ const passport = require("passport");
 const initializePassport = require('./middleware/passport-config')
 const User = require('./models/user');
 const connectEnsureLogin = require('connect-ensure-login');
-
+const fetchUserData = require('./middleware/fetchUserData');
 
 // Page Template Engine
 app.use(expressLayouts);
@@ -36,6 +36,8 @@ initializePassport(
   );
 app.use(passport.session());
 app.use(passport.initialize());
+// fetch user data 
+app.use(fetchUserData);
 // Books Database
 mongoose
   .connect(
