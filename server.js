@@ -8,13 +8,14 @@ const passport = require("passport");
 const initializePassport = require('./middleware/passport-config')
 const User = require('./models/user');
 const connectEnsureLogin = require('connect-ensure-login');
-
+const flash = require("connect-flash");
 
 // Page Template Engine
 app.use(expressLayouts);
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
+app.use(flash());
 
 // SetUp parse
 app.use(express.urlencoded({ extended: true }));
