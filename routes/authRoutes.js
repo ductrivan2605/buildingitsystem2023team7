@@ -39,35 +39,29 @@ router.get("/configure", async (req, res) => {
     res.render("404")
   }
 });
-router.post('/register', upload.single('profileImage'), async (req, res) => {
+router.post('/register', upload.single('imageProfile'), async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-    // Check if a file is uploaded
-    let imagePath = '';
-    if (req.file) {
-      imagePath = `/images/${req.file.filename}`;
-    }
-
+    const image = req.file ? req.file.filename : null;
     const user = new User({
       name: req.body.name,
       username: req.body.username,
       password: hashedPassword,
       email: req.body.email || '',
-      role: 'standard', // 'admin' for admin users
-      image: imagePath, // Save the image path in the user model
+      role: 'standard',
+      image,
     });
 
     await user.save();
     console.log(user);
     res.redirect('/auth/signin');
   } catch (error) {
-    console.error(error);
     res.status(500).send('Error registering user');
-    // Consider rendering an error page instead of sending a text response
     res.render('404');
   }
 });
+
+
 
 // router.post('/signin', async (req, res) => {
 //   const { username, password } = req.body;

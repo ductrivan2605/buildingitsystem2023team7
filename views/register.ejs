@@ -125,21 +125,21 @@
                 </div>
               </div>
               
-
               <div class="tab-pane fade active show" id="account-general">
                 <div class="card-body media align-items-center">
                   <img src="/images/userDefault.jpg" alt="profile_image" class="profile_img" id="profileImage">
                   <div class="media-body ml-4">
-                    <label for="profileImage" class="btn btn-outline-primary">
-                      Upload new photo
-                      <input type="file" id="profileImage" name="profileImage" class="account-settings-fileinput" style="display: none;">
-                    </label>
+                    <div class="col-sm-12">
+                      <label for="imageProfile">Upload Profile Image:</label>
+                      <input type="file" name="imageProfile" id="imageProfile">
+                    
+                    </div>
                     &nbsp;
                     <button type="button" class="btn btn-default md-btn-flat btn-outline-danger" onclick="resetImage()">Reset</button>
                   </div>
                 </div>
               </div>
-            
+              
 
               <div class="col-12">
                 <label for="email" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>
