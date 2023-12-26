@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const router = express.Router();
+const User = require("../../models/user.js");
 const Books = require("../../models/bookModel.js");
 const Author = require("../../models/author.js");
 const Category = require("../../models/Category.js");
@@ -22,37 +23,22 @@ router.get("/", checkAdmin, async (req, res) => {
       messages: req.flash(),
     });
   } catch (error) {
-    res.status(404).render("/404");
+    res.status(404).render("404", { layout: false });
   }
 });
 
 router.post(
   "/add-new-book",
   checkAdmin,
-  upload.fields([
-    { name: "contentImage", maxCount: 10 },
-    { name: "imageCover", maxCount: 1 },
-  ]),
+  upload.single("imageCover"),
   async (req, res) => {
     try {
       const { title, authors, categories, published, publisher, description } =
         req.body;
+      const imageCover = req.file ? req.file.filename : "";
 
-      // Get the filenames for both contentImage and imageCover
-      const contentImageFiles = req.files["contentImage"];
-      const contentImage = contentImageFiles
-        ? contentImageFiles.map((file) => file.filename)
-        : null;
-
-      const imageCover = req.files["imageCover"][0].filename;
-
-      // Convert authors and categories to arrays
-      const authorIds = authors
-        ? authors.split(",").map((item) => item.trim())
-        : [];
-      const categoryIds = categories
-        ? categories.split(",").map((item) => item.trim())
-        : [];
+      const authorIds = Array.isArray(authors) ? authors : [authors];
+      const categoryIds = Array.isArray(categories) ? categories : [categories];
 
       const book = await Books.create({
         title: title,
@@ -61,7 +47,6 @@ router.post(
         published: published,
         publisher: publisher,
         description: description,
-        contentImage: contentImage,
         imageCover: imageCover,
       });
 
@@ -72,7 +57,8 @@ router.post(
       req.flash("success", "New book created successfully!");
       res.redirect("/admin/books-management");
     } catch (error) {
-      res.status(404).render("/404");
+      console.log(error);
+      res.status(404).render("404", { layout: false });
     }
   }
 );
@@ -144,7 +130,7 @@ router.post(
       req.flash("success", "Updated book successfully!");
       res.redirect("/admin/books-management");
     } catch (error) {
-      res.status(404).render("/404");
+      res.status(404).render("404", { layout: false });
     }
   }
 );
@@ -166,11 +152,7 @@ router.post("/delete/:id", checkAdmin, async (req, res) => {
           "../../public/images",
           imageFileName
         );
-        try {
-          await fs.promises.unlink(imagePath);
-        } catch (error) {
-          console.error("Error deleting image file:", error);
-        }
+        await fs.promises.unlink(imagePath);
       }
     }
 
@@ -180,19 +162,23 @@ router.post("/delete/:id", checkAdmin, async (req, res) => {
       "../../public/images",
       book.imageCover
     );
-    try {
-      await fs.promises.unlink(imageCoverPath);
-    } catch (error) {
-      console.error("Error deleting image cover file:", error);
-    }
+    await fs.promises.unlink(imageCoverPath);
 
-    // Delete the book document
     await Books.findByIdAndDelete(req.params.id);
+    // Find all users who have bookmarked this book
+    const usersWithBookmark = await User.find({ bookmarks: req.params.id });
+
+    // Remove the book ID from each user's bookmarks
+    usersWithBookmark.forEach(async (user) => {
+      user.bookmarks = user.bookmarks.filter(
+        (bookmark) => bookmark.toString() !== req.params.id
+      );
+      await user.save();
+    });
     req.flash("success", "Book deleted successfully!");
     res.redirect("/admin/books-management");
-
   } catch (error) {
-    res.status(404).render("/404");
+    res.status(404).render("404", { layout: false });
   }
 });
 
@@ -207,7 +193,18 @@ router.post(
 
       for (const deletedBook of deletedBooks) {
         await Books.findByIdAndDelete(deletedBook._id);
+        // Find all users who have bookmarked this book
+        const usersWithBookmark = await User.find({
+          bookmarks: deletedBook._id,
+        });
 
+        // Remove the book ID from each user's bookmarks
+        usersWithBookmark.forEach(async (user) => {
+          user.bookmarks = user.bookmarks.filter(
+            (bookmark) => bookmark.toString() !== deletedBook._id.toString()
+          );
+          await user.save();
+        });
         // Delete the corresponding image files
         if (deletedBook.imageCover) {
           const imageCoverPath = path.join(
@@ -216,12 +213,7 @@ router.post(
             deletedBook.imageCover
           );
 
-          // Check if the file exists before trying to delete
-          try {
-            await fs.promises.unlink(imageCoverPath);
-          } catch (error) {
-            console.error("Error deleting image cover file:", error);
-          }
+          await fs.promises.unlink(imageCoverPath);
         }
 
         // Delete the image cover file
@@ -230,11 +222,7 @@ router.post(
           "../../public/images",
           deletedBook.imageCover
         );
-        try {
-          await fs.promises.unlink(imageCoverPath);
-        } catch (error) {
-          console.error("Error deleting image cover file:", error);
-        }
+        await fs.promises.unlink(imageCoverPath);
       }
       if (!deletedBooks) {
         req.flash("fail", "Unable to delete all book!");
@@ -243,7 +231,7 @@ router.post(
       req.flash("success", "All book deleted successfully!");
       res.redirect("/admin/books-management");
     } catch (error) {
-      res.status(404).render("/404");
+      res.status(404).render("404", { layout: false });
     }
   }
 );

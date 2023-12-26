@@ -52,22 +52,6 @@
                   />
                   <div id="add-image-cover-preview" class="py-1"></div>
                 </div>
-                <div class="contentImageContainer d-flex flex-column">
-                  <label
-                    for="addContentImage"
-                    class="image-label"
-                    id="select-image"
-                    >Add Content Image</label
-                  >
-                  <input
-                    type="file"
-                    id="addContentImage"
-                    name="contentImage"
-                    onchange="previewImage('addContentImage', 'add-image-content-preview')"
-                    multiple
-                  />
-                  <div id="add-image-content-preview" class="py-1"></div>
-                </div>
               </div>
               <div class="right-container">
                 <label for="title">Book Title:</label>
@@ -302,7 +286,6 @@
             <td><%= book.category %></td>
             <td><%= book.publisher %></td>
             <td><%= book.published %></td>
-            <td></td>
             <td><%= book.description %></td>
             <td>
               <div class="imgBooks">
@@ -311,6 +294,9 @@
                   style="width: 100px; height: 100px; object-fit: cover"
                 />
               </div>
+            </td>
+            <td>
+              <button type="button"><a href="/admin/books-management/<%= book._id %>">View Content</a></button>
             </td>
             <td>
               <button
