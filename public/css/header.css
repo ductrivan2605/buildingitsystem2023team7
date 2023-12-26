@@ -215,6 +215,7 @@ body {
 .user {
   position: relative;
   cursor: pointer;
+  margin: 0 auto;
 }
 
 .user-dropdown {

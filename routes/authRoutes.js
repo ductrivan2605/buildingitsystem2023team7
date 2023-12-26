@@ -39,10 +39,10 @@ router.get("/configure", async (req, res) => {
     res.render("404")
   }
 });
-router.post('/register', upload.single('imageProfile'), async (req, res) => {
+router.post('/register', upload.single('image'), async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const image = req.file ? req.file.filename : null;
+    const image = req.file ? '/images/' + req.file.filename : '/images/userDefault.jpg';
     const user = new User({
       name: req.body.name,
       username: req.body.username,
@@ -56,9 +56,19 @@ router.post('/register', upload.single('imageProfile'), async (req, res) => {
     console.log(user);
     res.redirect('/auth/signin');
   } catch (error) {
+    console.error('Error registering user:', error);
     res.status(500).send('Error registering user');
-    res.render('404');
   }
+});
+
+router.get('/logout', (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Error logging out');
+    }
+    res.redirect('/');
+  });
 });
 
 
