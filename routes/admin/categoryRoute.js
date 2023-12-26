@@ -15,9 +15,10 @@ router.get("/", checkAdmin, async (req, res) => {
       layout: "./layouts/admin/itemsManagementLayout",
       title: "Category Management",
       categories: categories,
+      messages:req.flash(),
     });
   } catch (error) {
-    res.send(error);
+    res.status(404).render("/404");
   }
 });
 
@@ -31,16 +32,19 @@ router.post("/add-new-category", checkAdmin, upload.single("image"), async (req,
       ? subCategory.split(",").map((item) => item.trim())
       : [];
 
-    await Category.create({
+    const categories = await Category.create({
       category: category,
       subCategory: subCategoryArray,
       image: image,
     });
-    // req.flash("accepted", "Successfully create new category")
-    res.redirect("/admin/categories");
+    if (!categories) {
+      req.flash("fail", "Unable to create new category!");
+      res.redirect("/admin/categories");
+    } 
+      req.flash("success", "New category created successfully!");
+      res.redirect("/admin/categories");
   } catch (error) {
-    console.log(error);
-    res.send(error);
+    res.status(404).render("/404");
   }
 });
 
@@ -51,7 +55,10 @@ router.post(
   async (req, res) => {
     try {
       const categoryId = req.params.id;
-
+      if (!categoryId) {
+        req.flash("fail", "Unable to find category!");
+        res.redirect("/admin/categories");
+      } 
       // Extract fields from the request body
       const { category, subCategory } = req.body;
       const newImage = req.file ? req.file.filename : null;
@@ -90,20 +97,14 @@ router.post(
       );
 
       if (!updatedCategory) {
-        return res.status(404);
+        req.flash("fail", "Unable to update category!");
+        res.redirect("/admin/categories");
       }
-
-      // req.flash("accepted", "Successfully update category");
+      req.flash("success", "Category updated successfully!");
       res.redirect("/admin/categories");
+
     } catch (error) {
-      if (error.code === 11000) {
-        // Handle duplicate key error
-        console.error('Duplicate key violation:', error.keyValue);
-        // Implement your error handling or validation logic
-      } else {
-        // Handle other MongoDB errors
-        console.error('MongoDB error:', error);
-      }
+      res.status(404).render("/404");
     }
   }
 );
@@ -114,7 +115,8 @@ router.post("/delete/:id", checkAdmin, async (req, res) => {
     const deletedCategory = await Category.findByIdAndDelete(req.params.id);
 
     if (!deletedCategory) {
-      return res.status(404);
+      req.flash("fail", "Unable to find category!");
+      res.redirect("/admin/categories");
     }
 
     if (deletedCategory.image) {
@@ -126,11 +128,10 @@ router.post("/delete/:id", checkAdmin, async (req, res) => {
       await fs.promises.unlink(imagePath);
     }
 
-    // req.flash("accepted", "Successfully create new category")
+    req.flash("success", "Category deleted successfully!");
     res.redirect("/admin/categories");
   } catch (error) {
-    console.log(error);
-    res.status(500).send(error);
+    res.status(404).render("/404");
   }
 });
 
@@ -150,11 +151,15 @@ router.post("/delete-all-categories", checkAdmin, async (req, res) => {
       }
     }
 
-    await Category.deleteMany({});
+    const allCategories = await Category.deleteMany({});
+    if (!allCategories) {
+      req.flash("fail", "Unable to delete all categories!");
+      res.redirect("/admin/categories");
+    }
+    req.flash("success", "All category deleted successfully!");
     res.redirect("/admin/categories");
   } catch (error) {
-    console.log(error);
-    res.status(500).send(error);
+    res.status(404).render("/404");
   }
 });
 

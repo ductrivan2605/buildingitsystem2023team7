@@ -9,12 +9,14 @@ const initializePassport = require('./middleware/passport-config')
 const User = require('./models/user');
 const connectEnsureLogin = require('connect-ensure-login');
 const fetchUserData = require('./middleware/fetchUserData');
+const flash = require("connect-flash");
 
 // Page Template Engine
 app.use(expressLayouts);
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
+app.use(flash());
 
 // SetUp parse
 app.use(express.urlencoded({ extended: true }));
@@ -55,6 +57,7 @@ const categoryRouter = require("./routes/user/categoryPage");
 const CategoryRouter = require("./routes/admin/categoryRoute");
 const AuthorRouter = require("./routes/admin/authorRoute");
 const BooksRouter = require("./routes/admin/bookManagementRoute");
+const BookContentsRouter = require("./routes/admin/bookContentManagementRoute");
 const authRouter = require("./routes/authRoutes");
 const userManagementRouter = require("./routes/admin/userManagementRoute");
 const userRouter = require("./routes/user/userRoutes");
@@ -72,6 +75,7 @@ app.use("/category", categoryRouter);
 app.use("/admin/categories",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), CategoryRouter);
 app.use("/admin/authors",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), AuthorRouter);
 app.use("/admin/books-management",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), BooksRouter);
+app.use("/admin/books-management/",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), BookContentsRouter);
 app.use("/admin/users-management",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), userManagementRouter);
 app.use("/user", userRouter);
 app.use("/auth", authRouter);

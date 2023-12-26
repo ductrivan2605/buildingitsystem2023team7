@@ -18,6 +18,7 @@ router.get("/", checkAdmin, async (req, res) => {
       layout: "./layouts/admin/itemsManagementLayout",
       title: "User Management",
       users: users,
+      messages: req.flash(),
     });
   } catch (error) {
     res.send(error);

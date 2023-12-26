@@ -4,9 +4,7 @@ const express = require("express");
 const router = express.Router();
 const Authors = require("../../models/author.js");
 const upload = require("../../middleware/uploadImage.js");
-const {
-  checkAdmin
-} = require("../../middleware/checkAuthenticated.js");
+const { checkAdmin } = require("../../middleware/checkAuthenticated.js");
 
 // Get all authors
 router.get("/", checkAdmin, async (req, res) => {
@@ -16,18 +14,17 @@ router.get("/", checkAdmin, async (req, res) => {
       layout: "./layouts/admin/itemsManagementLayout",
       title: "Author Management",
       authors: authors,
+      messages: req.flash(),
     });
-    console.log(authors);
   } catch (error) {
-    console.log(error);
-    res.status(500).send(error);
+    res.status(404).render("/404");
   }
 });
 
 // Add a new author
 router.post(
   "/add-new-author",
-  
+
   checkAdmin,
   upload.single("image"),
   async (req, res) => {
@@ -36,11 +33,16 @@ router.post(
       const image = req.file ? req.file.filename : null;
 
       const author = await Authors.create({ name, email, background, image });
-      console.log(author);
-      res.redirect("/admin/authors");
+
+      if (!author) {
+        req.flash("fail", "Unable to create new author!");
+        res.redirect("/admin/authors");
+      } else {
+        req.flash("success", "New author created successfully!");
+        res.redirect("/admin/authors");
+      }
     } catch (error) {
-      console.log(error);
-      res.status(500).send(error);
+      res.status(404).render("/404");
     }
   }
 );
@@ -48,7 +50,7 @@ router.post(
 // Update an author
 router.post(
   "/update-author/:id",
-  
+
   checkAdmin,
   upload.single("editImage"),
   async (req, res) => {
@@ -82,31 +84,31 @@ router.post(
       existingAuthor.name = req.body.name || existingAuthor.name;
       existingAuthor.email = req.body.email || existingAuthor.email;
       existingAuthor.background =
-        req.body.background || existingAuthor.background;
+      req.body.background || existingAuthor.background;
 
-      await existingAuthor.save();
+      const author = await existingAuthor.save();
 
-      res.redirect("/admin/authors");
-    } catch (error) {
-      console.error("Error updating author:", error);
-
-      if (error.name === "CastError") {
-        return res.status(400).send("Invalid authorId");
+      if (!author) {
+        req.flash("fail", "Unable to edit author!");
+        res.redirect("/admin/authors");
+      } else {
+        req.flash("success", "New author edited successfully!");
+        res.redirect("/admin/authors");
       }
-
-      res.status(500).send("Internal Server Error");
+    } catch (error) {
+      res.status(404).render("/404");
     }
   }
 );
 
 // Delete a single author
-router.post("/delete/:id",  checkAdmin, async (req, res) => {
+router.post("/delete/:id", checkAdmin, async (req, res) => {
   try {
     const author = await Authors.findByIdAndDelete(req.params.id);
 
     if (!author) {
-      // req.flash("rejected", "Author not found!");
-      return res.redirect("/admin/authors");
+      req.flash("fail", "Unable to find author!");
+      res.redirect("/admin/authors");
     }
 
     // Delete the corresponding image file from the server
@@ -118,17 +120,17 @@ router.post("/delete/:id",  checkAdmin, async (req, res) => {
       );
       await fs.promises.unlink(imagePath);
     }
-
+    req.flash("success", "Deleted author successfully!");
     res.redirect("/admin/authors");
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(404).render("/404");
   }
 });
 
 // Delete all authors
 router.post(
   "/delete-all-authors",
-  
+
   checkAdmin,
   async (req, res) => {
     try {
@@ -145,18 +147,23 @@ router.post(
         }
       }
 
-      await Authors.deleteMany({});
-      console.log(deletedAuthors);
-      res.redirect("/admin/authors");
+      const author = await Authors.deleteMany({});
+      if (!author) {
+        req.flash("fail", "Unable to delete all author!");
+        res.redirect("/admin/authors");
+      } else {
+        req.flash("success", "All author deleted successfully!");
+        res.redirect("/admin/authors");
+      }
+
     } catch (error) {
-      console.log(error);
-      res.status(500).send(error);
+      res.status(404).render("/404");
     }
   }
 );
 
 // Search for book
-router.post("/search",  checkAdmin, async (req, res) => {
+router.post("/search", checkAdmin, async (req, res) => {
   let searchTerm = req.body.search;
   const regex = new RegExp(searchTerm, "i");
 

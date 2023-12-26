@@ -1,8 +1,16 @@
 <main class="d-flex flex-nowrap">
-  <!-- <div class="b-example-divider b-example-vr"></div> -->
   <div class="mainContent">
     <div class="CatergoryName">
       <h1>Book Management</h1>
+      <% if (messages.fail) { %>
+        <div id="rejectedMessage" class="alert alert-danger" role="alert">
+          <%- messages.fail %>
+        </div>
+        <% } %> <% if (messages.success) { %>
+        <div id="acceptedMessage" class="alert alert-success" role="alert">
+          <%- messages.success %>
+        </div>
+    <% } %>
     </div>
     <div class="search-form">
       <form
@@ -43,22 +51,6 @@
                     required
                   />
                   <div id="add-image-cover-preview" class="py-1"></div>
-                </div>
-                <div class="contentImageContainer d-flex flex-column">
-                  <label
-                    for="addContentImage"
-                    class="image-label"
-                    id="select-image"
-                    >Add Content Image</label
-                  >
-                  <input
-                    type="file"
-                    id="addContentImage"
-                    name="contentImage"
-                    onchange="previewImage('addContentImage', 'add-image-content-preview')"
-                    multiple
-                  />
-                  <div id="add-image-content-preview" class="py-1"></div>
                 </div>
               </div>
               <div class="right-container">
@@ -294,7 +286,6 @@
             <td><%= book.category %></td>
             <td><%= book.publisher %></td>
             <td><%= book.published %></td>
-            <td></td>
             <td><%= book.description %></td>
             <td>
               <div class="imgBooks">
@@ -303,6 +294,9 @@
                   style="width: 100px; height: 100px; object-fit: cover"
                 />
               </div>
+            </td>
+            <td>
+              <button type="button"><a href="/admin/books-management/<%= book._id %>">View Content</a></button>
             </td>
             <td>
               <button
