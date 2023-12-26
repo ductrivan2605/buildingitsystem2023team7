@@ -20,9 +20,9 @@ ul {
   list-style: none;
 }
 .footer {
-  background-color: #0f2c59;
-  padding-bottom: 15px;
-  padding-top: 15px;
+  background-color: #393e46;
+  padding-bottom: 30px;
+  padding-top: 30px;
 }
 .footer-col {
   width: 25%;
@@ -52,10 +52,10 @@ ul {
 .footer-col ul li a {
   font-size: 16px;
   text-transform: capitalize;
-  color: #ffffff;
+  color: #eeeeee;
   text-decoration: none;
   font-weight: 300;
-  color: #bbbbbb;
+  color: #eeeeee;
   display: block;
   transition: all 0.3s ease;
 }
