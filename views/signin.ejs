@@ -111,25 +111,21 @@
             <img src="/images/logo3.png" class="img-fluid" alt="Booktopialogo">
           </div>
           <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-            <form>
+            <form action="/auth/signin" method="post">
               <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                 <p class="lead fw-large fw-bold mb-0 me-3">Wellocme to Booktopia !</p> <br><br><br>
-
-
-
               </div>
-
               <!-- Username input -->
               <div class="form-outline mb-4">
                 <label class="form-label" for="form3Example3">User Name</label>
-                <input type="string" id="form3Example3" class="form-control form-control-lg"
+                <input type="string" name="username" id="form3Example3" class="form-control form-control-lg"
                   placeholder="Enter a valid User Name" />
               </div>
 
               <!-- Password input -->
               <div class="form-outline mb-3">
                 <label class="form-label" for="form3Example4">Password</label>
-                <input type="password" id="form3Example4" class="form-control form-control-lg"
+                <input type="password" name="password" id="form3Example4" class="form-control form-control-lg"
                   placeholder="Enter password" />
               </div>
 

@@ -1,0 +1,123 @@
+body {
+    background-color: #EEEEEE;
+}
+
+#wrapper{
+  height : auto;
+  min-height: 100%;
+}
+
+#wrapper,
+.resultContainer {
+  min-height: calc(100vh - 60px);
+
+}
+.bookmark-list {
+    list-style: none;
+    padding: 20px;
+  }
+.bookContainer h2 {
+    border-bottom: 1px solid rgb(187, 186, 186);
+    padding:20px;
+}  
+  .book {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 10px;
+    width: 50%;
+    margin: 12px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin:0 auto;
+  }
+  
+
+  
+  .book-info {
+    flex: 1;
+    margin-left: 20px;
+
+
+}
+.book-imagebox {
+    width: 17%;
+
+}
+
+
+  .deleteButton {
+    float: right;
+  }
+  .book-image{
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    
+}
+
+
+.book-title h3{
+    font-size: 25px;
+    font-weight: bold;
+    word-break: break-all;
+    overflow-wrap: break-word;
+}
+
+.bookdetail p {
+    color: #494848;
+    word-break: break-all;
+    overflow-wrap: break-word;
+}
+
+.deleteButton {
+    padding: 5px 10px;
+    background-color: #eb4444;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 4rem;
+    height: 2rem;
+
+}
+
+.deleteButton:hover {
+    background-color: #ff1a1a;
+}
+
+@media screen and (max-width: 767px) {
+    .book {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        width: 90%;
+        margin: 12px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin:0 auto;
+      }
+      .book-imagebox {
+        background-color: antiquewhite;
+        width: 30%;
+    
+    }
+    
+      .book-image{
+        max-width: 100%;
+        height: 190px;
+        object-fit: cover;
+        margin-bottom: 10px;
+        
+    }
+    
+      
+}

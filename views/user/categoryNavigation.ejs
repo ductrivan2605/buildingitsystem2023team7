@@ -3,16 +3,13 @@
     <div class="nav-items">
         <div class="nav-item">
             <a href="/category/<%= category.slug %>">
-                <img src="/images/<%= category.image %>" alt="Novel_icon">
-                <p><%= category.category %></p>
+                <img class="itemImage"src="/images/<%= category.image %>" alt="Novel_icon">
+                <div class="categoryName">
+                    <p><%= category.category %></p>
+                </div>
             </a>
         </div>
     </div>
     <% }) %>
-    <div class="nav-items">
-        <div class="nav-item">
-            <img src="/images/" alt="Novel_icon">
-            <p>View more</p>
-        </div>
-    </div>
+
 </div>

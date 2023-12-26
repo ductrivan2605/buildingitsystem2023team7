@@ -6,37 +6,48 @@ const WishlistItem = require('../../models/Wishlist');
 const upload = require("../../middleware/uploadImage.js");
 const fs = require('fs');
 const path = require('path');
+const User = require("../../models/user.js");
+const {
+  checkAdmin
+} = require("../../middleware/checkAuthenticated.js");
 
 let responseSent = false;
 
 // Get all wishlist items
-router.get('/', async (req, res) => {
+router.get('/', checkAdmin, async (req, res) => {
   try {
     const wishlistItems = await WishlistItem.find({ approveWishlist: false });
+    const users = await User.find({});
     res.render('admin/wishlistAdmin', {
       layout: './layouts/admin/itemsManagementLayout',
       title: 'Wishlist Management',
       wishlistItems: wishlistItems,
+      users: users,
+      user: res.locals.user, // Pass the user object to the template
+      messages: req.flash(),
     });
   } catch (error) {
     console.error(error);
-    res.status(500).send('Internal Server Error');
+    res.status(404).render("/404");
   }
 });
 
-router.get('/approved', async (req, res) => {
+router.get('/approved',  checkAdmin, async (req, res) => {
   try {
     const approvedWishlistItems = await WishlistItem.find({ approveWishlist: true });
+    const users = await User.find({});
     res.render('admin/wishlistAdmin2', {
       layout: './layouts/admin/itemsManagementLayout',
       title: 'Approved Wishlist Items',
       wishlistItems: approvedWishlistItems,
+      users: users,
+      user: res.locals.user, // Pass the user object to the template
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Internal Server Error');
+    res.status(404).render("/404");
   }
 });
+
 
 
 // Get a single wishlist item by ID
@@ -65,8 +76,7 @@ router.post('/reset', async (req, res) => {
     // Redirect back to the wishlist admin page after reset
     res.redirect('/admin/wishlist/');
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(404).render("/404");
   }
 });
 
@@ -130,8 +140,7 @@ router.post('/approve/:id', async (req, res) => {
     res.redirect('/admin/wishlist');
 
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(404).render("/404");
   }
 });
 
@@ -163,8 +172,7 @@ router.post('/delete1/:id', async (req, res) => {
     // res.status(200).json({ message: 'Wishlist Item deleted successfully' });
     res.redirect('/admin/wishlist');
   } catch (error) {
-    console.error('Error in delete route:', error);
-    res.status(500).json({ error: 'Internal Server Error', details: error.message });
+    res.status(404).render("/404");
   }
 });
 
@@ -196,8 +204,7 @@ router.post('/delete2/:id', async (req, res) => {
     // res.status(200).json({ message: 'Wishlist Item deleted successfully' });
     res.redirect('/admin/wishlist/approved');
   } catch (error) {
-    console.error('Error in delete route:', error);
-    res.status(500).json({ error: 'Internal Server Error', details: error.message });
+    res.status(404).render("/404");
   }
 });
 
@@ -251,8 +258,7 @@ router.post('/delete-all1', async (req, res) => {
     // Redirect to the wishlist page
     res.redirect('/admin/wishlist');
   } catch (error) {
-    console.error('Error in delete-all route:', error);
-    res.status(500).json({ error: 'Internal Server Error', details: error.message });
+    res.status(404).render("/404");
   }
 });
 
@@ -273,13 +279,15 @@ router.post('/delete-all2', async (req, res) => {
     }
 
     // Delete all wishlist items from the database
-    await WishlistItem.deleteMany({});
-
-    // Redirect to the wishlist page
-    res.redirect('/admin/wishlist/approved');
+    const wishList = await WishlistItem.deleteMany({});
+    if (!wishList) {
+      req.flash("fail", "Unable to delete all wishlists!");
+      res.redirect("/admin/categories");
+    }
+    req.flash("success", "All wishlists deleted successfully!");
+    res.redirect("/admin/categories");
   } catch (error) {
-    console.error('Error in delete-all route:', error);
-    res.status(500).json({ error: 'Internal Server Error', details: error.message });
+    res.status(404).render("/404");
   }
 });
 

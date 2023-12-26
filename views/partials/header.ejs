@@ -20,31 +20,20 @@
   <body>
     <header class="header">
       <div class="logo">
-        <a href="#"><img src="/images/logo.png" alt="" /></a>
+        <a href="/"><img src="/images/logo3.png" alt="" /></a>
       </div>
       <button class="menu-button" onclick="toggleMenu()">
         <i class="fa-solid fa-bars"></i>
       </button>
       <nav class="navBar">
         <ul class="NavList" id="navList">
-          <li class="NavList-item"><a href="#">Home</a></li>
+          <li class="NavList-item"><a href="/">Home</a></li>
           <li class="NavList-item">
-            <a href="#">Author <i class="fa-solid fa-caret-down"></i></a>
+            <a href="#">Book Progression <i class="fa-solid fa-caret-down"></i></a>
             <div class="dropDown">
               <ul class="dropDownList">
                 <li class="dropDownItem">
-                  <a href="#">Lv1 <i class="fa-solid fa-arrow-right"></i></a>
-                  <ul class="dropDownList-lv2">
-                    <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
-                    <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
-                  </ul>
-                </li>
-                <li class="dropDownItem">
-                  <a href="#">Lv1 <i class="fa-solid fa-arrow-right"></i></a>
-                  <ul class="dropDownList-lv2">
-                    <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
-                    <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
-                  </ul>
+                  <a href=""><i class="fa-solid fa-arrow-right"></i></a>
                 </li>
               </ul>
             </div>
@@ -76,13 +65,15 @@
         </ul>
       </nav>
 
-      <form class="search">
+      <form action="/user/search/result" method="post" class="search" >
         <input
           type="text"
+          name="search"
+          id="searchInput"
           class="search-box"
           placeholder="What are you finding?"
         />
-        <button type="submit" class="search-but">
+        <button type="submit" class="search-but"><i class="fa-solid fa-magnifying-glass"></i>
           <!-- <img
             src="https://cdn2.iconfinder.com/data/icons/minimal-set-five/32/minimal-48-1024.png"
             alt=""
@@ -91,6 +82,10 @@
           /> -->
         </button>
       </form>
+
+
+
+
       <div class="user" id="userSection">
         <div class="user-info" onclick="toggleUserMenu()">
           <img
@@ -103,7 +98,7 @@
         </div>
         <div class="user-dropdown" id="userDropdown">
           <!-- Dropdown menu content -->
-          <a href="#">Profile</a>
+          <a href="/bookmarks">Bookmark Management</a>
           <a href="#">Settings</a>
           <a href="#">Logout</a>
         </div>

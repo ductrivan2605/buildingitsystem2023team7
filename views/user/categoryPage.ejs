@@ -1,8 +1,9 @@
-<div class="wrap">
+<div id="wrap">
   <div class="subCategory">
     <h1>
       <%= category.category %>
     </h1>
+    
   </div>
   <nav class="navbar">
     <ul class="navbar__menu">
@@ -21,9 +22,26 @@
       <% if (books.length > 0) { %>
         <% books.forEach(book => { %>
           <div class="book">
-            <a href="/book/<%= book.slug %>"><img src="/images/<%= book.imageCover %>" alt="Fiction book 1" /></a>
-            <h2><%= book.title %></h2>
-            <p><%= book.authors.join(',') %></p>
+            <a href="/book/<%= book.slug %>">
+              <img class="bookImage" src="/images/<%= book.imageCover %>" alt="Fiction book 1" />
+              <div class="bookInformation">
+                <div class="bookTitle"><h2><%= book.title %></h2></div>
+                <div class="bookAuthor"><p><%= book.authors.join(',') %></p></div>
+              </div>  
+            </a>
+            <button class="bookmark-btn">
+              <form action="/bookmarks/add/<%= book.slug %>" method="post">
+                <button type="submit" class="bookmark-btn">
+                  <div class="btnIcon">
+                    <% if(book.bookmarked){ %>
+                      <ion-icon class="bookmarkIcon" name="star" style="color:gold"></ion-icon>
+                      <% }else{ %>
+                        <ion-icon class="bookmarkIcon" name="star" style="color: black"></ion-icon>
+                      <% } %>
+                  </div>
+                </button>
+              </form>
+            </button>
           </div>
         <% }) %>
       <% } else { %>

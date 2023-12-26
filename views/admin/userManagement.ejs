@@ -2,6 +2,15 @@
     <div class="mainContent">
         <div class="CatergoryName">
             <h1>User Management</h1>
+            <% if (messages.fail) { %>
+                <div id="rejectedMessage" class="alert alert-danger" role="alert">
+                  <%- messages.fail %>
+                </div>
+                <% } %> <% if (messages.success) { %>
+                <div id="acceptedMessage" class="alert alert-success" role="alert">
+                  <%- messages.success %>
+                </div>
+            <% } %>
         </div>
         <div class="search-form">
             <form action="/admin/users-management/search" method="post" class="d-flex">

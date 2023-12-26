@@ -8,13 +8,12 @@
   </head>
 
   <body>
+
+    <h1 class="book_details_title">Book Details</h1>
     <ul class="book_detail_breadcrumbs">
       <li><a href="/">Home</a></li>
-      <li><a href="/category/">Category</a></li>
-      <li><a href="/category/subcategory/">Subcategory</a></li>
-      <li><a href="/category/subcategory/page/">Page</a></li>
+      <li><%= books.title %></li>
     </ul>
-    <h1 class="book_details_title">Book Details</h1>
     <div class="container111">
       <div class="container1">
         <div class="title">
@@ -71,15 +70,10 @@
             
             <form action="/book/<%= books.slug %>/review" method="post">
             <div id="review" class="content">
-              <h3>Write a Comments</h3>
               <div class="user-comment">
+                <h3>Write a Comments</h3>
                 <div class="user-comment-box">
-                  <img
-                  src=""
-                  alt="User Profile Image"
-                  />
                   <div class="user-comment-box-header">
-                    <h3>User Name</h3>
                     <div class="star-rating space-x-4 mx-auto">
                       <input
                         type="radio"

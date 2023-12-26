@@ -1,8 +1,16 @@
 <main class="d-flex flex-nowrap">
-  <!-- <div class="b-example-divider b-example-vr"></div> -->
   <div class="mainContent">
     <div class="CatergoryName">
       <h1>Book Management</h1>
+      <% if (messages.fail) { %>
+        <div id="rejectedMessage" class="alert alert-danger" role="alert">
+          <%- messages.fail %>
+        </div>
+        <% } %> <% if (messages.success) { %>
+        <div id="acceptedMessage" class="alert alert-success" role="alert">
+          <%- messages.success %>
+        </div>
+    <% } %>
     </div>
     <div class="search-form">
       <form
@@ -279,10 +287,9 @@
             <th scope="col">Category</th>
             <th scope="col">Publisher</th>
             <th scope="col">Published</th>
-            <th scope="col">Rating</th>
             <th scope="col">Description</th>
-            <th scope="col">Review</th>
             <th scope="col">Cover image</th>
+            <th scope="col">Book content</th>
             <th scope="col">Edit</th>
           </tr>
         </thead>
@@ -295,9 +302,8 @@
             <td><%= book.category %></td>
             <td><%= book.publisher %></td>
             <td><%= book.published %></td>
-            <td><%= book.rating %></td>
+            <td></td>
             <td><%= book.description %></td>
-            <td><%= book.review %></td>
             <td>
               <div class="imgBooks">
                 <img

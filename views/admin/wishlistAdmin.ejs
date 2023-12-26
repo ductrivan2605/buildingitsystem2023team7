@@ -1,12 +1,14 @@
 
-    
-      <main class="main">
+      <main class="main" style="background-color: #EEEEEE;">
+<div class="CatergoryName">
+  <h1>Wishlist Management</h1>
+</div>
         <form action="/admin/wishlist/reset" method="post" id="wishlistResetForm" style="display: inline;">
           <button class="btn btn-primary">Reset Wishlist</button>
         </form>
       
         <!-- Delete All button -->
-        <input type="button" value="Delete All" onclick="openPopup('deleteAllPopup')" />
+        <input type="button" value="Delete All" onclick="openPopup('deleteAllPopup')" class="btn btn-danger"/>
         <div class="popup-container" id="deleteAllPopup">
           <div class="popup">
             <div>
@@ -20,6 +22,9 @@
             </div>
           </div>
         </div>
+        <form action="/admin/wishlist/approved" method="get" id="wishlistResetForm" style="display: inline;">
+          <button class="btn btn-success">Approved Wishlist</button>
+        </form>
       
         <!-- Wishlist Items table -->
         <table class="table mt-4">
@@ -41,7 +46,7 @@
                 <td><%= item.dateWishlist.toISOString().split('T')[0] %></td>
                 <td>
                   <div class="imgBooks">
-                    <img src="/images/<%= item.imageWishlist %>" alt="Wishlist Image" style="max-width: 50px; height: auto;">
+                    <img src="/images/<%= item.imageWishlist %>" alt="Wishlist Image" style="width: 100px; height: 100px; object-fit: cover;">
                   </div>
                 </td>
                 <td>

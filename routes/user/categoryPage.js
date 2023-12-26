@@ -7,7 +7,7 @@ const Categories = require("../../models/Category.js");
 router.get("/:slug", async (req, res) => {
     try {
         const page = req.query.page || 1;
-        const itemsPerPage = 12;
+        const itemsPerPage = 10;
         const searchTermSlug = req.params.slug;
 
         const category = await Categories.findOne({
@@ -69,7 +69,7 @@ router.get("/:slug", async (req, res) => {
 router.get("/:category/:subCategory", async (req, res) => {
     try {
         const page = req.query.page || 1;
-        const itemsPerPage = 12;
+        const itemsPerPage = 10;
         const categorySlug = req.params.category;
         const subCategorySlug = req.params.subCategory;
 

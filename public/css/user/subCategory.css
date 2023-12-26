@@ -11,6 +11,17 @@
     /* background-color: #222831; */
     
   }
+  #wrap{
+    height : auto;
+    min-height: 100%;
+    /* padding-bottom:212px; */
+  }
+  
+  #wrapper,
+  .mainContent {
+    min-height: calc(100vh - 60px);
+  
+  }
 
 .navbar__menu {
     list-style: none;
@@ -29,54 +40,67 @@
   }
   .subCategory h1 {
     /* text-align: center; */
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     padding: 10px;
     margin:0px;
+    border-bottom: 1px solid black;
 
     font-size: 60px;
 }
 
 .book-container {
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
-  background-color: #eeeeee;
+  background-color: #eeeeee; */
+  width:75%;
+  margin:0 auto;
 }
 
 .book {
-  width: 10%;
-  margin: 50px;
-  padding: 20px;
-  background-color: rgb(255, 255, 255);
-
-  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  width: 16%;
+  margin: 23px;
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
 }
 
 .book a img {
-  width: 100%;
-  height: 70%;
-  margin-bottom: 10px;
+  max-width: 100%;
+  height: 280px;
   object-fit: cover;
+  margin-bottom: 10px;
 }
 
 
-.book > h2{
-    font-size: 17px;
-    white-space: nowrap; 
-    overflow: hidden;
-    text-overflow: ellipsis; 
-    color: black;
+.bookTitle h2 {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 1.1em;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
 
 }
 
-.book > p {
-    font-size: 14px;
-    color: #555;
-    white-space: nowrap; 
-    overflow: hidden;
-    text-overflow: ellipsis; 
-    color: black;
+.bookAuthor p {
+  font-style: italic;
+  margin-bottom: 5px;
+  color: #555;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
     
 
+}
+.book a {
+  text-decoration: none; 
+  color: black; 
 }
 
 .navbar__menu li a {
@@ -110,6 +134,15 @@
 .page-btn:hover {
   background-color: #ddd;
 }
+button.bookmark-btn {
+  font-size: 28px;
+  float: right;
+}
+.bookmark-btn {
+  border: none; 
+  background: none; 
+  padding: 0; 
+}
 
 @media screen and (max-width: 700px) {
   .navbar {
@@ -129,20 +162,121 @@
         text-align: center;
       }
       .book {
-        width: calc(53% - 53px); 
-        margin: 30px 20px; 
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        width: 44%;
+        margin: 10px;
+        display: inline-block;
+        vertical-align: top;
+        text-align: left;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    body { 
+      body { 
       margin:0px;
       background-color: #222831;
       
     }
-    .subCategory h1 {
+      .subCategory h1 {
       /* text-align: center; */
       border-bottom: 1px solid black;
-      color: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
       padding: 10px;
       font-size: 60px;
       margin:0px;
   }
+      .bookImage {
+        max-width: 100%;
+        height: 230px;
+        object-fit: cover;
+        /* height: auto; */
+        margin-bottom: 10px;
+      }
+      .book-container {
+        width:95%;
+      }
+
 }
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .book {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 30%;
+    margin: 10px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+  body { 
+  margin:0px;
+  background-color: #222831;
+  
+}
+  .subCategory h1 {
+  /* text-align: center; */
+  border-bottom: 1px solid black;
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  font-size: 60px;
+  margin:0px;
+}
+  .bookImage {
+    max-width: 100%;
+    height: 230px;
+    object-fit: cover;
+    /* height: auto; */
+    margin-bottom: 10px;
+  }
+  .book-container {
+    width:95%;
+  }
+
+
+}
+
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .book {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 22%;
+    margin: 10px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+  body { 
+  margin:0px;
+  background-color: #222831;
+  
+}
+  .subCategory h1 {
+  /* text-align: center; */
+  border-bottom: 1px solid black;
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  font-size: 60px;
+  margin:0px;
+}
+  .bookImage {
+    max-width: 100%;
+    height: 230px;
+    object-fit: cover;
+    /* height: auto; */
+    margin-bottom: 10px;
+  }
+  .book-container {
+    width:95%;
+  }
+
+
+}
+

@@ -2,11 +2,13 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const User = require('../models/user');
+const passport = require('passport');
+const connectEnsureLogin = require('connect-ensure-login');
 
-router.get("/signin", async (req, res) => {
+router.get("/signin",connectEnsureLogin.ensureLoggedOut(), async (req, res) => {
   try {
     res.render("signin", {
-      layout: "./layouts/admin/itemsManagementLayout",
+      layout: false,
       title: "User Authenticate",
     });
   } catch (error) {
@@ -17,7 +19,7 @@ router.get("/signin", async (req, res) => {
 router.get("/register", async (req, res) => {
   try {
     res.render("register", {
-      layout: "./layouts/admin/itemsManagementLayout",
+      layout: false,
       title: "User Authenticate",
     });
   } catch (error) {
@@ -40,8 +42,10 @@ router.post('/register', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
+      name: req.body.name,
       username: req.body.username,
       password: hashedPassword,
+      email: req.body.email ||"",
       role: 'standard' // 'admin' for admin users
     });
     await user.save();
@@ -53,26 +57,37 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.post('/signin', async (req, res) => {
-  const { username, password } = req.body;
-  const user = await User.findOne({ username });
+// router.post('/signin', async (req, res) => {
+//   const { username, password } = req.body;
+//   const user = await User.findOne({ username });
 
-  if (!user) {
-    return res.status(404).send('User not found');
-  }
+//   if (!user) {
+//     return res.status(404).send('User not found');
+//   }
 
-  try {
-    if (await bcrypt.compare(password, user.password)) {
-      res.send(`Welcome, ${user.username}!`);
-      res.redirect("/")
-    } else {
-      res.status(401).send('Invalid password');
-    }
-  } catch (error) {
-    res.status(500).send('Error signing in');
-    res.render("404")
-  }
+//   try {
+//     if (await bcrypt.compare(password, user.password)) {
+//       res.send(`Welcome, ${user.username}!`);
+//       res.redirect("/")
+//     } else {
+//       res.status(401).send('Invalid password');
+//     }
+//   } catch (error) {
+//     res.status(500).send('Error signing in');
+//     res.render("404")
+//   }
+// });
+
+router.post('/signin', passport.authenticate('local', {
+  successReturnToOrRedirect:'/',
+  failureRedirect: '/auth/signin',
+  failureFlash: false, 
+}), (req, res) => {
+  console.log('Authentication successful');
 });
+
+
+
 // POST /auth/configure route to handle user information update
 router.post('/configure', async (req, res) => {
   const { name, email, address, subaddress, country } = req.body;
