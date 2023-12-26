@@ -61,6 +61,8 @@ const userRouter = require("./routes/user/userRoutes");
 const wishlistRouter = require("./routes/wishlistRouter");
 const wishlistAdminRouter = require("./routes/admin/wishlistAdminRouter");
 const searchPageRouter = require("./routes/user/searchPageRoute");
+const adminRouter = require('./routes/admin/adminRouter');
+
 
 app.use("/", mainPage);
 app.use("/book", bookDetailRouter);
@@ -76,7 +78,7 @@ app.use("/auth", authRouter);
 app.use("/wishlist", wishlistRouter);
 app.use("/admin/wishlist",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), wishlistAdminRouter);
 app.use("/user/search", searchPageRouter);
-
+app.use('/admin', adminRouter);
 // app.get('/', (req, res) => {
 //   res.render('user/wishlist');
 // });

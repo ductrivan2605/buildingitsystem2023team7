@@ -15,10 +15,10 @@
                         <div>
                             <h1>Add New User</h1>
                         </div>
-                        <form action="/admin/users-management/add-user" method="post" class="d-flex w-100">
+                        <form action="/admin/users-management/add-user" method="post" class="d-flex w-100" enctype="multipart/form-data">
                             <div class="image-container ">
                                 <label for="image">Add profile image</label>
-                                <input type="file" id="image" name="profileImage" onchange="previewImage('image', 'add-image-preview')">
+                                <input type="file" id="profileImage" name="profileImage" onchange="previewImage('profileImage', 'add-image-preview')">
                                 <div id="add-image-preview" class="py-1"></div>
                             </div>
                             <div class="right-container w-100">
@@ -34,15 +34,6 @@
 
                                 <label for="password">Password:</label>
                                 <input type="password" id="password" name="password" required>
-
-                                <label for="address">Address:</label>
-                                <input type="text" id="address" name="address" required>
-
-                                <label for="subaddress">Subaddress:</label>
-                                <input type="text" id="subaddress" name="subaddress">
-
-                                <label for="country">Country:</label>
-                                <input type="text" id="country" name="country">
 
                                 <label for="role">Role:</label>
                                 <select id="role" name="role">
@@ -84,8 +75,6 @@
                     <th scope="col">Name</th>
                     <th scope="col">Username</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Country</th>
                     <th scope="col">Role</th>
                     <th scope="col">Profile Picture</th>
                     <th scope="col">Actions</th>
@@ -99,12 +88,10 @@
                         <td><%= user.name %></td>
                         <td><%= user.username %></td>
                         <td><%= user.email %></td>
-                        <td><%= user.address %></td>
-                        <td><%= user.country %></td>
                         <td><%= user.role %></td>
                         <td>
                             <div class="profileImage">
-                                <img src="/images/<%= user.image %>" style="width: 100px; height: 100px; object-fit: cover;"/>
+                                <img src="<%= user.image %>" style="width: 100px; height: 100px; object-fit: cover;"/>
                             </div>
                         </td>
                         <td>
@@ -114,7 +101,7 @@
                                     <div>
                                         <h1>Edit User</h1>
                                     </div>
-                                    <form action="/admin/users-management/update-user/<%= user._id %>" method="post" class="d-flex w-100">
+                                    <form action="/admin/users-management/update/<%= user._id %>" method="post" class="d-flex w-100" enctype="multipart/form-data">
                                         <!-- Edit user form -->
                                         <div class="image d-flex flex-column">
                                             <label for="image">Add profile image</label>
@@ -132,15 +119,6 @@
                                                 <label for="editEmail">Email:</label>
                                                 <input type="email" id="editEmail" name="email" value="<%= user.email %>" required>
 
-                                                <label for="editAddress">Address:</label>
-                                                <input type="text" id="editAddress" name="address" value="<%= user.address %>" required>
-
-                                                <label for="editSubaddress">Subaddress:</label>
-                                                <input type="text" id="editSubaddress" name="subaddress" value="<%= user.subaddress %>">
-
-                                                <label for="editCountry">Country:</label>
-                                                <input type="text" id="editCountry" name="country" value="<%= user.country %>">
-
                                                 <label for="editRole">Role:</label>
                                                 <select id="editRole" name="role">
                                                     <option value="standard" <% if (user.role === 'standard') { %> selected <% } %>>Standard</option>
@@ -156,8 +134,9 @@
                                     </form>
                                 </div>
                             </div>
-                            <button class="delete-btn" onclick="openPopup('deletePopup')">Delete</button>
-                            <div class="popup-container" id="deletePopup">
+                            <button class="delete-btn" onclick="openPopup('deletePopup<%= counter %>')">Delete</button>
+
+                            <div class="popup-container" id="deletePopup<%= counter %>">
                                 <div class="popup">
                                     <div>
                                         <h1>Do you want to delete <%= user.username %>? </h1>
@@ -165,11 +144,12 @@
                                     <div class="fluid-container">
                                         <form action="/admin/users-management/delete-user/<%= user._id %>" method="post">
                                             <button type="submit" class="btn btn-success"> Confirm</button>
-                                            <button type="button" class="btn btn-danger" onclick="closePopup('deletePopup')"> Cancel</button>
+                                            <button type="button" class="btn btn-danger" onclick="closePopup('deletePopup<%= counter %>')"> Cancel</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
+
                         </td>
                     </tr>
                     <% counter++ %>

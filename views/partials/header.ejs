@@ -97,17 +97,18 @@
           <i class="fa-solid fa-caret-down"></i>
         </div>
         
-        <div class="user-dropdown" id="userDropdown">
-          <!-- Dropdown menu content -->
-          <% if (user) { %>
-            <a href="#">Profile</a>
-            <a href="#">Settings</a>
-            <a href="auth/logout">Logout</a>
-          <% } else { %>
-            <a href="auth/signin">Login</a>
-            <a href="auth/register">Register</a>
-          <% } %>
-        </div>
+   <div class="user-dropdown" id="userDropdown">
+  <!-- Dropdown menu content -->
+  <% if (user) { %>
+    <a href="#">Profile</a>
+    <a href="#">Settings</a>
+    <a href="<%= user.role === 'admin' ? 'admin/dashboard' : '/' %>">Home</a>
+    <a href="auth/logout">Logout</a>
+  <% } else { %>
+    <a href="auth/signin">Login</a>
+    <a href="auth/register">Register</a>
+  <% } %>
+</div>
       </div>
     </header>
   </body>

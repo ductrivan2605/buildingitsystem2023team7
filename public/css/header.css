@@ -218,6 +218,11 @@ body {
   margin: 0 auto;
 }
 
+#userAvatar {
+  width: 40px;
+  height: 40px;
+}
+
 .user-dropdown {
   display: none;
   position: absolute;

@@ -2,7 +2,9 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const User = require("../../models/user.js");
+const mongoose = require('mongoose');
 const fs = require('fs').promises;
+const path = require('path');
 const upload = require("../../middleware/uploadImage.js");
 const {
   checkAdmin
@@ -36,24 +38,18 @@ router.get("/", checkAdmin, async (req, res) => {
 //   }
 // });
 // POST /admin/add-user - Add a new user
-router.post('/add-user', checkAdmin, upload.single([{
-  name:"image", maxCount: 1
-}]), async (req, res) => {
+router.post('/add-user', checkAdmin, upload.single('profileImage'), async (req, res) => {
   try {
-    // if (req.user.role !== 'admin') {
-    //   return res.status(403).send('Access denied');
     const {
       name,
       username,
       email,
       password,
-      address,
-      subaddress,
-      country,
-      role
+      role,
     } = req.body;
-    //get the filenames for profileImage
-    const image = req.file ? req.file.filename : null;
+
+    // Get the filename for the profileImage, or use default if not provided
+    const image = req.file ? '/images/' + req.file.filename : '/images/userDefault.jpg';
 
     // Check if the username or email already exists
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
@@ -65,150 +61,139 @@ router.post('/add-user', checkAdmin, upload.single([{
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create the new user
-    const user = await User.create({
-      image: image,
-      name: name,
-      username: username,
-      email: email,
-      password: hashedPassword,
-      address: address,
-      subaddress: subaddress,
-      country: country,
-      role
-    });
-
-    console.log("Added new user:", user);
-    await user.save();
-    res.redirect('/admin/users-management');
-  } catch (error) {
-    res.status(500).send("Can't add user");
-    console.log(error.message)
-  }
-});
-// POST /admin/user/update/:id - Update user by ID
-router.post('/update/:id',
- checkAdmin,
- upload.single('editImage'), 
- async (req, res) => {
-  try {
-    const userId = req.params.id;
-
-    const {
+    const user = new User({
+      image,
       name,
       username,
       email,
-      password,
-      address,
-      subaddress,
-      country,
+      password: hashedPassword,
       role,
-    } = req.body;
+    });
 
-    // Check if the user exists
+    // Save the new user
+    await user.save();
+
+    console.log('Added new user:', user);
+    res.redirect('/admin/users-management');
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Can't add user");
+  }
+});
+
+
+// POST /admin/user/update/:id - Update user by ID
+router.post('/update/:id', checkAdmin, upload.single('editProfileImage'), async (req, res) => {
+  const userId = req.params.id;
+  const { name, username, email, password, role } = req.body;
+
+  try {
     const user = await User.findById(userId);
     if (!user) {
       return res.redirect("/admin/users-management");
     }
 
-    // Construct a dynamic update object
     const updateFields = {};
     if (name) updateFields.name = name;
     if (username) updateFields.username = username;
     if (email) updateFields.email = email;
-    if (address) updateFields.address = address;
-    if (subaddress) updateFields.subaddress = subaddress;
-    if (country) updateFields.country = country;
     if (role) updateFields.role = role;
 
-    // Update profile image if a new image is uploaded
     if (req.file) {
       // Delete the old profile image if it exists
       if (user.image) {
-        const oldImageFilePath = path.resolve(__dirname, "../../public/images", user.image);
-        if (fs.existsSync(oldImageFilePath)) {
-          fs.unlinkSync(oldImageFilePath);
+        const oldImageFilePath = path.join(__dirname, '../../public', user.image);
+        try {
+          await fs.unlink(oldImageFilePath);
+        } catch (error) {
+          console.error(`Error deleting old image: ${error.message}`);
         }
       }
       // Save the new profile image
-      user.image = req.file.filename;
+      updateFields.image = '/images/' + req.file.filename;
     }
 
-    // Check if a new password is provided and hash it
     if (password) {
       const hashedPassword = await bcrypt.hash(password, 10);
       updateFields.password = hashedPassword;
     }
 
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      updateFields,
-      { new: true }
-    );
+    // Use findOneAndUpdate with the filter on _id
+    const updatedUser = await User.findOneAndUpdate({ _id: userId }, updateFields, { new: true });
 
     if (!updatedUser) {
       return res.status(404).send('User not found');
     }
-    console.log(updatedUser);
-    res.redirect('/');
+
+    console.log('Updated user:', updatedUser);
+    res.redirect('/admin/users-management');
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Internal Server Error');
+    console.error('Error in update route:', error);
+    res.status(500).send(`Internal Server Error: ${error.message}`);
   }
 });
-
 // Delete a user
-router.post('/delete/:id', checkAdmin, async (req, res) => {
+router.post('/delete-user/:id', checkAdmin, async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const userId = req.params.id;
 
-    if (!user) {
-      req.flash('rejected', 'User not found!');
-      res.redirect('/admin/users-management');
-      return;
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ error: 'Invalid User ID' });
     }
 
-    // Delete user profile image if exists
-    if (user.image) {
-      const imagePath = path.join(__dirname, '../../public/images', user.image);
+    const deletedUser = await User.findByIdAndDelete(userId);
+
+    if (!deletedUser) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    if (deletedUser.image) {
+      const imagePath = `public${deletedUser.image}`; // Assume the image path is already in the correct format
+
       try {
         await fs.unlink(imagePath);
       } catch (error) {
-        console.error('Error deleting profile image:', error);
+        console.error('Error deleting image file:', error);
       }
     }
 
-    // Delete the user document
-    await User.findByIdAndDelete(req.params.id);
     res.redirect('/admin/users-management');
   } catch (error) {
-    res.status(500).send(error.message);
+    console.error('Error in delete route:', error);
+    res.status(500).json({ error: 'Internal Server Error', details: error.message });
   }
 });
-
 // Delete all users
 router.post('/delete-all-users', checkAdmin, async (req, res) => {
   try {
     const deletedUsers = await User.find({});
 
     for (const deletedUser of deletedUsers) {
-      await User.findByIdAndDelete(deletedUser._id);
-
       // Delete profile image if exists
       if (deletedUser.image) {
-        const imagePath = path.join(__dirname, '../../public/profile-images', deletedUser.image);
+        const imagePath = path.join(__dirname, '../../public', deletedUser.image);
         try {
           await fs.unlink(imagePath);
         } catch (error) {
           console.error('Error deleting profile image:', error);
         }
       }
+
+      // Remove the image reference from the user document
+      deletedUser.image = null;
+      await deletedUser.save();
     }
+
+    // Delete all user documents
+    await User.deleteMany({});
+
     res.status(202).redirect('/admin/users-management');
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
   }
 });
+
 // Search for users
 router.post("/search", checkAdmin, async(req, res) => {
   try {
