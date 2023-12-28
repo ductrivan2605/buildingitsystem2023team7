@@ -5,8 +5,8 @@
 }
 
 .splide__track {
-    background-color: #393E46;
     border-radius: 20px;
+    width:95%;
 }
 
 
@@ -27,6 +27,7 @@
     margin-bottom: 40px;
     border-radius: 20px;
     border: 1px solid black;
+
 
 
 
