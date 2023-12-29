@@ -4,6 +4,15 @@ const links = document.querySelectorAll('.container1 nav a');
 links.forEach((link, index) => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
+
+    // Remove 'active' class from all links
+    links.forEach((link) => {
+      link.classList.remove('active');
+    });
+
+    // Add 'active' class to the clicked link
+    link.classList.add('active');
+
     showContent(index);
   });
 });
