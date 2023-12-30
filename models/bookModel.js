@@ -51,11 +51,14 @@ const BookSchema = new mongoose.Schema({
     type: String,
   },
   reviews: [ReviewSchema],
-  contentImage: [
-    {
-      type: String,
-    },
-  ],
+  contentImage: {
+    type: [
+      {
+        type: String,
+      },
+    ],
+    default: [],
+  },
   imageCover: {
     type: String,
     required: true,
@@ -70,7 +73,7 @@ const BookSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-  ],
+  ]
 });
 
 // Calculating the average stars
