@@ -57,9 +57,10 @@ router.post('/register', upload.single('image'), async (req, res) => {
     res.redirect('/auth/signin');
   } catch (error) {
     console.error('Error registering user:', error);
-    res.status(500).send('Error registering user');
+    res.status(500).send(`Error registering user: ${error.message}`);
   }
 });
+
 
 router.get('/logout', (req, res) => {
   req.logout((err) => {
