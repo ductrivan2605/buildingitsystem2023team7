@@ -51,7 +51,14 @@ const BookSchema = new mongoose.Schema({
     type: String,
   },
   reviews: [ReviewSchema],
-  contentImage: String,
+  contentImage: {
+    type: [
+      {
+        type: String,
+      },
+    ],
+    default: [],
+  },
   imageCover: {
     type: String,
     required: true,
