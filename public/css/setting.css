@@ -13,7 +13,7 @@ body {
   flex-direction: column;
   height: 100%;
   width: 200px;
-  position: fixed;
+  position: relative;
   z-index: 1;
   top: 0;
   left: 0;
@@ -23,12 +23,12 @@ body {
 }
 
 .content {
-  margin: 3% 4% 1% 15%;
+  margin: 0% 4% 1% 15%;
 }
 
 .settings {
   list-style-type: none;
-  margin-top: 30px;
+  margin-top: 70px;
 }
 
 .sidebar li {
@@ -40,9 +40,13 @@ body {
   text-decoration: none;
 }
 
+
+
+@media (min-width: 1000px) {
 .settings:hover {
   background-color: #e2e2e2; 
   transition: background-color 1s; 
+}
 }
 
 .profile_img {
@@ -60,11 +64,11 @@ body {
 }
 
 .submitButton {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  padding: 1% 4% 1% 1%;
-  text-align: right;
+  position: relative;
+  float: right;
+  margin-top: 20px; 
+  margin-right: 50px;
+  margin-bottom: 50px;
 }
 
 .readonly-field {
@@ -94,39 +98,28 @@ body {
   }
 
   .content {
-    margin: 20% 3% 10% 3%;
+    margin: 12% 3% 10% 3%;
   }
 
-  .changePassword {
-    position: fixed;
-    top: 10px;
-    left: 110px;
-    background-color: #EEEEEE;
-    border: 1px solid #333;
-    border-radius: 5px;
-    padding: 10px;
-  }
-
-  .changePassword:hover {
-    transition: 1s;
-    background-color: #d8d8d8;
-  }
-
-
+  .changePassword,
   .general {
-    position: fixed;
-    top: 10px;
-    background-color: #EEEEEE;
-    border: 1px solid #333;
-    border-radius: 5px;
-    padding: 10px;
+      position: relative;
+      background-color: #EEEEEE;
+      border: 1px solid #333;
+      border-radius: 5px;
+      padding: 10px;
+      display: inline-block;
+      white-space: nowrap;
+      transition: background-color 1s; /* 배경색에 대한 트랜지션 적용 */
   }
-
+  
+  /* hover 시에 버튼 내부의 배경색 변경 */
+  .changePassword:hover,
   .general:hover {
-    transition: 1s;
-    background-color: #d8d8d8;
+      background-color: #d8d8d8; /* hover 시 배경색 변경 */
   }
 
+  
   .hamburger {
     display: block;
   }
