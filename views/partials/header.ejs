@@ -90,7 +90,7 @@
           <% if (user && user.image) { %>
             <img id="userAvatar" src="<%= user.image %>" alt="User Avatar" />
           <% } else { %>
-            <img id="userAvatar" src="default-avatar.png" alt="Default Avatar" />
+            <img id="userAvatar" src="../../public/images/userDefault.jpg.png" alt="Default Avatar" />
           <% } %>
       
           <span id="userName"><%= user ? user.name : 'Guest' %></span>
