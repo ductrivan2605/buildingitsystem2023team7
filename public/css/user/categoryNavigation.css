@@ -63,6 +63,7 @@
     flex-wrap: wrap;
     gap: 80px; 
     justify-content: flex-start;
+    margin-top:50px;
 
 }
 
@@ -111,6 +112,15 @@
     color: black;
 }
 
+.nav-item {
+    border: none;
+    background: none;
+    text-decoration: none;
+    color: black;
+}
+.viewMore {
+    font-size: 70px;
+}
 
 @media screen and (max-width: 768px) and (max-width: 1024px) {
     .categoryName p {

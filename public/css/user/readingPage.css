@@ -1,0 +1,117 @@
+#pdf-viewer {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 100vh;
+  }
+
+  /* Hide buttons initially and style */
+  .page-navigation {
+    position: fixed;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: bottom 0.3s ease-in-out;
+  }
+
+  /* Merged CSS for book reading */
+  .book-move {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .book-container {
+    width: 100%;
+    max-width: 1000px;
+  }
+
+  #page-display {
+    min-height: 600px;
+    max-height: 300px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    overflow: hidden; /* Hides content that overflows the box */
+    white-space: pre-wrap; /* Allows the text to wrap onto the next line */
+    word-wrap: break-word;
+    border: black 1px solid;
+    font-family: cursive;
+    overflow-y: scroll;
+  }
+
+  .page-navigation-btn {
+    margin: 5px;
+      padding: 8px 12px;
+      border: none;
+      background-color: #3498db;
+      color: white;
+      cursor: pointer;
+  }
+
+  .page-navigation-btn:hover {
+    bottom: 0;
+  }
+
+  .rightside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .select,
+  .option {
+    width: 100px;
+    height: 30px;
+    margin: 0 5px;
+    margin-bottom: 20px;
+  }
+
+  #page-number-box {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+  }
+
+  /* Adjustments for mobile screens */
+  @media screen and (max-width: 767px) {
+    .book-move {
+      flex-direction: column;
+      width: 90%; /* Container adjusts to mobile screen width */
+      margin: 0 auto;
+    }
+
+    #page-display {
+      width: 100%;
+      margin: 20px 0;
+      min-height: 70vh;
+      font-size: smaller;
+    }
+
+    .page-navigation-btn {
+      padding: 10px 22%; /* Smaller padding for mobile */
+    }
+
+    .rightside {
+      order: 3;
+      margin-top: 20px;
+      display: block;
+      width: 100%; /* Adjust to mobile screen width */
+    }
+
+    #page-navigation {
+      display: flex;
+      justify-content: center;
+    }
+
+    .book-container {
+      width: 100%;
+      max-width: unset; /* Remove max-width for mobile */
+    }
+
+    /* Style adjustments for mobile for page number box */
+    #page-number-box {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  }

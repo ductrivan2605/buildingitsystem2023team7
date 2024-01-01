@@ -1,4 +1,5 @@
 showContent('general');
+showContent('cchangePassword')
 
 function showContent(category) {
   const contentElements = document.querySelectorAll('.content');

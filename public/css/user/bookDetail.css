@@ -52,7 +52,6 @@ body {
     max-width: 1200px;
     margin: auto;
     justify-content: center;
-    border-style: double;
   }
  
   .title {
@@ -89,12 +88,14 @@ body {
      margin: 5px;
    }
  
-  .description {
+  .description11 {
     margin: 40px;
     width: 80%;
   }
+
+  
  
-  nav ul {
+  .bookDetailnav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -102,11 +103,11 @@ body {
     background-color: #333;
   }
  
-  nav ul li {
+  .bookDetailnav ul li {
     float: left;
   }
  
-  nav ul li a {
+  .bookDetailreviews {
     display: block;
     color: white;
     text-align: center;
@@ -114,7 +115,7 @@ body {
     text-decoration: none;
   }
  
-  nav ul li a:hover:not(.active) {
+  .bookDetailnav ul li a:hover:not(.active) {
     background-color: #111;
   }
  
@@ -123,10 +124,19 @@ body {
     padding: 20px;
   }
  
+  .bookDetailreviews1 {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
   .active {
     display: block;
     background-color: white;
     color: black;
+    padding: 14px 16px;
   }
  
  .user-review, .user-comment {
@@ -268,7 +278,7 @@ body {
     .title {
      text-align: center;
    }
-   .description {
+   .description11 {
      margin: 40px;
    }
    .authorpage {

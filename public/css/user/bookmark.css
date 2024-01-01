@@ -85,7 +85,7 @@ body {
 .categoryName {
     padding:30px;
 }
-/* 모바일 화면에 대한 스타일링 */
+
 @media screen and (max-width: 768px) {
     .bookmarkHeader {
         padding: 20px; 

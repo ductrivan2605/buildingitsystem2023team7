@@ -1,0 +1,220 @@
+<main class="d-flex flex-nowrap">
+  <div class="mainContent">
+    <div class="CatergoryName">
+      <h1>Content Management of <%= books[0].title %></h1>
+      <% if (messages.fail) { %>
+      <div id="rejectedMessage" class="alert alert-danger" role="alert">
+        <%- messages.fail %>
+      </div>
+      <% } %> <% if (messages.success) { %>
+      <div id="acceptedMessage" class="alert alert-success" role="alert">
+        <%- messages.success %>
+      </div>
+      <% } %>
+    </div>
+    <div class="search-form">
+      <form
+        action="/admin/books-management/search"
+        method="post"
+        class="d-flex d-none"
+      >
+        <input type="text" name="search" placeholder="Search for book name" />
+        <button type="submit">Search</button>
+      </form>
+      <div class="btns">
+        <% if (!books[0].contentImage) { %>
+          <input
+            type="button"
+            value="Add book"
+            onclick="openPopup('addBookPopup')"
+          />
+        <% } else { %>
+          <input
+            type="button"
+            value="Add book"
+            onclick="openPopup('addBookPopup')"
+            disabled
+          />
+        <% } %>
+        <div class="popup-container" id="addBookPopup">
+          <div class="popup">
+            <div>
+              <h1 class="add-new-book">Add New Content</h1>
+            </div>
+            <form
+              action="/admin/books-management/<%= books[0]._id %>/add-new-content"
+              method="post"
+              class="d-flex w-100"
+              enctype="multipart/form-data"
+            >
+              <div class="image-container w-100">
+                <div class="contentImageContainer d-flex flex-column">
+                  <label
+                    for="contentImage"
+                    class="image-label"
+                    id="select-image"
+                    >Add Content Image</label
+                  >
+                  <input
+                    type="file"
+                    id="contentImage"
+                    name="contentImage"
+                    onchange="previewImage('contentImage', 'add-image-content-preview')"
+                  />
+                  <div id="add-image-content-preview" class="py-1"></div>
+                </div>
+                <div class="button-container">
+                  <button type="reset" id="reset" class="d-none">Reset</button>
+                  <button type="submit" id="submit">Submit</button>
+                  <button
+                    type="button"
+                    id="cancel"
+                    onclick="closePopup('addBookPopup')"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <input
+          type="button"
+          value="Delete All"
+          onclick="openPopup('deleteAllPopup')" disabled hidden
+        />
+        <div class="popup-container d-none" id="deleteAllPopup">
+          <div class="popup">
+            <div>
+              <h1>Do you want to delete all contents?</h1>
+            </div>
+            <div class="fluid-container">
+              <form
+                action="/admin/books-management/<%= books[0]._id %>/delete-all-contents"
+                method="post"
+              >
+                <button type="submit" class="btn btn-success">Confirm</button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  onclick="closePopup('deleteAllPopup')"
+                >
+                  Cancel
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="customerTables">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Book content</th>
+            <th scope="col">Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (books[0] && books[0].contentImage) { %>
+          <tr>
+            <th scope="row">1</th>
+            <td>
+              <div class="imgBooks">
+                <embed
+                  src="/pdf/<%= books[0].contentImage %>"
+                  type="application/pdf"
+                  width="100"
+                  height="100"
+                />
+              </div>
+            </td>
+            <td>
+              <button class="edit-btn" onclick="openPopup('editPopup')">
+                Edit
+              </button>
+              <div class="popup-container" id="editPopup">
+                <div class="popup">
+                  <div>
+                    <h1>Edit content</h1>
+                  </div>
+                  <form
+                    action="/admin/books-management/<%= books[0]._id %>/update-content"
+                    method="post"
+                    class="d-flex w-100"
+                    enctype="multipart/form-data"
+                  >
+                    <div class="image-container w-100">
+                      <div class="contentImageContainer d-flex flex-column">
+                        <label
+                          for="editContentImage"
+                          class="image-label"
+                          id="select-image"
+                        >
+                          Update image content
+                        </label>
+                        <input
+                          type="file"
+                          id="editContentImage"
+                          name="editContentImage"
+                          onchange="previewImage('editContentImage', 'edit-image-content-preview')"
+                        />
+                        <div id="edit-image-content-preview" class="py-1"></div>
+                      </div>
+                      <div class="button-container">
+                        <button type="reset">Reset</button>
+                        <button type="submit">Submit</button>
+                        <button
+                          type="button"
+                          id="cancel"
+                          onclick="closePopup('editPopup')"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <button class="delete-btn" onclick="openPopup('deletePopup')">
+                Delete
+              </button>
+              <div class="popup-container" id="deletePopup">
+                <div class="popup">
+                  <div>
+                    <h1>Do you want to delete this book content?</h1>
+                  </div>
+                  <div class="fluid-container">
+                    <form
+                      action="/admin/books-management/<%= books[0]._id %>/delete-content"
+                      method="post"
+                    >
+                      <input type="hidden" name="contentIndex" />
+                      <button type="submit" class="btn btn-success">
+                        Confirm
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        onclick="closePopup('deletePopup')"
+                      >
+                        Cancel
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <% } else { %>
+          <tr>
+            <td colspan="3">No content found</td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>

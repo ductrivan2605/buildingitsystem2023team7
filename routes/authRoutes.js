@@ -4,6 +4,7 @@ const router = express.Router();
 const User = require('../models/user');
 const passport = require('passport');
 const connectEnsureLogin = require('connect-ensure-login');
+const upload = require("../middleware/uploadImage");
 
 router.get("/signin",connectEnsureLogin.ensureLoggedOut(), async (req, res) => {
   try {
@@ -38,24 +39,39 @@ router.get("/configure", async (req, res) => {
     res.render("404")
   }
 });
-router.post('/register', async (req, res) => {
+router.post('/register', upload.single('image'), async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const image = req.file ? '/images/' + req.file.filename : '/images/userDefault.jpg';
     const user = new User({
       name: req.body.name,
       username: req.body.username,
       password: hashedPassword,
-      email: req.body.email ||"",
-      role: 'standard' // 'admin' for admin users
+      email: req.body.email || '',
+      role: 'standard',
+      image,
     });
+
     await user.save();
     console.log(user);
     res.redirect('/auth/signin');
   } catch (error) {
+    console.error('Error registering user:', error);
     res.status(500).send('Error registering user');
-    res.render("404")
   }
 });
+
+router.get('/logout', (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Error logging out');
+    }
+    res.redirect('/');
+  });
+});
+
+
 
 // router.post('/signin', async (req, res) => {
 //   const { username, password } = req.body;

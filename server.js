@@ -8,6 +8,7 @@ const passport = require("passport");
 const initializePassport = require('./middleware/passport-config')
 const User = require('./models/user');
 const connectEnsureLogin = require('connect-ensure-login');
+const fetchUserData = require('./middleware/fetchUserData');
 const flash = require("connect-flash");
 
 // Page Template Engine
@@ -37,6 +38,8 @@ initializePassport(
   );
 app.use(passport.session());
 app.use(passport.initialize());
+// fetch user data 
+app.use(fetchUserData);
 // Books Database
 mongoose
   .connect(
@@ -54,12 +57,17 @@ const categoryRouter = require("./routes/user/categoryPage");
 const CategoryRouter = require("./routes/admin/categoryRoute");
 const AuthorRouter = require("./routes/admin/authorRoute");
 const BooksRouter = require("./routes/admin/bookManagementRoute");
+const BookContentsRouter = require("./routes/admin/bookContentManagementRoute");
 const authRouter = require("./routes/authRoutes");
 const userManagementRouter = require("./routes/admin/userManagementRoute");
 const userRouter = require("./routes/user/userRoutes");
 const wishlistRouter = require("./routes/wishlistRouter");
 const wishlistAdminRouter = require("./routes/admin/wishlistAdminRouter");
 const searchPageRouter = require("./routes/user/searchPageRoute");
+const adminRouter = require('./routes/admin/adminRouter');
+const userSettingRouter = require('./routes/user/userSettingRouter')
+const renderingRouter = require('./routes/user/bookRendering'); 
+
 
 app.use("/", mainPage);
 app.use("/book", bookDetailRouter);
@@ -69,13 +77,16 @@ app.use("/category", categoryRouter);
 app.use("/admin/categories",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), CategoryRouter);
 app.use("/admin/authors",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), AuthorRouter);
 app.use("/admin/books-management",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), BooksRouter);
+app.use("/admin/books-management/",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), BookContentsRouter);
 app.use("/admin/users-management",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), userManagementRouter);
 app.use("/user", userRouter);
+app.use("/user/setting", userSettingRouter);
 app.use("/auth", authRouter);
 app.use("/wishlist", wishlistRouter);
 app.use("/admin/wishlist",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), wishlistAdminRouter);
 app.use("/user/search", searchPageRouter);
-
+app.use('/admin', adminRouter);
+app.use('/api', renderingRouter);
 // app.get('/', (req, res) => {
 //   res.render('user/wishlist');
 // });
