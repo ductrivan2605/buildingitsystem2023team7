@@ -10,11 +10,9 @@
     <div id="pdf-viewer"></div>
     <p>Page: <span id="page-num"></span> / <span id="page-count"></span></p>
     <progress id="reading-progress" value="0" max="100"></progress>
-    
-  </div>
-  <div id="page-navigation">
-      <button class="page-navigation-btn" id="prev-page"> ◁ </button>
-      <button class="page-navigation-btn" id="next-page"> ▷ </button>
+    <div class="navigation-buttons">
+      <button id="prev-page">Previous</button>
+      <button id="next-page">Next</button>
     </div>
   </div>
 
@@ -26,30 +24,24 @@
   
       let currentPage = 1;
       let pdfDoc = null;
-      let renderContext = null;
   
       const loadPDF = async () => {
         try {
           const pdf = atob(pdfDataUri.split(',')[1]);
           pdfDoc = await pdfjsLib.getDocument({ data: pdf }).promise;
-          renderPage(currentPage);
+          renderPages(currentPage);
         } catch (error) {
           console.error('Error loading PDF:', error);
         }
       };
 
-      const updateProgress = async (currentPage) => {
-        const slug = '<%= book.slug %>'; // Get the book slug from your rendered book object
-        try {
-          await fetch(`/api/books/${slug}/update-progress`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ slug, currentPage }),
-          });
-        } catch (error) {
-          console.error('Failed to update reading progress:', error);
+      const renderPages = async (startPage) => {
+        pdfViewer.innerHTML = ''; // Clear the viewer
+        for (let i = 0; i < 2; i++) {
+          const pageNum = startPage + i;
+          if (pageNum <= pdfDoc.numPages) {
+            await renderPage(pageNum);
+          }
         }
       };
 
@@ -60,40 +52,51 @@
         const context = canvas.getContext('2d');
         canvas.height = viewport.height;
         canvas.width = viewport.width;
-  
-        if (renderContext) {
-          pdfViewer.replaceChild(canvas, pdfViewer.firstChild);
-        } else {
-          pdfViewer.appendChild(canvas);
-        }
-  
-        renderContext = {
+        
+        pdfViewer.appendChild(canvas);
+
+        const renderContext = {
           canvasContext: context,
           viewport: viewport
         };
         page.render(renderContext);
-  
-        document.getElementById('page-num').textContent = num;
+
+        document.getElementById('page-num').textContent = `${currentPage}-${currentPage + 1}`;
         document.getElementById('page-count').textContent = pdfDoc.numPages;
         const progress = ((num - 1) / (pdfDoc.numPages - 1)) * 100;
         document.getElementById('reading-progress').value = progress;
-
-        await updateProgress(num); // Update the progress when rendering a new page
       };
   
       document.getElementById('prev-page').addEventListener('click', function() {
         if (currentPage > 1) {
-          currentPage--;
-          renderPage(currentPage);
+          currentPage -= 2;
+          renderPages(currentPage);
         }
       });
   
       document.getElementById('next-page').addEventListener('click', function() {
-        if (currentPage < pdfDoc.numPages) {
-          currentPage++;
-          renderPage(currentPage);
+        if (currentPage < pdfDoc.numPages - 1) {
+          currentPage += 2;
+          renderPages(currentPage);
         }
       });
+
+        document.addEventListener('keydown', function(event) {
+    switch (event.key) {
+      case 'ArrowLeft':
+        if (currentPage > 1) {
+          currentPage -= 2;
+          renderPages(currentPage);
+        }
+        break;
+      case 'ArrowRight':
+        if (currentPage < pdfDoc.numPages - 1) {
+          currentPage += 2;
+          renderPages(currentPage);
+        }
+        break;
+    }
+  });
   
       loadPDF();
     });
