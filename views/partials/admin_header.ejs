@@ -55,7 +55,7 @@
           <!-- Dropdown menu content -->
           <% if (user) { %>
             <a href="#">Profile</a>
-            <a href="#">Settings</a>
+            <a href="/user/setting#general">Settings</a>
             <a href="<%= user.role === 'admin' ? 'admin/dashboard' : '/' %>">Home</a>
             <a href="<%= user.role === 'admin' ? 'admin' : '' %>/auth/logout">Logout</a>
           <% } else { %>

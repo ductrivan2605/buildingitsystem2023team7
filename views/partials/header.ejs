@@ -93,7 +93,7 @@
             <img id="userAvatar" src="../../public/images/userDefault.jpg.png" alt="Default Avatar" />
           <% } %>
       
-          <span id="userName"><%= user ? user.name : 'Guest' %></span>
+          <span id="userName"> <%= user ? user.name : 'Guest' %> </span>
           <i class="fa-solid fa-caret-down"></i>
         </div>
 
@@ -102,7 +102,7 @@
   <!-- Dropdown menu content -->
   <% if (user) { %>
     <a href="#">Profile</a>
-    <a href="/user/setting">Settings</a>
+    <a href="/user/setting#general">Settings</a>
     <a href="<%= user.role === 'admin' ? 'admin/dashboard' : '/' %>">Home</a>
     <a href="/auth/logout">Logout</a>
   <% } else { %>
