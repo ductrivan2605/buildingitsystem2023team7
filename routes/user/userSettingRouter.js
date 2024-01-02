@@ -28,61 +28,58 @@ router.get("/", checkAuthenticated, async (req, res) => {
 });
 
 router.post('/update/:id', checkAuthenticated, upload.single('editProfileImage'), async (req, res) => {
-    const userId = req.params.id;
-    const { name, username, email, currentPassword, newPassword, repeatPassword } = req.body;
-  
-    try {
-      // Fetch the user from the database
-      const user = await User.findById(userId);
-  
-      if (!user) {
-        return res.redirect("/user/settings");
-      }
-  
-      // Check if the provided current password matches the stored hashed password
-      const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
-  
-      if (!isPasswordValid) {
-        return res.status(400).send('Current password is incorrect');
-      }
-  
-      const updateFields = {};
-      if (name) updateFields.name = name;
-      if (username) updateFields.username = username;
-      if (email) updateFields.email = email;
-  
-      if (req.file) {
-        // Delete the old profile image if it exists
-        if (user.image) {
-          const oldImageFilePath = path.join(__dirname, '../public', user.image);
-          try {
-            await fs.unlink(oldImageFilePath);
-          } catch (error) {
-            console.error(`Error deleting old image: ${error.message}`);
-          }
-        }
-        // Save the new profile image
-        updateFields.image = '/images/' + req.file.filename;
-      }
-  
-      if (newPassword && newPassword === repeatPassword) {
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
-        updateFields.password = hashedPassword;
-      }
-  
-      // Use findOneAndUpdate with the filter on _id
-      const updatedUser = await User.findOneAndUpdate({ _id: userId }, updateFields, { new: true });
-  
-      if (!updatedUser) {
-        return res.status(404).send('User not found');
-      }
-  
-      console.log('Updated user:', updatedUser);
-      res.redirect('/user/settings');
-    } catch (error) {
-      console.error('Error in update route:', error);
-      res.status(500).send(`Internal Server Error: ${error.message}`);
+  console.log('Reached update route');
+  const userId = req.params.id;
+  const { name, email, currentPassword, newPassword, repeatPassword } = req.body;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.redirect("/user/settings");
     }
-  });
+
+    const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(400).send('Current password is incorrect');
+    }
+
+    const updateFields = {};
+    if (name) updateFields.name = name;
+    if (email) updateFields.email = email;
+
+    if (req.file) {
+      // Delete the old profile image if it exists
+      if (user.image) {
+        const oldImageFilePath = path.join(__dirname, '../public', user.image);
+        try {
+          await fs.unlink(oldImageFilePath);
+        } catch (error) {
+          console.error(`Error deleting old image: ${error.message}`);
+        }
+      }
+      // Save the new profile image
+      updateFields.image = '/images/' + req.file.filename;
+    }
+
+    if (newPassword && newPassword === repeatPassword) {
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      updateFields.password = hashedPassword;
+    }
+
+    const updatedUser = await User.findOneAndUpdate({ _id: userId }, updateFields, { new: true });
+
+    if (!updatedUser) {
+      return res.status(404).send('User not found');
+    }
+
+    console.log('Updated user:', updatedUser);
+    res.redirect('/user/settings');
+  } catch (error) {
+    console.error('Error in update route:', error);
+    res.status(500).send(`Internal Server Error: ${error.message}`);
+  }
+});
 
 module.exports = router;

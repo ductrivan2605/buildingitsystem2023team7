@@ -5,13 +5,13 @@
         <li><a class="general" href="#general" onclick="showContent('general')">General</a></li>
     </div>
     <div class="settings">
-        <li><a class="changePassword" href="#changePassword" onclick="showContent('changePassword')">Password</a></li>
+        <li><a class="changePassword" href="#changePassword" onclick="showContent('changePassword')">Change password</a></li>
     </div>
 
 </div>
 
 
-<% console.log('User Data:', user); %>
+
 <!-- User Settings Form -->
 <form action="/user/setting/update/<%= user._id %>" method="post" enctype="multipart/form-data">
     <!-- General Settings -->
@@ -20,11 +20,12 @@
             <img src="<%= user.image %>" alt="User Profile Image" class="profile_img" id="profileImage">
             <label for="editProfileImage" class="btn btn-outline-primary">
                 Upload new photo
-                <input type="file" id="editProfileImage" name="editProfileImage" class="account-settings-fileinput" style="display: none;">
+                <input type="file" id="editProfileImage" name="editProfileImage" class="account-settings-fileinput" style="display: none;" onchange="previewImage('editProfileImage', 'profileImage')">
             </label>
             &nbsp;
             <button type="button" class="btn btn-default md-btn-flat btn-outline-danger" onclick="resetImage()">Reset</button>
         </div>
+        
 
         <div class="card-body">
             <div class="form-group">
