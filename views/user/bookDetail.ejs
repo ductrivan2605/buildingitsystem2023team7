@@ -16,11 +16,10 @@
     <div class="container111">
       <div class="container1">
         <div class="title">
-          <img
-            src="/images/<%= books.imageCover %>"
-            style="max-width: 80%; height: auto; margin-bottom: 20px;"
-            alt="Image Cover"
-          />
+          <div class="image-container">
+          <img src="/images/<%= books.imageCover %>" style="max-width: 80%; height: auto; margin-bottom: 20px;" alt="Image Cover" class="book-image"/>
+          <button class="read-button">Read</button>
+        </div>
           <div class="details">
             <h2><%= books.title %></h2>
             <p>Publisher: <%= books.publisher %></p>
@@ -170,5 +169,11 @@
     </div>
       </div>
     </div>
+
+    <script>
+      document.querySelector('.read-button').addEventListener('click', function () {
+        window.location.href = '/read';
+      });
+    </script>
   </body>
 </html>
