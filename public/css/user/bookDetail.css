@@ -85,6 +85,11 @@ body {
   border-radius: 5px;
 }
 
+.read-button:active {
+  box-shadow: inset -.3rem -.1rem 1.4rem  #55d7de, inset .3rem .4rem .8rem #55d7de; 
+  cursor: pointer;
+}
+
 .image-container:hover .book-image {
   filter: blur(2px);
 }
