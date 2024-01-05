@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
     // Check if the user is authenticated
     const isAuthenticated = req.isAuthenticated();
 
-    // Fetch user's bookmarks if authenticated
+    // Fetch user's bookmarks is authenticated
     const userBookmarks = isAuthenticated ? req.user.bookmarks.map(bookmark => bookmark.toString()) : [];
     const books = await Books.find({});
     res.render("user/categoryNavigation", {
