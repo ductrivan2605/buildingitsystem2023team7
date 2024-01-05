@@ -25,7 +25,12 @@ body {
     
     
     
-}#wrapper,
+}
+#wrapper{
+    height : auto;
+    min-height: 100%;
+  }
+#wrapper,
 .mainContent {
   min-height: calc(100vh - 10px);
 
