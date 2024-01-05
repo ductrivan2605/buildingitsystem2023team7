@@ -16,10 +16,8 @@
     <div class="container111">
       <div class="container1">
         <div class="title">
-          <div class="image-container">
+          <div class="image-container1">
           <img src="/images/<%= books.imageCover %>" style="max-width: 80%; height: auto; margin-bottom: 20px;" alt="Image Cover" class="book-image"/>
-          <form action="/reading-history/add-history/<%= books.slug %>" method="post">
-            <button type="submit" class="read-button">Read</button>
           </form>
         </div>
           <div class="details">
@@ -50,6 +48,8 @@
               <a href="/author/<%= authorSlug %>"><%= books.authors[index] %></a
               ><%= index !== books.authors.length - 1 ? ',' : '' %> <% }) %>
             </p>
+            <form action="/reading-history/add-history/<%= books.slug %>" method="post">
+            <button type="submit" class="read-button">Read</button>
           </div>
         </div>
         <div class="description11">
