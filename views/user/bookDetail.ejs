@@ -18,7 +18,9 @@
         <div class="title">
           <div class="image-container">
           <img src="/images/<%= books.imageCover %>" style="max-width: 80%; height: auto; margin-bottom: 20px;" alt="Image Cover" class="book-image"/>
-          <button class="read-button">Read</button>
+          <form action="/reading-history/add-history/<%= books.slug %>" method="post">
+            <button type="submit" class="read-button">Read</button>
+          </form>
         </div>
           <div class="details">
             <h2><%= books.title %></h2>
