@@ -52,6 +52,9 @@ body {
   text-decoration: none;
 }
 
+.form-group {
+  max-width: 750px;
+}
 
 
 @media (min-width: 1000px) {
