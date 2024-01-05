@@ -91,8 +91,18 @@ app.use('/api', renderingRouter);
 //   res.render('user/wishlist');
 // });
 
+//local host
 // app.listen(3000, () => {
 //   console.log(`Server is running on port localhost:3000`);
 // });
 
-app.listen(process.env.PORT || 3000);
+//Heroku published
+// app.listen(process.env.PORT || 3000, => {
+//      console.log(`Server is running on port localhost:3000`);
+//    });
+
+//display consol.log
+const port = process.env.PORT || 3000; 
+app.listen(port, () => {
+     console.log(`Server is running on port ${port}`); 
+});
