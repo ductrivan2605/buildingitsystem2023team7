@@ -35,6 +35,12 @@ const userSchema = new mongoose.Schema({
     of: Number,
     default: {}, // Default to an empty object for storing progress
   },
+  readingHistory:[
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Book details",
+    }
+  ]
 });
 
 userSchema.plugin(passportLocalMongoose);
