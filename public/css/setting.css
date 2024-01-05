@@ -4,6 +4,18 @@ body {
   font-family: Arial, sans-serif;
 }
 
+#wrap{
+  height : auto;
+  min-height: 100%;
+  /* padding-bottom:212px; */
+}
+
+#wrapper,
+.mainContent {
+  min-height: calc(100vh - 10px);
+
+}
+
 .hamburger {
   display: none;
 }

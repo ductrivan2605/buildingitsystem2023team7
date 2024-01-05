@@ -29,7 +29,7 @@
         <ul class="NavList" id="navList">
           <li class="NavList-item"><a href="/">Home</a></li>
           <li class="NavList-item">
-            <a href="#">Book Progression <i class="fa-solid fa-caret-down"></i></a>
+            <a href="#">Reading History <i class="fa-solid fa-caret-down"></i></a>
             <div class="dropDown">
               <ul class="dropDownList">
                 <li class="dropDownItem">
@@ -102,6 +102,7 @@
   <!-- Dropdown menu content -->
   <% if (user) { %>
     <a href="#">Profile</a>
+    <a href="/bookmarks">Bookmarks</a>
     <a href="/user/setting#general">Settings</a>
     <a href="<%= user.role === 'admin' ? 'admin/dashboard' : '/' %>">Home</a>
     <a href="/auth/logout">Logout</a>

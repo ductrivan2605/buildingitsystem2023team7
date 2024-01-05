@@ -1,86 +1,90 @@
+<div class="wrap">
+    <div class="mainContent">
 
-<div class="sidebar">
-    <!-- <div class="hamburger"><button>☰ </button> </div> -->
-    <div class="settings">
-        <li><a class="general" href="#general" onclick="showContent('general')">General</a></li>
-    </div>
-    <div class="settings">
-        <li><a class="changePassword" href="#changePassword" onclick="showContent('changePassword')">Change password</a></li>
-    </div>
-
-</div>
-
-
-
-<!-- User Settings Form -->
-<form action="/user/setting/update/<%= user._id %>" method="post" enctype="multipart/form-data">
-    <!-- General Settings -->
-    <div id="general" class="content">
-        <div class="card-body media align-items-center">
-            <img src="<%= user.image || '/images/userDefault.jpg' %>" alt="profile_image" class="profile_img" id="profileImage">
-            <div class="media-body ml-4">
-                <label for="uploadInput" class="btn btn-outline-primary">
-                    Upload new photo
-                    <input type="file" id="uploadInput" name="editProfileImage" class="account-settings-fileinput" style="display: none;" onchange="previewImage('uploadInput', 'profileImage'); ">
-                </label>
-                &nbsp;
-                <button type="button" class="btn btn-default md-btn-flat btn-outline-danger" onclick="resetImage('uploadInput', 'profileImage')">Reset</button>
+        <div class="sidebar">
+            <!-- <div class="hamburger"><button>☰ </button> </div> -->
+            <div class="settings">
+                <li><a class="general" href="#general" onclick="showContent('general')">General</a></li>
             </div>
-        </div>
-        
-        
-
-        <div class="card-body">
-            <div class="form-group">
-                <label class="form-label">Username</label>
-                <div class="readonly-field"><%= user.username %></div>
-            </div>            
-            <div class="form-group">
-                <label class="form-label">Name</label>
-                <input type="text" class="form-control" name="name" value="<%= user.name %>">
+            <div class="settings">
+                <li><a class="changePassword" href="#changePassword" onclick="showContent('changePassword')">Change password</a></li>
             </div>
-            <div class="form-group">
-                <label class="form-label">E-mail</label>
-                <input type="text" class="form-control mb-1" name="email" value="<%= user.email %>">
+
+        </div>
+
+
+
+        <!-- User Settings Form -->
+        <form action="/user/setting/update/<%= user._id %>" method="post" enctype="multipart/form-data">
+            <!-- General Settings -->
+            <div id="general" class="content">
+                <div class="card-body media align-items-center">
+                    <img src="<%= user.image || '/images/userDefault.jpg' %>" alt="profile_image" class="profile_img" id="profileImage">
+                    <div class="media-body ml-4">
+                        <label for="uploadInput" class="btn btn-outline-primary">
+                            Upload new photo
+                            <input type="file" id="uploadInput" name="editProfileImage" class="account-settings-fileinput" style="display: none;" onchange="previewImage('uploadInput', 'profileImage'); ">
+                        </label>
+                        &nbsp;
+                        <button type="button" class="btn btn-default md-btn-flat btn-outline-danger" onclick="resetImage('uploadInput', 'profileImage')">Reset</button>
+                    </div>
+                </div>
+                
+                
+
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">Username</label>
+                        <div class="readonly-field"><%= user.username %></div>
+                    </div>            
+                    <div class="form-group">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" name="name" value="<%= user.name %>">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">E-mail</label>
+                        <input type="text" class="form-control mb-1" name="email" value="<%= user.email %>">
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Change Password -->
-    <div id="changePassword" class="content">
-        <div class="form-group">
-            <label class="form-label">Current password</label>
-            <input type="password" class="form-control" name="currentPassword">
-            <% if (messages.error && messages.error.includes('Current password')) { %>
-                <small class="text-danger"><%= messages.error %></small>
-            <% } %>
-        </div>
-        <div class="form-group">
-            <label class="form-label">New password</label>
-            <input type="password" class="form-control" name="newPassword">
-        </div>
-        <div class="form-group">
-            <label class="form-label">Repeat new password</label>
-            <input type="password" class="form-control" name="repeatPassword">
-        </div>
-    </div>
+            <!-- Change Password -->
+            <div id="changePassword" class="content">
+                <div class="form-group">
+                    <label class="form-label">Current password</label>
+                    <input type="password" class="form-control" name="currentPassword">
+                    <% if (messages.error && messages.error.includes('Current password')) { %>
+                        <small class="text-danger"><%= messages.error %></small>
+                    <% } %>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">New password</label>
+                    <input type="password" class="form-control" name="newPassword">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Repeat new password</label>
+                    <input type="password" class="form-control" name="repeatPassword">
+                </div>
+            </div>
 
-    <!-- Information -->
-    <div id="information" class="content">
-        <div class="card-body pb-2">
-            <!-- Add more fields as needed -->
-        </div>
-    </div>
+            <!-- Information -->
+            <div id="information" class="content">
+                <div class="card-body pb-2">
+                    <!-- Add more fields as needed -->
+                </div>
+            </div>
 
-    <!-- Submit Button -->
-    <div class="submitButton">
-        <div class="text-right mt-3">
-            <button type="submit" class="btn btn-primary">Save changes</button>
-            &nbsp;
-            <button type="button" class="btn btn-danger">Cancel</button>
-        </div>
+            <!-- Submit Button -->
+            <div class="submitButton">
+                <div class="text-right mt-3">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    &nbsp;
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                </div>
+            </div>
+        </form>
     </div>
-</form>
+    </div>
 
 <!-- 
         <div class="card-body pb-2">

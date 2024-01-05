@@ -25,8 +25,11 @@ body {
     
     
     
-}
+}#wrapper,
+.mainContent {
+  min-height: calc(100vh - 10px);
 
+}
 .categorySearch h1 {
     font-size: 30px;
     margin:0;
