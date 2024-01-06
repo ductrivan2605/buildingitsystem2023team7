@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const User = require("../../models/user.js");
 const { checkAdmin } = require("../../middleware/checkAuthenticated.js");
+const fetchUserData = require('../../middleware/fetchUserData.js');
 
 // GET /admin/user-reading-progress - View user reading progress
-router.get("/:userId", checkAdmin, async (req, res) => {
+router.get("/:userId",fetchUserData, checkAdmin, async (req, res) => {
   try {
     const userId = req.params.userId;
     const users = await User.findById(userId).populate('readingProgress.bookId');

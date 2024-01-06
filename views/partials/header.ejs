@@ -101,7 +101,7 @@
    <div class="user-dropdown" id="userDropdown">
   <!-- Dropdown menu content -->
   <% if (user) { %>
-    <a href="#">Profile</a>
+    <a href="/user/profile">Profile</a>
     <a href="/bookmarks">Bookmarks</a>
     <a href="/user/setting#general">Settings</a>
     <a href="<%= user.role === 'admin' ? '/admin/' : '/' %>">Home</a>

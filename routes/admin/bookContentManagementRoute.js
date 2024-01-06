@@ -5,8 +5,9 @@ const router = express.Router();
 const Books = require("../../models/bookModel.js");
 const uploadContent = require("../../middleware/uploadBookContent.js");
 const { checkAdmin } = require("../../middleware/checkAuthenticated.js");
+const fetchUserData = require("../../middleware/fetchUserData.js");
 
-router.get("/:id", checkAdmin, async (req, res) => {
+router.get("/:id",fetchUserData, checkAdmin, async (req, res) => {
   try {
     const books = await Books.find({ _id: req.params.id });
     res.render("admin/bookContentsManagement", {

@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Books = require("../../models/bookModel.js");
 const Authors = require("../../models/author.js");
+const fetchUserData = require("../../middleware/fetchUserData.js");
 
-router.get("/:slug", async (req, res) => {
+router.get("/:slug",fetchUserData, async (req, res) => {
   try {
     const author = await Authors.findOne({ slug: req.params.slug });
 

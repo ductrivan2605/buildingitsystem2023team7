@@ -9,9 +9,10 @@ const upload = require("../../middleware/uploadImage.js");
 const {
   checkAdmin
 } = require("../../middleware/checkAuthenticated.js");
+const fetchUserData = require('../../middleware/fetchUserData.js');
 
 // GET /admin - View all users 
-router.get("/", checkAdmin, async (req, res) => {
+router.get("/",fetchUserData, checkAdmin, async (req, res) => {
   try {
     const users = await User.find({});
     res.render("admin/userManagement", {

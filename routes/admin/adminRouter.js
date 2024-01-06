@@ -9,10 +9,10 @@ const User = require("../../models/user.js");
 const {
   checkAdmin
 } = require("../../middleware/checkAuthenticated.js");
+const fetchUserData = require('../../middleware/fetchUserData.js');
 
-router.get("/", checkAdmin, async (req, res) => {
+router.get("/", checkAdmin, fetchUserData, async (req, res) => {
   try {
-    const authors = await Authors.find({});
     res.render("admin/adminDashBoard", {
       layout: "./layouts/admin/admindashboardLayout",
       title: "Admin Dashboard",
