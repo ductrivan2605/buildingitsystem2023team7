@@ -27,33 +27,36 @@ router.get('/:slug/progress', async (req, res) => {
 });
 router.post('/:userId/:slug/update-progress', async (req, res) => {
   try {
-    const { currentPage, totalNumberOfPages, slug } = req.body;
-    const userId = req.params.userId;
-    
-    const user = await User.findById(userId);
-    if (user) {
-      let bookProgress = user.readingProgress.find(progress => progress.bookId.slug === slug);
-      if (bookProgress) {
-        // Update the progress only if the current page is higher
-        if (currentPage > bookProgress.currentPage) {
-          bookProgress.currentPage = currentPage;
-          bookProgress.progress = ((currentPage - 1) / (totalNumberOfPages - 1)) * 100;
-        }
-      } else {
-        // Create a new progress record
-        user.readingProgress.push({
-          bookId: { slug },
-          currentPage,
-          totalPages: totalNumberOfPages,
-          progress: ((currentPage - 1) / (totalNumberOfPages - 1)) * 100,
-        });
+    const { currentPage, totalPages } = req.body;
+    const { userId, slug } = req.params;
+
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: userId, 'readingProgress.bookId.slug': slug },
+      {
+        $set: {
+          'readingProgress.$.currentPage': currentPage,
+          'readingProgress.$.progress': ((currentPage - 1) / (totalPages - 1)) * 100,
+        },
+      },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).send('User not found');
       }
-      // Save the updated user with progress
+      // Create a new progress record
+      user.readingProgress.push({
+        bookId: { slug },
+        currentPage,
+        totalPages,
+        progress: ((currentPage - 1) / (totalPages - 1)) * 100,
+      });
       await user.save();
-      res.sendStatus(200); // Send a success response
-    } else {
-      res.status(404).send('User not found');
     }
+
+    res.sendStatus(200); // Send a success response
   } catch (error) {
     console.error('Error saving progress:', error);
     res.status(500).send('Internal Server Error');
