@@ -1,113 +1,45 @@
-.categoryHeader h2 {
+.categoryHeader {
     border-bottom: 1px solid black;
     padding:20px;
 }
-.navForBook {
+.mainCategory h1 {
+    padding:20px;
+    font-size: 30px;
+}
+.navbar__menu {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #EEEEEE;
-    padding: 10px;
     flex-wrap: wrap;
-    gap: 80px; 
-    justify-content: flex-start;
-    width: 75%;
-    margin: 0 auto;
-    margin-top:50px;
-
-
-}
-
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #393E46;
+    padding:20px;
+    
+  }
 body {
-    background-color: #EEEEEE;
-}
-.nav-items {
-    text-align: center;
-    width: calc(20.666% - 20px); 
-    margin-bottom: 20px;
-    box-sizing: border-box;
-
+    margin:0;
 
 }
+  .navbar__menu li {
+    flex: 0 0 calc(16.666% - 10px);
+    color: white;
+    margin-top:10px;
+    margin-bottom: 10px;
 
+  }
+  .navbar__menu li a {
+    position: relative;
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+  }
 
-.nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-}
+  
+  @media (min-width: 768px) {
+    .navbar__menu li {
+      flex-basis: calc(33.33% - 10px); 
 
-
-.itemImage {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-bottom: 5px; 
-}
-
-.categoryName p {
-    margin: 0; 
-    font-size: 20px; 
-    word-wrap: break-word;
-}
-
-.categoryName {
-    flex: 1; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    word-break: break-word; 
-}
-
-.nav-item a {
-    text-decoration: none; 
-    color: black;
-}
-
-@media screen and (max-width: 768px) and (max-width: 1024px) {
-    .categoryName p {
-        margin: 0; 
-        font-size: 10px; 
-        word-wrap: break-word;
     }
-    .nav-items {
-        width: calc(33.33% - 20px); 
-    }
-    .navForBook {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #f0f0f0;
-        padding: 10px;
-        flex-wrap: wrap;
-        gap: 30px; 
-        justify-content: flex-start;
-    
-    }
-
-}
-
-@media (min-width: 1024px) and (max-width: 1366px) {
-    .categoryName p {
-        margin: 0; 
-        font-size: 12px; 
-        word-wrap: break-word;
-    }
-    .nav-items {
-        width: calc(33.33% - 20px); 
-    }
-    .navForBook {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        background-color: #f0f0f0;
-        padding: 10px;
-        flex-wrap: wrap;
-        gap: 30px; 
-        justify-content: flex-start;
-    
-    }
-
-}
+  }
+  

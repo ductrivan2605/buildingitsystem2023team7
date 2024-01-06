@@ -53,6 +53,7 @@ const mainPage = require("./routes/user/mainPage");
 const bookDetailRouter = require("./routes/user/bookDetail");
 const authorRouter = require("./routes/user/aboutAuthor");
 const bookMarkRouter = require("./routes/user/bookMark");
+const readingHistoryRouter = require("./routes/user/readingHistory");
 const categoryRouter = require("./routes/user/categoryPage");
 const CategoryRouter = require("./routes/admin/categoryRoute");
 const AuthorRouter = require("./routes/admin/authorRoute");
@@ -74,6 +75,7 @@ app.use("/", mainPage);
 app.use("/book", bookDetailRouter);
 app.use("/author", authorRouter);
 app.use("/bookmarks",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), bookMarkRouter);
+app.use("/reading-history",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), readingHistoryRouter);
 app.use("/category", categoryRouter);
 app.use("/admin/categories",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), CategoryRouter);
 app.use("/admin/authors",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), AuthorRouter);
@@ -93,6 +95,18 @@ app.use('/api', renderingRouter);
 //   res.render('user/wishlist');
 // });
 
-app.listen(3000, () => {
-  console.log(`Server is running on port localhost:3000`);
+//local host
+// app.listen(3000, () => {
+//   console.log(`Server is running on port localhost:3000`);
+// });
+
+//Heroku published
+// app.listen(process.env.PORT || 3000, => {
+//      console.log(`Server is running on port localhost:3000`);
+//    });
+
+//display consol.log
+const port = process.env.PORT || 3000; 
+app.listen(port, () => {
+     console.log(`Server is running on port ${port}`); 
 });
