@@ -6,7 +6,7 @@ const Books = require("../../models/bookModel.js");
 
 router.get("/", async (req, res) => {
   try {
-    const categories = await Categories.find({}).limit(5);
+    const categories = await Categories.find({}).limit(4);
 
     // Check if the user is authenticated
     const isAuthenticated = req.isAuthenticated();
@@ -40,7 +40,5 @@ router.get("/book/:slug", async (req, res) => {
     console.log(error);
   }
 });
-
-router.get("/book/:slug/comments", async (req, res) => {});
 
 module.exports = router;
