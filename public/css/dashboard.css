@@ -31,3 +31,19 @@ main {
 .mini-window:hover {
     background-color: #f0f0f0;
 }
+
+.content-box {
+    padding: 10px 12px;
+	border: solid 1px #A6D0DD;
+	border-radius: 25px;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+	box-shadow: 20px 20px 30px rgba( 0, 255, 255, 0.2);
+	background-color: #DAF5FF;
+	margin: 15px 0;
+	position: relative;
+}
+
+#cat1 .content-box:hover {
+    box-shadow: 20px 20px 30px rgba(2, 199, 199, 0.8);
+}

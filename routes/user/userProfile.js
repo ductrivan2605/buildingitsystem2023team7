@@ -25,5 +25,14 @@ router.get("/", checkAuthenticated, async (req, res) => {
     }
   });
 
+  router.get('/change', (req, res) => {
+    req.logout((err) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send('Error logging out');
+      }
+      res.redirect('/auth/signin');
+    });
+  });
 
   module.exports = router;
