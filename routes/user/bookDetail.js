@@ -41,6 +41,7 @@ router.post("/:slug/review",checkAuthenticated,  async (req, res) => {
 });
 
 router.get("/:slug/read", checkAuthenticated, async (req, res) => {
+    const userId = req.user.id;
     try {
       const book = await Book.findOne({ slug: req.params.slug });
       if (!book || !book.contentImage || book.contentImage.length === 0) {
@@ -66,7 +67,8 @@ router.get("/:slug/read", checkAuthenticated, async (req, res) => {
         layout: './layouts/user/bookReadingPageLayout',
         title: 'Booktopia',
         pdfDataUri: pdfDataUri, // Pass the base64 data to the view
-        book: book // Pass other book details if needed
+        book: book, // Pass other book details if needed
+        userId: userId,
       });
     } catch (error) {
       console.error(error);

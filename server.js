@@ -67,6 +67,7 @@ const searchPageRouter = require("./routes/user/searchPageRoute");
 const adminRouter = require('./routes/admin/adminRouter');
 const userSettingRouter = require('./routes/user/userSettingRouter')
 const renderingRouter = require('./routes/user/bookRendering'); 
+const userReadingProgressRouter = require('./routes/admin/usersReadingProgress');
 
 
 app.use("/", mainPage);
@@ -79,6 +80,7 @@ app.use("/admin/authors",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/si
 app.use("/admin/books-management",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), BooksRouter);
 app.use("/admin/books-management/",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), BookContentsRouter);
 app.use("/admin/users-management",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), userManagementRouter);
+app.use("/admin/user-reading-progress", connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), userReadingProgressRouter);
 app.use("/user", userRouter);
 app.use("/user/setting", userSettingRouter);
 app.use("/auth", authRouter);

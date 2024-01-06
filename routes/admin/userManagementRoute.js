@@ -21,7 +21,7 @@ router.get("/", checkAdmin, async (req, res) => {
       messages: req.flash(),
     });
   } catch (error) {
-    res.send(error);
+    res.status(404).render("404", { layout: false });
   }
 });
 
@@ -69,6 +69,7 @@ router.post('/add-user', checkAdmin, upload.single('profileImage'), async (req, 
       email,
       password: hashedPassword,
       role,
+      readingProgress: [], // Initialize reading progress for the new user
     });
 
     // Save the new user
@@ -78,10 +79,9 @@ router.post('/add-user', checkAdmin, upload.single('profileImage'), async (req, 
     res.redirect('/admin/users-management');
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Can't add user");
+    res.status(404).render("404", { layout: false });
   }
 });
-
 
 // POST /admin/user/update/:id - Update user by ID
 router.post('/update/:id', checkAdmin, upload.single('editProfileImage'), async (req, res) => {
