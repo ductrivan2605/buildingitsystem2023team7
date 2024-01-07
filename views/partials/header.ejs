@@ -29,21 +29,21 @@
         <ul class="NavList" id="navList">
           <li class="NavList-item"><a href="/">Home</a></li>
           <li class="NavList-item">
-            <a href="#">Reading History <i class="fa-solid fa-caret-down"></i></a>
-            <div class="dropDown">
+            <a href="#">Reading History</a>
+            <!-- <div class="dropDown">
               <ul class="dropDownList">
                 <li class="dropDownItem">
                   <a href=""><i class="fa-solid fa-arrow-right"></i></a>
                 </li>
               </ul>
-            </div>
+            </div> -->
           </li>
           <!-- <li class="NavList-item"><a href="#">Author</a></li> -->
           <!-- <li class="NavList-item"><a href="#">New Arrival</a></li> -->
 
           <li class="NavList-item">
-            <a href="#">Categories <i class="fa-solid fa-caret-down"></i></a>
-            <div class="dropDown">
+            <a href="#">Categories</a>
+            <!-- <div class="dropDown">
               <ul class="dropDownList">
                 <li class="dropDownItem">
                   <a href="#">Lv1 <i class="fa-solid fa-arrow-right"></i></a>
@@ -59,29 +59,32 @@
                     <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
                   </ul>
                 </li>
-              </ul>
+              </ul> -->
             </div>
+          </li>
+          <li class="NavList-item">
+            <form action="/user/search/result" method="post" class="search" >
+            <input
+              type="text"
+              name="search"
+              id="searchInput"
+              class="search-box"
+              placeholder="What are you finding?"
+            />
+            <button type="submit" class="search-but"><i class="fa-solid fa-magnifying-glass"></i>
+              <!-- <img
+                src="https://cdn2.iconfinder.com/data/icons/minimal-set-five/32/minimal-48-1024.png"
+                alt=""
+                class="img1"
+    
+              /> -->
+            </button>
+            </form>
           </li>
         </ul>
       </nav>
 
-      <form action="/user/search/result" method="post" class="search" >
-        <input
-          type="text"
-          name="search"
-          id="searchInput"
-          class="search-box"
-          placeholder="What are you finding?"
-        />
-        <button type="submit" class="search-but"><i class="fa-solid fa-magnifying-glass"></i>
-          <!-- <img
-            src="https://cdn2.iconfinder.com/data/icons/minimal-set-five/32/minimal-48-1024.png"
-            alt=""
-            class="img1"
-
-          /> -->
-        </button>
-      </form>
+     
 
 
 
