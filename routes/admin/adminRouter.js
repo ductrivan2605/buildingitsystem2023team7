@@ -1,11 +1,36 @@
-// adminRouter.js
+
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
+const upload = require("../../middleware/uploadImage.js");
+const fs = require('fs');
+const path = require('path');
+const User = require("../../models/user.js");
+const {
+  checkAdmin
+} = require("../../middleware/checkAuthenticated.js");
+const fetchUserData = require('../../middleware/fetchUserData.js');
 
-// Define /admin route
-router.get('/', (req, res) => {
-    // Admin route logic
+router.get("/", checkAdmin, fetchUserData, async (req, res) => {
+  try {
+    res.render("admin/adminDashBoard", {
+      layout: "./layouts/admin/admindashboardLayout",
+      title: "Admin Dashboard",
+      messages: req.flash(),
+    });
+  } catch (error) {
+    // Render the 404 error page
+    res.status(404).render("404", {
+      layout: "./layouts/admin/admindashboardLayout",
+      title: "Page Not Found",
+      messages: req.flash(),
+    });
+  }
 });
+
+
+
+
 
 // Define /admin/auth/logout route
 router.get('/auth/logout', (req, res) => {

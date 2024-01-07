@@ -10,11 +10,12 @@ const User = require("../../models/user.js");
 const {
   checkAdmin
 } = require("../../middleware/checkAuthenticated.js");
+const fetchUserData = require('../../middleware/fetchUserData.js');
 
 let responseSent = false;
 
 // Get all wishlist items
-router.get('/', checkAdmin, async (req, res) => {
+router.get('/',fetchUserData, checkAdmin, async (req, res) => {
   try {
     const wishlistItems = await WishlistItem.find({ approveWishlist: false });
     const users = await User.find({});

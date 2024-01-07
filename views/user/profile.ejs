@@ -1,0 +1,39 @@
+<div class="container user-profile">
+    <!-- Display user information here -->
+    <div class="text-center">
+        <img src="/public/images/ <%= user.image %>" alt="User Avatar" class="avatar">
+    </div>
+
+    <div class="profile-info text-center">
+        <h1><%= user.name %></h1>
+        <p>Username: <%= user.username %></p>
+        <p>Email: <%= user.email %></p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="btn-container">
+        
+        <a href="/user/setting" class="change-btn btn btn-primary btn-block">Change Information</a>
+        
+
+        <!-- Change Account Link -->
+        <a href="/user/profile/change" class="change-btn btn btn-secondary btn-block">Change Account</a>
+    </div>
+
+    
+    <form action="/auth/logout" method="post" class="logout-btn">
+        <button type="submit" class="btn btn-danger btn-block">Logout</button>
+    </form>
+</div>
+</main>
+
+<footer>
+<!-- Your footer content here -->
+</footer>
+
+<!-- Add Bootstrap JS and Popper.js if needed -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

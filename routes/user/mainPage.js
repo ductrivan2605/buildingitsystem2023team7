@@ -3,6 +3,8 @@ const router = express.Router();
 const Categories = require("../../models/Category.js");
 const Authors = require("../../models/author.js");
 const Books = require("../../models/bookModel.js");
+const User = require("../../models/user.js");
+const mongoose = require('mongoose');
 
 router.get("/", async (req, res) => {
   try {
@@ -22,6 +24,8 @@ router.get("/", async (req, res) => {
         bookmarked: userBookmarks.includes(book._id.toString()),
       })),
       title: "Booktopia",
+      users: users,
+      user: req.user,
     });
   } catch (error) {
     console.log(error);

@@ -68,7 +68,10 @@ const searchPageRouter = require("./routes/user/searchPageRoute");
 const adminRouter = require('./routes/admin/adminRouter');
 const userSettingRouter = require('./routes/user/userSettingRouter')
 const renderingRouter = require('./routes/user/bookRendering'); 
-
+const userReadingProgressRouter = require('./routes/admin/usersReadingProgress');
+const userProfileRouter = require('./routes/user/userProfile');
+const feedbackRouter = require('./routes/user/feedbackRoute');
+const adminFeedbackRouter = require('./routes/admin/feedbackRoute');
 
 app.use("/", mainPage);
 app.use("/book", bookDetailRouter);
@@ -76,19 +79,23 @@ app.use("/author", authorRouter);
 app.use("/bookmarks",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), bookMarkRouter);
 app.use("/reading-history",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), readingHistoryRouter);
 app.use("/category", categoryRouter);
+app.use('/admin', adminRouter);
 app.use("/admin/categories",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), CategoryRouter);
 app.use("/admin/authors",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), AuthorRouter);
 app.use("/admin/books-management",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), BooksRouter);
 app.use("/admin/books-management/",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), BookContentsRouter);
 app.use("/admin/users-management",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), userManagementRouter);
+app.use("/admin/user-reading-progress", connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), userReadingProgressRouter);
+app.use("/admin/wishlist",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), wishlistAdminRouter);
 app.use("/user", userRouter);
+app.use("/user/profile", userProfileRouter);
 app.use("/user/setting", userSettingRouter);
+app.use("/user/search", searchPageRouter);
 app.use("/auth", authRouter);
 app.use("/wishlist", wishlistRouter);
-app.use("/admin/wishlist",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), wishlistAdminRouter);
-app.use("/user/search", searchPageRouter);
-app.use('/admin', adminRouter);
 app.use('/api', renderingRouter);
+app.use('/feedback', feedbackRouter);
+app.use('/admin/feedback', adminFeedbackRouter)
 // app.get('/', (req, res) => {
 //   res.render('user/wishlist');
 // });

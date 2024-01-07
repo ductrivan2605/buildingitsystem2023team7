@@ -8,11 +8,8 @@
 <body>
   <div>
     <div id="pdf-viewer"></div>
-
     <p>Page: <span id="page-num"></span> / <span id="page-count"></span></p>
-    <div class="page-progress">
     <progress id="reading-progress" value="0" max="100"></progress>
-  </div>
     <div class="navigation-buttons">
       <button id="prev-page">Previous</button>
       <button id="next-page">Next</button>
@@ -23,87 +20,117 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const pdfViewer = document.getElementById('pdf-viewer');
-      const pdfDataUri = '<%= pdfDataUri %>'; // Get the base64 PDF data URI passed from the server
-  
-      let currentPage = 1;
+      const pdfDataUri = '<%= pdfDataUri %>';
+      const userId = '<%= userId %>';
+      const storageKey = `${userId}_currentPage`;
+
+      let currentPage = parseInt(localStorage.getItem(storageKey)) || 1;
       let pdfDoc = null;
-  
+
       const loadPDF = async () => {
         try {
           const pdf = atob(pdfDataUri.split(',')[1]);
           pdfDoc = await pdfjsLib.getDocument({ data: pdf }).promise;
-          renderPages(currentPage);
+          renderPage(currentPage);
         } catch (error) {
           console.error('Error loading PDF:', error);
         }
       };
 
-      const renderPages = async (startPage) => {
-        pdfViewer.innerHTML = ''; // Clear the viewer
-        for (let i = 0; i < 2; i++) {
-          const pageNum = startPage + i;
-          if (pageNum <= pdfDoc.numPages) {
-            await renderPage(pageNum);
-          }
-        }
-      };
-
       const renderPage = async (num) => {
-        const page = await pdfDoc.getPage(num);
-        const viewport = page.getViewport({ scale: 1.5 });
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-        
-        pdfViewer.appendChild(canvas);
+        pdfViewer.innerHTML = '';
+        if (num <= pdfDoc.numPages) {
+          const page = await pdfDoc.getPage(num);
+          const viewport = page.getViewport({ scale: 1.5 });
+          const canvas = document.createElement('canvas');
+          const context = canvas.getContext('2d');
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
 
-        const renderContext = {
-          canvasContext: context,
-          viewport: viewport
-        };
-        page.render(renderContext);
+          pdfViewer.appendChild(canvas);
 
-        document.getElementById('page-num').textContent = `${currentPage}-${currentPage + 1}`;
-        document.getElementById('page-count').textContent = pdfDoc.numPages;
-        const progress = ((num - 1) / (pdfDoc.numPages - 1)) * 100;
-        document.getElementById('reading-progress').value = progress;
+          const renderContext = {
+            canvasContext: context,
+            viewport: viewport
+          };
+          page.render(renderContext);
+
+          document.getElementById('page-num').textContent = `${currentPage}`;
+          document.getElementById('page-count').textContent = pdfDoc.numPages;
+          const progress = ((num - 1) / (pdfDoc.numPages - 1)) * 100;
+          document.getElementById('reading-progress').value = progress;
+        }
       };
-  
-      document.getElementById('prev-page').addEventListener('click', function() {
-        if (currentPage > 1) {
-          currentPage -= 2;
-          renderPages(currentPage);
+
+      const updateReadingProgress = async (currentPage) => {
+        try {
+          console.log(`Updating progress for user ${userId}, page ${currentPage}`);
+          localStorage.setItem(storageKey, currentPage);
+
+          const totalNumberOfPages = pdfDoc.numPages;
+          await fetch(`/api/${userId}/${slug}/update-progress`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ currentPage, totalPages: totalNumberOfPages }),
+          });
+
+          console.log('Reading progress updated successfully');
+        } catch (error) {
+          console.error('Error updating reading progress:', error);
         }
-      });
-  
-      document.getElementById('next-page').addEventListener('click', function() {
-        if (currentPage < pdfDoc.numPages - 1) {
-          currentPage += 2;
-          renderPages(currentPage);
+      };
+
+      const handlePageChange = async (newPage) => {
+        if (newPage !== currentPage) {
+          await updateReadingProgress(newPage);
+          currentPage = newPage;
+        }
+      };
+
+      document.getElementById('prev-page').addEventListener('click', async function() {
+        if (currentPage > 1) {
+          currentPage--;
+          await renderPage(currentPage);
+          await handlePageChange(currentPage);
         }
       });
 
-        document.addEventListener('keydown', function(event) {
-    switch (event.key) {
-      case 'ArrowLeft':
-        if (currentPage > 1) {
-          currentPage -= 2;
-          renderPages(currentPage);
+      document.getElementById('next-page').addEventListener('click', async function() {
+        if (currentPage < pdfDoc.numPages) {
+          currentPage++;
+          await renderPage(currentPage);
+          await handlePageChange(currentPage);
         }
-        break;
-      case 'ArrowRight':
-        if (currentPage < pdfDoc.numPages - 1) {
-          currentPage += 2;
-          renderPages(currentPage);
+      });
+
+      document.addEventListener('keydown', async function(event) {
+        switch (event.key) {
+          case 'ArrowLeft':
+            if (currentPage > 1) {
+              currentPage--;
+              await renderPage(currentPage);
+              await handlePageChange(currentPage);
+            }
+            break;
+          case 'ArrowRight':
+            if (currentPage < pdfDoc.numPages) {
+              currentPage++;
+              await renderPage(currentPage);
+              await handlePageChange(currentPage);
+            }
+            break;
         }
-        break;
-    }
-  });
-  
+      });
+
+      // Register the beforeunload event listener
+      window.addEventListener('beforeunload', async function(event) {
+        await updateReadingProgress(currentPage);
+      });
+
       loadPDF();
     });
-  </script>
-  
+  </script>  
 </body>
 </html>

@@ -86,6 +86,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Role</th>
                     <th scope="col">Profile Picture</th>
+                    <th scope="col">Reading Progress</th>
                     <th scope="col">Actions</th>
                     </tr>
                 </thead>
@@ -102,6 +103,9 @@
                             <div class="profileImage">
                                 <img src="<%= user.image %>" style="width: 100px; height: 100px; object-fit: cover;"/>
                             </div>
+                        </td>
+                        <td>
+                            <a href="/admin/user-reading-progress/<%= user._id %>" class="check-progress-link">Check Reading Progression</a>
                         </td>
                         <td>
                             <button class="edit-btn" onclick="openPopup('editPopup<%= counter %>')">Edit</button>

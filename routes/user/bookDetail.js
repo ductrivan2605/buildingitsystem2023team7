@@ -4,9 +4,10 @@ const Book = require("../../models/bookModel.js");
 const path = require("path");
 const fs = require("fs");
 const { checkAuthenticated } = require("../../middleware/checkAuthenticated");
+const fetchUserData = require("../../middleware/fetchUserData.js");
 
 // Display book details and reviews
-router.get("/:slug", async (req, res) => {
+router.get("/:slug",fetchUserData, async (req, res) => {
     try {
         const books = await Book.findOne({ slug: req.params.slug });
         console.log(books);

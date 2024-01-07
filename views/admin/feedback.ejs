@@ -1,0 +1,40 @@
+<main class="d-flex flex-nowrap">
+    <div class="mainContent">
+      <div class="CatergoryName">
+        <h1>Feedback Management</h1>
+      </div>
+  
+      <div class="search-form">
+        <form action="/admin/feedback" method="post" class="d-flex">
+          <input type="text" name="search" placeholder="Search feedback" />
+          <button type="submit">Search</button>
+        </form>
+      </div>
+  
+      <div class="feedbackTables">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Category</th>
+              <th scope="col">Feedback Text</th>
+              <th scope="col">Submitted At</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% let counter = 1; %>
+            <% feedbacks.forEach((feedback) => { %>
+              <tr>
+                <th scope="row"><%= counter %></th>
+                <td><%= feedback.feedbackCategory %></td>
+                <td><%= feedback.feedbackText %></td>
+                <td><%= feedback.submissionTime.toDateString() %></td>
+              </tr>
+              <% counter++; %>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+  

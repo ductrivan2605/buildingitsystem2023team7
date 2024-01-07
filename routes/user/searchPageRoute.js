@@ -3,10 +3,11 @@ const router = express.Router();
 const Books = require("../../models/bookModel.js");
 const Author = require("../../models/author.js");
 const Category = require("../../models/Category.js");
+const fetchUserData = require("../../middleware/fetchUserData.js");
 
 
 
-router.get("/", async (req, res) => {
+router.get("/",fetchUserData, async (req, res) => {
     try {
       const books = await Books.find({});
       const authors = await Author.find({});

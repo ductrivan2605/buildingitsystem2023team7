@@ -1,0 +1,72 @@
+<style>
+    body {
+        color: #EEEEEE;
+    }
+    .feedback-container {
+        width: 80%;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .feedback-form-group {
+        margin-bottom: 15px;
+    }
+    .feedback-label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    .feedback-select, .feedback-textarea {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    .feedback-button {
+        background-color: #00ADB5;
+        color: #FFFFFF;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        max-width: 200px;
+        margin: 20px auto;
+    }
+    .feedback-button:hover {
+        background-color: #029D8A;
+    }
+    .feedback-textarea {
+        height: 300px; 
+        resize: none; 
+    }
+    .h1tag {
+        color: black;
+    }
+</style>
+</head>
+<body>
+<div class="feedback-container">
+<h1 class="h1tag">Feedback</h1>
+<form action="/feedback" method="POST">
+    <div class="feedback-form-group">
+        <label for="feedbackCategory" class="feedback-label">Category</label>
+        <select id="feedbackCategory" name="feedbackCategory" class="feedback-select" required>
+            <option value="" disabled selected>Select a category</option>
+            <option value="websiteNavigation">Website Navigation</option>
+            <option value="ebookCollection">E-Book Collection</option>
+            <option value="accountIssues">Account Issues</option>
+            <option value="readingExperience">Reading Experience</option>
+            <option value="technicalSupport">Technical Support</option>
+            <option value="generalFeedback">General Feedback</option>
+        </select>
+    </div>
+    <div class="feedback-form-group">
+        <label for="feedbackText" class="feedback-label">Your Feedback</label>
+        <textarea id="feedbackText" name="feedbackText" class="feedback-textarea" placeholder="Enter your feedback here..." required></textarea>
+    </div>
+    <button type="submit" class="feedback-button">Submit Feedback</button>
+</form>
+</div>
+</body>
