@@ -37,9 +37,7 @@
                                         <form method="post" action="/reading-history/delete-history/<%= book.slug %>">
                                             <button class="deleteButton">Delete</button>
                                         </form>
-                                        <button type="button">
-                                            <a href="/book/<%= book.slug %>/read"> Continue reading</a>
-                                        </button>
+                                        <button type="submit" class="read-button">Read</button>
                                     </div>
                                 </div>
                             </li>
@@ -51,6 +49,11 @@
             </div>
         </div>
     </div>
+    <script>
+        document.querySelector('.read-button').addEventListener('click', function () {
+          window.location.href = '/book/<%= books.slug %>/read';
+        });
+      </script>
 </body>
 
 </html>
