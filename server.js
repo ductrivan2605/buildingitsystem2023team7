@@ -70,6 +70,8 @@ const userSettingRouter = require('./routes/user/userSettingRouter')
 const renderingRouter = require('./routes/user/bookRendering'); 
 const userReadingProgressRouter = require('./routes/admin/usersReadingProgress');
 const userProfileRouter = require('./routes/user/userProfile');
+const feedbackRouter = require('./routes/user/feedbackRoute');
+const adminFeedbackRouter = require('./routes/admin/feedbackRoute');
 
 app.use("/", mainPage);
 app.use("/book", bookDetailRouter);
@@ -92,6 +94,8 @@ app.use("/user/search", searchPageRouter);
 app.use("/auth", authRouter);
 app.use("/wishlist", wishlistRouter);
 app.use('/api', renderingRouter);
+app.use('/feedback', feedbackRouter);
+app.use('/admin/feedback', adminFeedbackRouter)
 // app.get('/', (req, res) => {
 //   res.render('user/wishlist');
 // });
