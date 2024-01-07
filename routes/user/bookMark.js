@@ -3,8 +3,9 @@ const router = express.Router();
 const User = require("../../models/user.js");
 const Books = require("../../models/bookModel.js");
 const connectEnsureLogin = require('connect-ensure-login');
+const fetchUserData = require("../../middleware/fetchUserData.js");
 
-router.get("/", async (req, res) => {
+router.get("/",fetchUserData, async (req, res) => {
   try {
     const userId = req.user.id;
 

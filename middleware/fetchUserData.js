@@ -7,6 +7,7 @@ const fetchUserData = async (req, res, next) => {
       res.locals.user = {
         name: user.name,
         image: user.image,
+        role: user.role,
       };
     } catch (error) {
       console.error('Error fetching user data:', error);

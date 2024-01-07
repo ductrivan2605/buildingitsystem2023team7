@@ -130,6 +130,10 @@
   background-color: #f4f4f4;
   cursor: pointer;
 }
+.notavailable p {
+  text-align: center;
+  font-size: 50px;
+}
 
 .page-btn:hover {
   background-color: #ddd;
