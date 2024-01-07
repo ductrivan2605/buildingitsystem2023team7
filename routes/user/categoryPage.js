@@ -3,6 +3,16 @@ const router = express.Router();
 const Books = require("../../models/bookModel.js");
 const Categories = require("../../models/Category.js");
 
+
+router.get('/all', async (req,res) => {
+    const categories = await Categories.find({});
+    res.render('user/allcategorypage', {
+        layout: './layouts/user/categoryPage',
+        categories: categories,
+        title: "Booktopia",
+
+    });
+})
 // For the main category page
 router.get("/:slug", async (req, res) => {
     try {

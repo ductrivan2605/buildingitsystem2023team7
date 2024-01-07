@@ -1,77 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/user/bookDetail.css" />
-    <title>Book Details</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/user/bookDetail.css" />
+  <title>Book Details</title>
+</head>
 
-  <body>
-
-    <ul class="book_detail_breadcrumbs">
-      <li><a href="/">Home</a></li>
-      <li><%= books.title %></li>
-    </ul>
-    <div class="container111">
-      <div class="container1">
-        <div class="title">
-          <div class="image-container1">
+<body>
+  <ul class="book_detail_breadcrumbs">
+    <li><a href="/">Home</a></li>
+    <li><%= books.title %></li>
+  </ul>
+  <div class="container111">
+    <div class="container1">
+      <div class="title">
+        <div class="image-container1">
           <img src="/images/<%= books.imageCover %>" style="max-width: 80%; height: auto; margin-bottom: 20px;" alt="Image Cover" class="book-image"/>
-          </form>
         </div>
-          <div class="details">
-            <h2><%= books.title %></h2>
-            <p>Publisher: <%= books.publisher %></p>
-            <p>Publication Date: <%= books.published %></p>
+        <div class="details">
+          <h2><%= books.title %></h2>
+          <p>Publisher: <%= books.publisher %></p>
+          <p>Publication Date: <%= books.published %></p>
 
-            <% function displayStars(rating) { %>
-              <% const roundedRating = Math.round(rating); %>
-              <% for (let i = 1; i <= 5; i++) { %>
-                  <% if (i <= roundedRating) { %>
-                      <span class="stars">&#9733;</span>
-                  <% } else { %>
-                      <span class="stars">&#9734;</span>
-                  <% } %>
+          <% function displayStars(rating) { %>
+            <% const roundedRating = Math.round(rating); %>
+            <% for (let i = 1; i <= 5; i++) { %>
+              <% if (i <= roundedRating) { %>
+                <span class="stars">&#9733;</span>
+              <% } else { %>
+                <span class="stars">&#9734;</span>
               <% } %>
             <% } %>
-            <p>Rating: <%= displayStars(books.averageRating) %> 
-              <% if(books.reviews.length < 2){ %>
-              <%= books.reviews.length %> review 
-              <% }else{ %>
-                <%= books.reviews.length %> reviews 
-                <% } %>
-            </p>
-            <p>
-              Author(s): <% books.authorsSlug.forEach((authorSlug, index) => {
-              %>
-              <a href="/author/<%= authorSlug %>"><%= books.authors[index] %></a
-              ><%= index !== books.authors.length - 1 ? ',' : '' %> <% }) %>
-            </p>
-            <form action="/reading-history/add-history/<%= books.slug %>" method="post">
+          <% } %>
+          <p>
+            Rating: <%= displayStars(books.averageRating) %> 
+            <% const reviewCount = books.reviews.length; %>
+            <%= reviewCount %> <%= reviewCount === 1 ? 'review' : 'reviews' %>
+          </p>
+          <p>
+            Author(s): <% books.authorsSlug.forEach((authorSlug, index) => { %>
+              <a href="/author/<%= authorSlug %>"><%= books.authors[index] %></a><%= index !== books.authors.length - 1 ? ',' : '' %> 
+            <% }) %>
+          </p>
+          <form action="/reading-history/add-history/<%= books.slug %>" method="post">
             <button type="submit" class="read-button">Read</button>
-          </div>
+          </form>
         </div>
-        <div class="description11">
-          <nav class="bookDetailnav">
-            <ul>
-              <li>
-                <a class="active bookDetailreviews1" href="#book-intro">Book Introduction</a>
-              </li>
-              <li><a class="bookDetailreviews" href="#reviews">Reviews</a></li>
-            </ul>
-          </nav>
+      </div>
+      <div class="description11">
+        <nav class="bookDetailnav">
+          <ul>
+            <li>
+              <a class="active bookDetailreviews1" href="#book-intro">Book Introduction</a>
+            </li>
+            <li><a class="bookDetailreviews" href="#reviews">Reviews</a></li>
+          </ul>
+        </nav>
 
-          <div class="description1">
-            <div id="book-intro" class="content active">
-              <h2>Book Introduction</h2>
-              <p><%= books.description%></p>
-            </div>
+        <div class="description1">
+          <div id="book-intro" class="content active">
+            <h2>Book Introduction</h2>
+            <p><%= books.description %></p>
+          </div>
             
-            <form action="/book/<%= books.slug %>/review" method="post">
+          <form action="/book/<%= books.slug %>/review" method="post">
             <div id="review" class="content">
               <div class="user-comment">
-                <h3>Write a Comments</h3>
+                <h3>Write a Comment</h3>
                 <div class="user-comment-box">
                   <div class="user-comment-box-header">
                     <div class="star-rating space-x-4 mx-auto">
@@ -119,63 +115,62 @@
                   </div>
                 </div>
                 <hr />
-                  <div class="review-description">
-                      <textarea
-                          id="comment-contents"
-                          placeholder="Leave your review here"
-                          name="review"
-                          rows="5"
-                          cols="100"
-                      ></textarea>
-                  </div>
-                  <div class="action-buttons">
-                      <button type="submit" class="helpful-btn">Submit</button>
-                      <button type="reset" class="report-btn" id="resetButton">Reset</button>
-                  </div>
-              </form>
-              </div>
-
-              <h2>Reviews</h2>
-              <% books.reviews.slice().reverse().forEach((review) => { %>
-                <div class="user-review">
-                    <div class="user-profile">
-                        <img src="" alt="User Profile Image" />
-                        <div class="user-details">
-                            <h3><%= review.userName %></h3>
-                            <div class="user-rating">
-                                <!-- Dynamically generate star ratings based on the review's rating -->
-                                <% for (let i = 1; i <= 5; i++) { %>
-                                    <% if (i <= review.rating) { %>
-                                        <span class="stars">&#9733;</span>
-                                    <% } else { %>
-                                        <span class="stars">&#9734;</span>
-                                    <% } %>
-                                <% } %>
-                            </div>
-                        </div>
-                    </div>
-                    <hr />
-                    <div class="review-description">
-                        <p><%= review.review %></p>
-                    </div>
-                    <div class="action-buttons">
-                        <button class="helpful-btn">Helpful</button>
-                        <button class="report-btn">Report</button>
-                    </div>
+                <div class="review-description">
+                  <textarea
+                    id="comment-contents"
+                    placeholder="Leave your review here"
+                    name="review"
+                    rows="5"
+                    cols="100"
+                  ></textarea>
                 </div>
-            <% }) %>
-            
-              
+                <div class="action-buttons">
+                  <button type="submit" class="helpful-btn">Submit</button>
+                  <button type="reset" class="report-btn" id="resetButton">Reset</button>
+                </div>
+              </div>
             </div>
-      </div>
-    </div>
-      </div>
-    </div>
+          </form>
 
-    <script>
-      document.querySelector('.read-button').addEventListener('click', function () {
-        window.location.href = '/book/<%= books.slug %>/read';
-      });
-    </script>
-  </body>
+            <h2>Reviews</h2>
+            <% books.reviews.slice().reverse().forEach((review) => { %>
+              <div class="user-review">
+                <div class="user-profile">
+                  <img src="" alt="User Profile Image" />
+                  <div class="user-details">
+                    <h3><%= review.userName %></h3>
+                    <div class="user-rating">
+                      <!-- Dynamically generate star ratings based on the review's rating -->
+                      <% for (let i = 1; i <= 5; i++) { %>
+                        <% if (i <= review.rating) { %>
+                          <span class="stars">&#9733;</span>
+                        <% } else { %>
+                          <span class="stars">&#9734;</span>
+                        <% } %>
+                      <% } %>
+                    </div>
+                  </div>
+                </div>
+                <hr />
+                <div class="review-description">
+                  <p><%= review.review %></p>
+                </div>
+                <div class="action-buttons">
+                  <button class="helpful-btn">Helpful</button>
+                  <button class="report-btn">Report</button>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelector('.read-button').addEventListener('click', function () {
+      window.location.href = '/book/<%= books.slug %>/read';
+    });
+  </script>
+</body>
 </html>

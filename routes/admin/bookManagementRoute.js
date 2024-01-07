@@ -48,6 +48,7 @@ router.post(
         publisher: publisher,
         description: description,
         imageCover: imageCover,
+        readCount: 0,
       });
 
       if (!book) {

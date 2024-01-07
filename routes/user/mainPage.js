@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Categories = require("../../models/Category.js");
-const Authors = require("../../models/author.js");
 const Books = require("../../models/bookModel.js");
 
 router.get("/", async (req, res) => {
@@ -10,14 +9,24 @@ router.get("/", async (req, res) => {
 
     // Check if the user is authenticated
     const isAuthenticated = req.isAuthenticated();
-
-    // Fetch user's bookmarks is authenticated
     const userBookmarks = isAuthenticated ? req.user.bookmarks.map(bookmark => bookmark.toString()) : [];
-    const books = await Books.find({});
+    
+    const newestBooks = await Books.find({}).sort({createdAt: -1});
+    const mostRatingBooks = await Books.find({}).sort({"reviews.rating": -1});
+    const mostReadBooks = await Books.find({}).sort({readCount: -1});
+    
     res.render("user/categoryNavigation", {
       layout: "./layouts/user/mainPage",
       categories: categories,
-      books: books.map(book => ({
+      newestBooks: newestBooks.map(book => ({
+        ...book.toObject(),
+        bookmarked: userBookmarks.includes(book._id.toString()),
+      })),
+      mostRatingBooks: mostRatingBooks.map(book => ({
+        ...book.toObject(),
+        bookmarked: userBookmarks.includes(book._id.toString()),
+      })),
+      mostReadBooks: mostReadBooks.map(book => ({
         ...book.toObject(),
         bookmarked: userBookmarks.includes(book._id.toString()),
       })),

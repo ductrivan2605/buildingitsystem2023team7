@@ -1,15 +1,17 @@
-<% if(books.length > 0){ %>
 <div class="bookContainers">
-
-<div class="category">
-  <h2>MostRead</h2>
-  <section class="splide" id="splide1" aria-label="Splide Basic HTML Example">
-    <div class="splide__track">
-      <ul class="splide__list">
-        <% books.forEach(book => {%>
+  <div class="category">
+    <h2>Recently Added</h2>
+    <section class="splide" id="splide1" aria-label="Splide Basic HTML Example">
+      <div class="splide__track">
+        <ul class="splide__list">
+          <% newestBooks.forEach(book => {%>
           <li class="splide__slide">
             <a href="/book/<%= book.slug %>">
-              <img class="bookImage" src="/images/<%= book.imageCover %>" alt="bookImage" />
+              <img
+                class="bookImage"
+                src="/images/<%= book.imageCover %>"
+                alt="bookImage"
+              />
               <div class="bookInformation">
                 <div class="bookTitle">
                   <h2><%= book.title %></h2>
@@ -23,27 +25,33 @@
               <button type="submit" class="bookmark-btn">
                 <div class="btnIcon">
                   <% if(book.bookmarked){ %>
-                    <ion-icon class="bookmarkIcon" name="star" style="color: gold"></ion-icon>
+                  <ion-icon
+                    class="bookmarkIcon"
+                    name="star"
+                    style="color: gold"
+                  ></ion-icon>
                   <% } else { %>
-                    <ion-icon class="bookmarkIcon" name="star" style="color: black"></ion-icon>
+                  <ion-icon
+                    class="bookmarkIcon"
+                    name="star"
+                    style="color: black"
+                  ></ion-icon>
                   <% } %>
                 </div>
               </button>
             </form>
           </li>
-        <% }) %>
-      </ul>
-    </div>
-  </section>
-</div>
-
+          <% }) %>
+        </ul>
+      </div>
+    </section>
+  </div>
   <div class="category">
-    <h2>MostRead2</h2>
-    <!-- <div class="bookContainer">     -->
+    <h2>Most Rating</h2>
     <section class="splide" id="splide2" aria-label="Splide Basic HTML Example">
       <div class="splide__track">
         <ul class="splide__list">
-          <% books.forEach(book => {%>
+          <% mostRatingBooks.forEach(book => {%>
           <li class="splide__slide">
             <a href="/book/<%= book.slug %>">
               <img
@@ -51,43 +59,86 @@
                 src="/images/<%= book.imageCover %>"
                 alt="bookImage"
               />
-              <div class="bookInformationMain">
-                <div class="bookTitle"><p><%= book.title %></p></div>
+              <div class="bookInformation">
+                <div class="bookTitle">
+                  <h2><%= book.title %></h2>
+                </div>
+                <div class="bookAuthor">
+                  <p><%= book.authors.join(', ') %></p>
+                </div>
               </div>
             </a>
-            <button class="bookmark-btn">
-              <div class="btnIcon">
-                <ion-icon class="bookmarkIcon" name="star"></ion-icon>
-              </div>
-            </button>
+            <form action="/bookmarks/add/<%= book.slug %>" method="post">
+              <button type="submit" class="bookmark-btn">
+                <div class="btnIcon">
+                  <% if(book.bookmarked){ %>
+                  <ion-icon
+                    class="bookmarkIcon"
+                    name="star"
+                    style="color: gold"
+                  ></ion-icon>
+                  <% } else { %>
+                  <ion-icon
+                    class="bookmarkIcon"
+                    name="star"
+                    style="color: black"
+                  ></ion-icon>
+                  <% } %>
+                </div>
+              </button>
+            </form>
           </li>
-          <% })%>
+          <% }) %>
         </ul>
       </div>
     </section>
   </div>
   <div class="category">
-    <h2>MostRead3</h2>
-    <!-- <div class="bookContainer">     -->
+    <h2>Most Read</h2>
     <section class="splide" id="splide3" aria-label="Splide Basic HTML Example">
       <div class="splide__track">
         <ul class="splide__list">
-          <% books.forEach(book => {%>
+          <% mostReadBooks.forEach(book => {%>
           <li class="splide__slide">
             <a href="/book/<%= book.slug %>">
-              <img src="/images/<%= book.imageCover %>" alt="bookImage" />
-              <p><%= book.title %></p>
-            </a>
-            <button class="bookmark-btn">
-              <div class="btnIcon">
-                <ion-icon class="bookmarkIcon" name="star"></ion-icon>
+              <img
+                class="bookImage"
+                src="/images/<%= book.imageCover %>"
+                alt="bookImage"
+              />
+              <div class="bookInformation">
+                <div class="bookTitle">
+                  <h2><%= book.title %></h2>
+                </div>
+                <div class="bookAuthor">
+                  <p><%= book.authors.join(', ') %></p>
+                </div>
               </div>
-            </button>
+            </a>
+            <form action="/bookmarks/add/<%= book.slug %>" method="post">
+              <button type="submit" class="bookmark-btn">
+                <div class="btnIcon">
+                  <% if(book.bookmarked){ %>
+                  <ion-icon
+                    class="bookmarkIcon"
+                    name="star"
+                    style="color: gold"
+                  ></ion-icon>
+                  <% } else { %>
+                  <ion-icon
+                    class="bookmarkIcon"
+                    name="star"
+                    style="color: black"
+                  ></ion-icon>
+                  <% } %>
+                </div>
+              </button>
+            </form>
           </li>
-          <% })%>
+          <% }) %>
         </ul>
       </div>
     </section>
   </div>
+
 </div>
-<% } %>
