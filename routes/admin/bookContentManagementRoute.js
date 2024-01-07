@@ -12,7 +12,7 @@ router.get("/:id",fetchUserData, checkAdmin, async (req, res) => {
     const books = await Books.find({ _id: req.params.id });
     res.render("admin/bookContentsManagement", {
       layout: "./layouts/admin/itemsManagementLayout",
-      title: "Book Management",
+      title: "Book Content Management",
       books: books,
       messages: req.flash(),
     });
