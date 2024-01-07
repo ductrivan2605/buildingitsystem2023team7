@@ -50,6 +50,12 @@ const userSchema = new mongoose.Schema({
     ref: "Book details",
   }],
   readingProgress: [bookProgressSchema],
+  readingHistory:[
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Book details",
+    }
+  ]
 });
 
 userSchema.plugin(passportLocalMongoose);

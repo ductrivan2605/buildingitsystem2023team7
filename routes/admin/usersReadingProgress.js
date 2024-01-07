@@ -7,7 +7,7 @@ const fetchUserData = require('../../middleware/fetchUserData.js');
 // GET /admin/user-reading-progress - View user reading progress
 router.get("/:userId",fetchUserData, checkAdmin, async (req, res) => {
   try {
-    const userId = req.params.userId;
+    const userId = await User.find({_id: req.params.id});
     const users = await User.findById(userId).populate('readingProgress.bookId');
     res.render("admin/userReadingProgress", {
         layout: "./layouts/admin/itemsManagementLayout",
@@ -20,5 +20,4 @@ router.get("/:userId",fetchUserData, checkAdmin, async (req, res) => {
     res.status(404).render("404", { layout: false });
   }
 });
-
 module.exports = router;
