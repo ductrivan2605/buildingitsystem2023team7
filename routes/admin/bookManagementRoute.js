@@ -8,9 +8,8 @@ const Author = require("../../models/author.js");
 const Category = require("../../models/Category.js");
 const upload = require("../../middleware/uploadImage.js");
 const { checkAdmin } = require("../../middleware/checkAuthenticated.js");
-const fetchUserData = require("../../middleware/fetchUserData.js");
 
-router.get("/",fetchUserData, checkAdmin, async (req, res) => {
+router.get("/", checkAdmin, async (req, res) => {
   try {
     const books = await Books.find({});
     const authors = await Author.find({});

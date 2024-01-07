@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Books = require("../../models/bookModel.js");
 const Categories = require("../../models/Category.js");
-const fetchUserData = require("../../middleware/fetchUserData.js");
 
 
 router.get('/all', async (req,res) => {
@@ -15,7 +14,7 @@ router.get('/all', async (req,res) => {
     });
 })
 // For the main category page
-router.get("/:slug",fetchUserData, async (req, res) => {
+router.get("/:slug", async (req, res) => {
     try {
         const page = req.query.page || 1;
         const itemsPerPage = 10;

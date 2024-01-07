@@ -4,10 +4,9 @@ const Book = require("../../models/bookModel.js");
 const path = require("path");
 const fs = require("fs");
 const { checkAuthenticated } = require("../../middleware/checkAuthenticated");
-const fetchUserData = require("../../middleware/fetchUserData.js");
 
 // Display book details and reviews
-router.get("/:slug",fetchUserData, async (req, res) => {
+router.get("/:slug", async (req, res) => {
     try {
         const books = await Book.findOne({ slug: req.params.slug });
         console.log(books);
@@ -72,11 +71,9 @@ router.post("/:slug/review", checkAuthenticated, async (req, res) => {
   try {
       const { reviewId, review, rating } = req.body;
 
-      // Check if the user has already reviewed the book
       const hasReviewed = await userHasReviewed(req.params.slug, req.user.name);
 
       if (hasReviewed) {
-          // User has already reviewed, update the existing review
           await Book.updateOne(
               { slug: req.params.slug, "reviews._id": reviewId },
               {
