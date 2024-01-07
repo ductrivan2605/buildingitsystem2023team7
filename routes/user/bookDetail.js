@@ -69,37 +69,40 @@ const userHasReviewed = async (slug, userName) => {
 // Submit a new review or update existing review
 router.post("/:slug/review", checkAuthenticated, async (req, res) => {
   try {
-      const { reviewId, review, rating } = req.body;
+    const { review, rating } = req.body;
+    const userName = req.user.name || "Anonymous";
+    const slug = req.params.slug;
 
-      const hasReviewed = await userHasReviewed(req.params.slug, req.user.name);
+    const hasReviewed = await userHasReviewed(slug, userName);
 
-      if (hasReviewed) {
-          await Book.updateOne(
-              { slug: req.params.slug, "reviews._id": reviewId },
-              {
-                  $set: {
-                      "reviews.$.review": review,
-                      "reviews.$.rating": parseInt(rating) || 1,
-                  },
-              }
-          );
-      } else {
-          // User has not reviewed, add a new review
-          const newReview = {
-              userName: req.user.name || "Anonymous",
-              review,
-              rating: parseInt(rating) || 1,
-          };
+    if (hasReviewed) {
+      await Book.updateOne(
+        { slug, "reviews.userName": userName },
+        {
+          $set: {
+            "reviews.$.review": review,
+            "reviews.$.rating": parseInt(rating) || 1,
+          },
+        }
+      );
+    } else {
+      // User has not reviewed, add a new review
+      const newReview = {
+        userName,
+        review,
+        rating: parseInt(rating) || 1,
+      };
 
-          await Book.updateOne({ slug: req.params.slug }, { $push: { reviews: newReview } });
-      }
+      await Book.updateOne({ slug }, { $push: { reviews: newReview } });
+    }
 
-      res.redirect(`/book/${req.params.slug}`);
+    res.redirect(`/book/${slug}`);
   } catch (error) {
-      console.error(error);
-      res.status(500).send("Internal Server Error");
+    console.error(error);
+    res.status(500).send("Internal Server Error");
   }
 });
+
 
 
 module.exports = router;
