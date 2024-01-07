@@ -7,8 +7,9 @@ const upload = require("../../middleware/uploadImage.js");
 const {
   checkAdmin
 } = require("../../middleware/checkAuthenticated.js");
+const fetchUserData = require("../../middleware/fetchUserData.js");
 // Get all categories
-router.get("/", checkAdmin, async (req, res) => {
+router.get("/",fetchUserData, checkAdmin, async (req, res) => {
   try {
     const categories = await Category.find({});
     res.render("admin/categoryManagement", {

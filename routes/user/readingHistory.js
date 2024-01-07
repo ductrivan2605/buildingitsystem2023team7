@@ -9,9 +9,9 @@ router.get("/",fetchUserData, async (req, res) => {
   try {
     const userId = req.user.id;
 
-    const user = await User.findById(userId).populate("bookmarks").lean();
+    const user = await User.findById(userId).populate("readingHistory").lean();
 
-    res.render("user/bookmarksList", {
+    res.render("user/readingHistoryList", {
       layout: "./layouts/user/bookMarkPage",
       title: "Booktopia",
       user,
@@ -22,7 +22,7 @@ router.get("/",fetchUserData, async (req, res) => {
   }
 });
 
-router.post("/add/:slug",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), async (req, res) => {
+router.post("/add-history/:slug",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), async (req, res) => {
   try {
     const { slug } = req.params;
 
@@ -38,19 +38,17 @@ router.post("/add/:slug",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/si
     // Update the user's bookmark array
     await User.findByIdAndUpdate(
       userId,
-      { $addToSet: { bookmarks: book._id } },
+      { $addToSet: { readingHistory: book._id } },
       { new: true }
     );
-
-    res.redirect('/bookmarks');
-    console.log("Added bookmarks");
+    res.redirect(`/book/${slug}/read`)
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal Server Error");
   }
 });
 
-router.post("/delete/:slug",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), async (req, res) => {
+router.post("/delete-history/:slug",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), async (req, res) => {
   try {
     const { slug } = req.params;
 
@@ -58,7 +56,7 @@ router.post("/delete/:slug",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth
     const book = await Books.findOne({ slug });
 
     if (!book) {
-      return res.redirect("/bookmarks");
+      return res.redirect("/reading-history");
     }
 
     const userId = req.user.id;
@@ -66,14 +64,12 @@ router.post("/delete/:slug",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth
     // Remove the book ID from the user's bookmarks array
     await User.findByIdAndUpdate(
       userId,
-      { $pull: { bookmarks: book._id } },
+      { $pull: { readingHistory: book._id } },
       { new: true }
     );
 
-    console.log("Deleted bookmark");
-
     // Redirect to the bookmark list page
-    res.redirect("/bookmarks");
+    res.redirect("/reading-history");
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal Server Error");

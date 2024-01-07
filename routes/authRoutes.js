@@ -42,6 +42,14 @@ router.get("/configure", async (req, res) => {
 router.post('/register', upload.single('image'), async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    const existingUser = await User.findOne({ $or: [{ username: req.body.username }, { email: req.body.email }] });
+
+    if (existingUser) {
+      // Send a window alert indicating that the username or email is already in use
+      return res.send('<script>alert("Username or email is already in use"); window.location="/auth/signup";</script>');
+    }
+
     const image = req.file ? '/images/' + req.file.filename : '/images/userDefault.jpg';
     const user = new User({
       name: req.body.name,
@@ -60,6 +68,7 @@ router.post('/register', upload.single('image'), async (req, res) => {
     res.status(500).send('Error registering user');
   }
 });
+
 
 router.get('/logout', (req, res) => {
   req.logout((err) => {

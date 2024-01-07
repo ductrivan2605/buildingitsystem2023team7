@@ -218,6 +218,10 @@ body {
   margin: 0 auto;
 }
 
+#userName {
+  margin-right:5px;
+}
+
 #userAvatar {
   width: 40px;
   height: 40px;

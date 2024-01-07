@@ -1,0 +1,50 @@
+<!-- userReadingProgress.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Reading Progress</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/userReadingProgress.css"> <!-- Add your custom CSS file -->
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>User Reading Progress - <%= user.name %></h1>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Book Title</th>
+                    <th scope="col">Current Page</th>
+                    <th scope="col">Total Pages</th>
+                    <th scope="col">Progress</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (user && user.readingProgress && user.readingProgress.length > 0) { %>
+                    <% let index = 1; %>
+                    <% user.readingProgress.forEach((progress) => { %>
+                        <tr>
+                            <th scope="row" style="display: none;"><%= index %></th>
+                            <td><%= progress.bookId.title %></td>
+                            <td><%= progress.currentPage %></td>
+                            <td><%= progress.totalPages %></td>
+                            <td><%= progress.progress %>%</td>
+                        </tr>
+                        <% index++; %>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="5">No reading progress available.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

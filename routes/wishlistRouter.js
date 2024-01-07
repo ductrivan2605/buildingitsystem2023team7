@@ -3,9 +3,10 @@ const express = require('express');
 const router = express.Router();
 const WishlistItem = require('../models/Wishlist')
 const upload = require("../middleware/uploadImage");
+const fetchUserData = require('../middleware/fetchUserData');
 
 //render all wishlist
-router.get('/', async (req, res) => {
+router.get('/',fetchUserData, async (req, res) => {
   try {
     const wishlistItems = await WishlistItem.find({});
     res.render('user/wishlist', {

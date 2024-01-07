@@ -26,7 +26,15 @@ body {
     
     
 }
+#wrapper{
+    height : auto;
+    min-height: 100%;
+  }
+#wrapper,
+.mainContent {
+  min-height: calc(100vh - 10px);
 
+}
 .categorySearch h1 {
     font-size: 30px;
     margin:0;
@@ -154,6 +162,8 @@ button:hover {
         text-align: left;
         background-color: #fff;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%; /* Full width on smaller screens */
+        margin: 10px 0; /* Adjust margin as needed */
 }
     
     .bookImage {
@@ -164,10 +174,11 @@ button:hover {
         margin-bottom: 10px;
         
 }
-    .bookContainer {
-        /* background-color: #0056b3; */
-        width:95%;
-    }
+.bookContainer {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
     .Searchcontainer {
         max-width: 600px;
         margin: 0 auto;
@@ -180,7 +191,7 @@ button:hover {
     .categorySearch h1 {
         font-size: 20px;
     }
-    select, input, button {
+    .select, input, button {
         margin: 3px;
         padding: 8px;
         font-size: 16px;
@@ -189,22 +200,24 @@ button:hover {
         color: black;
         border: none;
     }
-select {
+.select {
     width:24%;
 }
-input {
+.input {
     width:45%;
 }
 
-    button {
+    .button {
         cursor: pointer;
         background-color: #00ADB5;
         color: black;
         border: none;
         border-radius: 15px;
+        padding: 5px;
+        font-size: 14px;
     }
     
-    button:hover {
+    .button:hover {
         background-color: #0056b3;
     }
     

@@ -5,9 +5,10 @@ const router = express.Router();
 const Authors = require("../../models/author.js");
 const upload = require("../../middleware/uploadImage.js");
 const { checkAdmin } = require("../../middleware/checkAuthenticated.js");
+const fetchUserData = require("../../middleware/fetchUserData.js");
 
 // Get all authors
-router.get("/", checkAdmin, async (req, res) => {
+router.get("/",fetchUserData, checkAdmin, async (req, res) => {
   try {
     const authors = await Authors.find({});
     res.render("admin/authorManagement", {

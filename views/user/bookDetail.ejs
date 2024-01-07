@@ -16,11 +16,10 @@
     <div class="container111">
       <div class="container1">
         <div class="title">
-          <img
-            src="/images/<%= books.imageCover %>"
-            style="max-width: 80%; height: auto; margin-bottom: 20px;"
-            alt="Image Cover"
-          />
+          <div class="image-container1">
+          <img src="/images/<%= books.imageCover %>" style="max-width: 80%; height: auto; margin-bottom: 20px;" alt="Image Cover" class="book-image"/>
+          </form>
+        </div>
           <div class="details">
             <h2><%= books.title %></h2>
             <p>Publisher: <%= books.publisher %></p>
@@ -49,6 +48,8 @@
               <a href="/author/<%= authorSlug %>"><%= books.authors[index] %></a
               ><%= index !== books.authors.length - 1 ? ',' : '' %> <% }) %>
             </p>
+            <form action="/reading-history/add-history/<%= books.slug %>" method="post">
+            <button type="submit" class="read-button">Read</button>
           </div>
         </div>
         <div class="description11">
@@ -170,5 +171,11 @@
     </div>
       </div>
     </div>
+
+    <script>
+      document.querySelector('.read-button').addEventListener('click', function () {
+        window.location.href = '/book/<%= books.slug %>/read';
+      });
+    </script>
   </body>
 </html>

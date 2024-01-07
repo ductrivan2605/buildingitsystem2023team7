@@ -1,6 +1,25 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 
+const bookProgressSchema = new mongoose.Schema({
+  bookId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Book details',
+  },
+  currentPage: {
+    type: Number,
+    default: 1,
+  },
+  totalPages: {
+    type: Number,
+    default: 0,
+  },
+  progress: {
+    type: Number,
+    default: 0,
+  },
+});
+
 const userSchema = new mongoose.Schema({
   image: {
     type: String,
@@ -30,11 +49,7 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Book details",
   }],
-  readingProgress: {
-    type: Map,
-    of: Number,
-    default: {}, // Default to an empty object for storing progress
-  },
+  readingProgress: [bookProgressSchema],
 });
 
 userSchema.plugin(passportLocalMongoose);
