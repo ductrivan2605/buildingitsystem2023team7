@@ -114,7 +114,7 @@ app.use('/information', infoRouter)
 //    });
 
 //display consol.log
-const port = process.env.PORT || 3076; 
+const port = process.env.PORT || 3000; 
 app.listen(port, () => {
      console.log(`Server is running on port ${port}`); 
 });
