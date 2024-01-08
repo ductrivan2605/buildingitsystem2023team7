@@ -57,6 +57,7 @@
           <% if (user) { %>
             <a href="/user/profile">Profile</a>
             <a href="/user/setting#general">Settings</a>
+            <a href="/">Main page</a>
             <a href="<%= user.role === 'admin' ? '/admin/' : '/' %>">Home</a>
             <a href="<%= user.role === 'admin' ? 'admin' : '' %>/auth/logout">Logout</a>
           <% } else { %>

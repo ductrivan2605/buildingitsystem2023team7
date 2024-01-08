@@ -95,11 +95,6 @@ router.post('/update/:id', checkAdmin, upload.single('editProfileImage'), async 
       return res.redirect("/admin/users-management");
     }
     
-    // Check if the username or email already exists
-    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
-    if (existingUser) {
-      return res.status(400).send('Username or email already exists');
-    }
 
     const updateFields = {};
     if (name) updateFields.name = name;
