@@ -132,7 +132,8 @@ router.post("/:id/delete-content", checkAdmin, async (req, res) => {
 
     res.redirect(`/admin/books-management/${bookId}`);
   } catch (error) {
-    res.status(404).render("404", { layout: false });
+    console.log(error)
+    // res.status(404).render("404", { layout: false });
   }
 });
 
