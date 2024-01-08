@@ -8,9 +8,8 @@ const Author = require("../../models/author.js");
 const Category = require("../../models/Category.js");
 const upload = require("../../middleware/uploadImage.js");
 const { checkAdmin } = require("../../middleware/checkAuthenticated.js");
-const fetchUserData = require("../../middleware/fetchUserData.js");
 
-router.get("/",fetchUserData, checkAdmin, async (req, res) => {
+router.get("/", checkAdmin, async (req, res) => {
   try {
     const books = await Books.find({});
     const authors = await Author.find({});
@@ -49,6 +48,7 @@ router.post(
         publisher: publisher,
         description: description,
         imageCover: imageCover,
+        readCount: 0,
       });
 
       if (!book) {
@@ -190,22 +190,23 @@ router.post(
   checkAdmin,
   async (req, res) => {
     try {
+      // Find all books
       const deletedBooks = await Books.find({});
 
-      for (const deletedBook of deletedBooks) {
-        await Books.findByIdAndDelete(deletedBook._id);
-        // Find all users who have bookmarked this book
-        const usersWithBookmark = await User.find({
-          bookmarks: deletedBook._id,
-        });
+      // Remove all books from the database
+      await Books.deleteMany({});
 
-        // Remove the book ID from each user's bookmarks
-        usersWithBookmark.forEach(async (user) => {
-          user.bookmarks = user.bookmarks.filter(
-            (bookmark) => bookmark.toString() !== deletedBook._id.toString()
-          );
-          await user.save();
-        });
+      // Remove bookmarks from users and delete image files
+      for (const deletedBook of deletedBooks) {
+        const bookId = deletedBook._id;
+
+        // Find all users who have bookmarked this book
+        await User.updateOne(
+          { bookmarks: bookId },
+          { $pull: { bookmarks: bookId } },
+          { multi: true }
+        );
+
         // Delete the corresponding image files
         if (deletedBook.imageCover) {
           const imageCoverPath = path.join(
@@ -213,26 +214,26 @@ router.post(
             "../../public/images",
             deletedBook.imageCover
           );
-
           await fs.promises.unlink(imageCoverPath);
         }
 
-        // Delete the image cover file
-        const imageCoverPath = path.join(
-          __dirname,
-          "../../public/images",
-          deletedBook.imageCover
-        );
-        await fs.promises.unlink(imageCoverPath);
+        // Delete the content images associated with the book
+        for (const contentImage of deletedBook.contentImage) {
+          const contentImagePath = path.join(
+            __dirname,
+            "../../public/pdf",
+            contentImage
+          );
+          await fs.promises.unlink(contentImagePath);
+        }
       }
-      if (!deletedBooks) {
-        req.flash("fail", "Unable to delete all book!");
-        res.redirect("/admin/books-management");
-      }
-      req.flash("success", "All book deleted successfully!");
+
+      req.flash("success", "All books, bookmarks, and images deleted successfully!");
       res.redirect("/admin/books-management");
     } catch (error) {
-      res.status(404).render("404", { layout: false });
+      console.error(error);
+      req.flash("fail", "Error deleting books, bookmarks, and images");
+      res.redirect("/admin/books-management");
     }
   }
 );

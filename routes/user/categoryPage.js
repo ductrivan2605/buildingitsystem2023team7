@@ -2,10 +2,19 @@ const express = require("express");
 const router = express.Router();
 const Books = require("../../models/bookModel.js");
 const Categories = require("../../models/Category.js");
-const fetchUserData = require("../../middleware/fetchUserData.js");
 
+
+router.get('/all', async (req,res) => {
+    const categories = await Categories.find({});
+    res.render('user/allcategorypage', {
+        layout: './layouts/user/categoryPage',
+        categories: categories,
+        title: "Booktopia",
+
+    });
+})
 // For the main category page
-router.get("/:slug",fetchUserData, async (req, res) => {
+router.get("/:slug", async (req, res) => {
     try {
         const page = req.query.page || 1;
         const itemsPerPage = 10;

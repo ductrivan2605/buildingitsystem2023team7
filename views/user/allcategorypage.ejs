@@ -1,0 +1,17 @@
+<div class="categoryHeader">
+  <h2>All Categories</h2>
+</div>
+<% categories.forEach(category => { %>
+<nav class="navbar">
+  <div class="mainCategory">
+    <h1><%= category.category %></h1>
+  </div>
+  <ul class="navbar__menu">
+    <% category.subCategory.forEach(sub =>{ %>
+    <li>
+      <a href="/category/<%= category.slug %>/<%= sub %>"><%= sub %> </a>
+    </li>
+    <% }) %>
+  </ul>
+</nav>
+<% }) %>

@@ -19,7 +19,7 @@ router.get("/",fetchUserData, checkAdmin, async (req, res) => {
       messages:req.flash(),
     });
   } catch (error) {
-    res.status(404).render("/404");
+    res.status(404).render("./404", {layout: false});
   }
 });
 
@@ -45,7 +45,7 @@ router.post("/add-new-category", checkAdmin, upload.single("image"), async (req,
       req.flash("success", "New category created successfully!");
       res.redirect("/admin/categories");
   } catch (error) {
-    res.status(404).render("/404");
+    res.status(404).render("./404", {layout: false});
   }
 });
 
@@ -105,7 +105,7 @@ router.post(
       res.redirect("/admin/categories");
 
     } catch (error) {
-      res.status(404).render("/404");
+      res.status(404).render("./404", {layout:false});
     }
   }
 );
@@ -132,7 +132,7 @@ router.post("/delete/:id", checkAdmin, async (req, res) => {
     req.flash("success", "Category deleted successfully!");
     res.redirect("/admin/categories");
   } catch (error) {
-    res.status(404).render("/404");
+    res.status(504).render("../404", {layout: false});
   }
 });
 
@@ -160,7 +160,7 @@ router.post("/delete-all-categories", checkAdmin, async (req, res) => {
     req.flash("success", "All category deleted successfully!");
     res.redirect("/admin/categories");
   } catch (error) {
-    res.status(404).render("/404");
+    res.status(404).render("../404", {layout: false});
   }
 });
 

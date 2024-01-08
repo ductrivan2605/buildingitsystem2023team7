@@ -25,6 +25,7 @@ const BookSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  readCount: Number,
   authors: [
     {
       type: String,
@@ -74,6 +75,10 @@ const BookSchema = new mongoose.Schema({
       required: true,
     },
   ],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 // Calculating the average stars

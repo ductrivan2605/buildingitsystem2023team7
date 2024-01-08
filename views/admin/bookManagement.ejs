@@ -272,6 +272,8 @@
             <th scope="col">Publisher</th>
             <th scope="col">Published</th>
             <th scope="col">Description</th>
+            <th scope="col">Views</th>
+            <th scope="col">Rating</th>
             <th scope="col">Cover image</th>
             <th scope="col">Book content</th>
             <th scope="col">Edit</th>
@@ -287,6 +289,8 @@
             <td><%= book.publisher %></td>
             <td><%= book.published %></td>
             <td><%= book.description %></td>
+            <td><%= book.readCount %></td>
+            <td><%= book.reviews.averageRating %></td>
             <td>
               <div class="imgBooks">
                 <img

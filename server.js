@@ -72,6 +72,7 @@ const userReadingProgressRouter = require('./routes/admin/usersReadingProgress')
 const userProfileRouter = require('./routes/user/userProfile');
 const feedbackRouter = require('./routes/user/feedbackRoute');
 const adminFeedbackRouter = require('./routes/admin/feedbackRoute');
+const infoRouter = require('./routes/user/infoRoute');
 
 app.use("/", mainPage);
 app.use("/book", bookDetailRouter);
@@ -96,6 +97,8 @@ app.use("/wishlist", wishlistRouter);
 app.use('/api', renderingRouter);
 app.use('/feedback', feedbackRouter);
 app.use('/admin/feedback', adminFeedbackRouter)
+app.use('/information', infoRouter)
+
 // app.get('/', (req, res) => {
 //   res.render('user/wishlist');
 // });
@@ -111,7 +114,7 @@ app.use('/admin/feedback', adminFeedbackRouter)
 //    });
 
 //display consol.log
-const port = process.env.PORT || 3000; 
+const port = process.env.PORT || 3076; 
 app.listen(port, () => {
      console.log(`Server is running on port ${port}`); 
 });
