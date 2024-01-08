@@ -25,6 +25,7 @@ router.get("/:slug",fetchUserData, async (req, res) => {
 router.get("/:slug/read", checkAuthenticated, async (req, res) => {
   try {
     const book = await Book.findOne({ slug: req.params.slug });
+    const userId = await User.findById(req.params._id);
     if (!book || !book.contentImage || book.contentImage.length === 0) {
       return res.status(404).send('PDF not found');
     }
@@ -49,6 +50,7 @@ router.get("/:slug/read", checkAuthenticated, async (req, res) => {
     res.render('user/bookReading', {
       layout: './layouts/user/bookReadingPageLayout',
       title: 'Booktopia',
+      userId: userId,
       pdfDataUri: pdfDataUri, // Pass the base64 data to the view
       book: book // Pass other book details if needed
     });
