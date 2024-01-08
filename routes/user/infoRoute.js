@@ -1,9 +1,10 @@
 const express = require('express');
+const fetchUserData = require('../../middleware/fetchUserData');
 const router = express.Router();
 
 
 
-router.get("/aboutUs", async (req, res) => {
+router.get("/aboutUs",fetchUserData, async (req, res) => {
   try {
       res.render("user/aboutUs", {
           layout: "./layouts/user/feedbackLayout",
@@ -15,7 +16,7 @@ router.get("/aboutUs", async (req, res) => {
   }
 });
 
-router.get("/privacyPolicy", async (req, res) => {
+router.get("/privacyPolicy",fetchUserData, async (req, res) => {
     try {
         res.render("user/privacyPolicy", {
             layout: "./layouts/user/feedbackLayout",
@@ -28,7 +29,7 @@ router.get("/privacyPolicy", async (req, res) => {
   });
 
 
-  router.get("/copyright", async (req, res) => {
+  router.get("/copyright",fetchUserData, async (req, res) => {
     try {
         res.render("user/copyright", {
             layout: "./layouts/user/feedbackLayout",

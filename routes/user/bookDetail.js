@@ -1,16 +1,22 @@
 const express = require("express");
 const router = express.Router();
+const User = require("../../models/user.js");
 const Book = require("../../models/bookModel.js");
 const path = require("path");
 const fs = require("fs");
 const { checkAuthenticated } = require("../../middleware/checkAuthenticated");
+const fetchUserData = require("../../middleware/fetchUserData.js");
 
 // Display book details and reviews
-router.get("/:slug", async (req, res) => {
+router.get("/:slug",fetchUserData, async (req, res) => {
     try {
+        const userId = req.user.id;
         const books = await Book.findOne({ slug: req.params.slug });
+        const user = await User.findById(userId).populate("bookmarks").lean();
+        const userBookmarks = isAuthenticated ? req.user.bookmarks.map(bookmark => bookmark.toString()) : []; 
+
         console.log(books);
-        res.render('user/bookDetail', { layout: './layouts/user/bookDetailPage', title: "Booktopia" ,books  });
+        res.render('user/bookDetail', { layout: './layouts/user/bookDetailPage', title: "Booktopia" ,books,user,  });
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");

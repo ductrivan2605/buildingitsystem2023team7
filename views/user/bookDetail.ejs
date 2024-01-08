@@ -46,6 +46,21 @@
           <form action="/reading-history/add-history/<%= books.slug %>" method="post">
             <button type="submit" class="read-button">Read</button>
           </form>
+          
+              
+                <% if(books.bookmarked){ %>
+                  <form action="/bookmarks/delete/<%= books.slug %>" method="post">
+                    <button type="submit" class="bookmarked-button">Bookmarked</button>
+                    </form>
+                  
+                  
+                <% } else { %>
+                  <form action="/bookmarks/add/<%= books.slug %>" method="post">
+                    <button type="submit" class="bookmark-button">Bookmark</button>
+                  </form>
+                <% } %>
+              
+          
           <button type="bookmark" class="bookmark-button">Bookmark</button>
           <button type="bookmarked" class="bookmarked-button">Bookmarked</button>
         </div>
@@ -173,6 +188,11 @@
     document.querySelector('.read-button').addEventListener('click', function () {
       window.location.href = '/book/<%= books.slug %>/read';
     });
+    
+
   </script>
+  
+  
+
 </body>
 </html>

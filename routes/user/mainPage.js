@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Categories = require("../../models/Category.js");
 const Books = require("../../models/bookModel.js");
+const fetchUserData = require("../../middleware/fetchUserData.js");
 
-router.get("/", async (req, res) => {
+router.get("/",fetchUserData, async (req, res) => {
   try {
     const categories = await Categories.find({}).limit(4);
 
@@ -37,7 +38,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/book/:slug", async (req, res) => {
+router.get("/book/:slug",fetchUserData, async (req, res) => {
   try {
     const books = await Books.findOne({ slug: req.params.slug });
     res.render("user/bookDetail", {
