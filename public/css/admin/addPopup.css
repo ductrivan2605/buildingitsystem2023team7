@@ -92,7 +92,7 @@
     resize: vertical;
   }
   
-  .button-container {
+  /* .button-container {
     display: flex;
     justify-content: flex-end;
     margin-top: 20px;
@@ -139,7 +139,7 @@
   
   button:hover {
     background-color: #BD534F;
-  }
+  } */
   
   
   @media screen and (max-width: 600px) {

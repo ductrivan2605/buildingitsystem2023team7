@@ -19,10 +19,11 @@
         class="d-flex"
       >
         <input type="text" name="search" placeholder="Search for book name" />
-        <button type="submit">Search</button>
+        <button class="submittingBtn" type="submit">Search</button>
       </form>
       <div class="btns">
         <input
+        class="addingBooks"
           type="button"
           value="Add book"
           onclick="openPopup('addBookPopup')"
@@ -217,9 +218,10 @@
                 ></textarea>
 
                 <div class="button-container">
-                  <button type="reset" id="reset">Reset</button>
-                  <button type="submit" id="submit">Submit</button>
+                  <button class="resetBooks" type="reset" id="reset">Reset</button>
+                  <button class="addingBooks" type="submit" id="submit">Submit</button>
                   <button
+                  class="deletingBooks"
                     type="button"
                     id="cancel"
                     onclick="closePopup('addBookPopup')"
@@ -232,6 +234,7 @@
           </div>
         </div>
         <input
+        class="deletingBooks"
           type="button"
           value="Delete All"
           onclick="openPopup('deleteAllPopup')"
@@ -246,8 +249,9 @@
                 action="/admin/books-management/delete-all-books"
                 method="post"
               >
-                <button type="submit" class="btn btn-success">Confirm</button>
+                <button class="addingBooks" type="submit" class="btn btn-success">Confirm</button>
                 <button
+                class="deletingBooks"
                   type="button"
                   class="btn btn-danger"
                   onclick="closePopup('deleteAllPopup')"
@@ -300,7 +304,7 @@
               </div>
             </td>
             <td>
-              <button type="button"><a href="/admin/books-management/<%= book._id %>">View Content</a></button>
+              <button class="viewBtn" type="button"><a href="/admin/books-management/<%= book._id %>">View Content</a></button>
             </td>
             <td>
               <button
@@ -515,9 +519,10 @@
                       >
 
                       <div class="button-container">
-                        <button type="reset">Reset</button>
-                        <button type="submit">Submit</button>
+                        <button class="resetBooks" type="reset">Reset</button>
+                        <button class="addingBooks" type="submit">Submit</button>
                         <button
+                        class="deletingBooks"
                           type="button"
                           onclick="closePopup('editPopup<%= counter %>')"
                         >
@@ -544,10 +549,11 @@
                       action="/admin/books-management/delete/<%= book._id %>"
                       method="post"
                     >
-                      <button type="submit" class="btn btn-success">
+                      <button class="addingBooks" type="submit" class="btn btn-success">
                         Confirm
                       </button>
                       <button
+                      class="deletingBooks"
                         type="button"
                         class="btn btn-danger"
                         onclick="closePopup('deletePopup<%= counter %>')"
