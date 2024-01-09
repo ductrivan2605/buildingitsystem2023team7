@@ -2,9 +2,9 @@
     <!-- Display user information here -->
     <div class="text-center">
         <% if (user && user.image) { %>
-            <img id="userAvatar" src="<%= user.image %>" alt="User Avatar" />
+            <img id="avatar" src="<%= user.image %>" alt="User Avatar" />
           <% } else { %>
-            <img id="userAvatar" src="/images/userDefault.png" alt="Default Avatar" />
+            <img id="avatar" src="/images/userDefault.png" alt="Default Avatar" />
           <% } %>
     </div>
 

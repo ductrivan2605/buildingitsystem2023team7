@@ -4,16 +4,16 @@ body {
 }
 
 .user-profile {
-    max-width: 600px;
+    width: 800px;
     margin: 50px auto;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 }
-.avatar {
-    width: 100px;
-    height: 100px;
+#avatar {
+    width: 40%;
+    height: auto;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 20px;
@@ -26,7 +26,7 @@ body {
 .profile-info {
     display: flex;
     justify-content: space-around;
-    margin-top:150px;
+    margin-top:10px;
 }
 .profile-info p {
     font-size: 18px;
@@ -54,7 +54,7 @@ body {
     color: black;
     margin-bottom: 15px;
     font-size: 20px;
-  
+    padding: 5px 10px;
     
   }
   .custom-input {
