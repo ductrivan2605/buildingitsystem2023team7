@@ -1,24 +1,46 @@
 const express = require("express");
 const router = express.Router();
+const User = require("../../models/user.js");
 const Book = require("../../models/bookModel.js");
 const path = require("path");
 const fs = require("fs");
 const { checkAuthenticated } = require("../../middleware/checkAuthenticated");
+const fetchUserData = require("../../middleware/fetchUserData.js");
 
 // Display book details and reviews
-router.get("/:slug", async (req, res) => {
-    try {
-        const books = await Book.findOne({ slug: req.params.slug });
-        console.log(books);
-        res.render('user/bookDetail', { layout: './layouts/user/bookDetailPage', title: "Booktopia" ,books  });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Internal Server Error");
-    }
+router.get("/:slug", fetchUserData, async (req, res) => {
+  try {
+      const userId = req.user.id;
+      const bookSlug = req.params.slug;
+
+      // Fetch the book details
+      const book = await Book.findOne({ slug: bookSlug });
+
+      // Fetch user data with bookmarks
+      const user = await User.findById(userId).populate("bookmarks").lean();
+
+      // Check if the book is bookmarked by the user
+      const isBookmarked = user.bookmarks.some((bookmark) => bookmark.slug === bookSlug);
+
+      res.render('user/bookDetail', {
+          layout: './layouts/user/bookDetailPage',
+          title: "Booktopia",
+          books: book,  // Ensure that you use 'books' in your EJS template
+          user,
+          isBookmarked,
+      });
+  } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+  }
 });
+
+
+
 router.get("/:slug/read", checkAuthenticated, async (req, res) => {
   try {
     const book = await Book.findOne({ slug: req.params.slug });
+    const userId = await User.findById(req.params._id);
     if (!book || !book.contentImage || book.contentImage.length === 0) {
       return res.status(404).send('PDF not found');
     }
@@ -43,6 +65,7 @@ router.get("/:slug/read", checkAuthenticated, async (req, res) => {
     res.render('user/bookReading', {
       layout: './layouts/user/bookReadingPageLayout',
       title: 'Booktopia',
+      userId: userId,
       pdfDataUri: pdfDataUri, // Pass the base64 data to the view
       book: book // Pass other book details if needed
     });

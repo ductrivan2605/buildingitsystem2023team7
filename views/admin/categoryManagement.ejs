@@ -17,10 +17,10 @@
     <div class="search-form">
         <form action="/admin/categories/search" method="post" class="d-flex ">
             <input type="text" name="search" placeholder="Search for category" class="w-75"/>
-            <button type="submit" class="w-25 m-0 px-2">Search</button>
+            <button class="submittingBtn" type="submit" class="w-25 m-0 px-2">Search</button>
         </form>
         <div class="btns">
-            <input type="button" value="Add category" onclick="openPopup('addPopup')" />
+            <input class="addingBooks" type="button" value="Add category" onclick="openPopup('addPopup')" />
             <div class="popup-container" id="addPopup">
                 <div class="popup">
                     <div>
@@ -42,15 +42,15 @@
                             <textarea id="subCategory" name="subCategory" rows="4"></textarea>
                             
                             <div class="button-container">
-                            <button type="reset">Reset</button>
-                            <button type="submit">Submit</button>
-                            <button type="button" onclick="closePopup('addPopup')">Cancel</button>
+                            <button class="resetBooks" type="reset">Reset</button>
+                            <button class="addingBooks" type="submit">Submit</button>
+                            <button class="deletingBooks" type="button" onclick="closePopup('addPopup')">Cancel</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-            <input type="button" value="Delete All" onclick="openPopup('deleteAllPopup')"/>
+            <input class="deletingBooks" type="button" value="Delete All" onclick="openPopup('deleteAllPopup')"/>
             <div class="popup-container" id="deleteAllPopup">
                 <div class="popup">
                     <div>
@@ -58,8 +58,8 @@
                     </div>
                     <div class="fluid-container">
                         <form action="/admin/categories/delete-all-categories" method="post">
-                            <button type="submit" class="btn btn-success"> Confirm</button>
-                            <button type="button" class="btn btn-danger" onclick="closePopup('deleteAllPopup')"> Cancel</button>
+                            <button class="addingBooks" type="submit" class="btn btn-success"> Confirm</button>
+                            <button class="deletingBooks" type="button" class="btn btn-danger" onclick="closePopup('deleteAllPopup')"> Cancel</button>
                         </form>
                     </div>
                 </div>
@@ -118,9 +118,9 @@
                                     
         
                                     <div class="button-container">
-                                    <button type="reset">Reset</button>
-                                    <button type="submit">Submit</button>
-                                    <button type="button" onclick="closePopup('editPopup<%= counter %>')">Cancel</button>
+                                    <button class="resetBooks" type="reset">Reset</button>
+                                    <button class="addingBooks" type="submit">Submit</button>
+                                    <button class="deletingBooks" type="button" onclick="closePopup('editPopup<%= counter %>')">Cancel</button>
                                     </div>
                                 </div>
                             </form>
@@ -134,8 +134,8 @@
                             </div>
                             <div class="fluid-container">
                                 <form action="/admin/categories/delete/<%= category._id %>" method="post">
-                                    <button type="submit" class="btn btn-success"> Confirm</button>
-                                    <button type="button" class="btn btn-danger" onclick="closePopup('deletePopup<%= counter %>')"> Cancel</button>
+                                    <button class="addingBooks" type="submit" class="btn btn-success"> Confirm</button>
+                                    <button class="deletingBooks" type="button" class="btn btn-danger" onclick="closePopup('deletePopup<%= counter %>')"> Cancel</button>
                                 </form>
                             </div>
                         </div>

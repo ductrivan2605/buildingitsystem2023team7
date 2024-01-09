@@ -46,8 +46,22 @@
           <form action="/reading-history/add-history/<%= books.slug %>" method="post">
             <button type="submit" class="read-button">Read</button>
           </form>
-          <button type="bookmark" class="bookmark-button">Bookmark</button>
-          <button type="bookmarked" class="bookmarked-button">Bookmarked</button>
+      
+          <% console.log("User:", user); %>
+          <% console.log("Books:", books); %>
+          <% console.log("User bookmarks:", user && user.bookmarks); %>
+          <% const isBookmarked = user && user.bookmarks && user.bookmarks.some(bookmark => bookmark.slug === books.slug); %>
+          
+          <% if (isBookmarked) { %>
+              <form action="/bookmarks/delete/<%= books.slug %>" method="post">
+                  <button type="submit" class="bookmarked-button">Bookmarked</button>
+              </form>
+          <% } else { %>
+              <form action="/bookmarks/add/<%= books.slug %>" method="post">
+                  <button type="submit" class="bookmark-button">Bookmark</button>
+              </form>
+          <% } %>
+
         </div>
       </div>
       <div class="description11">
@@ -134,7 +148,6 @@
             </div>
           </form>
 
-            <h2>Reviews</h2>
             <% books.reviews.slice().reverse().forEach((review) => { %>
               <div class="user-review">
                 <div class="user-profile">
@@ -173,6 +186,11 @@
     document.querySelector('.read-button').addEventListener('click', function () {
       window.location.href = '/book/<%= books.slug %>/read';
     });
+    
+
   </script>
+  
+  
+
 </body>
 </html>

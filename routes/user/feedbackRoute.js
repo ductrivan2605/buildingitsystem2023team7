@@ -3,9 +3,10 @@ const router = express.Router();
 const User = require('../../models/user');
 const Feedback = require('../../models/feedback');
 const { checkAuthenticated } = require("../../middleware/checkAuthenticated.js");
+const fetchUserData = require('../../middleware/fetchUserData.js');
 
 
-router.get("/", checkAuthenticated, async (req, res) => {
+router.get("/",fetchUserData, checkAuthenticated, async (req, res) => {
   try {
       res.render("user/feedback", {
           layout: "./layouts/user/feedbackLayout",

@@ -1,3 +1,20 @@
+<% if (user) { %>
+    <div></div>
+  <% } else { %>
+    <div class="hero-section">
+        <div class="hero-content">
+          <h1>Welcome to Our Library</h1>
+          <p>
+            Discover a world of knowledge with our extensive collection of books.
+          </p>
+          <a href="#" class="browse-books-btn">Browse Books</a>
+        </div>
+      </div>
+  <% } %>
+   
+
+
+
 <div class="navForBook">
     <% categories.forEach(category => { %>
     <div class="nav-items">
@@ -11,12 +28,14 @@
         </div>
     </div>
     <% }) %>
+
+    <% if(categories.length === 4){ %>
     <div class="nav-items">
         <a href="/category/all" class="nav-item">
             <ion-icon class="viewMore" name="add-outline"></ion-icon>
             <p>View more</p>
         </a>
     </div>
-    
+    <% } %>
     
 </div>
