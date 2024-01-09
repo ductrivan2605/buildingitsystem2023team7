@@ -43,76 +43,114 @@
             <div class="dropDown">
               <ul class="dropDownList">
                 <li class="dropDownItem">
-                  <a href="#">Lv1 <i class="fa-solid fa-arrow-right"></i></a>
+                  <a href="#">Action <i class="fa-solid fa-arrow-right"></i></a>
                   <ul class="dropDownList-lv2">
-                    <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
-                    <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
+                    <li class="dropDownItem-lv2"><a href="#">Thrillers</a></li>
+                    <li class="dropDownItem-lv2"><a href="#">Spies</a></li>
+                    <li class="dropDownItem-lv2">
+                      <a href="#">Historical</a>
+                    </li>
                   </ul>
                 </li>
                 <li class="dropDownItem">
-                  <a href="#">Lv1 <i class="fa-solid fa-arrow-right"></i></a>
+                  <a href="#">Romance<i class="fa-solid fa-arrow-right"></i></a>
                   <ul class="dropDownList-lv2">
-                    <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
-                    <li class="dropDownItem-lv2"><a href="#">Lv2</a></li>
+                    <li class="dropDownItem-lv2">
+                      <a href="#">Historical</a>
+                    </li>
+                    <li class="dropDownItem-lv2">
+                      <a href="#">Contemporary</a>
+                    </li>
+                    <li class="dropDownItem-lv2">
+                      <a href="#">Paranormal</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="dropDownItem">
+                  <a href="#">Fantasy<i class="fa-solid fa-arrow-right"></i></a>
+                  <ul class="dropDownList-lv2">
+                    <li class="dropDownItem-lv2">
+                      <a href="#">Epic Fantasy</a>
+                    </li>
+                    <li class="dropDownItem-lv2">
+                      <a href="#">Urban Fantasy</a>
+                    </li>
+                    <li class="dropDownItem-lv2">
+                      <a href="#">Dystopian</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="dropDownItem">
+                  <a href="#">Mystery<i class="fa-solid fa-arrow-right"></i></a>
+                  <ul class="dropDownList-lv2">
+                    <li class="dropDownItem-lv2">
+                      <a href="#">Cozy Mystery</a>
+                    </li>
+                    <li class="dropDownItem-lv2">
+                      <a href="#">Police</a>
+                    </li>
+                    <li class="dropDownItem-lv2">
+                      <a href="#">Thriller</a>
+                    </li>
                   </ul>
                 </li>
               </ul>
             </div>
           </li>
-          
+
           <li class="NavList-item">
-            <form action="/user/search/result" method="post" class="search" >
-            <input
-              type="text"
-              name="search"
-              id="searchInput"
-              class="search-box"
-              placeholder="What are you finding?"
-            />
-            <button type="submit" class="search-but"><i class="fa-solid fa-magnifying-glass"></i>
-              <!-- <img
+            <form action="/user/search/result" method="post" class="search">
+              <input
+                type="text"
+                name="search"
+                id="searchInput"
+                class="search-box"
+                placeholder="What are you finding?"
+              />
+              <button type="submit" class="search-but">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <!-- <img
                 src="https://cdn2.iconfinder.com/data/icons/minimal-set-five/32/minimal-48-1024.png"
                 alt=""
                 class="img1"
     
               /> -->
-            </button>
+              </button>
             </form>
           </li>
-    
         </ul>
       </nav>
-
-     
-
 
       <div class="user" id="userSection">
         <div class="user-info" onclick="toggleUserMenu()">
           <% if (user && user.image) { %>
-            <img id="userAvatar" src="<%= user.image %>" alt="User Avatar" />
+          <img id="userAvatar" src="<%= user.image %>" alt="User Avatar" />
           <% } else { %>
-            <img id="userAvatar" src="/images/userDefault.png" alt="Default Avatar" />
+          <img
+            id="userAvatar"
+            src="/images/userDefault.png"
+            alt="Default Avatar"
+          />
           <% } %>
-      
+
           <span id="userName"> <%= user ? user.name : 'Guest' %> </span>
           <i class="fa-solid fa-caret-down"></i>
         </div>
 
-        
-   <div class="user-dropdown" id="userDropdown">
-  <!-- Dropdown menu content -->
-  <% if (user) { %>
-    <a href="/user/profile">Profile</a>
-    <a href="/bookmarks">Bookmarks</a>
-    <a href="/user/setting#general">Settings</a>
-    <a href="/feedback">Feedback</a>
-    <a href="<%= user.role === 'admin' ? '/admin/' : '/' %>">Home</a>
-    <a href="/auth/logout">Logout</a>
-  <% } else { %>
-    <a href="/auth/signin">Login</a>
-    <a href="/auth/register">Register</a>
-  <% } %>
-</div>
+        <div class="user-dropdown" id="userDropdown">
+          <!-- Dropdown menu content -->
+          <% if (user) { %>
+          <a href="/user/profile">Profile</a>
+          <a href="/bookmarks">Bookmarks</a>
+          <a href="/user/setting#general">Settings</a>
+          <a href="/feedback">Feedback</a>
+          <a href="<%= user.role === 'admin' ? '/admin/' : '/' %>">Home</a>
+          <a href="/auth/logout">Logout</a>
+          <% } else { %>
+          <a href="/auth/signin">Login</a>
+          <a href="/auth/register">Register</a>
+          <% } %>
+        </div>
       </div>
     </header>
   </body>
