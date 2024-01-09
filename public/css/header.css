@@ -33,7 +33,7 @@ body {
 /* code for tthe header */
 .header {
   height: 80px;
-  background-image: linear-gradient(0, #F3EDC8, #EAD196);
+  background-image: linear-gradient(#186F65,#6A9C89, #C3E2C2);
   margin-top: 0px;
   padding: 0px;
   background-size: cover;
@@ -56,7 +56,7 @@ body {
   left: 0;
   height: 4px;
   max-width: 200px;
-  background-color: #df826c;
+  background-color: #FF0060;
   width: 0;
   transition: width 0.3s ease-out, left 0.3s ease-out;
   z-index: 1;
@@ -101,7 +101,7 @@ body {
 }
 
 .NavList li a {
-  color: #7D0A0A;
+  color: #DCF2F1;
   display: block;
   padding: 8px 10px;
   text-decoration: 5;
@@ -111,7 +111,7 @@ body {
 
 .NavList-item a:hover {
   text-decoration: underline;
-  text-decoration-color: #e21818;
+  text-decoration-color: #FF004D;
 }
 
 /*code for the drop down menu*/
@@ -123,7 +123,7 @@ body {
 .dropDownList,
 .dropDownList-lv2 {
   position: absolute;
-  background-color: #FCF5ED;
+  background-color: #6DA4AA;
   list-style: none;
   z-index: 1000;
   display: none;
@@ -177,10 +177,10 @@ body {
   width: 300px;
   max-width: 400px;
   background-color: none;
-  margin-top: 15px;
-  margin-left: 40px;
+  margin-top: 25px;
+  margin-left: 80px;
   margin: 0 auto;
-  border-radius: 6%;
+  border-radius: 12%;
 }
 
 .search input[type="text"] {
@@ -199,8 +199,8 @@ body {
   padding: 8px 16px;
   font-size: 12px;
   font-weight: bold;
-  color: #fff;
-  background-color: #BF3131;
+  color: #DCF2F1;
+  background-color: #365486;
   cursor: pointer;
   margin-left: -1px;
   transition: background-color 0.2s ease-in-out;
@@ -211,7 +211,7 @@ body {
 }
 
 .search button[type="submit"]:hover {
-  background-color: #159895;
+  background-color: #7FC7D9;
 }
 /* this code is for user login */
 .user {
