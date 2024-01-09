@@ -48,14 +48,21 @@ p {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+
 /* Hide buttons initially and style */
-.navigation-buttons {
+/* .navigation-buttons {
   position: fixed;
   bottom: -40px;
   left: 50%;
   transform: translateX(-50%);
   transition: bottom 0.3s ease-in-out;
-}
+} */
+
+/* Show buttons on hover */
+/* .navigation-buttons:hover {
+  bottom: 0;
+} */
+
 
 .navigation-buttons button {
   margin: 5px;
@@ -66,10 +73,7 @@ p {
   cursor: pointer;
 }
 
-/* Show buttons on hover */
-.navigation-buttons:hover {
-  bottom: 0;
-}
+
 @media (max-width: 768px) {
   #pdf-viewer canvas {
     width: 100%;
