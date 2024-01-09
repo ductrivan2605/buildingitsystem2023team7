@@ -1,7 +1,11 @@
 <div class="container user-profile">
     <!-- Display user information here -->
     <div class="text-center">
-        <img src="/public/images/ <%= user.image %>" alt="User Avatar" class="avatar">
+        <% if (user && user.image) { %>
+            <img id="userAvatar" src="<%= user.image %>" alt="User Avatar" />
+          <% } else { %>
+            <img id="userAvatar" src="/images/userDefault.png" alt="Default Avatar" />
+          <% } %>
     </div>
 
     <div class="profile-info text-center">

@@ -48,17 +48,29 @@
           </form>
           
               
-                <% if(books.bookmarked){ %>
-                  <form action="/bookmarks/delete/<%= books.slug %>" method="post">
-                    <button type="submit" class="bookmarked-button">Bookmarked</button>
-                    </form>
-                  
-                  
-                <% } else { %>
-                  <form action="/bookmarks/add/<%= books.slug %>" method="post">
-                    <button type="submit" class="bookmark-button">Bookmark</button>
-                  </form>
-                <% } %>
+        
+            
+          <% if (user && user.bookmarks !== null && user.bookmarks !== undefined) { %>
+            <% console.log("user.bookmarks:", user.bookmarks); %>
+          
+            <% const isBookmarked = user.bookmarks.includes(books._id.toString()); %>
+          
+            <% if (isBookmarked) { %>
+              <form action="/bookmarks/delete/<%= books.slug %>" method="post">
+                <button type="submit" class="bookmarked-button">Bookmarked</button>
+              </form>
+            <% } else { %>
+              <form action="/bookmarks/add/<%= books.slug %>" method="post">
+                <button type="submit" class="bookmark-button">Bookmark</button>
+              </form>
+            <% } %>
+          <% } else { %>
+            <p>User information not available</p>
+          <% } %>
+          
+          
+          
+          
               
           
           <button type="bookmark" class="bookmark-button">Bookmark</button>
