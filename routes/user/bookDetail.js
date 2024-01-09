@@ -8,20 +8,35 @@ const { checkAuthenticated } = require("../../middleware/checkAuthenticated");
 const fetchUserData = require("../../middleware/fetchUserData.js");
 
 // Display book details and reviews
-router.get("/:slug",fetchUserData, async (req, res) => {
-    try {
-        const userId = req.user.id;
-        const books = await Book.findOne({ slug: req.params.slug });
-        const user = await User.findById(userId).populate("bookmarks").lean();
-        const userBookmarks = isAuthenticated ? req.user.bookmarks.map(bookmark => bookmark.toString()) : []; 
+router.get("/:slug", fetchUserData, async (req, res) => {
+  try {
+      const userId = req.user.id;
+      const bookSlug = req.params.slug;
 
-        console.log(books);
-        res.render('user/bookDetail', { layout: './layouts/user/bookDetailPage', title: "Booktopia" ,books,user,  });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Internal Server Error");
-    }
+      // Fetch the book details
+      const book = await Book.findOne({ slug: bookSlug });
+
+      // Fetch user data with bookmarks
+      const user = await User.findById(userId).populate("bookmarks").lean();
+
+      // Check if the book is bookmarked by the user
+      const isBookmarked = user.bookmarks.some((bookmark) => bookmark.slug === bookSlug);
+
+      res.render('user/bookDetail', {
+          layout: './layouts/user/bookDetailPage',
+          title: "Booktopia",
+          books: book,  // Ensure that you use 'books' in your EJS template
+          user,
+          isBookmarked,
+      });
+  } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+  }
 });
+
+
+
 router.get("/:slug/read", checkAuthenticated, async (req, res) => {
   try {
     const book = await Book.findOne({ slug: req.params.slug });

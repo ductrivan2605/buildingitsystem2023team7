@@ -46,35 +46,22 @@
           <form action="/reading-history/add-history/<%= books.slug %>" method="post">
             <button type="submit" class="read-button">Read</button>
           </form>
+      
+          <% console.log("User:", user); %>
+          <% console.log("Books:", books); %>
+          <% console.log("User bookmarks:", user && user.bookmarks); %>
+          <% const isBookmarked = user && user.bookmarks && user.bookmarks.some(bookmark => bookmark.slug === books.slug); %>
           
-              
-        
-            
-          <% if (user && user.bookmarks !== null && user.bookmarks !== undefined) { %>
-            <% console.log("user.bookmarks:", user.bookmarks); %>
-          
-            <% const isBookmarked = user.bookmarks.includes(books._id.toString()); %>
-          
-            <% if (isBookmarked) { %>
+          <% if (isBookmarked) { %>
               <form action="/bookmarks/delete/<%= books.slug %>" method="post">
-                <button type="submit" class="bookmarked-button">Bookmarked</button>
+                  <button type="submit" class="bookmarked-button">Bookmarked</button>
               </form>
-            <% } else { %>
-              <form action="/bookmarks/add/<%= books.slug %>" method="post">
-                <button type="submit" class="bookmark-button">Bookmark</button>
-              </form>
-            <% } %>
           <% } else { %>
-            <p>User information not available</p>
+              <form action="/bookmarks/add/<%= books.slug %>" method="post">
+                  <button type="submit" class="bookmark-button">Bookmark</button>
+              </form>
           <% } %>
-          
-          
-          
-          
-              
-          
-          <button type="bookmark" class="bookmark-button">Bookmark</button>
-          <button type="bookmarked" class="bookmarked-button">Bookmarked</button>
+
         </div>
       </div>
       <div class="description11">
