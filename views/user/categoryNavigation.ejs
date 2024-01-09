@@ -1,6 +1,4 @@
-<% if (user) { %>
-    <div></div>
-  <% } else { %>
+<% if (!user) { %>
     <div class="hero-section">
         <div class="hero-content">
           <h1>Welcome to Our Library</h1>
@@ -10,12 +8,8 @@
           <a href="/auth/signin" class="browse-books-btn">Browse Books</a>
         </div>
       </div>
-  <% } %>
-   
-
-
-
-<div class="navForBook">
+  <% } else { %>
+    <div class="navForBook">
     <% categories.forEach(category => { %>
     <div class="nav-items">
         <div class="nav-item">
@@ -39,3 +33,8 @@
     <% } %>
     
 </div>
+  <% } %>
+   
+
+
+
