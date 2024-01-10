@@ -47,7 +47,17 @@ router.post('/register', upload.single('image'), async (req, res) => {
 
     if (existingUser) {
       // Send a window alert indicating that the username or email is already in use
-      return res.send('<script>alert("Username or email is already in use"); window.location="/auth/signup";</script>');
+      if (req.file) {
+        const newImageFilePath = path.join(__dirname, '../../public', 'images', req.file.filename);
+        try {
+          await fs.unlink(newImageFilePath);
+        } catch (error) {
+          console.error(`Error deleting new image: ${error.message}`);
+        }
+      }
+
+      // Send a window alert indicating the email is not unique
+      return res.send('<script>alert("Email is already in use"); window.location="/auth/register";</script>');
     }
 
     const image = req.file ? '/images/' + req.file.filename : '/images/userDefault.jpg';

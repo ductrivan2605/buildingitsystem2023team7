@@ -1,13 +1,19 @@
 <div class="container user-profile">
     <!-- Display user information here -->
     <div class="text-center">
-        <img src="/public/images/ <%= user.image %>" alt="User Avatar" class="avatar">
+        <% if (user && user.image) { %>
+            <img id="avatar" src="<%= user.image %>" alt="User Avatar" />
+          <% } else { %>
+            <img id="avatar" src="/images/userDefault.png" alt="Default Avatar" />
+          <% } %>
     </div>
 
     <div class="profile-info text-center">
-        <h1><%= user.name %></h1>
-        <p>Username: <%= user.username %></p>
-        <p>Email: <%= user.email %></p>
+        <!-- <h1><%= user.name %></h1> -->
+        <label class="custom-label">Username:</label>
+        <p class="custom-input"><%= user.username %></p>
+        <label class="custom-label">Email:</label>
+        <p class="custom-input"><%= user.email %></p>
     </div>
 
     <!-- Buttons -->

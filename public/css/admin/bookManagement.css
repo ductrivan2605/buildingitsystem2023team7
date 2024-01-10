@@ -98,8 +98,16 @@
   height: 40px;
   justify-content: space-around;
 }
-
-.search-form input[type="search"] {
+.customerTables {
+  margin-top:35px;
+}
+.search-form {
+  margin:35px;
+}
+.custom-input {
+  width:60%;
+}
+/* .search-form input[type="search"] {
   width: 50%;
   border: 0;
   border-radius: 5px;
@@ -113,7 +121,7 @@
   font-size: 1rem;
 }
 
-/* .search-form input[type='text'] {
+.search-form input[type='text'] {
   width: 30%; 
   padding: 8px;
   border-radius: 5px; 
@@ -130,21 +138,77 @@
   color: white; 
   font-size: 1rem;
   cursor: pointer; 
-} */
-
-.btns input[type="button"]:nth-of-type(1) {
-  background-color: rgb(84, 177, 84);
-}
-
-.btns input[type="button"]:nth-of-type(2) {
-  background-color: rgb(211, 91, 91);
-}
-
-.btns input[type="button"] {
+}  */
+.submittingBtn {
   width: 6em;
   height: 100%;
+  border: none;
+  cursor: pointer;
+  border-radius: 15px;
+  background-color: #3498db;
+  color: white;
+}
+.addingBooks,
+.deletingBooks {
+  width: 7em;
+  height:40px;
+  border: none;
+  cursor: pointer;
+  border-radius: 15px;
+  color: white;
+}
+.viewBtn {
+  border: none;
+  color: black;
+  background-color: none;
+  background-color: transparent;
+
+}
+.resetBooks {
+  width: 7em;
+  height:40px;
+  border: none;
+  cursor: pointer;
+  border-radius: 15px;
+  color: white;
+  background-color: #5ec454;
+
+}
+.viewBtn a {
+  text-decoration: none;
+  color: black;
 }
 
+.viewBtn a:hover {
+  color: #3498db;
+}
+.addingBooks {
+  background-color: #3498db;
+  color: white;
+}
+.deletingBooks {
+  background-color: #e74c3c;
+  color: white;
+}
+.addingBooks:hover {
+  background-color: #236896;
+}
+.edit-btn:hover {
+  background-color: #236896;
+}
+.deletingBooks:hover {
+  background-color: #a13327;
+}
+.delete-btn:hover {
+  background-color: #a13327;
+}
+.submittingBtn:hover {
+  background-color: #236896;
+
+}
+.resetBooks:hover {
+  background-color: #418b3a;
+}
 .edit-btn,
 .delete-btn {
   padding: 8px 16px;
@@ -152,6 +216,8 @@
   border: none;
   cursor: pointer;
   margin: 50px 0px;
+  border-radius: 15px;
+  width: 5rem;
 }
 
 .edit-btn {
@@ -168,7 +234,13 @@
   width: 10%;
   height: auto;
 }
-
+.check-progress-link {
+  text-decoration: none;
+  color: black;
+}
+.check-progress-link:hover {
+  color: #3498db;
+}
 .searchField :is(.authorList, .categoryList) {
   max-height: 200px;
   overflow-y: scroll;

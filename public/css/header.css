@@ -33,7 +33,7 @@ body {
 /* code for tthe header */
 .header {
   height: 80px;
-  background-image: #eeeeee;
+  background-image: linear-gradient(#186F65,#6A9C89, #D5F0C1);
   margin-top: 0px;
   padding: 0px;
   background-size: cover;
@@ -42,7 +42,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 999;
+  z-index: 99;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -56,7 +56,7 @@ body {
   left: 0;
   height: 4px;
   max-width: 200px;
-  background-color: #df826c;
+  background-color: #FF0060;
   width: 0;
   transition: width 0.3s ease-out, left 0.3s ease-out;
   z-index: 1;
@@ -101,16 +101,17 @@ body {
 }
 
 .NavList li a {
-  color: #222831;
+  color: #DCF2F1;
   display: block;
   padding: 8px 10px;
-  text-decoration: 5;
-  font-size: 14px;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 450;
 }
 
 .NavList-item a:hover {
   text-decoration: underline;
-  text-decoration-color: #e21818;
+  text-decoration-color: #FF004D;
 }
 
 /*code for the drop down menu*/
@@ -122,7 +123,7 @@ body {
 .dropDownList,
 .dropDownList-lv2 {
   position: absolute;
-  background-color: #fff;
+  background-color: #6DA4AA;
   list-style: none;
   z-index: 1000;
   display: none;
@@ -171,14 +172,15 @@ body {
 
 /* this code below is for the search bar */
 .search {
+
   display: flex;
   width: 300px;
   max-width: 400px;
   background-color: none;
-  margin-top: 15px;
-  margin-left: 0px;
+  margin-top: 25px;
+  margin-left: 80px;
   margin: 0 auto;
-  border-radius: 6%;
+  border-radius: 12%;
 }
 
 .search input[type="text"] {
@@ -197,8 +199,8 @@ body {
   padding: 8px 16px;
   font-size: 12px;
   font-weight: bold;
-  color: #fff;
-  background-color: #00adb5;
+  color: #DCF2F1;
+  background-color: #365486;
   cursor: pointer;
   margin-left: -1px;
   transition: background-color 0.2s ease-in-out;
@@ -209,7 +211,7 @@ body {
 }
 
 .search button[type="submit"]:hover {
-  background-color: #159895;
+  background-color: #7FC7D9;
 }
 /* this code is for user login */
 .user {
@@ -279,7 +281,6 @@ body {
 /* this section is for the main code */
 .main { 
   z-index: 0;
-  background: ;
   animation: gradient 15s ease infinite;
   height: 120vh;
   max-height: 200vh;
@@ -403,6 +404,33 @@ label {
   .menu-button {
     display: none;
   }
+
+  @media only screen and (min-width: 768px) and (max-width: 1050px) {
+    .search-box{
+      width: 60px;
+    }
+    .search {
+
+      display: flex;
+      width: 200px;
+      max-width: 400px;
+      background-color: none;
+      margin-top: 15px;
+      margin-left: 40px;
+      margin: 0 auto;
+      border-radius: 6%;
+    }
+    .logo {
+      width: 100px;
+      height: 65px;
+      position: relative;
+      margin-top: 10px;
+      padding: 0px 20px;
+      margin-left: 15px;
+      margin-right: 15px;
+      z-index: 2;
+    }
+  }
 /* Media query for devices between 480px and 767px */
 @media only screen and (min-width: 400px) and (max-width: 767px) {
   .menu-button {
@@ -411,8 +439,8 @@ label {
     height: 45px;
     width: 45px;
     border-radius: 50%;
-    color: #2b2a4c;
-    background-color: #9ad0c2;
+    color: #CE5A67;
+    background-color: #F4BF96;
     border: 000000 2px;
   }
 
@@ -427,7 +455,7 @@ label {
     top: 60px;
     left: 0;
     width: 100%;
-    background-color: #EEEEEE;
+    background-color: #FCF5ED;
     z-index: 999;
     margin-top: 20px;
   }
@@ -479,12 +507,12 @@ label {
     width: 10%;
     display: block;
     /* margin: 0 auto; */
-    height: 25px;
-    width: 25px;
+    height: 45px;
+    width: 45px;
     margin-left: 5px;
     border-radius: 50%;
-    color: #2b2a4c;
-    background-color: #9ad0c2;
+    color: #CE5A67;
+    background-color: #F4BF96;
     /* border: 000000 2px; */
   }
 
@@ -499,7 +527,7 @@ label {
     top: 60px;
     left: 0;
     width: 100%;
-    background-color: #002b5b;
+    background-color: #FCF5ED;
     z-index: 999;
     margin-top: 20px;
   }
@@ -518,8 +546,7 @@ label {
   .search {
     width: 70%;
     /* margin-top: 10px; */
-    margin-left: -300px;
-    width: 50px;
+    
   }
   .search-but {
     width: 40px;
@@ -528,7 +555,7 @@ label {
   }
 
   .search-box {
-    width: 100px;
+    width: 50px;
   }
 
   .img1 {

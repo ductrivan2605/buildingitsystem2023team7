@@ -1,12 +1,12 @@
 .bookContainer {
     display:flex;
     justify-content: space-around;
-    background-color: rgb(234, 219, 200);
+    background-color: rgb(162, 141, 112);
     border-radius: 20px;
 }
 
 .bookContainers {
-    /* background-color: aqua; */
+    background-color: #80BCBD;
     /* margin:100px; */
     padding:20px;
 
@@ -17,7 +17,7 @@
     /* background-color: rgb(248, 240, 229); */
 }
 .category {
-    background-color: #222831;
+    background-color: #739072;
 
     border-radius: 20px;
     font-size: 20px;
@@ -58,12 +58,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f0f0f0;
+    background-image: linear-gradient(#D5F0C1,#80BCBD, #80BCBD);
     padding: 10px;
     flex-wrap: wrap;
     gap: 80px; 
     justify-content: flex-start;
-    margin-top:50px;
+    padding-top:40px;
 
 }
 

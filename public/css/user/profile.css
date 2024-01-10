@@ -4,17 +4,16 @@ body {
 }
 
 .user-profile {
-    max-width: 600px;
+    width: 800px;
     margin: 50px auto;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 }
-
-.avatar {
-    width: 100px;
-    height: 100px;
+#avatar {
+    width: 40%;
+    height: auto;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 20px;
@@ -24,20 +23,68 @@ body {
     font-size: 24px;
     margin-bottom: 10px;
 }
-
+.profile-info {
+    display: flex;
+    justify-content: space-around;
+    margin-top:10px;
+}
 .profile-info p {
     font-size: 18px;
     margin-bottom: 10px;
 }
 
+
 .btn-container {
-    display: flex;
-    justify-content: space-between;
     margin-top: 20px;
 }
 
-.logout-btn,
-.change-btn {
-    flex-grow: 1;
-    margin-right: 10px;
+.btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    /* margin-top:40px; */
 }
+.custom-label {
+    color: black;
+    margin-bottom: 15px;
+    font-size: 20px;
+    padding: 5px 10px;
+    
+  }
+  .custom-input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    width:40%;
+    margin-bottom: 15px;
+    background-color: #f0ecec;
+  
+  }
+  @media screen and (max-width: 767px) {
+    .profile-info {
+        display: inline;
+    }
+    .custom-input {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 5px 10px;
+        width:100%;
+        margin-bottom: 15px;
+        background-color: #f0ecec;
+      
+      }
+      .user-profile {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+  }

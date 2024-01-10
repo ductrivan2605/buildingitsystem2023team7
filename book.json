@@ -1,0 +1,69 @@
+[
+    {
+      "title": "The Da Vinci Code",
+      "authors": ["Dan Brown"],
+      "category": [
+        "Action & Adventure",
+        "Mystery & Crime"
+      ],
+      "subCategory": [
+        "Thrillers"
+      ],
+      "published": "2003-03-18",
+      "publisher": "Doubleday",
+      "description": "A murder in the Louvre Museum and clues in paintings by Leonardo da Vinci lead to the discovery of a religious mystery protected by a secret society for two thousand years.",
+      "contentImage": [],
+      "imageCover": "1704692429325.jpg",
+      "authorsSlug": [
+        "dan-brown"
+      ],
+      "reviews": [],
+      "readCount": 0,
+      "slug": "the-da-vinci-code"
+    },
+    {
+      "title": "The Bourne Identity",
+      "authors": ["Robert Ludlum"],
+      "category": [
+        "Action & Adventure",
+        "Mystery & Crime"
+      ],
+      "subCategory": [
+        "Spies"
+      ],
+      "published": "1980-02-11",
+      "publisher": "Richard Marek Publishers",
+      "description": "A man is found floating in the Mediterranean Sea with gunshot wounds and no memory of his past. As he tries to uncover his identity, he discovers that he is being hunted by assassins.",
+      "contentImage": [],
+      "imageCover": "1704692429325.jpg",
+      "authorsSlug": [
+        "robert-ludlum"
+      ],
+      "reviews": [],
+      "readCount": 0,
+      "slug": "the-bourne-identity"
+    },
+    {
+      "title": "The Three Musketeers",
+      "authors": ["Alexandre Dumas"],
+      "category": [
+        "Action & Adventure",
+        "Historical"
+      ],
+      "subCategory": [
+        "Historical Fiction"
+      ],
+      "published": "1844-03-14",
+      "publisher": "Baudry",
+      "description": "Set in 17th-century France, this classic novel follows the adventures of three musketeers and their young, brave friend D'Artagnan as they fight for justice and defend the honor of the queen.",
+      "contentImage": [],
+      "imageCover": "1704692429325.jpg",
+      "authorsSlug": [
+        "alexandre-dumas"
+      ],
+      "reviews": [],
+      "readCount": 0,
+      "slug": "the-three-musketeers"
+    }
+  ]
+  

@@ -19,7 +19,7 @@
         class="d-flex d-none"
       >
         <input type="text" name="search" placeholder="Search for book name" />
-        <button type="submit">Search</button>
+        <button class="submittingBtn" type="submit">Search</button>
       </form>
       <div class="btns">
         <% if (!books[0].contentImage) { %>
@@ -64,9 +64,10 @@
                   <div id="add-image-content-preview" class="py-1"></div>
                 </div>
                 <div class="button-container">
-                  <button type="reset" id="reset" class="d-none">Reset</button>
-                  <button type="submit" id="submit">Submit</button>
+                  <button class="resetBooks" type="reset" id="reset" class="d-none">Reset</button>
+                  <button class="addingBooks" type="submit" id="submit">Submit</button>
                   <button
+                  class="deletingBooks"
                     type="button"
                     id="cancel"
                     onclick="closePopup('addBookPopup')"
@@ -93,8 +94,9 @@
                 action="/admin/books-management/<%= books[0]._id %>/delete-all-contents"
                 method="post"
               >
-                <button type="submit" class="btn btn-success">Confirm</button>
+                <button class="addingBooks" type="submit" class="btn btn-success">Confirm</button>
                 <button
+                class="deletingBooks"
                   type="button"
                   class="btn btn-danger"
                   onclick="closePopup('deleteAllPopup')"

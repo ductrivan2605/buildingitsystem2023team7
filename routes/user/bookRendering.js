@@ -4,9 +4,10 @@ const path = require("path");
 // const fs = require('fs');
 const Book = require("../../models/bookModel");
 const User = require("../../models/user");
+const fetchUserData = require('../../middleware/fetchUserData');
 
 // API endpoint to get the last accessed page for a book
-router.get('/:slug/progress', async (req, res) => {
+router.get('/:slug/progress',fetchUserData, async (req, res) => {
   const { slug } = req.params; // Extract the book slug from the request parameters
   const userId = req.user._id; // Assuming userId is available from authentication
 

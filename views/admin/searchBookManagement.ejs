@@ -143,11 +143,11 @@
     </div>
     <div class="search-form">
         <form action="/admin/books-management/search" method="post" class="d-flex">
-            <input type="text" name="search" placeholder="Search for book name" />
-            <button type="submit">Search</button>
+            <input class="custom-input" type="text" name="search" placeholder="Search for book name" />
+            <button class="submittingBtn" type="submit">Search</button>
         </form>
         <div class="btns">
-            <input type="button" value="Add book" onclick="openPopup('addBookPopup')" />
+            <input class="addingBooks" type="button" value="Add book" onclick="openPopup('addBookPopup')" />
             <div class="popup-container" id="addBookPopup">
                 <div class="popup">
                     <div>
@@ -252,7 +252,7 @@
                     </form>
                 </div>
             </div>
-            <input type="button" value="Delete All" onclick="openPopup('deleteAllPopup')"/>
+            <input class="deletingBooks" type="button" value="Delete All" onclick="openPopup('deleteAllPopup')"/>
             <div class="popup-container" id="deleteAllPopup">
                 <div class="popup">
                     <div>

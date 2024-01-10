@@ -1,0 +1,232 @@
+[{
+  "_id": {
+    "$oid": "659b89ccc59f1595fe226ec5"
+  },
+  "category": "Action & Adventure",
+  "subCategory": [
+    "Thrillers",
+    "Spies",
+    "Historical Fiction"
+  ],
+  "image": "1704692171834.gif",
+  "slug": "action-and-adventure",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659b89d7c59f1595fe226ed6"
+  },
+  "category": "Romance",
+  "subCategory": [
+    "Historical Romance",
+    "Contemporary Romance",
+    "Paranormal Romance"
+  ],
+  "image": "1704692183524.jpg",
+  "slug": "romance",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659b89e1c59f1595fe226ee7"
+  },
+  "category": "Fantasy",
+  "subCategory": [
+    "Epic Fantasy",
+    "Urban Fantasy",
+    "Dystopian Fantasy"
+  ],
+  "image": "1704692193662.jpg",
+  "slug": "fantasy",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659b89eec59f1595fe226ef8"
+  },
+  "category": "Mystery & Crime",
+  "subCategory": [
+    "Cozy Mystery",
+    "Police Procedural",
+    "Psychological Thriller"
+  ],
+  "image": "1704692206568.jpg",
+  "slug": "mystery-and-crime",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659b89f9c59f1595fe226f09"
+  },
+  "category": "Young Adult",
+  "subCategory": [
+    "Coming of Age",
+    "Science Fiction",
+    "Fantasy"
+  ],
+  "image": "1704692217325.jpg",
+  "slug": "young-adult",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659d64702eb0d02ac5e4dc42"
+  },
+  "category": "Manhwa",
+  "subCategory": [
+    "Action",
+    "Romance",
+    "Fantasy",
+    "Slice of Life"
+  ],
+  "image": "/images/userDefault.png",
+  "slug": "manhwa"
+},
+{
+  "_id": {
+    "$oid": "659d64702eb0d02ac5e4dc43"
+  },
+  "category": "Manga",
+  "subCategory": [
+    "Shounen",
+    "Shoujo",
+    "Seinen",
+    "Josei"
+  ],
+  "image": "/images/userDefault.png",
+  "slug": "manga"
+},
+{
+  "_id": {
+    "$oid": "659d64702eb0d02ac5e4dc44"
+  },
+  "category": "Science Fiction",
+  "subCategory": [
+    "Space Opera",
+    "Cyberpunk",
+    "Time Travel"
+  ],
+  "image": "/images/userDefault.png",
+  "slug": "science-fiction"
+},
+{
+  "_id": {
+    "$oid": "659d64702eb0d02ac5e4dc45"
+  },
+  "category": "Historical",
+  "subCategory": [
+    "Ancient History",
+    "Medieval",
+    "Renaissance"
+  ],
+  "image": "/images/userDefault.png",
+  "slug": "historical"
+},
+{
+  "_id": {
+    "$oid": "659d64702eb0d02ac5e4dc46"
+  },
+  "category": "Comedy",
+  "subCategory": [
+    "Satire",
+    "Slapstick",
+    "Dark Comedy"
+  ],
+  "image": "/images/userDefault.png",
+  "slug": "comedy"
+},
+{
+  "_id": {
+    "$oid": "659d64702eb0d02ac5e4dc47"
+  },
+  "category": "Drama",
+  "subCategory": [
+    "Family Drama",
+    "Psychological Drama",
+    "Tragedy"
+  ],
+  "image": "/images/userDefault.png",
+  "slug": "drama"
+},
+{
+  "_id": {
+    "$oid": "659d64702eb0d02ac5e4dc48"
+  },
+  "category": "Horror",
+  "subCategory": [
+    "Supernatural Horror",
+    "Psychological Horror",
+    "Monster Horror"
+  ],
+  "image": "/images/userDefault.png",
+  "slug": "horror"
+},
+{
+  "_id": {
+    "$oid": "659d64702eb0d02ac5e4dc49"
+  },
+  "category": "Education",
+  "subCategory": [
+    "Art",
+    "Science",
+    "Mathematics",
+    "History"
+  ],
+  "image": "/images/userDefault.png",
+  "slug": "education"
+},
+{
+  "_id": {
+    "$oid": "659d64702eb0d02ac5e4dc4a"
+  },
+  "category": "Art & Design",
+  "subCategory": [
+    "Painting",
+    "Drawing",
+    "Sculpture",
+    "Digital Art"
+  ],
+  "image": "/images/userDefault.png",
+  "slug": "art-design"
+},
+{
+  "_id": {
+    "$oid": "659d64702eb0d02ac5e4dc4b"
+  },
+  "category": "Science & Technology",
+  "subCategory": [
+    "Physics",
+    "Chemistry",
+    "Biology",
+    "Computer Science"
+  ],
+  "image": "/images/userDefault.png",
+  "slug": "science-technology"
+},
+{
+  "_id": {
+    "$oid": "659d64702eb0d02ac5e4dc4c"
+  },
+  "category": "Mathematics",
+  "subCategory": [
+    "Algebra",
+    "Geometry",
+    "Calculus",
+    "Statistics"
+  ],
+  "image": "/images/userDefault.png",
+  "slug": "mathematics"
+},
+{
+  "_id": {
+    "$oid": "659d64702eb0d02ac5e4dc4d"
+  },
+  "category": "History & Social Studies",
+  "subCategory": [
+    "World History",
+    "Political Science",
+    "Cultural Studies"
+  ],
+  "image": "/images/userDefault.png",
+  "slug": "history-social-studies"
+}]

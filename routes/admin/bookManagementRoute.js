@@ -48,6 +48,7 @@ router.post(
         publisher: publisher,
         description: description,
         imageCover: imageCover,
+        contentImage: null,
         readCount: 0,
       });
 
