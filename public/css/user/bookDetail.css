@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-image: linear-gradient(#D5F0C1, #80BCBD, #80BCBD);
+  background-image: linear-gradient(#D5F0C1, #80BCBD, #80BCBD, #80BCBD);
 }
 
 
@@ -180,7 +180,14 @@ body {
   width: 80%;
 }
 
+.whole-content-book {
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-bottom-left-radius: 5px;
+}
 
+.bookDetailnav {
+}
 
 .bookDetailnav ul {
   list-style-type: none;
