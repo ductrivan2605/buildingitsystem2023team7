@@ -1,0 +1,37 @@
+[
+  {
+    "name": "J.R.R. Tolkien",
+    "email": "",
+    "background": "Tolkien was an English author, poet, and academic. He is best known for his high fantasy novels, including \"The Lord of the Rings\" and \"The Hobbit.\" His works have been translated into over 50 languages and have sold over 250 million copies worldwide.",
+    "image": "1704692231491.gif",
+    "slug": "j-r-r-tolkien"
+  }  
+  ,
+  {
+    "name": "George R.R. Martin",
+    "email": "",
+    "background": "Martin is an American author and screenwriter. He is best known for his epic fantasy series, \"A Song of Ice and Fire,\" which has been adapted into the popular TV show \"Game of Thrones.\" His books have sold over 90 million copies worldwide.",
+    "image": "1704692231491.gif",
+    "slug": "george-r-r-martin"
+  }
+  
+  ,
+  {
+    "name": "Patrick Rothfuss",
+    "email": "",
+    "background": "Rothfuss is an American author of epic fantasy novels. He is best known for his Kingkiller Chronicle series, which has won several awards and has been translated into over 30 languages. He is also a professor of English literature.",
+    "image": "1704692231491.gif",
+    "slug": "patrick-rothfuss"
+  }
+  ,
+  {
+    "name": "Robert Jordan",
+    "email": "",
+    "background": "The Wheel of Time is a series of high fantasy novels by American author Robert Jordan, with Brandon Sanderson as a co-author for the final three installments. Originally planned as a six-book series with the publication of The Eye of the World in 1990, The Wheel of Time came to span 14 volumes, in addition to a prequel novel and three companion books. Jordan died in 2007 while working on what was planned to be the twelfth and final volume in the series. He prepared extensive notes, which enabled fellow fantasy author Sanderson to complete the final book, which grew into three volumes: The Gathering Storm (2009), Towers of Midnight (2010), and A Memory of Light (2013).",
+    "image": "1704692231491.gif",
+    "slug": "robert-jordan"
+  }
+  
+  
+  
+]

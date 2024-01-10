@@ -1,0 +1,66 @@
+[{
+  "_id": {
+    "$oid": "659b8a07c59f1595fe226f25"
+  },
+  "name": "Chimamanda Ngozi Adichie",
+  "email": "",
+  "background": "Renowned for her powerful novels exploring gender, race, and postcolonialism, including \"Half of a Yellow Sun\" and \"Americanah.\" Adichie is a recipient of the Orange Prize and the National Book Critics Circle Award.",
+  "image": "1704692231491.gif",
+  "slug": "chimamanda-ngozi-adichie",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659b8a12c59f1595fe226f36"
+  },
+  "name": "Haruki Murakami",
+  "email": "",
+  "background": "Master of magical realism and surreal narratives, Murakami's captivating works like \"Norwegian Wood\" and \"1Q84\" have gained international acclaim. He is known for his introspective characters and dreamlike settings.",
+  "image": "1704692242657.jpg",
+  "slug": "haruki-murakami",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659b8a1ec59f1595fe226f47"
+  },
+  "name": "Khaled Hosseini",
+  "email": "",
+  "background": "A powerful storyteller known for his novels that explore human relationships and the impact of war, like \"The Kite Runner\" and \"A Thousand Splendid Suns.\" Hosseini's works shed light on the Afghan culture and the struggles of its people.",
+  "image": "1704692254278.jpg",
+  "slug": "khaled-hosseini",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659b8a28c59f1595fe226f58"
+  },
+  "name": "Paulo Coelho",
+  "email": "",
+  "background": "A bestselling author whose allegorical novels inspire and motivate readers through stories like \"The Alchemist\" and \"Eleven Minutes.\" Coelho's works combine spirituality, philosophy, and personal growth themes with simple yet profound messages.",
+  "image": "1704692264497.jpg",
+  "slug": "paulo-coelho",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659b8a33c59f1595fe226f69"
+  },
+  "name": "Margaret Atwood",
+  "email": "",
+  "background": "A literary icon known for her dystopian novels and feminist themes, Atwood's works like \"The Handmaid's Tale\" and \"Alias Grace\" offer insightful critiques of society and power dynamics. She has won numerous awards, including the Booker Prize.",
+  "image": "1704692275526.jpg",
+  "slug": "margaret-atwood",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659b8a43c59f1595fe226f7a"
+  },
+  "name": "Gabriel García Márquez",
+  "email": "",
+  "background": "A pioneer of magical realism, Márquez's masterpiece \"One Hundred Years of Solitude\" catapulted him to international fame. He is renowned for his vibrant prose, imaginative storytelling, and exploration of Latin American history and culture.",
+  "image": "1704692291230.jpg",
+  "slug": "gabriel-garcia-marquez",
+  "__v": 0
+}]
