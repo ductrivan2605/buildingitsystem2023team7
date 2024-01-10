@@ -1,0 +1,205 @@
+[{
+  "_id": {
+    "$oid": "659b8a75c59f1595fe226f96"
+  },
+  "title": "Things Fall Apart",
+  "readCount": 2,
+  "authors": [
+    "Haruki Murakami"
+  ],
+  "category": [
+    "Spies"
+  ],
+  "published": "",
+  "publisher": "Heinemann",
+  "description": "Set in pre-colonial Nigeria, this novel tells the story of Okonkwo, a proud and ambitious leader in the Igbo community. Torn between his traditional beliefs and the encroaching influence of British colonialism, Okonkwo's tragic downfall paints a powerful portrait of cultural clash and individual struggle.",
+  "contentImage": [
+    "1704780117726.pdf"
+  ],
+  "imageCover": "1704692341572.gif",
+  "authorsSlug": [
+    "haruki-murakami"
+  ],
+  "reviews": [],
+  "createdAt": {
+    "$date": "2024-01-08T05:39:01.780Z"
+  },
+  "slug": "things-fall-apart",
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "659b8a85c59f1595fe226fa7"
+  },
+  "title": "Frankenstein",
+  "readCount": 0,
+  "authors": [
+    "Khaled Hosseini"
+  ],
+  "category": [
+    "Spies"
+  ],
+  "published": "",
+  "publisher": "Penguin Classics",
+  "description": "A pioneering work of science fiction, \"Frankenstein\" explores the ethical and philosophical implications of scientific advancement through the tale of Victor Frankenstein, a young scientist who creates a monstrous being through unorthodox means. The creature's quest for understanding and belonging raises timeless questions about human nature and the consequences of tampering with creation.",
+  "contentImage": null,
+  "imageCover": "1704692357912.jpg",
+  "authorsSlug": [
+    "khaled-hosseini"
+  ],
+  "reviews": [],
+  "createdAt": {
+    "$date": "2024-01-08T05:39:17.915Z"
+  },
+  "slug": "frankenstein",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659b8ab0c59f1595fe226fb8"
+  },
+  "title": "One Hundred Years of Solitude",
+  "readCount": 0,
+  "authors": [
+    "Khaled Hosseini"
+  ],
+  "category": [
+    "Spies"
+  ],
+  "published": "",
+  "publisher": "Harper Perennial",
+  "description": "A magical realist masterpiece, \"One Hundred Years of Solitude\" chronicles the rise and fall of the Buendía family over seven generations in the fictional town of Macondo. Blending history, myth, and fantasy, the novel examines themes of time, isolation, and the cyclical nature of life in a richly imagined world.",
+  "contentImage": null,
+  "imageCover": "1704692400290.jpg",
+  "authorsSlug": [
+    "khaled-hosseini"
+  ],
+  "reviews": [],
+  "createdAt": {
+    "$date": "2024-01-08T05:40:00.291Z"
+  },
+  "slug": "one-hundred-years-of-solitude",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659b8acdc59f1595fe226fc9"
+  },
+  "title": "The God of Small Things",
+  "readCount": 0,
+  "authors": [
+    "Khaled Hosseini, Haruki Murakami"
+  ],
+  "category": [
+    "Thrillers"
+  ],
+  "published": "",
+  "publisher": "India Ink",
+  "description": "Set in Kerala, India, this poignant novel tells the story of Estha and Rahel, twins whose childhood idyllic world is shattered by societal and familial constraints. Exploring themes of forbidden love, religious divisions, and the complex dynamics of family, \"The God of Small Things\" is a deeply affecting portrait of loss and resilience.",
+  "contentImage": [],
+  "imageCover": "1704692429325.jpg",
+  "authorsSlug": [
+    "khaled-hosseini-haruki-murakami"
+  ],
+  "reviews": [],
+  "createdAt": {
+    "$date": "2024-01-08T05:40:29.326Z"
+  },
+  "slug": "the-god-of-small-things",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659b8aefc59f1595fe226fda"
+  },
+  "title": "Cloud Atlas",
+  "readCount": 0,
+  "authors": [
+    "Khaled Hosseini"
+  ],
+  "category": [
+    "Historical Fiction"
+  ],
+  "published": "",
+  "publisher": "Random House",
+  "description": "Six interconnected stories spanning across time and space, \"Cloud Atlas\" challenges conventional narrative structures and explores themes of reincarnation, the interconnectedness of humanity, and the cyclical nature of time. From past lives in the South Pacific to a dystopian future, the novel offers a breathtaking journey through diverse settings and characters, ultimately blurring the lines between reality and fiction.",
+  "contentImage": null,
+  "imageCover": "1704692463613.jpg",
+  "authorsSlug": [
+    "khaled-hosseini"
+  ],
+  "reviews": [],
+  "createdAt": {
+    "$date": "2024-01-08T05:41:03.615Z"
+  },
+  "slug": "cloud-atlas",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659b8b07c59f1595fe226feb"
+  },
+  "title": "Lincoln in the Bardo",
+  "readCount": 0,
+  "authors": [
+    "Paulo Coelho"
+  ],
+  "category": [
+    "Historical Fiction"
+  ],
+  "published": "",
+  "publisher": "Random House",
+  "description": "A unique and poignant retelling of Abraham Lincoln's grief over the death of his son, Willie, \"Lincoln in the Bardo\" places the grieving president in the company of other mourners in a kind of purgatory. Through their dialogue and reflections, the novel explores themes of loss, mortality, and the power of human connection in the face of great sorrow.",
+  "contentImage": null,
+  "imageCover": "1704692487286.jpg",
+  "authorsSlug": [
+    "paulo-coelho"
+  ],
+  "reviews": [
+    {
+      "review": "This book is so boring",
+      "userName": "1",
+      "rating": 1,
+      "_id": {
+        "$oid": "659d0991fc545a61e1815ca6"
+      },
+      "createdAt": {
+        "$date": "2024-01-09T08:53:37.022Z"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-01-08T05:41:27.287Z"
+  },
+  "slug": "lincoln-in-the-bardo",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659b8cf2429def4f5fd346e3"
+  },
+  "title": "adfa",
+  "readCount": 30,
+  "authors": [
+    "Haruki Murakami"
+  ],
+  "category": [
+    "Thrillers"
+  ],
+  "published": "",
+  "publisher": "adf",
+  "description": "asdfasdf",
+  "contentImage": [
+    "1704693034716.pdf"
+  ],
+  "imageCover": "1704692978496.jpg",
+  "authorsSlug": [
+    "haruki-murakami"
+  ],
+  "reviews": [],
+  "createdAt": {
+    "$date": "2024-01-08T05:49:38.503Z"
+  },
+  "slug": "adfa",
+  "__v": 1
+}]

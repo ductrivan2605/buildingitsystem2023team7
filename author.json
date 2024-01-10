@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Dan Brown",
+    "email": "",
+    "background": "Brown is an American author and former musician. He is best known for his thriller novels, including \"The Da Vinci Code\" and \"Angels & Demons.\" His books have sold over 250 million copies worldwide and have been translated into 56 languages.",
+    "image": "1704692231491.gif",
+    "slug": "dan-brown"
+  },
+  {
+    "name": "Robert Ludlum",
+    "email": "",
+    "background": "Ludlum was an American author of thriller novels, including the Jason Bourne series. His books have sold over 300 million copies worldwide and have been translated into 32 languages.",
+    "image": "1704692231491.gif",
+    "slug": "robert-ludlum"
+  },
+  {
+    "name": "Alexandre Dumas",
+    "email": "",
+    "background": "Dumas was a French author and playwright, best known for his adventure novels, including \"The Three Musketeers\" and \"The Count of Monte Cristo.\" His works have been translated into over 100 languages and have inspired countless adaptations.",
+    "image": "1704692231491.gif",
+    "slug": "alexandre-dumas"
+  }
+]
