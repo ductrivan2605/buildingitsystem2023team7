@@ -20,29 +20,6 @@
         </div>
         <div class="details">
           <h2><%= books.title %></h2>
-          <p>Publisher: <%= books.publisher %></p>
-          <p>Publication Date: <%= books.published %></p>
-
-          <% function displayStars(rating) { %>
-            <% const roundedRating = Math.round(rating); %>
-            <% for (let i = 1; i <= 5; i++) { %>
-              <% if (i <= roundedRating) { %>
-                <span class="stars">&#9733;</span>
-              <% } else { %>
-                <span class="stars">&#9734;</span>
-              <% } %>
-            <% } %>
-          <% } %>
-          <p>
-            Rating: <%= displayStars(books.averageRating) %> 
-            <% const reviewCount = books.reviews.length; %>
-            <%= reviewCount %> <%= reviewCount === 1 ? 'review' : 'reviews' %>
-          </p>
-          <p>
-            Author(s): <% books.authorsSlug.forEach((authorSlug, index) => { %>
-              <a href="/author/<%= authorSlug %>"><%= books.authors[index] %></a><%= index !== books.authors.length - 1 ? ',' : '' %> 
-            <% }) %>
-          </p>
           <form action="/reading-history/add-history/<%= books.slug %>" method="post">
             <button type="submit" class="read-button">Read</button>
           </form>
@@ -68,7 +45,7 @@
         <nav class="bookDetailnav">
           <ul>
             <li>
-              <a class="active bookDetailreviews1" href="#book-intro">Book Introduction</a>
+              <a class="active bookDetailreviews1" href="#book-intro">Book Information</a>
             </li>
             <li><a class="bookDetailreviews" href="#reviews">Reviews</a></li>
           </ul>
@@ -76,7 +53,33 @@
 
         <div class="description1">
           <div id="book-intro" class="content active">
-            <h2>Book Introduction</h2>
+          <h3>Book Information</h3>
+          <p>Title: <%= books.title %></p>
+          <p>Publisher: <%= books.publisher %></p>
+          <p>Publication Date: <%= books.published %></p>
+
+          <% function displayStars(rating) { %>
+            <% const roundedRating = Math.round(rating); %>
+            <% for (let i = 1; i <= 5; i++) { %>
+              <% if (i <= roundedRating) { %>
+                <span class="stars">&#9733;</span>
+              <% } else { %>
+                <span class="stars">&#9734;</span>
+              <% } %>
+            <% } %>
+          <% } %>
+          <p>
+            Rating: <%= displayStars(books.averageRating) %> 
+            <% const reviewCount = books.reviews.length; %>
+            <%= reviewCount %> <%= reviewCount === 1 ? 'review' : 'reviews' %>
+          </p>
+          <p>
+            Author(s): <% books.authorsSlug.forEach((authorSlug, index) => { %>
+              <a href="/author/<%= authorSlug %>"><%= books.authors[index] %></a><%= index !== books.authors.length - 1 ? ',' : '' %> 
+            <% }) %>
+          </p>
+          <br>
+            <h4>Book Introduction</h4>
             <p><%= books.description %></p>
           </div>
             
