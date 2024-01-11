@@ -10,6 +10,7 @@ min-height: 100%;
 #wrapper,
 .resultContainer {
 min-height: calc(100vh - 10px);
+  background: linear-gradient(#D5F0C1,#80BCBD 17%, #80BCBD);;
 
 }
 .bookmark-list {
