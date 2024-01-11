@@ -43,7 +43,6 @@ const BookSchema = new mongoose.Schema({
   },
   publisher: {
     type: String,
-    required: true,
   },
   rating: {
     type: Number,
