@@ -39,6 +39,7 @@
 
 .authorDescription {
     max-width: 500px;
+    font-size: 15px;
 }
 
 @media screen and (max-width: 768px) {
