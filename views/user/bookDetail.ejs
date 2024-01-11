@@ -154,7 +154,15 @@
             <% books.reviews.slice().reverse().forEach((review) => { %>
               <div class="user-review">
                 <div class="user-profile">
-                  <img src="" alt="User Profile Image" />
+                  <% if (user && user.image) { %>
+                  <img src="<%= user.image %>" alt="User Profile Image" />
+                  <% } else { %>
+                    <img
+                      id="userAvatar"
+                      src="/images/userDefault.png"
+                      alt="Default Avatar"
+                    />
+                    <% } %>
                   <div class="user-details">
                     <h3><%= review.userName %></h3>
                     <div class="user-rating">
