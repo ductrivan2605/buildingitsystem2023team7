@@ -18,6 +18,7 @@
               <th scope="col">#</th>
               <th scope="col">Category</th>
               <th scope="col">Feedback Text</th>
+              <th scope="col">User Email</th>
               <th scope="col">Submitted At</th>
             </tr>
           </thead>
@@ -28,6 +29,7 @@
                 <th scope="row"><%= counter %></th>
                 <td><%= feedback.feedbackCategory %></td>
                 <td><%= feedback.feedbackText %></td>
+                <td><%= feedback.email %></td>
                 <td><%= feedback.submissionTime.toDateString() %></td>
               </tr>
               <% counter++; %>

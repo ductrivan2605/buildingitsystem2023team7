@@ -21,11 +21,13 @@ router.get("/",fetchUserData, checkAuthenticated, async (req, res) => {
 
 router.post("/", checkAuthenticated, async (req, res) => {
   try {
-      const newFeedback = new Feedback({
-          feedbackCategory: req.body.feedbackCategory,
-          feedbackText: req.body.feedbackText,
-          
-      });
+    const userEmail = req.user.email;
+
+    const newFeedback = new Feedback({
+        feedbackCategory: req.body.feedbackCategory,
+        feedbackText: req.body.feedbackText,
+        email: userEmail, 
+    });
 
       await newFeedback.save();
       

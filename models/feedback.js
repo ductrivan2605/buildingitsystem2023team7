@@ -9,6 +9,9 @@ const feedbackSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    email:{
+        type: String,
+      },
     submissionTime: {
         type: Date,
         default: Date.now,
