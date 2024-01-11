@@ -18,15 +18,16 @@ router.get("/:slug", fetchUserData, async (req, res) => {
 
       // Fetch user data with bookmarks
       const user = await User.findById(userId).populate("bookmarks").lean();
-
+      const users = await User.findById(userId);
+      
       // Check if the book is bookmarked by the user
       const isBookmarked = user.bookmarks.some((bookmark) => bookmark.slug === bookSlug);
 
       res.render('user/bookDetail', {
           layout: './layouts/user/bookDetailPage',
           title: "Booktopia",
-          books: book,  // Ensure that you use 'books' in your EJS template
-          user,
+          books: book,
+          user: user,
           isBookmarked,
       });
   } catch (error) {
