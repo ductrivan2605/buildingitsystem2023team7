@@ -12,7 +12,7 @@
 
 
 .splide__slide img {
-    width: 55%;
+    width: 40%;
     height: 70%;
     object-fit: cover;
     margin-top:15px;
@@ -96,6 +96,7 @@ button.bookmark-btn {
         width: 70%;
         display: block;
         margin: 0 auto; 
+        margin-top:15px;
 
     }
 
