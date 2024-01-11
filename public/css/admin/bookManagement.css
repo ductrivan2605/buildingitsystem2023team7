@@ -157,6 +157,43 @@
   border-radius: 15px;
   color: white;
 }
+.btn-primary {
+
+  color: white;
+  
+}
+.btn-primary {
+  display: flex;
+  float: right;
+  margin:5px;
+  /* background-color: #5ec454; */
+}
+.btn-warning {
+  display: flex;
+  float: right;
+  margin:5px;
+  color: white;
+  
+}
+.btn-success {
+  display: flex;
+  float: right;
+  margin:5px;
+  /* background-color: #3498db; */
+  
+}
+.btn-danger {
+  display: flex;
+  float: right;
+  margin:5px;
+  background-color: #e74c3c;
+  
+  
+}
+.btn-danger:hover {
+  background-color: #a13327;
+}
+
 .viewBtn {
   border: none;
   color: black;
@@ -179,6 +216,9 @@
   color: black;
 }
 
+.viewBtn a:hover {
+  color: #3498db;
+}
 .viewBtn a:hover {
   color: #3498db;
 }
