@@ -7,17 +7,23 @@ const fetchUserData = require('../../middleware/fetchUserData.js');
 // GET /admin/user-reading-progress - View user reading progress
 router.get("/:userId",fetchUserData, checkAdmin, async (req, res) => {
   try {
-    const userId = await User.find({_id: req.params.id});
-    const users = await User.findById(userId).populate('readingProgress.bookId');
-    res.render("admin/userReadingProgress", {
-        layout: "./layouts/admin/itemsManagementLayout",
-        title: "User Reading Progress",
-        users: users,
-        messages: req.flash(),
+    const userId = req.params.userId;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      // If the user is not found, redirect or handle as appropriate
+      return res.status(404).render('error', { message: 'User not found', error: {} });
+    }
+
+    res.render('admin/userReadingProgress', {
+      layout: './layouts/admin/itemsManagementLayout',
+      title: `User Reading Progress - ${user.username}`,
+      user: user,
     });
   } catch (error) {
-    console.log(error)
-    res.status(404).render("404", { layout: false });
+    console.error('Error fetching user:', error);
+    res.status(500).render('error', { message: 'Internal Server Error', error: error });
   }
 });
+
 module.exports = router;

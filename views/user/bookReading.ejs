@@ -21,10 +21,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      console.log("DOM Content Loaded");
       const pdfViewer = document.getElementById('pdf-viewer');
       const pdfDataUri = '<%= pdfDataUri %>';
       const userId = '<%= userId %>';
-      const storageKey = `${userId}_currentPage`;
+      const bookSlug = '<%= book.slug %>'; // Add bookSlug
+      const storageKey = `${userId}_${bookSlug}_currentPage`; // Update storageKey
 
       let currentPage = parseInt(localStorage.getItem(storageKey)) || 1;
       let pdfDoc = null;
@@ -33,6 +35,7 @@
         try {
           const pdf = atob(pdfDataUri.split(',')[1]);
           pdfDoc = await pdfjsLib.getDocument({ data: pdf }).promise;
+          console.log("Loaded PDF successfully");
           renderPage(currentPage);
         } catch (error) {
           console.error('Error loading PDF:', error);
@@ -56,6 +59,7 @@
             viewport: viewport
           };
           page.render(renderContext);
+          console.log("Rendered page successfully");
 
           document.getElementById('page-num').textContent = `${currentPage}`;
           document.getElementById('page-count').textContent = pdfDoc.numPages;
@@ -65,23 +69,27 @@
       };
 
       const updateReadingProgress = async (currentPage) => {
-        try {
-          console.log(`Updating progress for user ${userId}, page ${currentPage}`);
-          localStorage.setItem(storageKey, currentPage);
+        console.log(`Updating progress for user ${userId}, book ${slug}, page ${currentPage}`);
+        localStorage.setItem(storageKey, currentPage);
 
-          const totalNumberOfPages = pdfDoc.numPages;
-          await fetch(`/api/${userId}/${slug}/update-progress`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ currentPage, totalPages: totalNumberOfPages }),
+        const totalNumberOfPages = pdfDoc.numPages;
+        fetch(`/api/${userId}/${bookSlug}/update-progress`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ currentPage, totalNumberOfPages, slug }),
+        })
+          .then(response => {
+            if (response.ok) {
+              console.log('Reading progress updated successfully');
+            } else {
+              console.error('Failed to update reading progress');
+            }
+          })
+          .catch(error => {
+            console.error('Error updating reading progress:', error);
           });
-
-          console.log('Reading progress updated successfully');
-        } catch (error) {
-          console.error('Error updating reading progress:', error);
-        }
       };
 
       const handlePageChange = async (newPage) => {
