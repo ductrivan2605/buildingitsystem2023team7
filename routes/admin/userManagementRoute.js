@@ -51,7 +51,7 @@ router.post('/add-user', checkAdmin, upload.single('profileImage'), async (req, 
     } = req.body;
 
     // Get the filename for the profileImage, or use default if not provided
-    const image = req.file ? '/images/' + req.file.filename : '/images/userDefault.jpg';
+    const image = req.file ? '/images/' + req.file.filename : '/images/userDefault.png';
 
     // Check if the username or email already exists
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
