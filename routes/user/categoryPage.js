@@ -19,20 +19,18 @@ router.get("/:slug", async (req, res) => {
         const page = req.query.page || 1;
         const itemsPerPage = 10;
         const searchTermSlug = req.params.slug;
-
+        
         const category = await Categories.findOne({
             slug: searchTermSlug,
         });
-
         if (!category) {
-            // Handle case where category with given slug is not found
             return res.status(404).send("Category not found");
         }
-
+        
         const totalBooks = await Books.countDocuments({
             $or: [
-                { category: searchTermSlug.category },
-                { category: { $in: category.subCategory } },
+                { category: category.category },  
+                { category: { $in: category.subCategory } },  
             ]
         });
 
@@ -51,7 +49,7 @@ router.get("/:slug", async (req, res) => {
         } else {
             books = await Books.find({
                 $or: [
-                    { category: searchTermSlug.category },
+                    { category: category.category },
                     { category: { $in: category.subCategory } },
                 ]
             })
