@@ -183,7 +183,10 @@ body {
 .whole-content-book {
   border-bottom-style: groove;
   border-left-style:groove;
+  border-right-style: groove;
   border-bottom-left-radius: 10px;
+  border-width: 1px;
+  border-color: #4F6F52;
   overflow: hidden;
 }
 
@@ -197,6 +200,9 @@ body {
   background-color: #4F6F52;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
+  border-style: solid;
+  border-color: #4F6F52;
+  border-width: 1px;
 }
 
 .bookDetailnav ul li {
