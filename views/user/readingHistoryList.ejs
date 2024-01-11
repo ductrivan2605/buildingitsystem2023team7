@@ -20,12 +20,13 @@
                                         <p><strong>Publisher:</strong><%= book.publisher %></p>
                                     </div>
                                     <div class="bookmarkBtn">
+                                        <button class="readingBtn" type="button">
+                                            <a href="/book/<%= book.slug %>/read"> Continue reading</a>
+                                        </button>
                                         <form method="post" action="/reading-history/delete-history/<%= book.slug %>">
                                             <button class="deleteButton">Delete</button>
                                         </form>
-                                        <button type="button">
-                                            <a href="/book/<%= book.slug %>/read"> Continue reading</a>
-                                        </button>
+
                                     </div>
                                 </div>
                             </li>

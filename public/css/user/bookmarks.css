@@ -104,7 +104,29 @@ border-radius: 5px;
 border: 1px solid black;
 padding: 50px;
 }
-
+.readingBtn {
+  border: none;
+  background-color: rgb(100, 159, 236);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 10rem;
+  /* height: 2rem; */
+  padding: 5px 10px;
+  margin-right: 5px;
+}
+.readingBtn a {
+  text-decoration: none;
+  color: white;
+}
+.bookmarkBtn {
+  display: flex;
+  float: right;
+}
+.readingBtn:hover {
+  background-color: rgb(69, 121, 189);
+}
 @media screen and (max-width: 767px) {
   .book {
       display: flex;
