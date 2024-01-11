@@ -22,7 +22,7 @@
             <div class="popup-container" id="addPopup">
                 <div class="popup">
                     <div>
-                        <h1 class="add-new-book">Add New Book</h1>
+                        <h1 class="add-new-book">Add New Author</h1>
                     </div>
                     <form action="/admin/authors/add-new-author" method="post"  class="d-flex w-100" enctype="multipart/form-data">
                         <div class="image-container ">
@@ -116,10 +116,10 @@
         
         
                                     <label for="editEmail">Email</label>
-                                    <input type="email" id="editEmail" name="email" />
+                                    <input type="email" id="editEmail" name="email" value="<%= author.email %>" />
         
                                     <label for="editBackground">Background</label>
-                                    <textarea id="editBackground" name="background" rows="4"></textarea>
+                                    <textarea id="editBackground" name="background" rows="4"><%= author.background %></textarea>
                                     
         
                                     <div class="button-container">

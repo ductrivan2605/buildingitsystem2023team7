@@ -82,10 +82,9 @@ router.post(
       }
 
       // Update fields if provided in the request
-      existingAuthor.name = req.body.name || existingAuthor.name;
-      existingAuthor.email = req.body.email || existingAuthor.email;
-      existingAuthor.background =
-      req.body.background || existingAuthor.background;
+      existingAuthor.name = req.body.name || "";
+      existingAuthor.email = req.body.email || "";
+      existingAuthor.background = req.body.background || "";
 
       const author = await existingAuthor.save();
 

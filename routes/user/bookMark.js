@@ -42,8 +42,8 @@ router.post("/add/:slug",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/si
       { new: true }
     );
 
-    res.redirect('/bookmarks');
-    console.log("Added bookmarks");
+    const referer = req.get('referer');
+    res.redirect(referer);
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal Server Error");
@@ -70,10 +70,8 @@ router.post("/delete/:slug",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth
       { new: true }
     );
 
-    console.log("Deleted bookmark");
-
-    // Redirect to the bookmark list page
-    res.redirect("/bookmarks");
+    const referer = req.get('referer');
+    res.redirect(referer);
   } catch (error) {
     console.log(error);
     res.status(500).send("Internal Server Error");

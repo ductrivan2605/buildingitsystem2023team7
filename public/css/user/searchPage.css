@@ -33,7 +33,7 @@ body {
 #wrapper,
 .mainContent {
   min-height: calc(100vh - 10px);
-
+  background: linear-gradient(#D5F0C1,#80BCBD 15%, #80BCBD 49%);
 }
 .categorySearch h1 {
     font-size: 30px;
@@ -75,12 +75,6 @@ button:hover {
     background-color: #0056b3;
 }
 
-.resultContainer {
-    /* text-align: center; */
-    background-color: #EEEEEE;
-    
-
-}
 .bookContainer h2 {
     /* padding:10px; */
     border-bottom: 1px solid black;

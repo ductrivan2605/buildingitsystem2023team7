@@ -60,7 +60,7 @@ router.post('/register', upload.single('image'), async (req, res) => {
       return res.send('<script>alert("Email is already in use"); window.location="/auth/register";</script>');
     }
 
-    const image = req.file ? '/images/' + req.file.filename : '/images/userDefault.jpg';
+    const image = req.file ? '/images/' + req.file.filename : '/images/userDefault.png';
     const user = new User({
       name: req.body.name,
       username: req.body.username,

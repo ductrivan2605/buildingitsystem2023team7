@@ -26,14 +26,16 @@
   .popup {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     max-width: 800px;
+    min-width: 300px; /* 최소 너비 설정 */
+    max-height: 600px; /* 최대 높이 설정 */
+    min-height: 200px; /* 최소 높이 설정 */
     width: 90%;
     background-color: white;
     padding: 20px;
     border-radius: 8px;
-    overflow: hidden;
+    overflow-y: scroll;
     z-index: 100;
   }
 

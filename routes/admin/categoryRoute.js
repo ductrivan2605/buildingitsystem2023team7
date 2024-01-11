@@ -7,9 +7,9 @@ const upload = require("../../middleware/uploadImage.js");
 const {
   checkAdmin
 } = require("../../middleware/checkAuthenticated.js");
-const fetchUserData = require("../../middleware/fetchUserData.js");
+// const fetchUserData = require("../../middleware/fetchUserData.js");
 // Get all categories
-router.get("/",fetchUserData, checkAdmin, async (req, res) => {
+router.get("/", checkAdmin, async (req, res) => {
   try {
     const categories = await Category.find({});
     res.render("admin/categoryManagement", {
@@ -51,7 +51,7 @@ router.post("/add-new-category", checkAdmin, upload.single("image"), async (req,
 
 router.post(
   "/update-category/:id",
-   checkAdmin,
+  checkAdmin,
   upload.single("editImage"),
   async (req, res) => {
     try {
@@ -60,6 +60,7 @@ router.post(
         req.flash("fail", "Unable to find category!");
         res.redirect("/admin/categories");
       } 
+
       // Extract fields from the request body
       const { category, subCategory } = req.body;
       const newImage = req.file ? req.file.filename : null;
@@ -70,10 +71,14 @@ router.post(
       // Construct a dynamic update object with only provided fields
       const updateFields = {};
       if (category) updateFields.category = category;
-      if (subCategory)
+
+      if (subCategory !== undefined) {
+        // Check if subCategory is defined and not an empty string
         updateFields.subCategory = subCategory
-          .split(",")
-          .map((item) => item.trim());
+          ? subCategory.split(",").map((item) => item.trim())
+          : [];
+      }
+
       if (newImage) {
         // Delete the old image file
         if (currentCategory.image) {
@@ -101,6 +106,7 @@ router.post(
         req.flash("fail", "Unable to update category!");
         res.redirect("/admin/categories");
       }
+
       req.flash("success", "Category updated successfully!");
       res.redirect("/admin/categories");
 
@@ -109,6 +115,7 @@ router.post(
     }
   }
 );
+
 
 // Delete a single category
 router.post("/delete/:id", checkAdmin, async (req, res) => {

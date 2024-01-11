@@ -38,13 +38,19 @@ router.post("/result", async(req, res) => {
         {authors: regex},
       ]
     });
+
+    const isAuthenticated = req.isAuthenticated();
+    const userBookmarks = isAuthenticated ? req.user.bookmarks.map(bookmark => bookmark.toString()) : [];
     const authors = await Author.find({});
     const categories = await Category.find({});
     res.render("user/searchPageResult", {
       layout: "./layouts/user/searchPageLayout",
       title: "Book Management",
       searchTerm: searchTerm, 
-      books: books,
+      books:books.map(book => ({
+        ...book.toObject(),
+        bookmarked: userBookmarks.includes(book._id.toString()),
+      })),
       authors: authors,
       categories: categories
     });
