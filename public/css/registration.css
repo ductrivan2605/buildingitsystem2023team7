@@ -1,5 +1,5 @@
 body {
-    background-color: #EEEEEE;
+    background: linear-gradient(#D5F0C1,#80BCBD 17%, #80BCBD);
 }
 
 .profile_img {
@@ -12,7 +12,7 @@ body {
 /*mobile*/
 @media only screen and (max-width: 960px) {
     #con {
-        width: 300%;
+        width: 100%;
         margin-bottom: 0%;
     }
 

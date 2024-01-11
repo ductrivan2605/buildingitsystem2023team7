@@ -1,5 +1,17 @@
 * {
     color: #222831;
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#D5F0C1, #80BCBD 17%, #80BCBD); 
+}
+* {
+    color: #222831;
 }
 
 #submitBtn {
