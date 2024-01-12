@@ -10,23 +10,24 @@
     <div id="pdf-viewer"></div>
     <p>Page: <span id="page-num"></span> / <span id="page-count"></span></p>
     <div class="page-progress">
-    <progress id="reading-progress" value="0" max="100"></progress>
-  </div>
+      <progress id="reading-progress" value="0" max="100"></progress>
+    </div>
     <div class="navigation-buttons">
-      <button id="prev-page">Previous</button>
-      <button id="next-page">Next</button>
+      <form action="/user-reading-progress/<%= userId %>/<%= book.slug %>/update-progress" method="post">
+        <button type="submit" name="action" value="prev" id="prev-page">Previous</button>
+        <button type="submit" name="action" value="next" id="next-page">Next</button>
+      </form>
     </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      console.log("DOM Content Loaded");
       const pdfViewer = document.getElementById('pdf-viewer');
       const pdfDataUri = '<%= pdfDataUri %>';
       const userId = '<%= userId %>';
-      const bookSlug = '<%= book.slug %>'; // Add bookSlug
-      const storageKey = `${userId}_${bookSlug}_currentPage`; // Update storageKey
+      const slug = '<%= book.slug %>';
+      const storageKey = `${userId}_${slug}_currentPage`;
 
       let currentPage = parseInt(localStorage.getItem(storageKey)) || 1;
       let pdfDoc = null;
@@ -35,7 +36,6 @@
         try {
           const pdf = atob(pdfDataUri.split(',')[1]);
           pdfDoc = await pdfjsLib.getDocument({ data: pdf }).promise;
-          console.log("Loaded PDF successfully");
           renderPage(currentPage);
         } catch (error) {
           console.error('Error loading PDF:', error);
@@ -59,7 +59,6 @@
             viewport: viewport
           };
           page.render(renderContext);
-          console.log("Rendered page successfully");
 
           document.getElementById('page-num').textContent = `${currentPage}`;
           document.getElementById('page-count').textContent = pdfDoc.numPages;
@@ -71,25 +70,6 @@
       const updateReadingProgress = async (currentPage) => {
         console.log(`Updating progress for user ${userId}, book ${slug}, page ${currentPage}`);
         localStorage.setItem(storageKey, currentPage);
-
-        const totalNumberOfPages = pdfDoc.numPages;
-        fetch(`/api/${userId}/${bookSlug}/update-progress`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ currentPage, totalNumberOfPages, slug }),
-        })
-          .then(response => {
-            if (response.ok) {
-              console.log('Reading progress updated successfully');
-            } else {
-              console.error('Failed to update reading progress');
-            }
-          })
-          .catch(error => {
-            console.error('Error updating reading progress:', error);
-          });
       };
 
       const handlePageChange = async (newPage) => {
@@ -99,7 +79,8 @@
         }
       };
 
-      document.getElementById('prev-page').addEventListener('click', async function() {
+      document.getElementById('prev-page').addEventListener('click', async function(e) {
+        e.preventDefault();
         if (currentPage > 1) {
           currentPage--;
           await renderPage(currentPage);
@@ -107,7 +88,8 @@
         }
       });
 
-      document.getElementById('next-page').addEventListener('click', async function() {
+      document.getElementById('next-page').addEventListener('click', async function(e) {
+        e.preventDefault();
         if (currentPage < pdfDoc.numPages) {
           currentPage++;
           await renderPage(currentPage);

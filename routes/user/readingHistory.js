@@ -5,22 +5,26 @@ const Books = require("../../models/bookModel.js");
 const connectEnsureLogin = require('connect-ensure-login');
 const fetchUserData = require("../../middleware/fetchUserData.js");
 
-router.get("/",fetchUserData, async (req, res) => {
+router.get('/', fetchUserData, async (req, res) => {
   try {
     const userId = req.user.id;
 
-    const user = await User.findById(userId).populate("readingHistory").lean();
+    const user = await User.findById(userId)
+      .populate('readingHistory')
+      .populate('readingProgress.bookId')
+      .lean();
 
-    res.render("user/readingHistoryList", {
-      layout: "./layouts/user/bookMarkPage",
-      title: "Booktopia",
+    res.render('user/readingHistoryList', {
+      layout: './layouts/user/bookMarkPage',
+      title: 'Booktopia',
       user,
     });
   } catch (error) {
     console.log(error);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send('Internal Server Error');
   }
 });
+
 
 router.post("/add-history/:slug",connectEnsureLogin.ensureLoggedIn({redirectTo:'/auth/signin'}), async (req, res) => {
   try {
