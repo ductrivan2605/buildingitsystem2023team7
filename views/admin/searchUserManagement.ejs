@@ -1,0 +1,174 @@
+<main class="d-flex flex-nowrap">
+    <div class="mainContent">
+        <div class="CatergoryName">
+            <h1>User Management</h1>
+            <% if (messages.fail) { %>
+                <div id="rejectedMessage" class="alert alert-danger" role="alert">
+                  <%- messages.fail %>
+                </div>
+                <% } %> <% if (messages.success) { %>
+                <div id="acceptedMessage" class="alert alert-success" role="alert">
+                  <%- messages.success %>
+                </div>
+            <% } %>
+        </div>
+        <div class="search-form">
+            <form action="/admin/users-management/search" method="post" class="d-flex">
+                <input type="text" name="search" placeholder="Search for user by name or username" />
+                <button class="submittingBtn" type="submit" class="w-25 m-0 px-2">Search</button>
+            </form>
+            <div class="btns">
+                <input class="addingBooks" type="button" value="Add User" onclick="openPopup('addPopup')" />
+                <div class="popup-container" id="addPopup">
+                    <div class="popup">
+                        <div>
+                            <h1>Add New User</h1>
+                        </div>
+                        <form action="/admin/users-management/add-user" method="post" class="d-flex w-100" enctype="multipart/form-data">
+                            <div class="image-container ">
+                                <label for="image">Add profile image</label>
+                                <input type="file" id="profileImage" name="profileImage" onchange="previewImage('profileImage', 'add-image-preview')">
+                                <div id="add-image-preview" class="py-1"></div>
+                            </div>
+                            <div class="right-container w-100">
+
+                                <label for="name">Name:</label>
+                                <input type="text" id="name" name="name" required>
+
+                                <label for="username">Username:</label>
+                                <input type="text" id="username" name="username" required>
+
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email" required>
+
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" name="password" required>
+
+                                <label for="role">Role:</label>
+                                <select id="role" name="role">
+                                    <option value="standard">Standard</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+
+                                <div class="button-container">
+                                    <button class="resetBooks" type="reset">Reset</button>
+                                    <button class="addingBooks" type="submit">Submit</button>
+                                    <button class="deletingBooks" type="button" onclick="closePopup('addPopup')">Cancel</button>
+                                </div>
+                        </div>
+                            
+                        </form>
+                    </div>
+                </div>
+                <input class="deletingBooks" type="button" value="Delete All" onclick="openPopup('deleteAllPopup')"/>
+                <div class="popup-container" id="deleteAllPopup">
+                    <div class="popup">
+                        <div>
+                            <h1>Do you want to delete all users? </h1>
+                        </div>
+                        <div class="fluid-container">
+                            <form action="/admin/users-management/delete-all-users" method="post">
+                                <button class="addingBooks"type="submit" class="btn btn-success"> Confirm</button>
+                                <button class="deletingBooks" type="button" class="btn btn-danger" onclick="closePopup('deleteAllPopup')"> Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="customerTables">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>    
+                    <th scope="col">Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Profile Picture</th>
+                    <th scope="col">Reading Progress</th>
+                    <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% counter = 1 %>
+                    <% users.forEach((user) => { %>
+                    <tr>
+                        <th scope="row"><%= counter %></th>
+                        <td><%= user.name %></td>
+                        <td><%= user.username %></td>
+                        <td><%= user.email %></td>
+                        <td><%= user.role %></td>
+                        <td>
+                            <div class="profileImage">
+                                <img src="<%= user.image %>" style="width: 100px; height: 100px; object-fit: cover;"/>
+                            </div>
+                        </td>
+                        <td>
+                            <a href="/admin/user-reading-progress/<%= user._id %>" class="check-progress-link">Check Reading Progression</a>
+                        </td>
+                        <td>
+                            <button class="edit-btn" onclick="openPopup('editPopup<%= counter %>')">Edit</button>
+                            <div class="popup-container" id="editPopup<%= counter %>">
+                                <div class="popup">
+                                    <div>
+                                        <h1>Edit User</h1>
+                                    </div>
+                                    <form action="/admin/users-management/update/<%= user._id %>" method="post" class="d-flex w-100" enctype="multipart/form-data">
+                                        <!-- Edit user form -->
+                                        <div class="image d-flex flex-column">
+                                            <label for="image">Add profile image</label>
+                                            <input type="file" id="editImage" name="editProfileImage" onchange="previewImage('editImage', 'edit-image-preview')">
+                                            <div id="edit-image-preview" class="py-1"></div>
+                                        </div>
+                                        <div class="right-container w-100">
+
+                                                <label for="editName">Name:</label>
+                                                <input type="text" id="editName" name="name" value="<%= user.name %>" required>
+
+                                                <label for="editUsername">Username:</label>
+                                                <input type="text" id="editUsername" name="username" value="<%= user.username %>" required>
+
+                                                <label for="editEmail">Email:</label>
+                                                <input type="email" id="editEmail" name="email" value="<%= user.email %>" required>
+
+                                                <label for="editRole">Role:</label>
+                                                <select id="editRole" name="role">
+                                                    <option value="standard" <% if (user.role === 'standard') { %> selected <% } %>>Standard</option>
+                                                    <option value="admin" <% if (user.role === 'admin') { %> selected <% } %>>Admin</option>
+                                                </select>
+
+                                        <div class="button-container">
+                                            <button class="resetBooks" type="reset">Reset</button>
+                                            <button class="addingBooks" type="submit">Submit</button>
+                                            <button class="deletingBooks" type="button" onclick="closePopup('editPopup<%= counter %>')">Cancel</button>
+                                        </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <button class="delete-btn" onclick="openPopup('deletePopup<%= counter %>')">Delete</button>
+
+                            <div class="popup-container" id="deletePopup<%= counter %>">
+                                <div class="popup">
+                                    <div>
+                                        <h1>Do you want to delete <%= user.username %>? </h1>
+                                    </div>
+                                    <div class="fluid-container">
+                                        <form action="/admin/users-management/delete-user/<%= user._id %>" method="post">
+                                            <button class="addingBooks" type="submit" class="btn btn-success"> Confirm</button>
+                                            <button class="deletingBooks" type="button" class="btn btn-danger" onclick="closePopup('deletePopup<%= counter %>')"> Cancel</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <% counter++ %>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
