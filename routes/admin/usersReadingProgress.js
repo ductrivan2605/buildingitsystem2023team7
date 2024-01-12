@@ -6,7 +6,7 @@ const pdfParse = require('pdf-parse');
 const { checkAdmin } = require("../../middleware/checkAuthenticated.js");
 const fetchUserData = require('../../middleware/fetchUserData.js');
 
-router.post("/:userId/:slug/update-progress", async (req, res) => {
+router.post('/:userId/:slug/update-progress', async (req, res) => {
   try {
     const { action, currentPage } = req.body;
     const userId = req.params.userId;
@@ -17,7 +17,7 @@ router.post("/:userId/:slug/update-progress", async (req, res) => {
 
     if (user) {
       // Fetch the book by slug
-      const book = await Book.findOne({ slug });
+      const book = await Books.findOne({ slug });
 
       if (!book) {
         return res.status(404).send('Book not found');
@@ -26,16 +26,20 @@ router.post("/:userId/:slug/update-progress", async (req, res) => {
       // Find the book progress for the current slug
       const bookProgress = user.readingProgress.find((progress) => progress.bookId.slug === slug);
 
+      let totalPages;
+
+      if (book) {
+        // Fetch total pages from the contentImage array
+        totalPages = await getTotalPagesFromPDF(book.contentImage[0]);
+      }
+
       if (bookProgress) {
         // Update existing progress
         bookProgress.currentPage = currentPage;
-        bookProgress.progress = ((currentPage - 1) / (bookProgress.totalPages - 1)) * 100;
+        bookProgress.totalPages = totalPages;
+        bookProgress.progress = ((currentPage - 1) / (totalPages - 1)) * 100;
       } else {
-        // If no progress is found, set defaults
-
-        // Fetch total pages from the PDF content
-        const totalPages = await getTotalPagesFromPDF(book.contentImage[0]); // Assuming contentImage is an array with a single PDF file
-
+        // Create new progress if not exists
         user.readingProgress.push({
           bookId: { slug },
           currentPage,
@@ -44,8 +48,9 @@ router.post("/:userId/:slug/update-progress", async (req, res) => {
         });
       }
 
-      // Save the updated user with progress
+      // Save the user with updated progress
       await user.save();
+
       res.sendStatus(200); // Send a success response
     } else {
       res.status(404).send('User not found');
@@ -60,7 +65,7 @@ router.post("/:userId/:slug/update-progress", async (req, res) => {
 async function getTotalPagesFromPDF(pdfContent) {
   try {
     const data = await pdfParse(pdfContent);
-    return data.numPages || 1; // Default to 1 if unable to determine total pages
+    return data.numpages || 1; // Default to 1 if unable to determine total pages
   } catch (error) {
     console.error('Error parsing PDF:', error);
     return 1; // Default to 1 if an error occurs

@@ -273,36 +273,42 @@
         <table class="table table-striped">
         <thead>
             <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Author</th>
-            <th scope="col">Category</th>
-            <th scope="col">Published</th>
-            <th scope="col">Rating</th>
-            <th scope="col">Description</th>
-            <th scope="col">Review</th>
-            <th scope="col">Cover image</th>
-            <th scope="col">Edit</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% counter = 1 %>
-            <% books.forEach((book) =>{ %>
-            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Category</th>
+                <th scope="col">Publisher</th>
+                <th scope="col">Published</th>
+                <th scope="col">Description</th>
+                <th scope="col">Views</th>
+                <th scope="col">Rating</th>
+                <th scope="col">Cover image</th>
+                <th scope="col">Book content</th>
+                <th scope="col">Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% counter = 1 %> <% books.forEach((book) =>{ %>
+              <tr>
                 <th scope="row"><%= counter %></th>
                 <td><%= book.title %></td>
-                <td>
-                    <%= book.authors %>
-                </td>
+                <td><%= book.authors %></td>
                 <td><%= book.category %></td>
+                <td><%= book.publisher %></td>
                 <td><%= book.published %></td>
-                <td><%= book.rating %></td>
                 <td><%= book.description %></td>
-                <td><%= book.review %></td>
+                <td><%= book.readCount %></td>
+                <td><%= book.reviews.averageRating %></td>
                 <td>
-                    <div class="imgBooks">
-                        <img src="/images/<%= book.imageCover %>" style="width: 100px; height: 100px; object-fit: cover;"/>
-                    </div>
+                  <div class="imgBooks">
+                    <img
+                      src="/images/<%= book.imageCover %>"
+                      style="width: 100px; height: 100px; object-fit: cover"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <button class="viewBtn" type="button"><a href="/admin/books-management/<%= book._id %>">View Content</a></button>
                 </td>
                 <td>
                     <button class="edit-btn" onclick="openPopup('editPopup<%= counter %>')">Edit</button>

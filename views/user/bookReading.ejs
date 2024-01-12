@@ -13,7 +13,7 @@
       <progress id="reading-progress" value="0" max="100"></progress>
     </div>
     <div class="navigation-buttons">
-      <form action="/user-reading-progress/<%= userId %>/<%= book.slug %>/update-progress" method="post">
+      <form action="/admin/user-reading-progress/<%= userId %>/<%= book.slug %>/update-progress" method="post">
         <button type="submit" name="action" value="prev" id="prev-page">Previous</button>
         <button type="submit" name="action" value="next" id="next-page">Next</button>
       </form>
@@ -67,9 +67,28 @@
         }
       };
 
-      const updateReadingProgress = async (currentPage) => {
+      const updateReadingProgress = async (currentPage, action) => {
         console.log(`Updating progress for user ${userId}, book ${slug}, page ${currentPage}`);
         localStorage.setItem(storageKey, currentPage);
+      
+        // Save the updated user with progress
+        await fetch(`/admin/user-reading-progress/${userId}/${slug}/update-progress`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ action, currentPage }),
+        })
+          .then(response => {
+            if (response.ok) {
+              console.log('Reading progress updated successfully');
+            } else {
+              console.error('Failed to update reading progress');
+            }
+          })
+          .catch(error => {
+            console.error('Error updating reading progress:', error);
+          });
       };
 
       const handlePageChange = async (newPage) => {

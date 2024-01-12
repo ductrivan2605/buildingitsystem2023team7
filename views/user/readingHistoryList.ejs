@@ -32,43 +32,8 @@
                 <% }); %>
             <% } else { %>
                 <div class="noInformation">
-                    <p>No bookmarks yet!</p>
+                    <p>No reading history yet!</p>
                 </div>
             <% } %>
         </div>
     </div>
-
-    <div class="resultContainer">
-        <div class="bookContainer">
-            <h2>Reading Progression</h2>
-            <% if (user.readingProgress && Array.isArray(user.readingProgress) && user.readingProgress.length > 0) { %>
-                <% user.readingProgress.forEach((progress) => { %>
-                    <ul class="bookmark-list">
-                        <li class="book">
-                            <div class="book-imagebox">
-                                <img class="book-image" src="/images/<%= progress.bookId.imageCover %>">
-                            </div>
-                            <div class="book-info">
-                                <div class="book-title">
-                                    <h3><%= progress.bookId.title %></h3>
-                                </div>
-                                <div class="bookdetail">
-                                    <p><strong>Author:</strong><%= progress.bookId.authors.join(', ') %></p>
-                                    <p><strong>Category:</strong><%= progress.bookId.category.join(', ') %></p>
-                                    <p><strong>Publisher:</strong><%= progress.bookId.publisher %></p>
-                                    <p><strong>Current Page:</strong><%= progress.currentPage %></p>
-                                    <p><strong>Total Pages:</strong><%= progress.totalPages %></p>
-                                    <p><strong>Progress:</strong><%= progress.progress %>%</p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                <% }); %>
-            <% } else { %>
-                <div class="noInformation">
-                    <p>No reading progression available.</p>
-                </div>
-            <% } %>
-        </div>
-    </div>
-</div>
