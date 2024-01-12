@@ -76,6 +76,10 @@
 
 
 }
+.nav-items a:hover {
+    text-decoration: underline;
+    text-decoration-color: #FF004D;
+  }
 
 
 .nav-item {
