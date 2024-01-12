@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/user/readingPage.css">
 </head>
+
 <body>
   <div>
     <div id="pdf-viewer"></div>
+    <div class="whole-reading-book-content">
     <p>Page: <span id="page-num"></span> / <span id="page-count"></span></p>
     <div class="page-progress">
       <progress id="reading-progress" value="0" max="100"></progress>
@@ -18,11 +21,16 @@
         <button type="submit" name="action" value="next" id="next-page">Next</button>
       </form>
     </div>
+    <div class="zoom-buttons">
+      <button id="zoom-in">Zoom In</button>
+      <button id="zoom-out">Zoom Out</button>
+    </div>
   </div>
+</div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const pdfViewer = document.getElementById('pdf-viewer');
       const pdfDataUri = '<%= pdfDataUri %>';
       const userId = '<%= userId %>';
@@ -70,7 +78,7 @@
       const updateReadingProgress = async (currentPage, action) => {
         console.log(`Updating progress for user ${userId}, book ${slug}, page ${currentPage}`);
         localStorage.setItem(storageKey, currentPage);
-      
+
         // Save the updated user with progress
         await fetch(`/admin/user-reading-progress/${userId}/${slug}/update-progress`, {
           method: 'POST',
@@ -98,7 +106,7 @@
         }
       };
 
-      document.getElementById('prev-page').addEventListener('click', async function(e) {
+      document.getElementById('prev-page').addEventListener('click', async function (e) {
         e.preventDefault();
         if (currentPage > 1) {
           currentPage--;
@@ -107,7 +115,7 @@
         }
       });
 
-      document.getElementById('next-page').addEventListener('click', async function(e) {
+      document.getElementById('next-page').addEventListener('click', async function (e) {
         e.preventDefault();
         if (currentPage < pdfDoc.numPages) {
           currentPage++;
@@ -116,7 +124,24 @@
         }
       });
 
-      document.addEventListener('keydown', async function(event) {
+      const updateScale = (newScale) => {
+        pdfViewer.style.transform = `scale(${newScale})`;
+        renderPage(currentPage); // Re-render the current page with the new scale
+      };
+
+      // Zoom In button event listener
+      document.getElementById('zoom-in').addEventListener('click', function () {
+        const newScale = Math.min(2, pdfViewer.style.transform ? parseFloat(pdfViewer.style.transform.match(/scale\((.*?)\)/)[1]) + 0.2 : 1.2);
+        updateScale(newScale);
+      });
+
+      // Zoom Out button event listener
+      document.getElementById('zoom-out').addEventListener('click', function () {
+        const newScale = Math.max(0.2, pdfViewer.style.transform ? parseFloat(pdfViewer.style.transform.match(/scale\((.*?)\)/)[1]) - 0.2 : 0.8);
+        updateScale(newScale);
+      });
+
+      document.addEventListener('keydown', async function (event) {
         switch (event.key) {
           case 'ArrowLeft':
             if (currentPage > 1) {
@@ -136,12 +161,13 @@
       });
 
       // Register the beforeunload event listener
-      window.addEventListener('beforeunload', async function(event) {
+      window.addEventListener('beforeunload', async function (event) {
         await updateReadingProgress(currentPage);
       });
 
       loadPDF();
     });
-  </script>  
+  </script>
 </body>
+
 </html>
