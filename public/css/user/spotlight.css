@@ -93,7 +93,7 @@ button.bookmark-btn {
 @media screen and (max-width: 767px) {
     .splide__slide img {
 
-        width: 70%;
+        width: 60%;
         display: block;
         margin: 0 auto; 
         margin-top:15px;

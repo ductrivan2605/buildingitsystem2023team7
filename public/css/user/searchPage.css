@@ -149,14 +149,14 @@ button:hover {
         border: 1px solid #ccc;
         border-radius: 5px;
         padding: 10px;
-        width: 37%;
+        width: 49%;
         margin: 10px;
         display: inline-block;
         vertical-align: top;
         text-align: left;
         background-color: #fff;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: 100%; /* Full width on smaller screens */
+        /* width: 100%;  */
         margin: 10px 0; /* Adjust margin as needed */
 }
     
