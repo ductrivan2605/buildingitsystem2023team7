@@ -67,7 +67,6 @@ const wishlistAdminRouter = require("./routes/admin/wishlistAdminRouter");
 const searchPageRouter = require("./routes/user/searchPageRoute");
 const adminRouter = require('./routes/admin/adminRouter');
 const userSettingRouter = require('./routes/user/userSettingRouter')
-const renderingRouter = require('./routes/user/bookRendering'); 
 const userReadingProgressRouter = require('./routes/admin/usersReadingProgress');
 const userProfileRouter = require('./routes/user/userProfile');
 const feedbackRouter = require('./routes/user/feedbackRoute');
@@ -94,7 +93,6 @@ app.use("/user/setting", userSettingRouter);
 app.use("/user/search", searchPageRouter);
 app.use("/auth", authRouter);
 app.use("/wishlist", wishlistRouter);
-app.use('/api', renderingRouter);
 app.use('/feedback', feedbackRouter);
 app.use('/admin/feedback', adminFeedbackRouter)
 app.use('/information', infoRouter)

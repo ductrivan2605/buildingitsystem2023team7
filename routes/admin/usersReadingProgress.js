@@ -1,11 +1,73 @@
 const express = require('express');
 const router = express.Router();
 const User = require("../../models/user.js");
+const Book = require("../../models/bookModel.js");
+const pdfParse = require('pdf-parse');
 const { checkAdmin } = require("../../middleware/checkAuthenticated.js");
 const fetchUserData = require('../../middleware/fetchUserData.js');
 
-// GET /admin/user-reading-progress - View user reading progress
-router.get("/:userId",fetchUserData, checkAdmin, async (req, res) => {
+router.post("/:userId/:slug/update-progress", async (req, res) => {
+  try {
+    const { action, currentPage } = req.body;
+    const userId = req.params.userId;
+    const slug = req.params.slug;
+
+    // Fetch the user
+    const user = await User.findById(userId);
+
+    if (user) {
+      // Fetch the book by slug
+      const book = await Book.findOne({ slug });
+
+      if (!book) {
+        return res.status(404).send('Book not found');
+      }
+
+      // Find the book progress for the current slug
+      const bookProgress = user.readingProgress.find((progress) => progress.bookId.slug === slug);
+
+      if (bookProgress) {
+        // Update existing progress
+        bookProgress.currentPage = currentPage;
+        bookProgress.progress = ((currentPage - 1) / (bookProgress.totalPages - 1)) * 100;
+      } else {
+        // If no progress is found, set defaults
+
+        // Fetch total pages from the PDF content
+        const totalPages = await getTotalPagesFromPDF(book.contentImage[0]); // Assuming contentImage is an array with a single PDF file
+
+        user.readingProgress.push({
+          bookId: { slug },
+          currentPage,
+          totalPages,
+          progress: ((currentPage - 1) / (totalPages - 1)) * 100,
+        });
+      }
+
+      // Save the updated user with progress
+      await user.save();
+      res.sendStatus(200); // Send a success response
+    } else {
+      res.status(404).send('User not found');
+    }
+  } catch (error) {
+    console.error('Error updating reading progress:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// Function to get total pages from a PDF file
+async function getTotalPagesFromPDF(pdfContent) {
+  try {
+    const data = await pdfParse(pdfContent);
+    return data.numPages || 1; // Default to 1 if unable to determine total pages
+  } catch (error) {
+    console.error('Error parsing PDF:', error);
+    return 1; // Default to 1 if an error occurs
+  }
+}
+
+router.get("/:userId", fetchUserData, checkAdmin, async (req, res) => {
   try {
     const userId = req.params.userId;
     const user = await User.findById(userId);
