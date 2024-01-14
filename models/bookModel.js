@@ -52,11 +52,7 @@ const BookSchema = new mongoose.Schema({
   },
   reviews: [ReviewSchema],
   contentImage: {
-    type: [
-      {
-        type: String,
-      },
-    ],
+    type: [String],
     default: [],
   },
   imageCover: {
