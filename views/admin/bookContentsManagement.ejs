@@ -22,7 +22,7 @@
         <button class="submittingBtn" type="submit">Search</button>
       </form>
       <div class="btns">
-        <% if (!books[0].contentImage) { %>
+        <% if (books[0].contentImage.length === 0 ) { %>
           <input
             type="button"
             value="Add book"
@@ -120,7 +120,7 @@
           </tr>
         </thead>
         <tbody>
-          <% if (books[0] && books[0].contentImage) { %>
+          <% if (books[0] && books[0].contentImage.length > 0) { %>
           <tr>
             <th scope="row">1</th>
             <td>

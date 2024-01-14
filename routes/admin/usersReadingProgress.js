@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require("../../models/user.js");
 const Book = require("../../models/bookModel.js");
-const pdfParse = require('pdf-parse');
+// const pdfParse = require('pdf-parse');
 const { checkAdmin } = require("../../middleware/checkAuthenticated.js");
 const fetchUserData = require('../../middleware/fetchUserData.js');
 
